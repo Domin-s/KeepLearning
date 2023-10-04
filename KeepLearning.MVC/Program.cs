@@ -11,6 +11,8 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
+app.Services.SeedData();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

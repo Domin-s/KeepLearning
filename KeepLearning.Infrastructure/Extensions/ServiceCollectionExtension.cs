@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Infrastructure.Persistence;
+using KeepLearning.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,8 @@ namespace KeepLearning.Infrastructure.Extensions
             })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<KeepLearningDbContext>();
+
+            services.AddScoped<CountrySeeder>();
         }
     }
 }
