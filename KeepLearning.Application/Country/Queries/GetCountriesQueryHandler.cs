@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KeepLearning.Application.TestCountry.Models;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
@@ -24,11 +25,12 @@ namespace KeepLearning.Application.Country.Queries
             return contriesDto;
         }
 
-        private async Task<IEnumerable<Domain.Enteties.Country>> GetCountries(IEnumerable<string> continents)
+        private async Task<IEnumerable<Domain.Enteties.Country>> GetCountries(IEnumerable<ContinentClass.Continent> continents)
         {
             if (continents.Any())
             {
-                return await _countryRepository.GetByContinent(continents);
+                var stringContinents = continents.Select(c => ContinentClass.ContinentString(c));
+                return await _countryRepository.GetByContinents(stringContinents);
             }
             else
             {

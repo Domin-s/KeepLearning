@@ -18,7 +18,7 @@ namespace KeepLearning.Infrastructure.Repositories
             => await _dbContext.Countries
                         .ToListAsync();
 
-        public async Task<IEnumerable<Country>> GetByContinent(IEnumerable<string> continents)
+        public async Task<IEnumerable<Country>> GetByContinents(IEnumerable<string> continents)
             => await _dbContext.Countries
                         .Where(c => continents.Contains(c.Continent))
                         .ToListAsync();

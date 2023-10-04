@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Application.Country.Queries;
+using KeepLearning.Application.TestCountry.Command;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,6 @@ namespace KeepLearning.MVC.Controllers
             _mediator = mediator;
         }
 
-        [Route("Countries")]
         public async Task<IActionResult> List(GetCountriesQuery query)
         {
             var countries = await  _mediator.Send(query);
