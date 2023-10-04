@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Infrastructure.Persistence;
+using KeepLearning.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +15,14 @@ namespace KeepLearning.Infrastructure.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("KeepLearning"))
             );
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.Stores.MaxLengthForKeys = 450;
+            })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<KeepLearningDbContext>();
+
+            services.AddScoped<CountrySeeder>();
         }
     }
 }

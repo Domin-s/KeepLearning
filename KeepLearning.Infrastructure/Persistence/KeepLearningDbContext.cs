@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using KeepLearning.Domain.Enteties;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeepLearning.Infrastructure.Persistence
@@ -9,5 +10,6 @@ namespace KeepLearning.Infrastructure.Persistence
         {
 
         }
+        public DbSet<Country> Countries { get; set; }
     }
 }
