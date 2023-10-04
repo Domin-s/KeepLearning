@@ -1,4 +1,6 @@
-﻿using KeepLearning.Infrastructure.Persistence;
+﻿using KeepLearning.Domain.Interfaces;
+using KeepLearning.Infrastructure.Persistence;
+using KeepLearning.Infrastructure.Repositories;
 using KeepLearning.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,8 @@ namespace KeepLearning.Infrastructure.Extensions
                 .AddEntityFrameworkStores<KeepLearningDbContext>();
 
             services.AddScoped<CountrySeeder>();
+
+            services.AddScoped<ICountryRepository, CountryRepository>();
         }
     }
 }
