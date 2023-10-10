@@ -1,8 +1,8 @@
 ﻿namespace KeepLearning.Application.TestCountry.Models
 {
-    public static class ContinentClass
+    public static class Continent
     {
-        public enum Continent
+        public enum Name
         {
             Africa,
             Asia,
@@ -12,19 +12,38 @@
             SouthAmerica
         };
 
-        public static string ContinentString(Continent continent)
+        public static string MapContinentToString(Name continent)
         {
             switch (continent)
             {
-                case Continent.Africa: return "Africa";
-                case Continent.Asia: return "Asia";
-                case Continent.Australia: return "Australia";
-                case Continent.Europe: return "Europe";
-                case Continent.NorthAmerica: return "N. America";
-                case Continent.SouthAmerica: return "S. America";
+                case Name.Africa: return "Africa";
+                case Name.Asia: return "Asia";
+                case Name.Australia: return "Australia";
+                case Name.Europe: return "Europe";
+                case Name.NorthAmerica: return "N. America";
+                case Name.SouthAmerica: return "S. America";
 
                 default: throw new ArgumentException(message: "Invalid enum value");
             }
         }
+
+        public static Name MapStringToContinent(string continent)
+        {
+            switch (continent)
+            {
+                case "Africa": return Name.Africa;
+                case "Asia": return Name.Asia;
+                case "Australia": return Name.Australia;
+                case "Europe": return Name.Europe;
+                case "N. America": return Name.NorthAmerica;
+                case "S. America": return Name.SouthAmerica;
+
+                default: throw new ArgumentException(message: "Invalid enum value");
+            }
+        }
+
+        public static IEnumerable<string> GetAll()
+            => Enum.GetValues(typeof(Name)).Cast<Name>().ToList().Select( n => MapContinentToString(n));
+        
     }
 }

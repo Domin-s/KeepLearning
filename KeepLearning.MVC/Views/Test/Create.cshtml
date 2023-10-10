@@ -1,4 +1,4 @@
-﻿@model KeepLearning.Application.TestCountry.Command.CreateTestCountryCommand
+﻿@model IEnumerable<string>
 
 @{
     ViewData["Title"] = "Create";
@@ -6,31 +6,35 @@
 
 <h1>Create</h1>
 
-<h4>CreateTestCountryCommand</h4>
+<h4>CreateTestViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form method="post" action="Create">
             <div class="form-group">
-                <label asp-for="ToGuessType" class="control-label"></label>
-                <input asp-for="ToGuessType" class="form-control" />
-                <span asp-validation-for="ToGuessType" class="text-danger"></span>
+                <label for="Name" class="control-label"></label>
+                <input id="Name" class="form-control" name="Name" />
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label for="NumberOfQuestion" class="control-label"></label>
+
+                <label for="cars">Choose number of questions</label>
+                <select name="NumberOfQuestion" id="NumberOfQuestion">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfQuestion" class="control-label"></label>
-                <input asp-for="NumberOfQuestion" class="form-control" />
-                <span asp-validation-for="NumberOfQuestion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Continents" class="control-label"></label>
-                <input asp-for="Continents" class="form-control" />
-                <span asp-validation-for="Continents" class="text-danger"></span>
+                @foreach (var continent in Model)
+                {
+
+                    <input type="checkbox" name="Continents" for="continent" class="form-check-input" value="@continent" />
+                    <label class="form-check-label" id="continent">@continent</label>
+                    <br />
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

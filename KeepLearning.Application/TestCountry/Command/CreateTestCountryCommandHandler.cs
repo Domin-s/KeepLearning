@@ -18,7 +18,7 @@ namespace KeepLearning.Application.TestCountry.Command
 
         public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
         {
-            var mappedContinent = request.Continents.Select(c => ContinentClass.ContinentString(c));
+            var mappedContinent = request.Continents.Select(c => Continent.MapContinentToString(c));
 
             var countries = await _countryRepository.GetByContinents(mappedContinent);
 
@@ -29,7 +29,7 @@ namespace KeepLearning.Application.TestCountry.Command
 
         private TestCountryDto CreateTest(CreateTestCountryCommand command, IEnumerable<Domain.Enteties.Country> countries)
         {
-            IEnumerable<Question> questions = CreateQuestions(command, countries.ToList());
+            IEnumerable<QuestionDto> questions = CreateQuestions(command, countries.ToList());
 
             TestCountryDto test = new TestCountryDto()
             {
@@ -42,45 +42,54 @@ namespace KeepLearning.Application.TestCountry.Command
             return test;
         }
 
-        private IEnumerable<Question> CreateQuestions(CreateTestCountryCommand command, List<Domain.Enteties.Country> countries)
+        private IEnumerable<QuestionDto> CreateQuestions(CreateTestCountryCommand command, List<Domain.Enteties.Country> countries)
         {
-            var numbersOfQuestion = PickRandomNumbers(command.NumberOfQuestion, countries.Count());
-            var questions = new List<Question>();
-            
-            for (var x = 0; x < command.NumberOfQuestion; x++)
-            {
-                var numberOfCountry = numbersOfQuestion[x];
-                var question = new Question()
-                {
-                    CountryName = countries[numberOfCountry].Name,
-                    CountryCapitalCity = countries[numberOfCountry].CapitalCity,
-                };
+            var pickedUpCountries = new List<Domain.Enteties.Country>();
 
-                questions.Add(question);
+            while (pickedUpCountries.Count < command.NumberOfQuestion)
+            {
+                Domain.Enteties.Country randomCountry;
+                PickRandomCountry(countries, out randomCountry);
+
+                if (!pickedUpCountries.Contains(randomCountry))
+                {
+                    pickedUpCountries.Add(randomCountry);
+                }
+            }
+
+            var questions = ToQuestionDto(pickedUpCountries, GuessType.GuessCapitalCity);
+
+            return questions;
+        }
+
+        private void PickRandomCountry(List<Domain.Enteties.Country> countries, out Domain.Enteties.Country country)
+        {
+            var randomNumber = new Random().Next(0, countries.Count());
+            country = countries[randomNumber];
+        }
+
+        private List<QuestionDto> ToQuestionDto(List<Domain.Enteties.Country> countries, GuessType guessType)
+        {
+            var questions = new List<QuestionDto>();
+
+            foreach (var item in countries)
+            {
+                switch (guessType)
+                {
+                    case GuessType.GuessCapitalCity:
+                        questions.Add(ToQuestionDto(item.Name, item.CapitalCity));
+                        break;
+
+                    case GuessType.GuessCountry:
+                        questions.Add(ToQuestionDto(item.Name, item.CapitalCity));
+                        break;
+                }
             }
 
             return questions;
         }
 
-        private List<int> PickRandomNumbers(int numberOfNumbers, int too)
-        {
-            var counter = 0;
-
-            List<int> numbers = new List<int>();
-
-            while(counter < numberOfNumbers)
-            {
-                var nextNumber = new Random().Next(0, too);
-                
-                if (!numbers.Contains(nextNumber))
-                {
-                    numbers.Add(nextNumber);
-                    counter++;
-                }
-            }
-            numbers.Sort();
-
-            return numbers;
-        }
+        private QuestionDto ToQuestionDto(string questionText, string answerText)
+         => new QuestionDto(questionText, answerText);
     }
 }

@@ -5,6 +5,6 @@ namespace KeepLearning.Application.Country.Queries
 {
     public class GetCountriesQuery : IRequest<IEnumerable<CountryDto>>
     {
-        public IEnumerable<ContinentClass.Continent> Continents { get; set; } = new List<ContinentClass.Continent>();
+        public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
     }
 }

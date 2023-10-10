@@ -25,11 +25,11 @@ namespace KeepLearning.Application.Country.Queries
             return contriesDto;
         }
 
-        private async Task<IEnumerable<Domain.Enteties.Country>> GetCountries(IEnumerable<ContinentClass.Continent> continents)
+        private async Task<IEnumerable<Domain.Enteties.Country>> GetCountries(IEnumerable<Continent.Name> continents)
         {
             if (continents.Any())
             {
-                var stringContinents = continents.Select(c => ContinentClass.ContinentString(c));
+                var stringContinents = continents.Select(c => Continent.MapContinentToString(c));
                 return await _countryRepository.GetByContinents(stringContinents);
             }
             else

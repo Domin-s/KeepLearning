@@ -1,6 +1,8 @@
-﻿using KeepLearning.Application.TestCountry.Command;
+﻿using KeepLearning.Application.TestCountry.Models;
+using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KeepLearning.MVC.Controllers
 {
@@ -13,24 +15,34 @@ namespace KeepLearning.MVC.Controllers
             _mediator = mediator;
         }
 
-
-
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            return View();
+            var continents = Continent.GetAll();
+
+            return View(continents);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateTestCountryCommand command)
+        public async Task<IActionResult> Create(CreateTestViewModel form)
         {
+            var command = form.ToCreateTestCountryCommand();
+
             var test = await _mediator.Send(command);
 
-            return Ok(test.Questions);
+            var questions = JsonConvert.SerializeObject(test.Questions);
+
+            TempData["Questions"] = questions;
+
+            return RedirectToAction(nameof(Resolve));
         }
 
-        public async Task<IActionResult> Details()
+        public IActionResult Resolve()
         {
-            return View();
+            var jsonQuestion = TempData["Questions"].ToString();
+
+            var questions = JsonConvert.DeserializeObject<IEnumerable<QuestionDto>>(jsonQuestion);
+
+            return View(questions);
         }
 
     }

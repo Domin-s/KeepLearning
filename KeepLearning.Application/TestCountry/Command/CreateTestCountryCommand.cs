@@ -3,8 +3,10 @@ using MediatR;
 
 namespace KeepLearning.Application.TestCountry.Command
 {
-    public class CreateTestCountryCommand : TestCountryBasic, IRequest<TestCountryDto>
+    public class CreateTestCountryCommand : IRequest<TestCountryDto>
     {
-        public ToGuessType ToGuessType { get; set; }
+        public string? Name { get; set; }
+        public int NumberOfQuestion { get; set; }
+        public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
     }
 }
