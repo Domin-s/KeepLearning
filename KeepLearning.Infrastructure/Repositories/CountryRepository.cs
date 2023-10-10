@@ -1,4 +1,4 @@
-﻿using KeepLearning.Domain.Enteties;
+﻿using KeepLearning.Application.Country;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +14,30 @@ namespace KeepLearning.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Country>> GetAll()
-            => await _dbContext.Countries
+        public async Task<Countries> GetAll()
+        {
+            var listOfCountry = await _dbContext.Countries
                         .ToListAsync();
 
-        public async Task<IEnumerable<Country>> GetByContinents(IEnumerable<string> continents)
-            => await _dbContext.Countries
+            return new Countries(listOfCountry);
+        }
+
+        public async Task<Countries> GetByContinent(string continent)
+        {
+            var listOfCountry = await _dbContext.Countries
+                        .Where(c => c.Continent == continent)
+                        .ToListAsync();
+
+            return new Countries(listOfCountry);
+        }
+
+        public async Task<Countries> GetByContinents(IEnumerable<string> continents)
+        {
+            var listOfCountry = await _dbContext.Countries
                         .Where(c => continents.Contains(c.Continent))
                         .ToListAsync();
+
+            return new Countries(listOfCountry);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace KeepLearning.MVC.Controllers
 
         public IActionResult Resolve()
         {
-            var jsonQuestion = TempData["Questions"].ToString();
+            string jsonQuestion = TempData["Questions"].ToString();
 
             var questions = JsonConvert.DeserializeObject<IEnumerable<QuestionDto>>(jsonQuestion);
 

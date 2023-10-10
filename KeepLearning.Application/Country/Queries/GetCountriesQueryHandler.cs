@@ -5,7 +5,7 @@ using MediatR;
 
 namespace KeepLearning.Application.Country.Queries
 {
-    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, IEnumerable<CountryDto>>
+    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, Countries>
     {
         private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
@@ -16,16 +16,16 @@ namespace KeepLearning.Application.Country.Queries
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CountryDto>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
+        public async Task<Countries> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
             var countries = await GetCountries(request.Continents);
 
-            var contriesDto = _mapper.Map<IEnumerable<CountryDto>>(countries);
+            var contriesDto = _mapper.Map<Countries>(countries);
 
             return contriesDto;
         }
 
-        private async Task<IEnumerable<Domain.Enteties.Country>> GetCountries(IEnumerable<Continent.Name> continents)
+        private async Task<Countries> GetCountries(IEnumerable<Continent.Name> continents)
         {
             if (continents.Any())
             {

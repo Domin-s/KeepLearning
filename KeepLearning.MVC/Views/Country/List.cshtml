@@ -1,11 +1,11 @@
-﻿@model IEnumerable<KeepLearning.Application.Country.CountryDto>
+﻿@model KeepLearning.Application.Country.Countries
 
 @{
     ViewData["Title"] = "List";
 }
 
 
-@if (!Model.Any())
+@if (!Model.ListOfCountry.Any())
 {
 
     <h1>Not find any contry</h1>
@@ -20,19 +20,18 @@ else
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    <div>Name</div>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CapitalCity)
+                    <div>Capital city</div>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Continent)
+                    <div>Continent</div>
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.ListOfCountry)
             {
                 <tr>
                     <td>
