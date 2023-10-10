@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.TestCountry.Models;
+using KeepLearning.Application.Country;
+using KeepLearning.Application.Models.Enums;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Country.Queries
+namespace KeepLearning.Application.Queries.Country
 {
     public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, Countries>
     {

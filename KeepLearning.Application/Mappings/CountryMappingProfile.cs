@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Country;
+using KeepLearning.Application.Models.Country;
 using KeepLearning.Application.TestCountry.Models;
 
 namespace KeepLearning.Application.Mappings

@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Application.TestCountry.Models
+﻿namespace KeepLearning.Application.Models.Question
 {
     public record class QuestionDto(string QuestionText, string AnswerText) { }
 }

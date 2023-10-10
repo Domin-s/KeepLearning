@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Application.Country
+﻿namespace KeepLearning.Application.Models.Country
 {
     public class CountryDto
     {

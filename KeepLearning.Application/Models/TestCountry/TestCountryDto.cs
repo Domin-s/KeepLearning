@@ -1,4 +1,7 @@
-﻿namespace KeepLearning.Application.TestCountry.Models
+﻿using KeepLearning.Application.Models.Enums;
+using KeepLearning.Application.Models.Question;
+
+namespace KeepLearning.Application.Models.TestCountry
 {
     public class TestCountryDto
     {

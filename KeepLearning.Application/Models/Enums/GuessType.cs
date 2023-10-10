@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Application.TestCountry.Models
+﻿namespace KeepLearning.Application.Models.Enums
 {
     public enum GuessType
     {

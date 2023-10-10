@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Application.TestCountry.Models
+﻿namespace KeepLearning.Application.Models.Enums
 {
     public static class Continent
     {
@@ -43,7 +43,7 @@
         }
 
         public static IEnumerable<string> GetAll()
-            => Enum.GetValues(typeof(Name)).Cast<Name>().ToList().Select( n => MapContinentToString(n));
-        
+            => Enum.GetValues(typeof(Name)).Cast<Name>().ToList().Select(n => MapContinentToString(n));
+
     }
 }

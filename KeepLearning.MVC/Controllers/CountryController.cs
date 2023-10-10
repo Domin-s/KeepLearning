@@ -1,4 +1,4 @@
-﻿using KeepLearning.Application.Country.Queries;
+﻿using KeepLearning.Application.Queries.Country;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

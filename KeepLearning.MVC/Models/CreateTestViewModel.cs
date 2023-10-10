@@ -1,5 +1,5 @@
-﻿using KeepLearning.Application.TestCountry.Command;
-using KeepLearning.Application.TestCountry.Models;
+﻿using KeepLearning.Application.Models.Enums;
+using KeepLearning.Application.Queries.TestCountry;
 
 namespace KeepLearning.MVC.Models
 {
@@ -9,7 +9,7 @@ namespace KeepLearning.MVC.Models
         public int NumberOfQuestion { get; set; }
         public List<string> Continents { get; set; } = new List<string>();
 
-        public GetTestCountryCommand ToCreateTestCountryCommand()
+        public GetTestCountryQuery ToCreateTestCountryCommand()
         {
             var continents = new List<Continent.Name>();
 
@@ -19,7 +19,7 @@ namespace KeepLearning.MVC.Models
                 continents.Add(name);
             }
 
-            return new GetTestCountryCommand
+            return new GetTestCountryQuery
             {
                 Name = Name,
                 NumberOfQuestion = NumberOfQuestion,

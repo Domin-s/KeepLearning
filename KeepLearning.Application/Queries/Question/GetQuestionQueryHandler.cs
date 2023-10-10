@@ -1,8 +1,9 @@
-﻿using KeepLearning.Application.TestCountry.Models;
+﻿using KeepLearning.Application.Models.Enums;
+using KeepLearning.Application.Models.Question;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Question.Queries
+namespace KeepLearning.Application.Queries.Question
 {
     public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, QuestionDto>
     {

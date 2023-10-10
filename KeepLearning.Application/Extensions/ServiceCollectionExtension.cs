@@ -1,5 +1,5 @@
-﻿using KeepLearning.Application.Country.Queries;
-using KeepLearning.Application.Mappings;
+﻿using KeepLearning.Application.Mappings;
+using KeepLearning.Application.Queries.Country;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

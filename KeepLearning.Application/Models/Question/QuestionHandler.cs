@@ -1,6 +1,6 @@
-﻿using KeepLearning.Domain.Enteties;
+﻿using KeepLearning.Application.Models.Enums;
 
-namespace KeepLearning.Application.TestCountry.Models
+namespace KeepLearning.Application.Models.Question
 {
     public static class QuestionHandler
     {
