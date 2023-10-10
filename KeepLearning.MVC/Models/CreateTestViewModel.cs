@@ -9,7 +9,7 @@ namespace KeepLearning.MVC.Models
         public int NumberOfQuestion { get; set; }
         public List<string> Continents { get; set; } = new List<string>();
 
-        public CreateTestCountryCommand ToCreateTestCountryCommand()
+        public GetTestCountryCommand ToCreateTestCountryCommand()
         {
             var continents = new List<Continent.Name>();
 
@@ -19,7 +19,7 @@ namespace KeepLearning.MVC.Models
                 continents.Add(name);
             }
 
-            return new CreateTestCountryCommand
+            return new GetTestCountryCommand
             {
                 Name = Name,
                 NumberOfQuestion = NumberOfQuestion,
