@@ -10,11 +10,11 @@
 
 <form method="get" asp-action="Random">
     <div class="form-group">
-        <div class="container text-center">
+        <div class="container">
             <div class="row align-items-start">
                 <div class="col-10">
                     <div class="row m-2">
-                        <div for="GuessType" class="col-6">Chosse what you want guess: </div>
+                        <div for="GuessType" class="col-3">Chosse what you want guess: </div>
                         <div class="col-6">
                             <select class="form-select" name="GuessType" id="GuessType">
                                 @foreach (var guessType in Model.GuessTypes)
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="row m-2">
-                        <div for="Continent" class="col-6">Choose continent</div>
+                        <div for="Continent" class="col-3">Choose continent</div>
                         <div class="col-6">
                             <select class="form-select" name="Continent" id="Continent">
                                 @foreach (var continent in Model.Continents)
@@ -36,8 +36,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="m-3">
+
+                <div class="row m-4 col-6">
+                    <div class="col-4">
+                        <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to list</a>
+                    </div>
+                    <div class="col-4">
                         <input type="submit" value="Create random question" class="btn btn-primary" />
                     </div>
                 </div>
