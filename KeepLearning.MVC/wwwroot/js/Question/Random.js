@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
 
     var question = $("#question");
@@ -7,7 +5,6 @@ $(document).ready(function () {
     var goodAnswer = $("#goodAnswer");
 
     $("#checker").click(function () {
-
         if (inputString.val() == goodAnswer.val()) {
             toastr["success"]("Good answer! Congratulations!!");
             RefreshDataOnWebsite();

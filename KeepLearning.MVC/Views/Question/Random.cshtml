@@ -4,46 +4,47 @@
     ViewData["Title"] = "Random";
 }
 
-@if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
-{
-    <h1>Guess the capital city of country: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
-}
-else
-{
-    <h1>Guess the country by its capital city: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
-}
-
-
 <div>
-    <div class="mb-3">
-        <input type="text" class="form-control" id="userAnswer" placeholder="Tape answer">
-        <input hidden value="@Model.Question.AnswerText" id="goodAnswer">
-    </div>
-</div>
+    @if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
+    {
+        <h1>Guess the capital city of country: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+    }
+    else
+    {
+        <h1>Guess the country by its capital city: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+    }
 
-<div class="row">
-    <div class="mb-3" >
+
+    <div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="userAnswer" placeholder="Tape answer">
+            <input hidden value="@Model.Question.AnswerText" id="goodAnswer">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
             <input hidden value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
             <input hidden value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
-            <input type="submit"  id="getAnotherRandomQuestion" value="Another random question" class="btn btn-primary" />
+            <input type="submit" id="getAnotherRandomQuestion" value="Another random question" class="btn btn-primary" />
+        </div>
+
+        <div class="mb-3">
+            <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+        </div>
+
+        <div class="mb-3">
+            <button id="checker" class="btn btn-primary" role="button">Check answer</button>
+        </div>
     </div>
 
-    <div class="mb-3">
-        <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
-    </div>
+    <div>
+        <label>Answer history (question => you answer):</label>
 
-    <div class="mb-3">
-        <button id="checker" class="btn btn-primary" role="button">Check answer</button>
+        <ul id="answerHistory">
+        </ul>
     </div>
 </div>
-
-<div>
-    <label>Answer history (question => you answer)</label>
-
-    <ul id="answerHistory">
-    </ul>
-</div>
-
 @section Scripts {
     <script src="~/js/Question/Random.js"></script>
 }
