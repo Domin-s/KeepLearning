@@ -4,43 +4,47 @@
     ViewData["Title"] = "Random";
 }
 
-<h3>Choose what you want guess and from which contiennt you want have a question and then click "Creaet"</h3>
+<h2 class="text-center">Random question creater</h2>
 
 <hr />
 
 <form method="get" asp-action="Random">
     <div class="form-group">
-        <div class="mb-3">
-            <label for="GuessType" class="control-label">Choose type of question</label>
-
-            <select class="form-select" name="GuessType" id="GuessType">
-                @foreach (var guessType in Model.GuessTypes)
-                {
-                    <option value="@guessType">@guessType</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="Continent" class="control-label">Choose continent</label>
-
-            <select class="form-select" name="Continent" id="Continent">
-                @foreach (var continent in Model.Continents)
-                {
-                    <option value="@continent">@continent</option>
-                }
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <input type="submit" value="Create random question" class="btn btn-primary" />
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col-10">
+                    <div class="row m-2">
+                        <div for="GuessType" class="col-6">Chosse what you want guess: </div>
+                        <div class="col-6">
+                            <select class="form-select" name="GuessType" id="GuessType">
+                                @foreach (var guessType in Model.GuessTypes)
+                                {
+                                    <option value="@guessType">@guessType</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div for="Continent" class="col-6">Choose continent</div>
+                        <div class="col-6">
+                            <select class="form-select" name="Continent" id="Continent">
+                                @foreach (var continent in Model.Continents)
+                                {
+                                    <option value="@continent">@continent</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="m-3">
+                        <input type="submit" value="Create random question" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
