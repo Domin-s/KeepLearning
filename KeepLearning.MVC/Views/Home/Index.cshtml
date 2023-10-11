@@ -3,6 +3,14 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Welcome</h1>
+    <h5>Choose category to create test</h5>
+
+    <div class="row m-4">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Country</a>
+            </li>
+        </ul>
+    </div>
 </div>
