@@ -1,8 +1,17 @@
-﻿namespace KeepLearning.Application.Models.Enums
+﻿using static KeepLearning.Application.Models.Enums.Continent;
+
+namespace KeepLearning.Application.Models.Enums
 {
-    public enum GuessType
+    public static class GuessType
     {
-        GuessCapitalCity,
-        GuessCountry
+        public enum Value
+        {
+            CapitalCity,
+            Country
+        }
+
+        public static IEnumerable<string> GetAllLikeStrings()
+            => Enum.GetValues(typeof(Value)).Cast<Value>().ToList().Select(c => c.ToString());
+
     }
 }

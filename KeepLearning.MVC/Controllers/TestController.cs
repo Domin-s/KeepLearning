@@ -18,7 +18,7 @@ namespace KeepLearning.MVC.Controllers
 
         public IActionResult Create()
         {
-            var continents = Continent.GetAll();
+            var continents = Continent.GetAllLikeStrings();
 
             return View(continents);
         }

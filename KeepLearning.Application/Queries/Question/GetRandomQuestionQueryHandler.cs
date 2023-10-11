@@ -5,24 +5,26 @@ using MediatR;
 
 namespace KeepLearning.Application.Queries.Question
 {
-    public class GetQuestionQueryHandler : IRequestHandler<GetQuestionQuery, QuestionDto>
+    public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {
         private readonly ICountryRepository _countryRepository;
 
-        public GetQuestionQueryHandler(ICountryRepository countryRepository)
+        public GetRandomQuestionQueryHandler(ICountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
         }
 
-        public async Task<QuestionDto> Handle(GetQuestionQuery request, CancellationToken cancellationToken)
+        public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
         {
+            int numberOfQuestion = new Random().Next(0, 10);
+
             var continent = Continent.MapContinentToString(request.Continent);
 
             var countries = await _countryRepository.GetByContinent(continent);
 
             var randomCountry = countries.GetRandomCountry();
 
-            return QuestionHandler.FromCountryAndGuessType(randomCountry, request.GuessType);
+            return QuestionHandler.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
         }
     }
 }

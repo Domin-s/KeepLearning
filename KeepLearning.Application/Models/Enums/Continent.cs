@@ -42,7 +42,7 @@
             }
         }
 
-        public static IEnumerable<string> GetAll()
+        public static IEnumerable<string> GetAllLikeStrings()
             => Enum.GetValues(typeof(Name)).Cast<Name>().ToList().Select(n => MapContinentToString(n));
 
     }

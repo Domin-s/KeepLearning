@@ -4,9 +4,9 @@ using MediatR;
 
 namespace KeepLearning.Application.Queries.Question
 {
-    public class GetQuestionQuery : IRequest<QuestionDto>
+    public class GetRandomQuestionQuery : IRequest<QuestionDto>
     {
-        public GuessType GuessType { get; set; }
+        public GuessType.Value GuessType { get; set; }
         public Continent.Name Continent { get; set; }
     }
 }
