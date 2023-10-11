@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KeepLearning.MVC.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace KeepLearning.MVC.Controllers;
 
@@ -14,13 +13,11 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    [Authorize]
     public IActionResult Index()
     {
         return View();
     }
 
-    [Authorize]
     public IActionResult Privacy()
     {
         return View();
