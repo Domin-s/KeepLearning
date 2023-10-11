@@ -1,0 +1,36 @@
+﻿@model GuessRandomQuestionModelView
+
+@{
+    ViewData["Title"] = "Random";
+}
+
+@if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
+{
+    <h1>Guess the capital city of country: <span class="fw-bolder">@Model.Question.QuestionText</span></h1>
+}
+else
+{
+    <h1>Guess the country by its capital city: <span class="fw-bolder">@Model.Question.QuestionText</span></h1>
+}
+
+
+<div>
+    <div class="mb-3">
+        <input type="text" class="form-control" id="Question[@Model.Question.NumberQuestion]" placeholder="Tape answer">
+        <input hidden value="@Model.Question.QuestionText" id="Answer[@Model.Question.NumberQuestion]">
+    </div>
+</div>
+
+<div class="row">
+    <div class="mb-3">
+        <form type="post" asp-action="Random">
+            <input hidden value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
+            <input hidden value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
+            <input type="submit" value="Another random question" class="btn btn-primary" />
+        </form>
+    </div>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+    </div>
+</div>

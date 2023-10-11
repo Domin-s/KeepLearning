@@ -1,0 +1,50 @@
+﻿@model KeepLearning.Application.Country.Countries
+
+@{
+    ViewData["Title"] = "List";
+}
+
+
+@if (!Model.ListOfCountry.Any())
+{
+
+    <h1>Not find any contry</h1>
+}
+else
+{
+    <h1>Countries</h1>
+
+    <h3><a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Create">Create test</a></h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <div>Name</div>
+                </th>
+                <th>
+                    <div>Capital city</div>
+                </th>
+                <th>
+                    <div>Continent</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListOfCountry)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CapitalCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Continent)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
