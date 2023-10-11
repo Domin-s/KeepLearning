@@ -4,33 +4,53 @@
     ViewData["Title"] = "Random";
 }
 
-@if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
-{
-    <h1>Guess the capital city of country: <span class="fw-bolder">@Model.Question.QuestionText</span></h1>
-}
-else
-{
-    <h1>Guess the country by its capital city: <span class="fw-bolder">@Model.Question.QuestionText</span></h1>
-}
-
-
 <div>
-    <div class="mb-3">
-        <input type="text" class="form-control" id="Question[@Model.Question.NumberQuestion]" placeholder="Tape answer">
-        <input hidden value="@Model.Question.QuestionText" id="Answer[@Model.Question.NumberQuestion]">
-    </div>
-</div>
+    <div>
+        @if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
+        {
+            <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+        }
+        else
+        {
+            <h1 class="m-2">Guess the country by its capital city: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+        }
 
-<div class="row">
-    <div class="mb-3">
-        <form type="post" asp-action="Random">
-            <input hidden value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
-            <input hidden value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
-            <input type="submit" value="Another random question" class="btn btn-primary" />
-        </form>
+        <h4 class="m-2">Selected continent: <span class="fw-bolder">@Model.GetRandomQuestionQuery.Continent</span></h4>
     </div>
 
-    <div class="mb-3">
-        <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+    <div class="mt-4">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="userAnswer" placeholder="Tape answer">
+            <input hidden value="@Model.Question.AnswerText" id="goodAnswer">
+        </div>
+    </div>
+    
+    <div hidden>
+        <input value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
+        <input value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+            </div>
+            <div class="col">
+                <button id="checker" class="btn btn-primary" role="button">Check answer</button>
+            </div>
+            <div class="col">
+                <input type="submit" id="getAnotherRandomQuestion" value="Another random question" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <label>Answer history (question => you answer):</label>
+
+        <ul id="answerHistory">
+        </ul>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/Question/Random.js"></script>
+}

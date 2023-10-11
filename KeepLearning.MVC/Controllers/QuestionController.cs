@@ -26,7 +26,7 @@ namespace KeepLearning.MVC.Controllers
             return View(randomQuestionViewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Random(GetRandomQuestionQuery getRandomQuestionQuery)
         {
 
@@ -35,6 +35,15 @@ namespace KeepLearning.MVC.Controllers
             var modelView = new GuessRandomQuestionModelView(getRandomQuestionQuery, question);
 
             return View(modelView);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RandomAnotherQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
+        {
+
+            var question = await _mediator.Send(getRandomQuestionQuery);
+
+            return Ok(question);
         }
     }
 }
