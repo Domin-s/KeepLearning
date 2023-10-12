@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Application.Models.Enums;
+using KeepLearning.Application.Queries.CheckAnswer;
 using KeepLearning.Application.Queries.Question;
 using KeepLearning.MVC.Models;
 using MediatR;
@@ -44,6 +45,14 @@ namespace KeepLearning.MVC.Controllers
             var question = await _mediator.Send(getRandomQuestionQuery);
 
             return Ok(question);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckAnswer(CheckAnswerQuery checkAnswerQuery)
+        {
+            var result = await _mediator.Send(checkAnswerQuery);
+
+            return Ok(result);
         }
     }
 }
