@@ -32,10 +32,10 @@ namespace KeepLearning.Application.Queries.CheckAnswer
             switch (query.GuessType)
             {
                 case GuessType.Value.CapitalCity:
-                    return await _countryRepository.GetByCapitalCity(query.Question);
+                    return await _countryRepository.GetByName(query.Question);
 
                 case GuessType.Value.Country:
-                    return await _countryRepository.GetByName(query.Question);
+                    return await _countryRepository.GetByCapitalCity(query.Question);
 
                 default:
                     throw new NotImplementedException();
