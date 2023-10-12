@@ -1,4 +1,4 @@
 ﻿namespace KeepLearning.Application.Models.Question
 {
-    public record class QuestionDto(string QuestionText, string AnswerText, int NumberQuestion) { }
+    public record class QuestionDto(int NumberQuestion, string QuestionText) { }
 }

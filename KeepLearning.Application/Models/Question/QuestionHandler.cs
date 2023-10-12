@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Application.Models.Enums;
 
 namespace KeepLearning.Application.Models.Question
 {
@@ -10,10 +9,10 @@ namespace KeepLearning.Application.Models.Question
             switch (guessType)
             {
                 case GuessType.Value.CapitalCity:
-                    return new QuestionDto(country.Name, country.CapitalCity, numberOfQuestion);
+                    return new QuestionDto(numberOfQuestion, country.Name);
 
                 case GuessType.Value.Country:
-                    return new QuestionDto(country.CapitalCity, country.Name, numberOfQuestion);
+                    return new QuestionDto(numberOfQuestion, country.CapitalCity);
 
                 default:
                     throw new Exception("Wrong GuessType");
