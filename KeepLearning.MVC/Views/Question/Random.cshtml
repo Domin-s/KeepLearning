@@ -8,11 +8,11 @@
     <div>
         @if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
         {
-            <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+            <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder" id="Question">@Model.Question.QuestionText</span></h1>
         }
         else
         {
-            <h1 class="m-2">Guess the country by its capital city: <span class="fw-bolder" id="question">@Model.Question.QuestionText</span></h1>
+            <h1 class="m-2">Guess the country by its capital city: <span class="fw-bolder" id="Question">@Model.Question.QuestionText</span></h1>
         }
 
         <h4 class="m-2">Selected continent: <span class="fw-bolder">@Model.GetRandomQuestionQuery.Continent</span></h4>
@@ -20,7 +20,7 @@
 
     <div class="mt-4">
         <div class="mb-3">
-            <input type="text" class="form-control" id="userAnswer" placeholder="Tape answer">
+            <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
         </div>
     </div>
     
@@ -35,10 +35,10 @@
                 <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
             </div>
             <div class="col">
-                <button id="checker" class="btn btn-primary" role="button">Check answer</button>
+                <button id="answerChecker" class="btn btn-primary" role="button">Check answer</button>
             </div>
             <div class="col">
-                <input type="submit" id="getAnotherRandomQuestion" value="Another random question" class="btn btn-primary" />
+                <button id="getAnotherRandomQuestion" class="btn btn-primary" role="button">Another random question</button>
             </div>
         </div>
     </div>
