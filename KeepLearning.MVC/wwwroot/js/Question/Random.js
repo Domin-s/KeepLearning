@@ -57,12 +57,12 @@ $(document).ready(function () {
         if (isCorrect) {
             toastr["success"]("Good answer! Congratulations!!");
 
-            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css('color', 'green');
+            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'green', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
         } else {
             toastr["error"]("Wrong answer. Write another or click in another random question.");
 
-            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css('color', 'red');
+            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'red', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
         }
     };
