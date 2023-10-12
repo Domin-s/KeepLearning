@@ -1,5 +1,5 @@
 ﻿using KeepLearning.Application.Models.Question;
-using KeepLearning.Application.Queries.Question;
+using KeepLearning.Application.Queries.GetRandomQuestion;
 
 namespace KeepLearning.MVC.Models
 {

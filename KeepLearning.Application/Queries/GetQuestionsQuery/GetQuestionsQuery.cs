@@ -2,9 +2,9 @@
 using KeepLearning.Application.Models.TestCountry;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.TestCountry
+namespace KeepLearning.Application.Queries.GetQuestionsQuery
 {
-    public class GetTestCountryQuery : IRequest<TestCountryDto>
+    public class GetQuestionsQuery : IRequest<TestCountryDto>
     {
         public string? Name { get; set; }
         public int NumberOfQuestion { get; set; } = 10;

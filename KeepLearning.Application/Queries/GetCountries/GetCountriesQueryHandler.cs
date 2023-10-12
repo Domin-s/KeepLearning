@@ -4,7 +4,7 @@ using KeepLearning.Application.Models.Enums;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.Country
+namespace KeepLearning.Application.Queries.GetCountries
 {
     public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, Countries>
     {

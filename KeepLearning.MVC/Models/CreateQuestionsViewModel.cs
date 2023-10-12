@@ -1,15 +1,15 @@
 ﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Queries.TestCountry;
+using KeepLearning.Application.Queries.GetQuestionsQuery;
 
 namespace KeepLearning.MVC.Models
 {
-    public class CreateTestViewModel
+    public class CreateQuestionsViewModel
     {
         public string? Name { get; set; }
         public int NumberOfQuestion { get; set; }
         public List<string> Continents { get; set; } = new List<string>();
 
-        public GetTestCountryQuery ToCreateTestCountryCommand()
+        public GetQuestionsQuery ToCreateTestCountryCommand()
         {
             var continents = new List<Continent.Name>();
 
@@ -19,7 +19,7 @@ namespace KeepLearning.MVC.Models
                 continents.Add(name);
             }
 
-            return new GetTestCountryQuery
+            return new GetQuestionsQuery
             {
                 Name = Name,
                 NumberOfQuestion = NumberOfQuestion,

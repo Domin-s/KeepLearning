@@ -2,7 +2,7 @@
 using KeepLearning.Application.Models.Enums;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.Country
+namespace KeepLearning.Application.Queries.GetCountries
 {
     public class GetCountriesQuery : IRequest<Countries>
     {
