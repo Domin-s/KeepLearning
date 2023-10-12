@@ -8,5 +8,7 @@ namespace KeepLearning.Domain.Interfaces
         Task<Countries> GetAll();
         Task<Countries> GetByContinent(string continent);
         Task<Countries> GetByContinents(IEnumerable<string> continents);
+        Task<Country?> GetByName(string name);
+        Task<Country?> GetByCapitalCity(string capitalCity);
     }
 }

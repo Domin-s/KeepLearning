@@ -1,23 +1,15 @@
 $(document).ready(function () {
-
-    var question = $("#question");
-    var inputString = $("#userAnswer");
-    var goodAnswer = $("#goodAnswer");
-
-    $("#checker").click(function () {
-        if (inputString.val() == goodAnswer.val()) {
-            toastr["success"]("Good answer! Congratulations!!");
-            RefreshDataOnWebsite();
-            inputString.val('');
-        } else {
-            toastr["error"]("Wrong answer! You can write another answer again!");
-            AddAnswerToHistory(question.text(), inputString.val(), goodAnswer.val());
-            inputString.val('');
-        }
-    });
+    var isIncorrect = false;
+    var question = $("#Question");
+    var answer = $("#Answer");
 
     $("#getAnotherRandomQuestion").click(function (event) {
+        AddAnswerToHistory(question.text(), answer.text(), isIncorrect);
         RefreshDataOnWebsite();
+    });
+
+    $("#answerChecker").click(function (event) {
+        CheckAnswer();
     });
 
     function RefreshDataOnWebsite() {
@@ -26,17 +18,13 @@ $(document).ready(function () {
 
         var dataToSend = 'Continent=' + continent + "&GuessType=" + guessType;
 
-        AddAnswerToHistory(question.text(), inputString.val(), goodAnswer.val());
-
         $.ajax({
             url: `/Question/RandomAnotherQuestion`,
             type: 'get',
             data: dataToSend,
             success: function (data) {
                 question.text(data.questionText);
-                goodAnswer.val(data.answerText);
-
-                console.log(goodAnswer.val())
+                answer.val(data.answerText);
             },
             error: function (data) {
                 toastr["error"]("Something went wrong")
@@ -44,14 +32,37 @@ $(document).ready(function () {
         })
     }
 
-    function AddAnswerToHistory(question, userAnswer, goodAnswer) {
+    function CheckAnswer() {
+        var guessType = $("#GuessType").val();
+        var dataToSend = 'Question=' + question.text() + "&Answer=" + answer.val() + "&GuessType=" + guessType;
+
+        $.ajax({
+            url: `/Question/CheckAnswer`,
+            type: 'get',
+            data: dataToSend,
+            success: function (data) {
+                console.log("val :: " + answer.val());
+                AddAnswerToHistory(question.text(), answer.val(), data);
+                RefreshDataOnWebsite();
+            },
+            error: function (data) {
+                toastr["error"]("Something went wrong")
+            }
+        })
+    }
+
+    function AddAnswerToHistory(question, userAnswer, isCorrect) {
         var answerHistory = $("#answerHistory");
 
-        if (userAnswer == goodAnswer) {
-            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css('color', 'green');
+        if (isCorrect) {
+            toastr["success"]("Good answer! Congratulations!!");
+
+            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'green', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
         } else {
-            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css('color', 'red');
+            toastr["error"]("Wrong answer. Write another or click in another random question.");
+
+            var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'red', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
         }
     };
