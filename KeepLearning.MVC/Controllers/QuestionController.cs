@@ -1,6 +1,8 @@
 ﻿using KeepLearning.Application.Models.Enums;
 using KeepLearning.Application.Models.Question;
+using KeepLearning.Application.Models.TestCountry;
 using KeepLearning.Application.Queries.CheckAnswer;
+using KeepLearning.Application.Queries.GetQuestionsQuery;
 using KeepLearning.Application.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;
 using MediatR;
@@ -11,6 +13,8 @@ namespace KeepLearning.MVC.Controllers
 {
     public class QuestionController : Controller
     {
+        const string STDTestCountry = "SerializedTestCountry";
+
         private readonly IMediator _mediator;
 
         public QuestionController(IMediator mediator)
@@ -62,26 +66,39 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(CreateQuestionsViewModel form)
+        public async Task<IActionResult> CreateTest(GetQuestionsQuery query)
         {
-            var command = form.ToCreateTestCountryCommand();
+            var test = await _mediator.Send(query);
 
-            var test = await _mediator.Send(command);
-
-            var questions = JsonConvert.SerializeObject(test.Questions);
-
-            TempData["Questions"] = questions;
+            var serializedTest = JsonConvert.SerializeObject(test);
+            TempData[STDTestCountry] = serializedTest;
 
             return RedirectToAction(nameof(Resolve));
         }
 
         public IActionResult Resolve()
         {
-            string jsonQuestion = TempData["Questions"].ToString();
+            var serializedTest = CheckTempData(STDTestCountry);
 
-            var questions = JsonConvert.DeserializeObject<IEnumerable<QuestionDto>>(jsonQuestion);
+            var questions = JsonConvert.DeserializeObject<TestCountryDto>(serializedTest);
 
             return View(questions);
+        }
+        private string CheckTempData(string name)
+        {
+            var tempData = TempData[name];
+            if (tempData is null)
+            {
+                throw new Exception("Something wont wrong");
+            }
+
+            var serializedTest = tempData.ToString();
+            if (serializedTest is null)
+            {
+                throw new Exception("Something wont wrong");
+            }
+
+            return serializedTest;
         }
 
         private QuestionDataViewModel CreateQuestionDataViewModel()
