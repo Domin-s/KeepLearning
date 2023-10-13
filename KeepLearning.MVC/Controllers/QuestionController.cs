@@ -80,10 +80,13 @@ namespace KeepLearning.MVC.Controllers
         {
             var serializedTest = CheckTempData(STDTestCountry);
 
-            var questions = JsonConvert.DeserializeObject<TestCountryDto>(serializedTest);
+            var testCountryDto = JsonConvert.DeserializeObject<TestCountryDto>(serializedTest);
 
-            return View(questions);
+            TempData[STDTestCountry] = serializedTest;
+
+            return View(testCountryDto);
         }
+
         private string CheckTempData(string name)
         {
             var tempData = TempData[name];
@@ -92,13 +95,13 @@ namespace KeepLearning.MVC.Controllers
                 throw new Exception("Something wont wrong");
             }
 
-            var serializedTest = tempData.ToString();
-            if (serializedTest is null)
+            var serializedString = tempData.ToString();
+            if (serializedString is null)
             {
                 throw new Exception("Something wont wrong");
             }
 
-            return serializedTest;
+            return serializedString;
         }
 
         private QuestionDataViewModel CreateQuestionDataViewModel()

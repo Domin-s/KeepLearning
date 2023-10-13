@@ -15,18 +15,21 @@
         <div class="row align-items-start">
             <form method="post" action="CreateTest">
                 <div hidden>
-                    <input value="@Model.Name" id="Name">
-                    <input value="@Model.NumberOfQuestion" id="NumberOfQuestion">
-                    <input value="@Model.GuessType" id="GuessType">
-                    <input value="@Model.Continents" id="Continents">
+                    <input value="@Model.Name" id="Name" name="Name">
+                    <input value="@Model.NumberOfQuestion" id="NumberOfQuestion" name="NumberOfQuestion">
+                    <input value="@Model.GuessType" id="GuessType" name="GuessType">
+                    @foreach (var continent in Model.Continents)
+                    {
+                        <input value="@continent" id="Continents" name="Continents">
+                    }
                 </div>
 
                 <div class="row m-4 col-6">
                     <div class="col-4">
-                        <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+                        <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
                     </div>
                     <div class="col-4">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
                     </div>
                 </div>
             </form>
@@ -38,13 +41,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="col">
+            <th class="col-1">
                 Number of question
             </th>
-            <th>
+            <th class="col-4">
                 Question
             </th>
-            <th>
+            <th class="col-4">
                 Your answers
             </th>
         </tr>
