@@ -1,0 +1,68 @@
+﻿@using KeepLearning.Application.Models.TestCountry
+
+@model TestCountryDto
+
+@{
+    ViewData["Title"] = "Resolve";
+}
+
+<h1>Resolve</h1>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <div class="row align-items-start">
+            <form method="post" action="CreateTest">
+                <div hidden>
+                    <input value="@Model.Name" id="Name">
+                    <input value="@Model.NumberOfQuestion" id="NumberOfQuestion">
+                    <input value="@Model.GuessType" id="GuessType">
+                    <input value="@Model.Continents" id="Continents">
+                </div>
+
+                <div class="row m-4 col-6">
+                    <div class="col-4">
+                        <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
+                    </div>
+                    <div class="col-4">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col">
+                Number of question
+            </th>
+            <th>
+                Question
+            </th>
+            <th>
+                Your answers
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Questions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberQuestion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionText)
+                </td>
+                <td>
+                    <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

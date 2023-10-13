@@ -73,10 +73,10 @@ namespace KeepLearning.MVC.Controllers
             var serializedTest = JsonConvert.SerializeObject(test);
             TempData[STDTestCountry] = serializedTest;
 
-            return RedirectToAction(nameof(Resolve));
+            return RedirectToAction(nameof(Test));
         }
 
-        public IActionResult Resolve()
+        public IActionResult Test()
         {
             var serializedTest = CheckTempData(STDTestCountry);
 

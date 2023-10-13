@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model QuestionDataViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -8,45 +8,63 @@
 
 <hr />
 
-<div class="row">
-    <div class="col">
-        <form method="post" action="Create">
-            <div class="row m-2">
-                <div class="col-3">Test name: </div>
-                <input id="Name" class="col-5" name="Name" />
-            </div>
-            <div class="row m-2">
-                <div class="col-3">Choose number of questions:</div>
-                <select name="NumberOfQuestion" class="col-5" id="NumberOfQuestion">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
+<div class="form-group">
+    <div class="container">
+        <div class="row align-items-start">
+            <form method="post" action="CreateTest">
+                <div class="col-10">
+                    <div class="row m-2">
+                        <div class="col-3">Test name: </div>
+                        <input id="Name" class="col-5" name="Name" />
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-3">Choose number of questions:</div>
+                        <select name="NumberOfQuestion" class="col-5" id="NumberOfQuestion">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-3">Choose continents: </div>
 
-            <div class="row m-2">
-                <div class="col-3">Choose continents: </div>
+                        <div class="form-group col-5">
+                            @foreach (var continent in Model.Continents)
+                            {
+                                <input type="checkbox" name="Continents" for="continent" class="form-check-input" value="@continent" />
+                                <label class="form-check-label" id="continent">@continent</label>
+                                <br />
+                            }
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-3">Choose number of questions:</div>
+                        <div class="form-group col-5">
+                            <select name="GuessType" class="col-5" id="GuessType">
+                                @foreach (var guessType in Model.GuessTypes)
+                                {
+                                    <option value="@guessType">@guessType</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row m-2">
 
-                <div class="form-group col-5">
-                    @foreach (var continent in Model)
-                    {
-                        <input type="checkbox" name="Continents" for="continent" class="form-check-input" value="@continent" />
-                        <label class="form-check-label" id="continent">@continent</label>
-                        <br />
-                    }
+                    </div>
                 </div>
-            </div>
-            <div class="row m-4 col-6">
-                <div class="col-4">
-                    <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to list</a>
+
+                <div class="row m-4 col-6">
+                    <div class="col-4">
+                        <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to list</a>
+                    </div>
+                    <div class="col-4">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
                 </div>
-                <div class="col-4">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
