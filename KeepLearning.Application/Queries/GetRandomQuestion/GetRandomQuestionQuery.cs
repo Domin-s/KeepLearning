@@ -2,7 +2,7 @@
 using KeepLearning.Application.Models.Question;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.Question
+namespace KeepLearning.Application.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQuery : IRequest<QuestionDto>
     {

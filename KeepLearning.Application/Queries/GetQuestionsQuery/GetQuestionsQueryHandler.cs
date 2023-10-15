@@ -5,20 +5,20 @@ using KeepLearning.Application.Models.TestCountry;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.TestCountry
+namespace KeepLearning.Application.Queries.GetQuestionsQuery
 {
-    internal class GetTestCountryQueryHandler : IRequestHandler<GetTestCountryQuery, TestCountryDto>
+    internal class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
     {
         private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
 
-        public GetTestCountryQueryHandler(ICountryRepository countryRepository, IMapper mapper)
+        public GetQuestionsQueryHandler(ICountryRepository countryRepository, IMapper mapper)
         {
             _countryRepository = countryRepository;
             _mapper = mapper;
         }
 
-        public async Task<TestCountryDto> Handle(GetTestCountryQuery request, CancellationToken cancellationToken)
+        public async Task<TestCountryDto> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
         {
             var mappedContinent = request.Continents.Select(c => Continent.MapContinentToString(c));
 
@@ -33,7 +33,7 @@ namespace KeepLearning.Application.Queries.TestCountry
             return test;
         }
 
-        private TestCountryDto CreateTest(GetTestCountryQuery command, IEnumerable<QuestionDto> questions)
+        private TestCountryDto CreateTest(GetQuestionsQuery command, IEnumerable<QuestionDto> questions)
         {
             TestCountryDto test = new TestCountryDto()
             {
