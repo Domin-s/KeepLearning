@@ -1,6 +1,7 @@
 ﻿using KeepLearning.Application.Models.Enums;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
+using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.Application.Queries.CheckAnswer
 {
@@ -18,8 +19,7 @@ namespace KeepLearning.Application.Queries.CheckAnswer
             var country = await GetCountry(request);
             if (country == null)
             {
-                // TODO: Add error here
-                return false;
+                throw new NotFoundException("Not found country");
             }
 
             var result = IsCorrectAnswer(country, request);

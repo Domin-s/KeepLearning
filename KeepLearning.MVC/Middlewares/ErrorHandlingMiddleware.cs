@@ -17,6 +17,11 @@ namespace KeepLearning.MVC.Middlewares
             {
                 await next.Invoke(context);
             }
+            catch (ArgumentException argumentException)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(argumentException.Message);
+            }
             catch (BadRequestException badRequestException)
             {
                 context.Response.StatusCode = 400;
@@ -36,6 +41,11 @@ namespace KeepLearning.MVC.Middlewares
             {
                 context.Response.StatusCode = 409;
                 await context.Response.WriteAsync(alreadyExist.Message);
+            }
+            catch (NotImplementedException notImplementedException)
+            {
+                context.Response.StatusCode = 501;
+                await context.Response.WriteAsync(notImplementedException.Message);
             }
             catch (Exception e)
             {
