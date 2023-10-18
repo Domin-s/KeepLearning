@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Application.Models.Enums;
 using KeepLearning.Application.Models.Question;
 using KeepLearning.Application.Models.TestCountry;
 using KeepLearning.Domain.Interfaces;
@@ -7,15 +6,13 @@ using MediatR;
 
 namespace KeepLearning.Application.Queries.GetQuestionsQuery
 {
-    internal class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
+    public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
     {
         private readonly ICountryRepository _countryRepository;
-        private readonly IMapper _mapper;
 
-        public GetQuestionsQueryHandler(ICountryRepository countryRepository, IMapper mapper)
+        public GetQuestionsQueryHandler(ICountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
-            _mapper = mapper;
         }
 
         public async Task<TestCountryDto> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
@@ -41,6 +38,7 @@ namespace KeepLearning.Application.Queries.GetQuestionsQuery
                 NumberOfQuestion = command.NumberOfQuestion,
                 Continents = command.Continents,
                 Questions = questions,
+                GuessType = command.GuessType
             };
 
             return test;

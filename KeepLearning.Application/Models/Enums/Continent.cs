@@ -12,7 +12,7 @@
             SouthAmerica
         };
 
-        internal static string MapContinentToString(Name continent)
+        public static string MapContinentToString(Name continent)
         {
             switch (continent)
             {
