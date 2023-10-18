@@ -8,6 +8,7 @@ using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.MVC.Controllers
 {
@@ -92,13 +93,13 @@ namespace KeepLearning.MVC.Controllers
             var tempData = TempData[name];
             if (tempData is null)
             {
-                throw new Exception("Something wont wrong");
+                throw new NotFoundException("TempData not found");
             }
 
             var serializedString = tempData.ToString();
             if (serializedString is null)
             {
-                throw new Exception("Something wont wrong");
+                throw new Exception("TempData can not map to string");
             }
 
             return serializedString;

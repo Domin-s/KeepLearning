@@ -12,7 +12,8 @@
             SouthAmerica
         };
 
-        internal static string MapContinentToString(Name continent)
+        // TODO: Add test for this!
+        public static string MapContinentToString(Name continent)
         {
             switch (continent)
             {
@@ -27,6 +28,7 @@
             }
         }
 
+        // TODO: Add test for this!
         public static Name MapStringToContinent(string continent)
         {
             switch (continent)
