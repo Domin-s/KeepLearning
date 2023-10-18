@@ -7,7 +7,7 @@ using MediatR;
 
 namespace KeepLearning.Application.Queries.GetQuestionsQuery
 {
-    internal class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
+    public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
     {
         private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
