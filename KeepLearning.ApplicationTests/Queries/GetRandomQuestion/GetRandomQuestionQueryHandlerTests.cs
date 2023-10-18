@@ -1,13 +1,15 @@
 ﻿using KeepLearning.Application.Country;
 using KeepLearning.Application.Models.Enums;
 using KeepLearning.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
 
 namespace KeepLearning.Application.Queries.GetRandomQuestion.Tests
 {
-    public class GetRandomQuestionQueryHandlerTests
+    public class GetRandomQuestionQueryHandlerTests: IClassFixture<WebApplicationFactory<Program>>
     {
-
         [Theory]
         [InlineData(GuessType.Value.Country, Continent.Name.Europe, "Warsaw")]
         [InlineData(GuessType.Value.CapitalCity, Continent.Name.Europe, "Poland")]
