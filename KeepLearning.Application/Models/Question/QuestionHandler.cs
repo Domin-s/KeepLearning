@@ -15,7 +15,7 @@ namespace KeepLearning.Application.Models.Question
                     return new QuestionDto(numberOfQuestion, country.CapitalCity);
 
                 default:
-                    throw new Exception("Wrong GuessType");
+                    throw new NotImplementedException();
             }
         }
 
