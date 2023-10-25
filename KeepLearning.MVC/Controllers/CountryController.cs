@@ -1,6 +1,5 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Queries;
-using KeepLearning.Application.Queries.GetCountries;
+﻿using KeepLearning.Application.Queries.GetCountries;
+using KeepLearning.Application.Queries.GetNumberOfCountriesQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

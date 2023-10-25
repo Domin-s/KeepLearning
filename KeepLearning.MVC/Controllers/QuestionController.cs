@@ -1,5 +1,4 @@
-﻿using KeepLearning.Application.Models.Enums;s
-using KeepLearning.Application.Models.TestCountry;
+﻿using KeepLearning.Application.Models.TestCountry;
 using KeepLearning.Application.Queries.CheckAnswer;
 using KeepLearning.Application.Queries.CheckTestQuery;
 using KeepLearning.Application.Queries.GetQuestionsQuery;
@@ -26,7 +25,7 @@ namespace KeepLearning.MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var questionDataViewModel = CreateQuestionDataViewModel();
+            var questionDataViewModel = new QuestionDataViewModel();
 
             return View(questionDataViewModel);
         }
@@ -69,7 +68,7 @@ namespace KeepLearning.MVC.Controllers
 
         public IActionResult CreateTest()
         {
-            var questionDataViewModel = CreateQuestionDataViewModel();
+            var questionDataViewModel = new QuestionDataViewModel();
 
             return View(questionDataViewModel);
         }
@@ -111,14 +110,6 @@ namespace KeepLearning.MVC.Controllers
             }
 
             return serializedString;
-        }
-
-        private QuestionDataViewModel CreateQuestionDataViewModel()
-        {
-            var continents = Continent.GetAllLikeStrings();
-            var guessTypes = GuessType.GetAllLikeStrings();
-
-            return new QuestionDataViewModel(continents, guessTypes);
         }
     }
 }
