@@ -30,7 +30,7 @@ namespace KeepLearning.Application.Queries.GetCountries
         {
             if (continents.Any())
             {
-                var stringContinents = continents.Select(c => Continent.MapContinentToString(c));
+                var stringContinents = continents.Select(Continent.MapContinentToString);
                 return await _countryRepository.GetByContinents(stringContinents);
             }
             else

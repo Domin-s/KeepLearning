@@ -30,6 +30,7 @@ namespace KeepLearning.Application.Queries.GetQuestionsQuery
             return test;
         }
 
+        // TODO: Refactor
         private TestCountryDto CreateTest(GetQuestionsQuery command, IEnumerable<QuestionDto> questions)
         {
             TestCountryDto test = new TestCountryDto()

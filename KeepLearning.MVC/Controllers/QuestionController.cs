@@ -1,7 +1,7 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Question;
+﻿using KeepLearning.Application.Models.Enums;s
 using KeepLearning.Application.Models.TestCountry;
 using KeepLearning.Application.Queries.CheckAnswer;
+using KeepLearning.Application.Queries.CheckTestQuery;
 using KeepLearning.Application.Queries.GetQuestionsQuery;
 using KeepLearning.Application.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;

@@ -49,5 +49,10 @@ namespace KeepLearning.Infrastructure.Repositories
 
         public async Task<Country?> GetByName(string name)
             => await _dbContext.Countries.Where(c => c.Name == name).FirstOrDefaultAsync();
+
+        public async Task<int> GetNumberOfCountries(IEnumerable<string> continents)
+            => await _dbContext.Countries
+                        .Where(c => continents.Contains(c.Continent))
+                        .CountAsync();
     }
 }
