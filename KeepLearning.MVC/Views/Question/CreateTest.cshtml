@@ -11,7 +11,7 @@
 <div class="form-group">
     <div class="container">
         <div class="row align-items-start">
-            <form method="post" action="CreateTest">
+            @*<form method="post" action="#">*@
                 <div class="col-10">
                     <div class="row m-2">
                         <div class="col-3">Test name: </div>
@@ -33,7 +33,7 @@
                         <div class="form-group col-5">
                             @foreach (var continent in Model.Continents)
                             {
-                                <input type="checkbox" name="Continents" for="continent" class="form-check-input" value="@continent" />
+                                <input type="checkbox" class="continentInput" name="Continents" for="continent" class="form-check-input" value="@continent" />
                                 <label class="form-check-label" id="continent">@continent</label>
                                 <br />
                             }
@@ -60,14 +60,15 @@
                         <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to list</a>
                     </div>
                     <div class="col-4">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-primary" id="createTest" />
                     </div>
                 </div>
-            </form>
+            @*</form>*@
         </div>
     </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Question/CreateTest.js"></script>
 }
