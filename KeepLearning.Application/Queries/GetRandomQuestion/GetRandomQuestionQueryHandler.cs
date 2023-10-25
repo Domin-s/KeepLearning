@@ -24,7 +24,7 @@ namespace KeepLearning.Application.Queries.GetRandomQuestion
 
             var randomCountry = countries.GetRandomCountry();
 
-            return QuestionHandler.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
+            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
         }
     }
 }

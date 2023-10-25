@@ -23,7 +23,7 @@ namespace KeepLearning.Application.Queries.GetQuestionsQuery
 
             var randomCountries = countries.GetRandomCountries(request.NumberOfQuestion);
 
-            var questions = QuestionHandler.FromCountriesAndGuessType(randomCountries, request.GuessType);
+            var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.GuessType);
 
             var test = CreateTest(request, questions);
 

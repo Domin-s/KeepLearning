@@ -59,6 +59,14 @@ namespace KeepLearning.MVC.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CheckTest(CheckTestQuery checkAnswerQuery)
+        {
+            var result = await _mediator.Send(checkAnswerQuery);
+
+            return Ok(result);
+        }
+
         public IActionResult CreateTest()
         {
             var questionDataViewModel = CreateQuestionDataViewModel();
