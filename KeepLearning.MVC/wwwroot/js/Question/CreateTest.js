@@ -11,7 +11,7 @@ $(document).ready(function () {
         createTest.prop("disabled", true);
 
         continentInputs.click(function (event) {
-            var maxNumberOfQuestions = GetMaxNumberOfQuestion(continentInputs);
+            GetMaxNumberOfQuestion(continentInputs);
             DiableButton(createTest, continentInputs);
         });
     }
@@ -22,43 +22,6 @@ $(document).ready(function () {
         } else {
             createTest.prop("disabled", true);
         }
-    }
-
-    function ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions) {
-        var numberOfQuestionsSelects = $("#NumberOfQuestion");
-        numberOfQuestionsSelects.find('option').remove().end();
-
-        console.log("ConfigureSelectForNumberOfQuestions: maxNumberOfQuestions");
-        console.log(maxNumberOfQuestions);
-
-        if (maxNumberOfQuestions == 0) {
-            var defaultSelect = "Yoy must have choosen at least one continet";
-            AddOption(defaultSelect, numberOfQuestionsSelects)
-        } else {
-            SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionsSelects);
-        }
-    }
-
-    function SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionSelects) {
-        console.log("SetMaxNumberOfQuestion: maxNumberOfQuestion");
-        console.log(maxNumberOfQuestions);
-
-        NumberOfQuestions.forEach(element => {
-            AddOptionWithNumber(element, maxNumberOfQuestions, numberOfQuestionSelects);
-        });
-    }
-
-    function AddOptionWithNumber(item, maxNumberOfQuestions, numberOfQuestionSelect) {
-        console.log("AddOptionWithNumber: numberOfQuestionSelect");
-        console.log(numberOfQuestionSelect);
-
-        if (item < maxNumberOfQuestions) {
-            AddOption(item, numberOfQuestionSelect);
-        }
-    }
-
-    function AddOption(value, numberOfQuestionSelect) {
-        numberOfQuestionSelect.append("<option value=" + value + ">" + value + "</option>");
     }
 
     function GetMaxNumberOfQuestion(continentInputs) {
@@ -75,6 +38,34 @@ $(document).ready(function () {
                 toastr["error"]("Something went wrong")
             }
         });
+    }
+
+    function ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions) {
+        var numberOfQuestionsSelects = $("#NumberOfQuestion");
+        numberOfQuestionsSelects.find('option').remove().end();
+
+        if (maxNumberOfQuestions == 0) {
+            var defaultSelect = "Yoy must have choosen at least one continet";
+            AddOption(defaultSelect, numberOfQuestionsSelects);
+        } else {
+            SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionsSelects);
+        }
+    }
+
+    function SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionSelects) {
+        NumberOfQuestions.forEach(element => {
+            AddOptionWithNumber(element, maxNumberOfQuestions, numberOfQuestionSelects);
+        });
+    }
+
+    function AddOptionWithNumber(item, maxNumberOfQuestions, numberOfQuestionSelect) {
+        if (item < maxNumberOfQuestions) {
+            AddOption(item, numberOfQuestionSelect);
+        }
+    }
+
+    function AddOption(value, numberOfQuestionSelect) {
+        numberOfQuestionSelect.append("<option value=" + value + ">" + value + "</option>");
     }
 
     function CreatePathParamsWithContinents(continentInputs) {
