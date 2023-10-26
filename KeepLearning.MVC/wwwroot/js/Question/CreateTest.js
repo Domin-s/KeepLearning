@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    const numberOfQuestions = {
 
-    };
+    const NumberOfQuestions = [5, 10, 20, 25, 50];
+
     var createTest = $("#createTest");
     var continentInputs = $(".continentInput");
 
@@ -25,15 +25,24 @@ $(document).ready(function () {
     }
 
     function SetMaxNumberOfQuestion(maxNumberOfQuestion) {
-        console.log("SetMaxNumberOfQuestion");
-        console.log(continentInputs);
-
-        var numberOfQuestion = $("#NumberOfQuestion");
-        console.log("numberOfQuestion");
-        console.log(numberOfQuestion);
-
         console.log("maxNumberOfQuestion");
         console.log(maxNumberOfQuestion);
+
+        var numberOfQuestionSelect = $("#NumberOfQuestion");
+        numberOfQuestionSelect.find('option').remove();
+
+        NumberOfQuestions.forEach(element => {
+            AddOption(element, maxNumberOfQuestion, numberOfQuestionSelect);
+        });
+    }
+
+    function AddOption(item, maxNumberOfQuestion, numberOfQuestionSelect) {
+        console.log("numberOfQuestionSelect");
+        console.log(numberOfQuestionSelect);
+
+        if (item < maxNumberOfQuestion) {
+            numberOfQuestionSelect.append("<option value=" + item + ">" + item + "</option>")
+        }
     }
 
     function GetMaxNumberOfQuestion(continentInputs) {
