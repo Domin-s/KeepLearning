@@ -11,8 +11,8 @@ $(document).ready(function () {
         createTest.prop("disabled", true);
 
         continentInputs.click(function (event) {
+            var maxNumberOfQuestions = GetMaxNumberOfQuestion(continentInputs);
             DiableButton(createTest, continentInputs);
-            GetMaxNumberOfQuestion(continentInputs);
         });
     }
 
@@ -24,37 +24,52 @@ $(document).ready(function () {
         }
     }
 
-    function SetMaxNumberOfQuestion(maxNumberOfQuestion) {
-        console.log("maxNumberOfQuestion");
-        console.log(maxNumberOfQuestion);
+    function ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions) {
+        var numberOfQuestionsSelects = $("#NumberOfQuestion");
+        numberOfQuestionsSelects.find('option').remove().end();
 
-        var numberOfQuestionSelect = $("#NumberOfQuestion");
-        numberOfQuestionSelect.find('option').remove();
+        console.log("ConfigureSelectForNumberOfQuestions: maxNumberOfQuestions");
+        console.log(maxNumberOfQuestions);
+
+        if (maxNumberOfQuestions == 0) {
+            var defaultSelect = "Yoy must have choosen at least one continet";
+            AddOption(defaultSelect, numberOfQuestionsSelects)
+        } else {
+            SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionsSelects);
+        }
+    }
+
+    function SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionSelects) {
+        console.log("SetMaxNumberOfQuestion: maxNumberOfQuestion");
+        console.log(maxNumberOfQuestions);
 
         NumberOfQuestions.forEach(element => {
-            AddOption(element, maxNumberOfQuestion, numberOfQuestionSelect);
+            AddOptionWithNumber(element, maxNumberOfQuestions, numberOfQuestionSelects);
         });
     }
 
-    function AddOption(item, maxNumberOfQuestion, numberOfQuestionSelect) {
-        console.log("numberOfQuestionSelect");
+    function AddOptionWithNumber(item, maxNumberOfQuestions, numberOfQuestionSelect) {
+        console.log("AddOptionWithNumber: numberOfQuestionSelect");
         console.log(numberOfQuestionSelect);
 
-        if (item < maxNumberOfQuestion) {
-            numberOfQuestionSelect.append("<option value=" + item + ">" + item + "</option>")
+        if (item < maxNumberOfQuestions) {
+            AddOption(item, numberOfQuestionSelect);
         }
+    }
+
+    function AddOption(value, numberOfQuestionSelect) {
+        numberOfQuestionSelect.append("<option value=" + value + ">" + value + "</option>");
     }
 
     function GetMaxNumberOfQuestion(continentInputs) {
         var dataToSend = CreatePathParamsWithContinents(continentInputs);
-        console.log(dataToSend);
 
         $.ajax({
             url: `/Country/GetNumberOfCountries`,
             type: 'get',
             data: dataToSend,
-            success: function (maxNumberOfQuestion) {
-                SetMaxNumberOfQuestion(maxNumberOfQuestion)
+            success: function (maxNumberOfQuestions) {
+                ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions);
             },
             error: function (data) {
                 toastr["error"]("Something went wrong")
