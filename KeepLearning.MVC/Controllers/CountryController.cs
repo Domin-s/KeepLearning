@@ -14,6 +14,7 @@ namespace KeepLearning.MVC.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<IActionResult> List(GetCountriesQuery query)
         {
             var countries = await _mediator.Send(query);
@@ -21,6 +22,7 @@ namespace KeepLearning.MVC.Controllers
             return View(countries);
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetNumberOfCountries(GetNumberOfCountriesQuery query)
         {
             var numberOfCountries = await _mediator.Send(query);
