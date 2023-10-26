@@ -1,10 +1,9 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.TestCountry;
+﻿using KeepLearning.Application.Models.Result;
 using MediatR;
 
 namespace KeepLearning.Application.Queries.CheckTestQuery
 {
-    public class CheckTestQuery : IRequest<TestResult>
+    public class CheckTestQuery : IRequest<TestResultDto>
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿@using KeepLearning.Application.Models.TestCountry
+﻿@using KeepLearning.Application.Models.Test.Country
 
 @model TestCountryDto
 
@@ -6,33 +6,59 @@
     ViewData["Title"] = "Resolve";
 }
 
-<h1>Resolve</h1>
-
-<hr />
-
 <div class="form-group">
     <div class="container">
         <div class="row align-items-start">
-            <form method="post" action="CreateTest">
-                <div hidden>
-                    <input value="@Model.Name" id="Name" name="Name">
-                    <input value="@Model.NumberOfQuestion" id="NumberOfQuestion" name="NumberOfQuestion">
-                    <input value="@Model.GuessType" id="GuessType" name="GuessType">
-                    @foreach (var continent in Model.Continents)
-                    {
-                        <input value="@continent" id="Continents" name="Continents">
-                    }
-                </div>
+            <div>
+                <h3>Test parameters:</h3>
 
-                <div class="row m-4 col-6">
-                    <div class="col-4">
-                        <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
+                @if (Model.Name != null)
+                {
+                    <div class="row m-2">
+                        <div class="col-3">Test name: @Model.Name</div>
                     </div>
-                    <div class="col-4">
-                        <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
-                    </div>
+                }
+
+                <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
+
+                <div class="col-3">Guess type: <span class="fw-bold">@Model.GuessType</span></div>
+
+
+                <div class="col-3">
+                    Choosen continents:
+                    <ul>
+                        @foreach (var continent in Model.Continents)
+                        {
+                            <li class="fw-bold">@continent</li>
+                        }
+                    </ul>
                 </div>
-            </form>
+            </div>
+
+            <hr />
+
+            <div class="row m-4 col-6">
+                <div class="col-4">
+                    <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
+                </div>
+                <div class="col-4">
+
+                    <form method="post" action="CreateTest">
+                        <div hidden>
+                            <input id="Name" name="Name" value="@Model.Name" />
+                            <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
+                            <input id="GuessType" name="GuessType" value="@Model.GuessType" />
+                            @foreach (var continent in Model.Continents)
+                            {
+                                <input value="@continent" id="Continents" name="Continents">
+                            }
+                        </div>
+                        <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+
+            <hr />
         </div>
     </div>
 </div>
@@ -57,10 +83,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NumberQuestion)
+                    <div>@item.NumberQuestion</div>
+                    <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="Answer" hidden>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.QuestionText)
+                    <div>@item.QuestionText</div>
+                    <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="Answer" hidden>
                 </td>
                 <td>
                     <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
@@ -69,3 +97,5 @@
         }
     </tbody>
 </table>
+
+<hr />

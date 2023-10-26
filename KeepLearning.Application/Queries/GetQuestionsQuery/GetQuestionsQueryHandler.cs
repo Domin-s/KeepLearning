@@ -1,6 +1,6 @@
 ﻿using KeepLearning.Application.Models.Enums;
 using KeepLearning.Application.Models.Question;
-using KeepLearning.Application.Models.TestCountry;
+using KeepLearning.Application.Models.Test.Country;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 

@@ -1,4 +1,4 @@
-﻿using KeepLearning.Application.Models.TestCountry;
+﻿using KeepLearning.Application.Models.Test.Country;
 using KeepLearning.Application.Queries.CheckAnswer;
 using KeepLearning.Application.Queries.CheckTestQuery;
 using KeepLearning.Application.Queries.GetQuestionsQuery;

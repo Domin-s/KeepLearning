@@ -22,7 +22,7 @@ namespace KeepLearning.Application.Models.Question
         public static IEnumerable<QuestionDto> FromCountriesAndGuessType(IEnumerable<Domain.Enteties.Country> countries, GuessType.Value guessType)
         {
             var questions = new List<QuestionDto>();
-            var numberQuestion = 0;
+            var numberQuestion = 1;
 
             foreach (var item in countries)
             {

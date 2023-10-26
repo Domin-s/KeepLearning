@@ -1,9 +1,9 @@
-﻿using KeepLearning.Application.Models.TestCountry;
+﻿using KeepLearning.Application.Models.Test.Country;
 using MediatR;
 
 namespace KeepLearning.Application.Queries.GetQuestionsQuery
 {
-    public class GetQuestionsQuery : TestCountryBase, IRequest<TestCountryDto>
+    public class GetQuestionsQuery : TestCountryDto, IRequest<TestCountryDto>
     {
     }
 }
