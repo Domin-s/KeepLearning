@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    const numberOfQuestions = {
+
+    };
     var createTest = $("#createTest");
     var continentInputs = $(".continentInput");
 
@@ -9,9 +12,9 @@ $(document).ready(function () {
 
         continentInputs.click(function (event) {
             DiableButton(createTest, continentInputs);
-            SetMaxNumberOfQuestion(continentInputs);
+            GetMaxNumberOfQuestion(continentInputs);
         });
-    };
+    }
 
     function DiableButton(createTest, continentInputs) {
         if (CheckIfAnyContinentIsChecked(continentInputs)) {
@@ -19,15 +22,19 @@ $(document).ready(function () {
         } else {
             createTest.prop("disabled", true);
         }
-    };
+    }
 
-    function SetMaxNumberOfQuestion(continentInputs) {
+    function SetMaxNumberOfQuestion(maxNumberOfQuestion) {
         console.log("SetMaxNumberOfQuestion");
         console.log(continentInputs);
-        var numberOfQuestion = $("#NumberOfQuestion");
-        var maxNumberOfQuestion = GetMaxNumberOfQuestion(continentInputs);
 
-    };
+        var numberOfQuestion = $("#NumberOfQuestion");
+        console.log("numberOfQuestion");
+        console.log(numberOfQuestion);
+
+        console.log("maxNumberOfQuestion");
+        console.log(maxNumberOfQuestion);
+    }
 
     function GetMaxNumberOfQuestion(continentInputs) {
         var dataToSend = CreatePathParamsWithContinents(continentInputs);
@@ -37,14 +44,14 @@ $(document).ready(function () {
             url: `/Country/GetNumberOfCountries`,
             type: 'get',
             data: dataToSend,
-            success: function (data) {
-                console.log("data :: " + data);
+            success: function (maxNumberOfQuestion) {
+                SetMaxNumberOfQuestion(maxNumberOfQuestion)
             },
             error: function (data) {
                 toastr["error"]("Something went wrong")
             }
         });
-    };
+    }
 
     function CreatePathParamsWithContinents(continentInputs) {
         var continentsAsString = "";
@@ -60,7 +67,7 @@ $(document).ready(function () {
         }
 
         return continentsAsString;
-    };
+    }
 
     function SetProperNameForContinent(continent) {
         switch (continent) {
@@ -71,17 +78,12 @@ $(document).ready(function () {
     }
 
     function CheckIfAnyContinentIsChecked(continents) {
-        console.log(continents)
-
         for (let i = 0; i < continents.length; i++) {
-            console.log("continents[i].prop('checked')");
-            console.log(continents.get(i).checked);
-
             if (continents.get(i).checked) {
                 return true;
             }
         }
 
         return false;
-    };
+    }
 });
