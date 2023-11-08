@@ -2,7 +2,7 @@
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetNumberOfCountriesQuery
+namespace KeepLearning.Application.Queries.GetNumberOfCountries
 {
     public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCountriesQuery, int>
     {

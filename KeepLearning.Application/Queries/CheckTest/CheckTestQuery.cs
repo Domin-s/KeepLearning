@@ -3,7 +3,7 @@ using KeepLearning.Application.Models.Enums;
 using KeepLearning.Application.Models.Result.Test;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.CheckTestQuery
+namespace KeepLearning.Application.Queries.CheckTest
 {
     public class CheckTestQuery : IRequest<TestResultDto>
     {

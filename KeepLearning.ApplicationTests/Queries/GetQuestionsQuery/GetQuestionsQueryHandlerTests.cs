@@ -7,7 +7,7 @@ using Moq;
 using static KeepLearning.Application.Models.Enums.Continent;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace KeepLearning.Application.Queries.GetQuestionsQuery.Tests
+namespace KeepLearning.Application.Queries.GetQuestions.Tests
 {
     public class GetQuestionsQueryHandlerTests
     {

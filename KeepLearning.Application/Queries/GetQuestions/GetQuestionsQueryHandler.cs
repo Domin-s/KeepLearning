@@ -4,7 +4,7 @@ using KeepLearning.Application.Models.Test.Country;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetQuestionsQuery
+namespace KeepLearning.Application.Queries.GetQuestions
 {
     public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
     {

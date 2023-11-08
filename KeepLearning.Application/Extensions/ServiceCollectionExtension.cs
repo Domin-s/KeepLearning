@@ -2,7 +2,7 @@
 using FluentValidation.AspNetCore;
 using KeepLearning.Application.Mappings;
 using KeepLearning.Application.Queries.GetCountries;
-using KeepLearning.Application.Queries.GetQuestionsQuery;
+using KeepLearning.Application.Queries.GetQuestions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
