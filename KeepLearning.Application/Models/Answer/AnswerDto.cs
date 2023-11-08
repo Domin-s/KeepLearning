@@ -1,10 +1,4 @@
-﻿using KeepLearning.Application.Models.Question;
-
-namespace KeepLearning.Application.Models.Answer
+﻿namespace KeepLearning.Application.Models.Answer
 {
-    public class AnswerDto
-    {
-        public required QuestionDto Question { get; set; }
-        public string? AnswerText { get; set; }
-    }
+    public record AnswerDto(int NumberQuestion, string QuestionText, string? AnswerText) { }
 }

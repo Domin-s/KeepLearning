@@ -58,14 +58,6 @@ namespace KeepLearning.MVC.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CheckTest(CheckTestQuery checkAnswerQuery)
-        {
-            var result = await _mediator.Send(checkAnswerQuery);
-
-            return Ok(result);
-        }
-
         public IActionResult CreateTest()
         {
             var questionDataViewModel = new QuestionDataViewModel();
@@ -93,6 +85,14 @@ namespace KeepLearning.MVC.Controllers
             TempData[STDTestCountry] = serializedTest;
 
             return View(testCountryDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckTest(CheckTestQuery checkAnswerQuery)
+        {
+            var result = await _mediator.Send(checkAnswerQuery);
+
+            return Ok(result);
         }
 
         private string CheckTempData(string name)

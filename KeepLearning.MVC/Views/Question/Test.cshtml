@@ -81,17 +81,17 @@
         <tbody>
             @foreach (var item in Model.Questions)
             {
-                <tr>
+                <tr class="Question[@item.NumberQuestion]">
                     <td>
                         <div>@item.NumberQuestion</div>
-                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="Answer" hidden>
+                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="NumberQuestion[@item.NumberQuestion]" hidden>
                     </td>
                     <td>
                         <div>@item.QuestionText</div>
-                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="Answer" hidden>
+                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="QuestionText[@item.NumberQuestion]" hidden>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
+                        <input type="text" class="form-control" name="Answer[@item.NumberQuestion]" id="Answer[@item.NumberQuestion]" placeholder="Tape answer">
                     </td>
                 </tr>
             }
@@ -101,7 +101,7 @@
     <hr />
     <div class="row m-4 col-6">
         <div class="col-4">
-            <a asp-action="CheckTest" class="btn btn-success" role="button">Check answers</a>
+            <a id="checkAnswers" class="btn btn-success" role="button">Check answers</a>
         </div>
         @*
             TODO: Add in a next branch
