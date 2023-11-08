@@ -6,96 +6,117 @@
     ViewData["Title"] = "Resolve";
 }
 
-<div class="form-group">
-    <div class="container">
-        <div class="row align-items-start">
-            <div>
-                <h3>Test parameters:</h3>
+<div>
+    <div class="form-group">
+        <div class="container">
+            <div class="row align-items-start">
+                <div>
+                    <h3>Test parameters:</h3>
 
-                @if (Model.Name != null)
-                {
-                    <div class="row m-2">
-                        <div class="col-3">Test name: @Model.Name</div>
-                    </div>
-                }
+                    @if (Model.Name != null)
+                    {
+                        <div class="row m-2">
+                            <div class="col-3">Test name: @Model.Name</div>
+                        </div>
+                    }
 
-                <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
+                    <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
 
-                <div class="col-3">Guess type: <span class="fw-bold">@Model.GuessType</span></div>
+                    <div class="col-3">Guess type: <span class="fw-bold">@Model.GuessType</span></div>
 
 
-                <div class="col-3">
-                    Choosen continents:
-                    <ul>
-                        @foreach (var continent in Model.Continents)
-                        {
-                            <li class="fw-bold">@continent</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="row m-4 col-6">
-                <div class="col-4">
-                    <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
-                </div>
-                <div class="col-4">
-
-                    <form method="post" action="CreateTest">
-                        <div hidden>
-                            <input id="Name" name="Name" value="@Model.Name" />
-                            <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
-                            <input id="GuessType" name="GuessType" value="@Model.GuessType" />
+                    <div class="col-3">
+                        Choosen continents:
+                        <ul>
                             @foreach (var continent in Model.Continents)
                             {
-                                <input value="@continent" id="Continents" name="Continents">
+                                <li class="fw-bold">@continent</li>
                             }
-                        </div>
-                        <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
-                    </form>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <hr />
+                <hr />
+
+                <div class="row m-4 col-6">
+                    <div class="col-4">
+                        <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
+                    </div>
+                    <div class="col-4">
+
+                        <form method="post" action="CreateTest">
+                            <div hidden>
+                                <input id="Name" name="Name" value="@Model.Name" />
+                                <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
+                                <input id="GuessType" name="GuessType" value="@Model.GuessType" />
+                                @foreach (var continent in Model.Continents)
+                                {
+                                    <input value="@continent" id="Continents" name="Continents">
+                                }
+                            </div>
+                            <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
+                        </form>
+                    </div>
+                </div>
+
+                <hr />
+            </div>
         </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">
+                    Number of question
+                </th>
+                <th class="col-4">
+                    Question
+                </th>
+                <th class="col-4">
+                    Your answers
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        <div>@item.NumberQuestion</div>
+                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="Answer" hidden>
+                    </td>
+                    <td>
+                        <div>@item.QuestionText</div>
+                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="Answer" hidden>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <hr />
+    <div class="row m-4 col-6">
+        <div class="col-4">
+            <a asp-action="CheckTest" class="btn btn-success" role="button">Check answers</a>
+        </div>
+        @*
+            TODO: Add in a next branch
+
+            <div class="col-4">
+                <a asp-controller="Donwload" asp-action="Pdf" class="btn btn-success" role="button">Back to creator</a>
+            </div>
+            <div class="col-4">
+                <a asp-action="Word" class="btn btn-success" role="button">Back to creator</a>
+            </div>
+        *@
     </div>
 </div>
 
+@section Scripts {
+    <script src="~/js/Question/Test.js"></script>
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th class="col-1">
-                Number of question
-            </th>
-            <th class="col-4">
-                Question
-            </th>
-            <th class="col-4">
-                Your answers
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Questions)
-        {
-            <tr>
-                <td>
-                    <div>@item.NumberQuestion</div>
-                    <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="Answer" hidden>
-                </td>
-                <td>
-                    <div>@item.QuestionText</div>
-                    <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="Answer" hidden>
-                </td>
-                <td>
-                    <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<hr />
