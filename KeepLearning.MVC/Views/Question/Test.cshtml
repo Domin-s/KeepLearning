@@ -1,4 +1,4 @@
-﻿@using KeepLearning.Application.Models.Test.Country
+﻿@using KeepLearning.Domain.Models.Test.Country
 
 @model TestCountryDto
 
@@ -84,14 +84,28 @@
                 <tr class="Question[@item.NumberQuestion]">
                     <td>
                         <div>@item.NumberQuestion</div>
-                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]" id="NumberQuestion[@item.NumberQuestion]" hidden>
+                        <input type="text"
+                               class="form-control"
+                               name="NumberQuestion[@item.NumberQuestion]"
+                               id="NumberQuestion[@item.NumberQuestion]"
+                               value="@item.NumberQuestion"
+                               hidden>
                     </td>
                     <td>
                         <div>@item.QuestionText</div>
-                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]" id="QuestionText[@item.NumberQuestion]" hidden>
+                        <input type="text"
+                               class="form-control"
+                               name="QuestionText[@item.NumberQuestion]"
+                               id="QuestionText[@item.NumberQuestion]"
+                               value="@item.QuestionText"
+                               hidden>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="Answer[@item.NumberQuestion]" id="Answer[@item.NumberQuestion]" placeholder="Tape answer">
+                        <input type="text"
+                               class="form-control"
+                               name="Answer[@item.NumberQuestion]"
+                               id="Answer[@item.NumberQuestion]"
+                               placeholder="Tape answer">
                     </td>
                 </tr>
             }
