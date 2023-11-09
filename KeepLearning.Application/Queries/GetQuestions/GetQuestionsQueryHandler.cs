@@ -27,22 +27,7 @@ namespace KeepLearning.Domain.Queries.GetQuestions
 
             var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.GuessType);
 
-            var test = CreateTest(request, questions);
-
-            return test;
-        }
-
-        // TODO: Refactor
-        private TestCountryDto CreateTest(GetQuestionsQuery command, IEnumerable<QuestionDto> questions)
-        {
-            TestCountryDto test = new TestCountryDto()
-            {
-                Name = command.Name,
-                NumberOfQuestion = command.NumberOfQuestion,
-                Continents = command.Continents,
-                Questions = questions,
-                GuessType = command.GuessType
-            };
+            var test = new TestCountryDto(request, questions);
 
             return test;
         }
