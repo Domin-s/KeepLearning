@@ -1,7 +1,7 @@
 ﻿using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
-using KeepLearning.Domain.Queries.GetQuestions;
+using KeepLearning.Domain.Queries.CreateTestCountry;
 using KeepLearning.Domain.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;
 using MediatR;
@@ -66,7 +66,7 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(GetQuestionsQuery query)
+        public async Task<IActionResult> CreateTest(CreateTestCountryQuery query)
         {
             var test = await _mediator.Send(query);
 

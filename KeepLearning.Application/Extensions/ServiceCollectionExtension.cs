@@ -2,7 +2,7 @@
 using FluentValidation.AspNetCore;
 using KeepLearning.Domain.Mappings;
 using KeepLearning.Domain.Queries.GetCountries;
-using KeepLearning.Domain.Queries.GetQuestions;
+using KeepLearning.Domain.Queries.CreateTestCountry;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ namespace KeepLearning.Domain.Extensions
 
             services.AddMediatR(typeof(GetCountriesQuery));
 
-            services.AddValidatorsFromAssemblyContaining<GetQuestionsQuery>()
+            services.AddValidatorsFromAssemblyContaining<CreateTestCountryQuery>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
         }

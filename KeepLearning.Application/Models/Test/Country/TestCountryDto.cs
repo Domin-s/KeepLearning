@@ -1,6 +1,6 @@
 ﻿using KeepLearning.Domain.Models.Enums;
 using KeepLearning.Domain.Models.Question;
-using KeepLearning.Domain.Queries.GetQuestions;
+using KeepLearning.Domain.Queries.CreateTestCountry;
 
 namespace KeepLearning.Domain.Models.Test.Country
 {
@@ -9,7 +9,7 @@ namespace KeepLearning.Domain.Models.Test.Country
         public GuessType.Value GuessType { get; set; } = default!;
         public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
 
-        public TestCountryDto(GetQuestionsQuery command, IEnumerable<QuestionDto> questions)
+        public TestCountryDto(CreateTestCountryQuery command, IEnumerable<QuestionDto> questions)
         {
             Name = command.Name;
             NumberOfQuestion = command.NumberOfQuestion;

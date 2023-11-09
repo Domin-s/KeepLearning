@@ -4,7 +4,7 @@ using KeepLearning.Domain.Models;
 using KeepLearning.Domain.Models.Enums;
 using Moq;
 
-namespace KeepLearning.Domain.Queries.GetQuestions.Tests
+namespace KeepLearning.Domain.Queries.CreateTestCountry.Tests
 {
     public class GetQuestionsQueryHandlerTests
     {
@@ -12,23 +12,23 @@ namespace KeepLearning.Domain.Queries.GetQuestions.Tests
 
         public static IEnumerable<object[]> GetDataForQuery()
         {
-            var queries = new List<GetQuestionsQuery>()
+            var queries = new List<CreateTestCountryQuery>()
             {
-                new GetQuestionsQuery()
+                new CreateTestCountryQuery()
                 {
                     Name = "First test",
                     NumberOfQuestion = 5,
                     GuessType = GuessType.Value.Country,
                     Continents = new List<Continent.Name>(){ Continent.Name.Asia }
                 },
-                new GetQuestionsQuery()
+                new CreateTestCountryQuery()
                 {
                     Name = "Second test",
                     NumberOfQuestion = 10,
                     GuessType = GuessType.Value.Country,
                     Continents = new List<Continent.Name>(){ Continent.Name.Asia }
                 },
-                new GetQuestionsQuery()
+                new CreateTestCountryQuery()
                 {
                     Name = "Third test",
                     NumberOfQuestion = 15,
@@ -42,7 +42,7 @@ namespace KeepLearning.Domain.Queries.GetQuestions.Tests
 
         [Theory]
         [MemberData(nameof(GetDataForQuery))]
-        public async void Handle_GetRandomQuestions_WhenNumberOfQuestionIsLowerThanCountriesFromContinent(GetQuestionsQuery getQuestionsQuery)
+        public async void Handle_GetRandomQuestions_WhenNumberOfQuestionIsLowerThanCountriesFromContinent(CreateTestCountryQuery getQuestionsQuery)
         {
             // arrange
             var continentsString = getQuestionsQuery.Continents.Select(c => Continent.MapContinentToString(c));
@@ -57,7 +57,7 @@ namespace KeepLearning.Domain.Queries.GetQuestions.Tests
             var countryServiceMock = new Mock<ICountryService>();
             countryServiceMock.Setup(country => country.GetRandomCountries(getQuestionsQuery.NumberOfQuestion)).Returns(listOfCountry);
 
-            var handler = new GetQuestionsQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
+            var handler = new CreateTestCountryQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
 
             // act
             var result = await handler.Handle(getQuestionsQuery, CancellationToken.None);
