@@ -1,4 +1,4 @@
-﻿using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Domain.Models.Enums;
 
 namespace KeepLearning.MVC.Models
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Models.Country;
+using KeepLearning.Domain.Models.Country;
 
-namespace KeepLearning.Application.Mappings
+namespace KeepLearning.Domain.Mappings
 {
     public class CountryMappingProfile : Profile
     {

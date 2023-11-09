@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Country;
-using KeepLearning.Domain.Enteties;
+﻿using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Models;
 using KeepLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

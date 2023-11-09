@@ -1,7 +1,7 @@
-﻿using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Domain.Models.Enums;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetNumberOfCountries
+namespace KeepLearning.Domain.Queries.GetNumberOfCountries
 {
     public class GetNumberOfCountriesQuery: IRequest<int>
     {

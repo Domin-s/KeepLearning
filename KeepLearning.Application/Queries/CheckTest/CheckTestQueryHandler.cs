@@ -1,8 +1,8 @@
-﻿using KeepLearning.Application.Models.Result.Test;
+﻿using KeepLearning.Domain.Models.Result.Test;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.CheckTest
+namespace KeepLearning.Domain.Queries.CheckTest
 {
     public class CheckTestQueryHandler : IRequestHandler<CheckTestQuery, TestResultDto>
     {
@@ -15,6 +15,7 @@ namespace KeepLearning.Application.Queries.CheckTest
 
         public Task<TestResultDto> Handle(CheckTestQuery request, CancellationToken cancellationToken)
         {
+
             throw new NotImplementedException();
         }
     }

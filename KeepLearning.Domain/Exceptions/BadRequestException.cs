@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RestaurantAPI.Exceptions
+﻿namespace RestaurantAPI.Exceptions
 {
     public class BadRequestException : Exception
     {

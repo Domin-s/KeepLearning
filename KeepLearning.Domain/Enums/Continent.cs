@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Application.Models.Enums
+﻿namespace KeepLearning.Domain.Models.Enums
 {
     public static class Continent
     {

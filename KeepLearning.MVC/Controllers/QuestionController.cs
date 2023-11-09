@@ -1,8 +1,8 @@
-﻿using KeepLearning.Application.Models.Test.Country;
-using KeepLearning.Application.Queries.CheckAnswer;
-using KeepLearning.Application.Queries.CheckTest;
-using KeepLearning.Application.Queries.GetQuestions;
-using KeepLearning.Application.Queries.GetRandomQuestion;
+﻿using KeepLearning.Domain.Models.Test.Country;
+using KeepLearning.Domain.Queries.CheckAnswer;
+using KeepLearning.Domain.Queries.CheckTest;
+using KeepLearning.Domain.Queries.GetQuestions;
+using KeepLearning.Domain.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

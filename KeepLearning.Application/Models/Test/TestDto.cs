@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Models.Question;
+﻿using KeepLearning.Domain.Models.Question;
 
-namespace KeepLearning.Application.Models.Test
+namespace KeepLearning.Domain.Models.Test
 {
     public class TestDto
     {

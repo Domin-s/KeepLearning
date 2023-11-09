@@ -1,18 +1,20 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Question;
-using KeepLearning.Application.Models.Test.Country;
+﻿using KeepLearning.Domain.Models.Enums;
+using KeepLearning.Domain.Models.Question;
+using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetQuestions
+namespace KeepLearning.Domain.Queries.GetQuestions
 {
     public class GetQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, TestCountryDto>
     {
         private readonly ICountryRepository _countryRepository;
+        private readonly ICountryService _countryService;
 
-        public GetQuestionsQueryHandler(ICountryRepository countryRepository)
+        public GetQuestionsQueryHandler(ICountryRepository countryRepository, ICountryService countryService)
         {
             _countryRepository = countryRepository;
+            _countryService = countryService;
         }
 
         public async Task<TestCountryDto> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
@@ -21,7 +23,7 @@ namespace KeepLearning.Application.Queries.GetQuestions
 
             var countries = await _countryRepository.GetByContinents(mappedContinent);
 
-            var randomCountries = countries.GetRandomCountries(request.NumberOfQuestion);
+            var randomCountries = _countryService.GetRandomCountries(request.NumberOfQuestion);
 
             var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.GuessType);
 

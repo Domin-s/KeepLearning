@@ -1,12 +1,11 @@
-﻿using KeepLearning.Application.Country;
-using KeepLearning.Application.Models.Enums;
-using KeepLearning.Domain.Interfaces;
+﻿using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Models;
+using KeepLearning.Domain.Models.Enums;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
 
-namespace KeepLearning.Application.Queries.GetRandomQuestion.Tests
+namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 {
     public class GetRandomQuestionQueryHandlerTests: IClassFixture<WebApplicationFactory<Program>>
     {
@@ -39,7 +38,10 @@ namespace KeepLearning.Application.Queries.GetRandomQuestion.Tests
             var countryRepositoryMock = new Mock<ICountryRepository>();
             countryRepositoryMock.Setup(country => country.GetByContinent(continentString)).ReturnsAsync(countries);
 
-            var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object);
+            var countryServiceMock = new Mock<ICountryService>();
+            countryServiceMock.Setup(country => country.GetRandomCountry(listOFCountry)).Returns(poland);
+
+            var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
 
             // act
             var result = await handler.Handle(query, CancellationToken.None);

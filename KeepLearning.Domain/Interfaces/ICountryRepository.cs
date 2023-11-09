@@ -1,5 +1,5 @@
-﻿using KeepLearning.Application.Country;
-using KeepLearning.Domain.Enteties;
+﻿using KeepLearning.Domain.Enteties;
+using KeepLearning.Domain.Models;
 
 namespace KeepLearning.Domain.Interfaces
 {

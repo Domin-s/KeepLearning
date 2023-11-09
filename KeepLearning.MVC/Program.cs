@@ -1,5 +1,5 @@
 using KeepLearning.Infrastructure.Extensions;
-using KeepLearning.Application.Extensions;
+using KeepLearning.Domain.Extensions;
 using KeepLearning.MVC.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);

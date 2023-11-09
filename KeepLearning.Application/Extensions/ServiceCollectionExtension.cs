@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using KeepLearning.Application.Mappings;
-using KeepLearning.Application.Queries.GetCountries;
-using KeepLearning.Application.Queries.GetQuestions;
+using KeepLearning.Domain.Mappings;
+using KeepLearning.Domain.Queries.GetCountries;
+using KeepLearning.Domain.Queries.GetQuestions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KeepLearning.Application.Extensions
+namespace KeepLearning.Domain.Extensions
 {
     public static class ServiceCollectionExtension
     {

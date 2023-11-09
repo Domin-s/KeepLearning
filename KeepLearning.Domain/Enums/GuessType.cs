@@ -1,6 +1,4 @@
-﻿using static KeepLearning.Application.Models.Enums.Continent;
-
-namespace KeepLearning.Application.Models.Enums
+﻿namespace KeepLearning.Domain.Models.Enums
 {
     public static class GuessType
     {

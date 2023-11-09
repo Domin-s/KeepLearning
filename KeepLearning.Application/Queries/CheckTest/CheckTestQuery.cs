@@ -1,9 +1,9 @@
-﻿using KeepLearning.Application.Models.Answer;
-using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Result.Test;
+﻿using KeepLearning.Domain.Models.Answer;
+using KeepLearning.Domain.Models.Enums;
+using KeepLearning.Domain.Models.Result.Test;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.CheckTest
+namespace KeepLearning.Domain.Queries.CheckTest
 {
     public class CheckTestQuery : IRequest<TestResultDto>
     {

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace KeepLearning.Application.Queries.GetQuestions
+namespace KeepLearning.Domain.Queries.GetQuestions
 {
     public class GetQuestionsQueryValidator : AbstractValidator<GetQuestionsQuery>
     {

@@ -1,7 +1,4 @@
-﻿using Xunit;
-using KeepLearning.Application.Models.Enums;
-
-namespace KeepLearning.Application.Models.Enums.Tests
+﻿namespace KeepLearning.Domain.Models.Enums.Tests
 {
     public class ContinentTests
     {

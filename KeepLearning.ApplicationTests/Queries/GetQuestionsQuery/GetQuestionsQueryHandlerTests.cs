@@ -1,13 +1,10 @@
-﻿using KeepLearning.Application.Country;
-using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Queries.GetRandomQuestion;
-using KeepLearning.ApplicationTests.Helper.Country;
+﻿using KeepLearning.ApplicationTests.Helper.Country;
 using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Models;
+using KeepLearning.Domain.Models.Enums;
 using Moq;
-using static KeepLearning.Application.Models.Enums.Continent;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace KeepLearning.Application.Queries.GetQuestions.Tests
+namespace KeepLearning.Domain.Queries.GetQuestions.Tests
 {
     public class GetQuestionsQueryHandlerTests
     {
@@ -55,9 +52,12 @@ namespace KeepLearning.Application.Queries.GetQuestions.Tests
             var countries = new Countries(listOfCountry) { };
 
             var countryRepositoryMock = new Mock<ICountryRepository>();
-            var something = countryRepositoryMock.Setup(country => country.GetByContinents(continentsString)).ReturnsAsync(countries);
+            countryRepositoryMock.Setup(country => country.GetByContinents(continentsString)).ReturnsAsync(countries);
 
-            var handler = new GetQuestionsQueryHandler(countryRepositoryMock.Object);
+            var countryServiceMock = new Mock<ICountryService>();
+            countryServiceMock.Setup(country => country.GetRandomCountries(getQuestionsQuery.NumberOfQuestion)).Returns(listOfCountry);
+
+            var handler = new GetQuestionsQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
 
             // act
             var result = await handler.Handle(getQuestionsQuery, CancellationToken.None);

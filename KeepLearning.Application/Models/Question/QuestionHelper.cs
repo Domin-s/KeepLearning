@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Domain.Models.Enums;
 
-namespace KeepLearning.Application.Models.Question
+namespace KeepLearning.Domain.Models.Question
 {
     public static class QuestionHelper
     {

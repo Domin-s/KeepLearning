@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Models.Enums;
+﻿using KeepLearning.Domain.Models.Enums;
 
-namespace KeepLearning.Application.Models.Test.Country
+namespace KeepLearning.Domain.Models.Test.Country
 {
     public class TestCountryDto : TestDto
     {
