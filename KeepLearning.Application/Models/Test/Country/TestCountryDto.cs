@@ -9,13 +9,18 @@ namespace KeepLearning.Domain.Models.Test.Country
         public GuessType.Value GuessType { get; set; } = default!;
         public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
 
-        public TestCountryDto(CreateTestCountryQuery command, IEnumerable<QuestionDto> questions)
+        public TestCountryDto()
         {
-            Name = command.Name;
-            NumberOfQuestion = command.NumberOfQuestion;
-            Continents = command.Continents;
+            
+        }
+
+        public TestCountryDto(CreateTestCountryQuery query, IEnumerable<QuestionDto> questions)
+        {
+            Name = query.Name;
+            NumberOfQuestion = query.NumberOfQuestion;
+            Continents = query.Continents;
             Questions = questions;
-            GuessType = command.GuessType;
+            GuessType = query.GuessType;
         }
     }
 }

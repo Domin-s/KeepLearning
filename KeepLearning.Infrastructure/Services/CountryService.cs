@@ -1,7 +1,7 @@
-﻿using KeepLearning.Domain.Models.Enums;
+﻿using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Models.Enums;
 using static KeepLearning.Domain.Models.Enums.GuessType;
-using KeepLearning.Domain.Models;
 
 namespace KeepLearning.Infrastructure.Services
 {
@@ -14,20 +14,23 @@ namespace KeepLearning.Infrastructure.Services
             _countryRepository = countryRepository;
         }
 
-        public Domain.Enteties.Country GetRandomCountry(IEnumerable<Domain.Enteties.Country> ListOfCountry)
-        {
-            var randomNumber = new Random().Next(0, ListOfCountry.Count());
+        public async Task<Country> GetRandomCountry(IEnumerable<Continent.Name> continents)
+        {;
+            var countries = await GetCountries(continents);
 
-            return ListOfCountry.ToList()[randomNumber];
+            var randomNumber = new Random().Next(0, countries.Count());
+
+            return countries.ToList()[randomNumber];
         }
 
-        public IEnumerable<Domain.Enteties.Country> GetRandomCountries(int numberOfQuestions)
+        public async Task<IEnumerable<Country>> GetRandomCountries(IEnumerable<Continent.Name> continents, int numberOfQuestions)
         {
-            var pickedUpCountries = new List<Domain.Enteties.Country>();
+            var pickedUpCountries = new List<Country>();
+            var countriesToChoose = await GetCountries(continents);
 
             while (pickedUpCountries.Count < numberOfQuestions)
             {
-                Domain.Enteties.Country randomCountry = GetRandomCountry(pickedUpCountries);
+                Country randomCountry = await GetRandomCountry(continents);
 
                 if (!pickedUpCountries.Contains(randomCountry))
                 {
@@ -38,7 +41,7 @@ namespace KeepLearning.Infrastructure.Services
             return pickedUpCountries;
         }
 
-        public async Task<Domain.Enteties.Country?> GetCountry(string questionText, GuessType.Value guessType)
+        public async Task<Country?> GetCountry(string questionText, GuessType.Value guessType)
         {
             switch (guessType)
             {
@@ -53,7 +56,7 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public async Task<Countries> GetCountries(IEnumerable<Continent.Name> continents)
+        public async Task<IEnumerable<Country>> GetCountries(IEnumerable<Continent.Name> continents)
         {
             if (continents.Any())
             {
@@ -66,7 +69,7 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public bool IsCorrectAnswer(Domain.Enteties.Country country, string answerText, GuessType.Value guessType)
+        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Value guessType)
         {
             switch (guessType)
             {

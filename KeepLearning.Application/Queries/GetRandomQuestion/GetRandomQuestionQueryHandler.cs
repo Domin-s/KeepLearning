@@ -21,11 +21,9 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
         {
             int numberOfQuestion = new Random().Next(0, 10);
 
-            var continent = Continent.MapContinentToString(request.Continent);
+            var continetByList = new List<Continent.Name>() { request.Continent };
 
-            var countries = await _countryRepository.GetByContinent(continent);
-
-            var randomCountry = _countryService.GetRandomCountry(countries.ListOfCountry);
+            var randomCountry = await _countryService.GetRandomCountry(continetByList);
 
             return QuestionHelper.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
         }
