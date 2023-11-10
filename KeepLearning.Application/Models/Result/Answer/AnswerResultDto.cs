@@ -1,4 +1,4 @@
 ﻿namespace KeepLearning.Domain.Models.Result
 {
-    public record AnswerResultDto(int NumberOfQuestion, string CorrectAnswer) { }
+    public record AnswerResultDto(int NumberOfQuestion, string? userAnswer, string CorrectAnswer) { }
 }

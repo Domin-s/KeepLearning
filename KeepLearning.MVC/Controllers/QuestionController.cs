@@ -33,7 +33,6 @@ namespace KeepLearning.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Random(GetRandomQuestionQuery getRandomQuestionQuery)
         {
-
             var question = await _mediator.Send(getRandomQuestionQuery);
 
             var modelView = new GuessRandomQuestionModelView(getRandomQuestionQuery, question);
@@ -44,7 +43,6 @@ namespace KeepLearning.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> RandomAnotherQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
         {
-
             var question = await _mediator.Send(getRandomQuestionQuery);
 
             return Ok(question);
@@ -58,6 +56,7 @@ namespace KeepLearning.MVC.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
         public IActionResult CreateTest()
         {
             var questionDataViewModel = new QuestionDataViewModel();
@@ -87,10 +86,10 @@ namespace KeepLearning.MVC.Controllers
             return View(testCountryDto);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CheckTest(CheckTestQuery checkTestQuery)
+        [HttpPost]
+        public async Task<IActionResult> CheckTest([FromForm]CheckTestQuery query)
         {
-            var result = await _mediator.Send(checkTestQuery);
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
