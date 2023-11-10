@@ -37,14 +37,17 @@ $(document).ready(function () {
 
     function AddColumnWithAnswer(result) {
         var tableHead = $('thead>tr');
+        var answerColumn = $('.AnswerColumn');
 
-        AddNewHeadColumn(tableHead);
-        AddNewBodyColumn(result);
+        if (answerColumn.length == 0) {
+            AddNewHeadColumn(tableHead);
+            AddNewBodyColumn(result);
+        }
     }
 
     function AddNewHeadColumn(tableHead) {
         var newDiv = $("<div></div>").text("Answer");
-        var newHeadColumn = $("<th></th>").append(newDiv);
+        var newHeadColumn = $("<th class='AnswerColumn'></th>").append(newDiv);
         tableHead.append(newHeadColumn);
     }
 
@@ -63,15 +66,22 @@ $(document).ready(function () {
         var newDiv = $("<div></div>").text(correctAnswer);
         var newBodyColumn = $("<td></td>").append(newDiv);
         row.append(newBodyColumn);
+
+        ChangeColorOfUserAnswer(numberOfQuestion, correctAnswer)
+    }
+
+    function ChangeColorOfUserAnswer(numberOfQuestion, correctAnswer) {
+        var answerInput = $('#Answer_' + numberOfQuestion);
+        if (answerInput.val() == correctAnswer) {
+            answerInput.css({ 'background-color': 'green', 'font-weight': 'bold'});
+        } else {
+            answerInput.css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
+        }
     }
 
     function DisableInputs(nameOfInputClass) {
         var inputs = $('.' + nameOfInputClass);
         inputs.prop("disabled", true);
-    }
-
-    function AddResult() {
-
     }
 
     function CreateDataToSend(guessType, questions) {
