@@ -15,6 +15,8 @@ namespace KeepLearning.Domain.Queries.CheckTest
 
         public Task<TestResultDto> Handle(CheckTestQuery request, CancellationToken cancellationToken)
         {
+            Console.WriteLine("request");
+            Console.WriteLine(request);
 
             throw new NotImplementedException();
         }

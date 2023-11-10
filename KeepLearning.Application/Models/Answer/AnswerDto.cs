@@ -1,4 +1,4 @@
 ﻿namespace KeepLearning.Domain.Models.Answer
 {
-    public record AnswerDto(int NumberQuestion, string QuestionText, string? AnswerText) { }
+    public record AnswerDto(int NumberOfQuestion, string QuestionText, string? AnswerText) { }
 }
