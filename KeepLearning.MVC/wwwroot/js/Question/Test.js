@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    var goodAnswers = 0;
-    var badAnswers = 0;
 
     class CheckTestQuery {
         constructor(guessType, answers) {
@@ -28,8 +26,6 @@ $(document).ready(function () {
         var dataToSend = CreateDataToSend(guessType, questions);
 
         $.post(`/Question/CheckTest`, dataToSend, (result, status) => {
-            goodAnswers = result.numberOfGoodAnswers;
-            badAnswers = result.numberOfBadAnswers;
             AddColumnWithAnswer(result);
             DisableInputs("Answer");
         });
@@ -42,6 +38,8 @@ $(document).ready(function () {
         if (answerColumn.length == 0) {
             AddNewHeadColumn(tableHead);
             AddNewBodyColumn(result);
+            ShowResult(result.numberOfGoodAnswers, result.numberOfBadAnswers);
+            HiddeButton("checkAnswers");
         }
     }
 
@@ -73,10 +71,24 @@ $(document).ready(function () {
     function ChangeColorOfUserAnswer(numberOfQuestion, correctAnswer) {
         var answerInput = $('#Answer_' + numberOfQuestion);
         if (answerInput.val() == correctAnswer) {
-            answerInput.css({ 'background-color': 'green', 'font-weight': 'bold'});
+            answerInput.css({ 'background-color': 'green', 'font-weight': 'bold' });
+        } else if (answerInput.val() == "") {
+            answerInput.val("Empty!").css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
         } else {
             answerInput.css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
         }
+    }
+
+    function ShowResult(goodAnswers, badAnswers) {
+        var result = $('.Result');
+        console.log(result);
+        result.show();
+        $('.GoodAnswers').text(goodAnswers);
+        $('.BadAnswers').text(badAnswers);
+    }
+
+    function HiddeButton(name) {
+        $('#' + name).hide();
     }
 
     function DisableInputs(nameOfInputClass) {
