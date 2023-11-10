@@ -81,7 +81,7 @@
         <tbody>
             @foreach (var item in Model.Questions)
             {
-                <tr class="Question Question[@item.NumberQuestion]">
+                <tr class="Question_@item.NumberQuestion Question">
                     <td>
                         <div>@item.NumberQuestion</div>
                         <input type="text"
@@ -102,7 +102,7 @@
                     </td>
                     <td>
                         <input type="text"
-                               class="form-control"
+                               class="form-control Answer"
                                name="Answer[@item.NumberQuestion]"
                                id="Answer[@item.NumberQuestion]"
                                placeholder="Tape answer">

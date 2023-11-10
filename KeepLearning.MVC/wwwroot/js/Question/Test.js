@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    var goodAnswers = 0;
+    var badAnswers = 0;
+
     class CheckTestQuery {
         constructor(guessType, answers) {
             this.GuessType = guessType;
@@ -24,9 +27,51 @@ $(document).ready(function () {
 
         var dataToSend = CreateDataToSend(guessType, questions);
 
-        $.post(`/Question/CheckTest`, dataToSend, (data, status) => {
-            console.log(data);
+        $.post(`/Question/CheckTest`, dataToSend, (result, status) => {
+            goodAnswers = result.numberOfGoodAnswers;
+            badAnswers = result.numberOfBadAnswers;
+            AddColumnWithAnswer(result);
+            DisableInputs("Answer");
         });
+    }
+
+    function AddColumnWithAnswer(result) {
+        var tableHead = $('thead>tr');
+
+        AddNewHeadColumn(tableHead);
+        AddNewBodyColumn(result);
+    }
+
+    function AddNewHeadColumn(tableHead) {
+        var newDiv = $("<div></div>").text("Answer");
+        var newHeadColumn = $("<th></th>").append(newDiv);
+        tableHead.append(newHeadColumn);
+    }
+
+    function AddNewBodyColumn(result) {
+        var answers = result.answerResults;
+
+        for (var i = 0; i < answers.length; i++) {
+            AddRowWithAnswer(answers[i].numberOfQuestion, answers[i].correctAnswer);
+        }
+    }
+
+    function AddRowWithAnswer(numberOfQuestion, correctAnswer) {
+        var className = '.Question_' + numberOfQuestion + '';
+        var row = $(className);
+
+        var newDiv = $("<div></div>").text(correctAnswer);
+        var newBodyColumn = $("<td></td>").append(newDiv);
+        row.append(newBodyColumn);
+    }
+
+    function DisableInputs(nameOfInputClass) {
+        var inputs = $('.' + nameOfInputClass);
+        inputs.prop("disabled", true);
+    }
+
+    function AddResult() {
+
     }
 
     function CreateDataToSend(guessType, questions) {
