@@ -1,30 +1,31 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Question;
+﻿using KeepLearning.Domain.Models.Enums;
+using KeepLearning.Domain.Models.Question;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetRandomQuestion
+namespace KeepLearning.Domain.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {
         private readonly ICountryRepository _countryRepository;
+        private readonly ICountryService _countryService;
 
-        public GetRandomQuestionQueryHandler(ICountryRepository countryRepository)
+        public GetRandomQuestionQueryHandler(ICountryRepository countryRepository, ICountryService countryService)
         {
             _countryRepository = countryRepository;
+            _countryService = countryService;
         }
 
+        // TODO: Move getting random country to get random country in database ussing TSQL
         public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
         {
             int numberOfQuestion = new Random().Next(0, 10);
 
-            var continent = Continent.MapContinentToString(request.Continent);
+            var continetByList = new List<Continent.Name>() { request.Continent };
 
-            var countries = await _countryRepository.GetByContinent(continent);
+            var randomCountry = await _countryService.GetRandomCountry(continetByList);
 
-            var randomCountry = countries.GetRandomCountry();
-
-            return QuestionHandler.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
+            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
         }
     }
 }

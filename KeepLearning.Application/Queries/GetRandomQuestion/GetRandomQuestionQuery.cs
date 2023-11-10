@@ -1,8 +1,8 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Question;
+﻿using KeepLearning.Domain.Models.Enums;
+using KeepLearning.Domain.Models.Question;
 using MediatR;
 
-namespace KeepLearning.Application.Queries.GetRandomQuestion
+namespace KeepLearning.Domain.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQuery : IRequest<QuestionDto>
     {

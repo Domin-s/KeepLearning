@@ -1,4 +1,5 @@
-﻿using KeepLearning.Application.Queries.GetCountries;
+﻿using KeepLearning.Domain.Queries.GetCountries;
+using KeepLearning.Domain.Queries.GetNumberOfCountries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,20 @@ namespace KeepLearning.MVC.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<IActionResult> List(GetCountriesQuery query)
         {
-            var countries = await  _mediator.Send(query);
+            var countries = await _mediator.Send(query);
 
             return View(countries);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNumberOfCountries(GetNumberOfCountriesQuery query)
+        {
+            var numberOfCountries = await _mediator.Send(query);
+
+            return Ok(numberOfCountries);
         }
     }
 }

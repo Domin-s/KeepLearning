@@ -1,9 +1,12 @@
-﻿using KeepLearning.Application.Mappings;
-using KeepLearning.Application.Queries.GetCountries;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using KeepLearning.Domain.Mappings;
+using KeepLearning.Domain.Queries.GetCountries;
+using KeepLearning.Domain.Queries.CreateTestCountry;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KeepLearning.Application.Extensions
+namespace KeepLearning.Domain.Extensions
 {
     public static class ServiceCollectionExtension
     {
@@ -12,6 +15,10 @@ namespace KeepLearning.Application.Extensions
             services.AddAutoMapper(typeof(CountryMappingProfile));
 
             services.AddMediatR(typeof(GetCountriesQuery));
+
+            services.AddValidatorsFromAssemblyContaining<CreateTestCountryQuery>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
         }
     }
 }

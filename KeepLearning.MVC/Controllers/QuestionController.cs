@@ -1,9 +1,8 @@
-﻿using KeepLearning.Application.Models.Enums;
-using KeepLearning.Application.Models.Question;
-using KeepLearning.Application.Models.TestCountry;
-using KeepLearning.Application.Queries.CheckAnswer;
-using KeepLearning.Application.Queries.GetQuestionsQuery;
-using KeepLearning.Application.Queries.GetRandomQuestion;
+﻿using KeepLearning.Domain.Models.Test.Country;
+using KeepLearning.Domain.Queries.CheckAnswer;
+using KeepLearning.Domain.Queries.CheckTest;
+using KeepLearning.Domain.Queries.CreateTestCountry;
+using KeepLearning.Domain.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +25,7 @@ namespace KeepLearning.MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var questionDataViewModel = CreateQuestionDataViewModel();
+            var questionDataViewModel = new QuestionDataViewModel();
 
             return View(questionDataViewModel);
         }
@@ -61,13 +60,13 @@ namespace KeepLearning.MVC.Controllers
 
         public IActionResult CreateTest()
         {
-            var questionDataViewModel = CreateQuestionDataViewModel();
+            var questionDataViewModel = new QuestionDataViewModel();
 
             return View(questionDataViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(GetQuestionsQuery query)
+        public async Task<IActionResult> CreateTest(CreateTestCountryQuery query)
         {
             var test = await _mediator.Send(query);
 
@@ -88,6 +87,14 @@ namespace KeepLearning.MVC.Controllers
             return View(testCountryDto);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> CheckTest(CheckTestQuery checkTestQuery)
+        {
+            var result = await _mediator.Send(checkTestQuery);
+
+            return Ok(result);
+        }
+
         private string CheckTempData(string name)
         {
             var tempData = TempData[name];
@@ -103,14 +110,6 @@ namespace KeepLearning.MVC.Controllers
             }
 
             return serializedString;
-        }
-
-        private QuestionDataViewModel CreateQuestionDataViewModel()
-        {
-            var continents = Continent.GetAllLikeStrings();
-            var guessTypes = GuessType.GetAllLikeStrings();
-
-            return new QuestionDataViewModel(continents, guessTypes);
         }
     }
 }

@@ -2,6 +2,7 @@
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
 using KeepLearning.Infrastructure.Seeders;
+using KeepLearning.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace KeepLearning.Infrastructure.Extensions
             services.AddScoped<CountrySeeder>();
 
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<ICountryService, CountryService>();
         }
     }
 }

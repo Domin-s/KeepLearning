@@ -7,6 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\js\Question\Test.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\Question\Test.js" />
 	  <None Include="wwwroot\js\Question\Random.js" />
 	</ItemGroup>
 

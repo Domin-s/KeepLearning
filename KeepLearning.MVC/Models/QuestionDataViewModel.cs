@@ -1,4 +1,16 @@
-﻿namespace KeepLearning.MVC.Models
+﻿using KeepLearning.Domain.Models.Enums;
+
+namespace KeepLearning.MVC.Models
 {
-    public record QuestionDataViewModel(IEnumerable<string> Continents, IEnumerable<string> GuessTypes) { }
+    public class QuestionDataViewModel
+    {
+        public IEnumerable<string> Continents;
+        public IEnumerable<string> GuessTypes;
+        
+        public QuestionDataViewModel()
+        {
+            Continents = Continent.GetAllLikeStrings();
+            GuessTypes = GuessType.GetAllLikeStrings();
+        }
+    }
 }
