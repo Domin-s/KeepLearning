@@ -1,6 +1,7 @@
 ﻿using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Domain.Models.Enums;
+using RestaurantAPI.Exceptions;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
 namespace KeepLearning.Infrastructure.Services
@@ -50,6 +51,26 @@ namespace KeepLearning.Infrastructure.Services
 
                 case Value.Country:
                     return await _countryRepository.GetByCapitalCity(questionText);
+
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        public async Task<string> GetCorrectAnswer(string questionText, GuessType.Value guessType)
+        {
+            var country = await GetCountry(questionText, guessType);
+
+            if (country == null)
+                throw new NotFoundException("Not found conutry");
+
+            switch (guessType)
+            {
+                case Value.CapitalCity:
+                    return country.CapitalCity;
+
+                case Value.Country:
+                    return country.Name;
 
                 default:
                     throw new NotImplementedException();

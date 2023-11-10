@@ -88,13 +88,12 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult CheckTest([FromForm]CheckTestQuery query)
+        public async Task<IActionResult> CheckTest([FromForm]CheckTestQuery query)
         {
 
-            Console.WriteLine("checkTestQuery");
-            Console.WriteLine(query);
+            var result = await _mediator.Send(query);
 
-            return Ok(query);
+            return Ok(result);
         }
 
         private string CheckTempData(string name)
