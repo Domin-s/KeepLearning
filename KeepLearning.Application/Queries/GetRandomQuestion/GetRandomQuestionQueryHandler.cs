@@ -7,12 +7,10 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {
-        private readonly ICountryRepository _countryRepository;
         private readonly ICountryService _countryService;
 
-        public GetRandomQuestionQueryHandler(ICountryRepository countryRepository, ICountryService countryService)
+        public GetRandomQuestionQueryHandler(ICountryService countryService)
         {
-            _countryRepository = countryRepository;
             _countryService = countryService;
         }
 

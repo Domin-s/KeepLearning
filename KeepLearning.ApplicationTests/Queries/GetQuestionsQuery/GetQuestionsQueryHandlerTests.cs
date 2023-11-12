@@ -49,15 +49,10 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry.Tests
 
             var listOfCountry = GetCountries(continentsString);
 
-            var countries = new Countries(listOfCountry) { };
-
-            var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetByContinents(continentsString)).ReturnsAsync(countries);
-
             var countryServiceMock = new Mock<ICountryService>();
-            countryServiceMock.Setup(country => country.GetRandomCountries(getQuestionsQuery.NumberOfQuestion)).Returns(listOfCountry);
+            countryServiceMock.Setup(country => country.GetRandomCountries(getQuestionsQuery.Continents, getQuestionsQuery.NumberOfQuestion)).ReturnsAsync(listOfCountry);
 
-            var handler = new CreateTestCountryQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
+            var handler = new CreateTestCountryQueryHandler(countryServiceMock.Object);
 
             // act
             var result = await handler.Handle(getQuestionsQuery, CancellationToken.None);
