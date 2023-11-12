@@ -33,15 +33,14 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
                 Continent = continent
             };
 
+            var continents = new List<Continent.Name>() { continent };
+
             var continentString = Continent.MapContinentToString(query.Continent);
 
-            var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetByContinent(continentString)).ReturnsAsync(countries);
-
             var countryServiceMock = new Mock<ICountryService>();
-            countryServiceMock.Setup(country => country.GetRandomCountry(listOFCountry)).Returns(poland);
+            countryServiceMock.Setup(country => country.GetRandomCountry(continents)).ReturnsAsync(poland);
 
-            var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object, countryServiceMock.Object);
+            var handler = new GetRandomQuestionQueryHandler(countryServiceMock.Object);
 
             // act
             var result = await handler.Handle(query, CancellationToken.None);
