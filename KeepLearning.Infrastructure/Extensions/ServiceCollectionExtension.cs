@@ -63,7 +63,7 @@ namespace KeepLearning.Infrastructure.Extensions
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            if (env == null || env != "production")
+            if (env != "production")
             {
                 return false;
             }
