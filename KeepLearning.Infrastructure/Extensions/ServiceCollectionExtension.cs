@@ -14,8 +14,11 @@ namespace KeepLearning.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            string connectionString;
+            SetConnectionString(true, out connectionString);
+
             services.AddDbContext<KeepLearningDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("KeepLearning"))
+                options.UseSqlServer(connectionString)
             );
 
             services.AddDefaultIdentity<IdentityUser>(options =>
@@ -29,6 +32,29 @@ namespace KeepLearning.Infrastructure.Extensions
 
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ICountryService, CountryService>();
+        }
+
+        private static void SetConnectionString(bool isDevelop, out string connectionString)
+        {
+            if (isDevelop)
+            {
+                connectionString = GetEnvOrSetEmpty("ASPNETCORE_DEV_CONNECTION_STRING");
+            } else
+            {
+                connectionString = GetEnvOrSetEmpty("ASPNETCORE_PROD_CONNECTION_STRING");
+            }
+        }
+
+        private static string GetEnvOrSetEmpty(string name)
+        {
+            var env = Environment.GetEnvironmentVariable(name);
+
+            if (env == null)
+            {
+                return "";
+            }
+
+            return env;
         }
     }
 }
