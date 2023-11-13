@@ -14,8 +14,11 @@ namespace KeepLearning.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            bool isProduction = CheckIsProduction();
+
             string connectionString;
-            SetConnectionString(true, out connectionString);
+            SetConnectionString(isProduction, out connectionString);
+
 
             services.AddDbContext<KeepLearningDbContext>(options =>
                 options.UseSqlServer(connectionString)
@@ -34,14 +37,14 @@ namespace KeepLearning.Infrastructure.Extensions
             services.AddScoped<ICountryService, CountryService>();
         }
 
-        private static void SetConnectionString(bool isDevelop, out string connectionString)
+        private static void SetConnectionString(bool isProduction, out string connectionString)
         {
-            if (isDevelop)
-            {
-                connectionString = GetEnvOrSetEmpty("ASPNETCORE_DEV_CONNECTION_STRING");
-            } else
+            if (isProduction)
             {
                 connectionString = GetEnvOrSetEmpty("ASPNETCORE_PROD_CONNECTION_STRING");
+            } else
+            {
+                connectionString = GetEnvOrSetEmpty("ASPNETCORE_DEV_CONNECTION_STRING");
             }
         }
 
@@ -55,6 +58,18 @@ namespace KeepLearning.Infrastructure.Extensions
             }
 
             return env;
+        }
+
+        private static bool CheckIsProduction()
+        {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (env == null || env != "production")
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
