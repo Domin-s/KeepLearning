@@ -5,14 +5,13 @@ using KeepLearning.Infrastructure.Seeders;
 using KeepLearning.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KeepLearning.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructure(this IServiceCollection services)
         {
             bool isProduction = CheckIsProduction();
 
