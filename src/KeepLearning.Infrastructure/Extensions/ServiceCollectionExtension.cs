@@ -41,7 +41,8 @@ namespace KeepLearning.Infrastructure.Extensions
             if (isProduction)
             {
                 connectionString = GetEnvOrSetEmpty("ASPNETCORE_PROD_CONNECTION_STRING");
-            } else
+            }
+            else
             {
                 connectionString = GetEnvOrSetEmpty("ASPNETCORE_DEV_CONNECTION_STRING");
             }
