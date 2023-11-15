@@ -1,6 +1,5 @@
 ﻿using KeepLearning.ApplicationTests.Helper.Country;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Models;
 using KeepLearning.Domain.Models.Enums;
 using Moq;
 

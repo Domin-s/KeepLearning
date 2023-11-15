@@ -1,21 +1,23 @@
 ﻿using KeepLearning.Domain.Interfaces;
+using KeepLearning.Infrastructure.Models;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
 using KeepLearning.Infrastructure.Seeders;
 using KeepLearning.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KeepLearning.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static void AddInfrastructure(this IServiceCollection services)
         {
+            var connectionString = ConnectionString.GetDBConnectionString();
+
             services.AddDbContext<KeepLearningDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("KeepLearning"))
+                options.UseSqlServer(connectionString)
             );
 
             services.AddDefaultIdentity<IdentityUser>(options =>
