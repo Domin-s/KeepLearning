@@ -1,6 +1,7 @@
 using KeepLearning.Infrastructure.Extensions;
 using KeepLearning.Domain.Extensions;
 using KeepLearning.MVC.Middlewares;
+using KeepLearning.MVC.HealthChecker;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,8 @@ builder.Logging.AddConsole();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck<EnvironmentHealthChecker>("EnvironmentHealthChecker");
 
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
