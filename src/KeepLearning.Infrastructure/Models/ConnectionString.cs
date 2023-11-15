@@ -54,5 +54,4 @@ namespace KeepLearning.Infrastructure.Models
             return connectionString;
         }
     }
-
 }
