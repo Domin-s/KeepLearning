@@ -10,11 +10,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
 app.Services.SeedData();
+
+app.MapHealthChecks("healthz");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
