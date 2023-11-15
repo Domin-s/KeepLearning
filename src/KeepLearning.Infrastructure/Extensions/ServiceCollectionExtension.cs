@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Domain.Interfaces;
+using KeepLearning.Infrastructure.Models;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
 using KeepLearning.Infrastructure.Seeders;
@@ -13,11 +14,7 @@ namespace KeepLearning.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services)
         {
-            bool isProduction = CheckIsProduction();
-
-            string connectionString;
-            SetConnectionString(isProduction, out connectionString);
-
+            var connectionString = ConnectionString.GetDBConnectionString();
 
             services.AddDbContext<KeepLearningDbContext>(options =>
                 options.UseSqlServer(connectionString)
@@ -34,42 +31,6 @@ namespace KeepLearning.Infrastructure.Extensions
 
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ICountryService, CountryService>();
-        }
-
-        private static void SetConnectionString(bool isProduction, out string connectionString)
-        {
-            if (isProduction)
-            {
-                connectionString = GetEnvOrSetEmpty("ASPNETCORE_PROD_CONNECTION_STRING");
-            }
-            else
-            {
-                connectionString = GetEnvOrSetEmpty("ASPNETCORE_DEV_CONNECTION_STRING");
-            }
-        }
-
-        private static string GetEnvOrSetEmpty(string name)
-        {
-            var env = Environment.GetEnvironmentVariable(name);
-
-            if (env == null)
-            {
-                return "";
-            }
-
-            return env;
-        }
-
-        private static bool CheckIsProduction()
-        {
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-            if (env != "production")
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
