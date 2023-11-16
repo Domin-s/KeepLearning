@@ -1,5 +1,4 @@
 ﻿using KeepLearning.Domain.Interfaces;
-using KeepLearning.Infrastructure.Models;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
 using KeepLearning.Infrastructure.Seeders;
@@ -14,7 +13,7 @@ namespace KeepLearning.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services)
         {
-            var connectionString = ConnectionString.GetDBConnectionString();
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING_KL_DB");
 
             services.AddDbContext<KeepLearningDbContext>(options =>
                 options.UseSqlServer(connectionString)
