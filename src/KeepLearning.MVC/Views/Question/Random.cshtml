@@ -8,11 +8,13 @@
     <div>
         @if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
         {
-            <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder" id="Question">@Model.Question.QuestionText</span></h1>
+            <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder"
+                    id="Question">@Model.Question.QuestionText</span></h1>
         }
         else
         {
-            <h1 class="m-2">Guess the country by its capital city: <span class="fw-bolder" id="Question">@Model.Question.QuestionText</span></h1>
+            <h1 class="m-2">Guess the country by its capital city: <span class="fw-bolder"
+                    id="Question">@Model.Question.QuestionText</span></h1>
         }
 
         <h4 class="m-2">Selected continent: <span class="fw-bolder">@Model.GetRandomQuestionQuery.Continent</span></h4>
@@ -20,10 +22,10 @@
 
     <div class="mt-4">
         <div class="mb-3">
-            <input type="text" class="form-control" id="Answer" placeholder="Tape answer">
+            <input type="text" class="form-control" id="Answer" placeholder="Type answer">
         </div>
     </div>
-    
+
     <div hidden>
         <input value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
         <input value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
@@ -38,13 +40,14 @@
                 <button id="answerChecker" class="btn btn-primary" role="button">Check answer</button>
             </div>
             <div class="col">
-                <button id="getAnotherRandomQuestion" class="btn btn-primary" role="button">Another random question</button>
+                <button id="getAnotherRandomQuestion" class="btn btn-primary" role="button">Another random
+                    question</button>
             </div>
         </div>
     </div>
 
     <div class="mt-4">
-        <label>Answer history (question => you answer):</label>
+        <label>Answer history (question => your answer):</label>
 
         <ul id="answerHistory">
         </ul>
