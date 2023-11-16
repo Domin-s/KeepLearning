@@ -1,41 +1,22 @@
-using KeepLearning.MVC.Models;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace KeepLearning.MVC.HealthChecker
 {
     public class EnvironmentHealthChecker : IHealthCheck
     {
-        private EnvsToCheck envsToCheck = new EnvsToCheck();
 
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            var (isOkEnvironment, message) = CheckEnvironments();
+            var environment = Environment.GetEnvironmentVariable("CONNECTION_STRING_KL_DB");
 
-            if (isOkEnvironment)
+            if (environment is not null)
             {
-                return Task.FromResult(HealthCheckResult.Healthy(message));
+                return Task.FromResult(HealthCheckResult.Healthy());
             }
             else
             {
-                return Task.FromResult(HealthCheckResult.Unhealthy(message));
+                return Task.FromResult(HealthCheckResult.Unhealthy());
             }
-        }
-
-        private (bool, string) CheckEnvironments()
-        {
-            var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
-
-            if (environment == "production")
-            {
-                return envsToCheck.CheckProdEnvironment();
-            }
-            else if (environment == "develop")
-            {
-                return envsToCheck.CheckLocalEnvironment();
-            }
-
-            return (false, "Hosting environment :" + environment);
         }
     }
-
 }
