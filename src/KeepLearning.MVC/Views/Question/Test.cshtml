@@ -54,7 +54,8 @@
                                     <input value="@continent" id="Continents" name="Continents">
                                 }
                             </div>
-                            <input type="submit" value="Create diffrent test with same parameters" class="btn btn-primary" />
+                            <input type="submit" value="Create different test with to the same parameters"
+                                class="btn btn-primary" />
                         </form>
                     </div>
                 </div>
@@ -84,28 +85,17 @@
                 <tr class="Question_@item.NumberQuestion Question">
                     <td>
                         <div>@item.NumberQuestion</div>
-                        <input type="text"
-                               class="form-control"
-                               name="NumberQuestion[@item.NumberQuestion]"
-                               id="NumberQuestion_@item.NumberQuestion"
-                               value="@item.NumberQuestion"
-                               hidden>
+                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]"
+                            id="NumberQuestion_@item.NumberQuestion" value="@item.NumberQuestion" hidden>
                     </td>
                     <td>
                         <div>@item.QuestionText</div>
-                        <input type="text"
-                               class="form-control"
-                               name="QuestionText[@item.NumberQuestion]"
-                               id="QuestionText_@item.NumberQuestion"
-                               value="@item.QuestionText"
-                               hidden>
+                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]"
+                            id="QuestionText_@item.NumberQuestion" value="@item.QuestionText" hidden>
                     </td>
                     <td>
-                        <input type="text"
-                               class="form-control Answer"
-                               name="Answer[@item.NumberQuestion]"
-                               id="Answer_@item.NumberQuestion"
-                               placeholder="Tape answer">
+                        <input type="text" class="form-control Answer" name="Answer[@item.NumberQuestion]"
+                            id="Answer_@item.NumberQuestion" placeholder="Tape answer">
                     </td>
                 </tr>
             }
@@ -113,10 +103,12 @@
     </table>
 
     <div class="Result" style="display: none">
-        <div>Good answers: <spn class="GoodAnswers"></spn></div>
-        <div>Bad answers: <spn class="BadAnswers"></spn></div>
+        <div>Good answers: <spn class="GoodAnswers"></spn>
+        </div>
+        <div>Bad answers: <spn class="BadAnswers"></spn>
+        </div>
     </div>
-    
+
 
     <hr />
     <div class="row m-4 col-6">
@@ -124,14 +116,14 @@
             <a id="checkAnswers" class="btn btn-success" role="button">Check answers</a>
         </div>
         @*
-            TODO: Add in a next branch
+        TODO: Add in a next branch
 
-            <div class="col-4">
-                <a asp-controller="Donwload" asp-action="Pdf" class="btn btn-success" role="button">Back to creator</a>
-            </div>
-            <div class="col-4">
-                <a asp-action="Word" class="btn btn-success" role="button">Back to creator</a>
-            </div>
+        <div class="col-4">
+        <a asp-controller="Donwload" asp-action="Pdf" class="btn btn-success" role="button">Back to creator</a>
+        </div>
+        <div class="col-4">
+        <a asp-action="Word" class="btn btn-success" role="button">Back to creator</a>
+        </div>
         *@
     </div>
 </div>
@@ -139,4 +131,3 @@
 @section Scripts {
     <script src="~/js/Question/Test.js"></script>
 }
-

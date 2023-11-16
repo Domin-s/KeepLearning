@@ -20,7 +20,7 @@
                     <div class="row m-2">
                         <div class="col-3">Choose number of questions:</div>
                         <select name="NumberOfQuestion" class="col-5" id="NumberOfQuestion">
-                            <option>Yoy must have choosen at least one continet</option>
+                            <option>Yoy have to choose at least one continet</option>
                         </select>
                     </div>
                     <div class="row m-2">
@@ -29,19 +29,28 @@
                         <div class="form-group col-5">
                             @foreach (var continent in Model.Continents)
                             {
-                                <input type="checkbox" class="continentInput form-check-input" name="Continents" for="continent" value="@continent" />
+                                <input type="checkbox" class="continentInput form-check-input" name="Continents"
+                                    for="continent" value="@continent" />
                                 <label class="form-check-label" id="continent">@continent</label>
                                 <br />
                             }
                         </div>
                     </div>
                     <div class="row m-2">
-                        <div class="col-3">Choose number of questions:</div>
+                        <div class="col-3">Choose a guess type:</div>
                         <div class="form-group col-5">
                             <select name="GuessType" class="col-5" id="GuessType">
                                 @foreach (var guessType in Model.GuessTypes)
                                 {
-                                    <option value="@guessType">@guessType</option>
+                                    // TODO: add method or change guess type with space between words
+                                    if (@guessType == "Country")
+                                    {
+                                        <option value="@guessType">Country</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@guessType">Capital city</option>
+                                    }
                                 }
                             </select>
                         </div>
@@ -53,7 +62,8 @@
 
                 <div class="row m-4 col-6">
                     <div class="col-4">
-                        <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to list</a>
+                        <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to
+                            list</a>
                     </div>
                     <div class="col-4">
                         <input type="submit" value="Create" class="btn btn-primary" id="createTest" />
@@ -65,6 +75,8 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/js/Question/CreateTest.js"></script>
 }
