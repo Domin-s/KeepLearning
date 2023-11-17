@@ -96,10 +96,10 @@ namespace KeepLearning.Infrastructure.Services
             switch (guessType)
             {
                 case Category.Country:
-                    return country.Name.Equals(answerText);
+                    return country.Name.ToLower().Equals(answerText.ToLower());
 
                 case Category.CapitalCity:
-                    return country.CapitalCity.Equals(answerText);
+                    return country.CapitalCity.ToLower().Equals(answerText.ToLower());
 
                 default: return false;
             }

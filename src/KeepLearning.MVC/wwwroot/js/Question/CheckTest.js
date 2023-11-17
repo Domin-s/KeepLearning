@@ -70,9 +70,17 @@ $(document).ready(function () {
 
     function ChangeColorOfUserAnswer(numberOfQuestion, correctAnswer) {
         var answerInput = $('#Answer_' + numberOfQuestion);
-        if (answerInput.val() == correctAnswer) {
+        var answerInputLowerCase = answerInput.val().toLowerCase();
+        var correctAnswerLowerCase = correctAnswer.toLowerCase();
+
+        console.log("answerInputLowerCase");
+        console.log(answerInputLowerCase);
+        console.log("correctAnswerLowerCase");
+        console.log(correctAnswerLowerCase);
+
+        if (answerInputLowerCase == correctAnswerLowerCase) {
             answerInput.css({ 'background-color': 'green', 'font-weight': 'bold' });
-        } else if (answerInput.val() == "") {
+        } else if (answerInputLowerCase == "") {
             answerInput.val("Empty!").css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
         } else {
             answerInput.css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
