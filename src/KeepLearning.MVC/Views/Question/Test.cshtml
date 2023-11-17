@@ -115,22 +115,9 @@
         <div class="col-4">
             <a id="checkAnswers" class="btn btn-success" role="button">Check answers</a>
         </div>
-        @*
-        TODO: Add in a next branch
-
-        <div class="col-4">
-        <a asp-controller="Donwload" asp-action="Pdf" class="btn btn-success" role="button">Back to creator</a>
-        </div>
-        <div class="col-4">
-        <a asp-action="Word" class="btn btn-success" role="button">Back to creator</a>
-        </div>
-        *@
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script src="~/js/Question/Test.js"></script>
+    <script src="~/js/Question/CheckTest.js"></script>
 }
