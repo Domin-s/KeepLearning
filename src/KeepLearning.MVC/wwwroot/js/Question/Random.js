@@ -12,6 +12,14 @@ $(document).ready(function () {
         CheckAnswer();
     });
 
+    $(answer).keypress(function (e) {
+        var key = e.which;
+        if (key == 13)  // the enter key code
+        {
+            CheckAnswer();
+        }
+    });
+
     function RefreshDataOnWebsite() {
         var continent = $("#Continent").val();
         var category = $("#Category").val();

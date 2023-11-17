@@ -17,7 +17,7 @@ namespace KeepLearning.Domain.Models.Enums
         {
             switch (category)
             {
-                case Category.CapitalCity: return "Capital City";
+                case Category.CapitalCity: return "Capital city";
                 case Category.Country: return "Country";
                 default:
                     throw new InvalidEnumArgumentException();
