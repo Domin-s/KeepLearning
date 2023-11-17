@@ -17,7 +17,6 @@ namespace KeepLearning.Infrastructure.Services
 
         public async Task<Country> GetRandomCountry(IEnumerable<Continent.Name> continents)
         {
-            ;
             var countries = await GetCountries(continents);
 
             var randomNumber = new Random().Next(0, countries.Count());
@@ -43,9 +42,9 @@ namespace KeepLearning.Infrastructure.Services
             return pickedUpCountries;
         }
 
-        public async Task<Country?> GetCountry(string questionText, GuessType.Category guessType)
+        public async Task<Country?> GetCountry(string questionText, GuessType.Category category)
         {
-            switch (guessType)
+            switch (category)
             {
                 case Category.CapitalCity:
                     return await _countryRepository.GetByName(questionText);
@@ -58,14 +57,14 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public async Task<string> GetCorrectAnswer(string questionText, GuessType.Category guessType)
+        public async Task<string> GetCorrectAnswer(string questionText, GuessType.Category category)
         {
-            var country = await GetCountry(questionText, guessType);
+            var country = await GetCountry(questionText, category);
 
             if (country == null)
                 throw new NotFoundException("Not found conutry");
 
-            switch (guessType)
+            switch (category)
             {
                 case Category.CapitalCity:
                     return country.CapitalCity;
@@ -91,9 +90,9 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category guessType)
+        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category category)
         {
-            switch (guessType)
+            switch (category)
             {
                 case Category.Country:
                     return country.Name.ToLower().Equals(answerText.ToLower());
