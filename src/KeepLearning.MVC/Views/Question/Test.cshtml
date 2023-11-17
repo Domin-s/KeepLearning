@@ -22,7 +22,7 @@
 
                     <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
 
-                    <div class="col-3">Guess type: <span class="fw-bold">@Model.GuessType</span></div>
+                    <div class="col-3">Guess type: <span class="fw-bold">@Model.Category</span></div>
 
 
                     <div class="col-3">
@@ -48,7 +48,7 @@
                             <div hidden>
                                 <input id="Name" name="Name" value="@Model.Name" />
                                 <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
-                                <input id="GuessType" name="GuessType" value="@Model.GuessType" />
+                                <input id="GuessType" name="Category" value="@Model.Category" />
                                 @foreach (var continent in Model.Continents)
                                 {
                                     <input value="@continent" id="Continents" name="Continents">

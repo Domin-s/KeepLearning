@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     class CheckTestQuery {
-        constructor(guessType, answers) {
-            this.GuessType = guessType;
+        constructor(category, answers) {
+            this.Category = category;
             this.Answers = answers
         }
     }
@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     function CheckAnswers() {
-        var guessType = $("#GuessType").val();
+        var guessType = $("#Category").val();
         var questions = $(".Question");
 
         var dataToSend = CreateDataToSend(guessType, questions);
@@ -96,10 +96,10 @@ $(document).ready(function () {
         inputs.prop("disabled", true);
     }
 
-    function CreateDataToSend(guessType, questions) {
+    function CreateDataToSend(category, questions) {
         var answers = CreateAnswersToSend(questions);
 
-        return new CheckTestQuery(guessType, answers);
+        return new CheckTestQuery(category, answers);
     }
 
     function CreateAnswersToSend(questions) {

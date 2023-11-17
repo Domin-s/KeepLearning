@@ -17,21 +17,21 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry.Tests
                 {
                     Name = "First test",
                     NumberOfQuestion = 5,
-                    GuessType = GuessType.Value.Country,
+                    Category = GuessType.Category.Country,
                     Continents = new List<Continent.Name>(){ Continent.Name.Asia }
                 },
                 new CreateTestCountryQuery()
                 {
                     Name = "Second test",
                     NumberOfQuestion = 10,
-                    GuessType = GuessType.Value.Country,
+                    Category = GuessType.Category.Country,
                     Continents = new List<Continent.Name>(){ Continent.Name.Asia }
                 },
                 new CreateTestCountryQuery()
                 {
                     Name = "Third test",
                     NumberOfQuestion = 15,
-                    GuessType = GuessType.Value.Country,
+                    Category = GuessType.Category.Country,
                     Continents = new List<Continent.Name>(){ Continent.Name.Asia }
                 }
             };
@@ -59,7 +59,7 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry.Tests
             // assert
             result.Name.Should().Be(getQuestionsQuery.Name);
             result.NumberOfQuestion.Should().Be(getQuestionsQuery.NumberOfQuestion);
-            result.GuessType.Should().Be(getQuestionsQuery.GuessType);
+            result.Category.Should().Be(getQuestionsQuery.Category);
             result.Continents.Should().Contain(getQuestionsQuery.Continents);
         }
 

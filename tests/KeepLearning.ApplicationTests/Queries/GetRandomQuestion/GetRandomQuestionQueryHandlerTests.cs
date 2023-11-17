@@ -7,12 +7,12 @@ using Moq;
 
 namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 {
-    public class GetRandomQuestionQueryHandlerTests: IClassFixture<WebApplicationFactory<Program>>
+    public class GetRandomQuestionQueryHandlerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         [Theory]
-        [InlineData(GuessType.Value.Country, Continent.Name.Europe, "Warsaw")]
-        [InlineData(GuessType.Value.CapitalCity, Continent.Name.Europe, "Poland")]
-        public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GuessType.Value guessType, Continent.Name continent, string questionText)
+        [InlineData(GuessType.Category.Country, Continent.Name.Europe, "Warsaw")]
+        [InlineData(GuessType.Category.CapitalCity, Continent.Name.Europe, "Poland")]
+        public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GuessType.Category guessType, Continent.Name continent, string questionText)
         {
             // arrange
             var poland = new Domain.Enteties.Country()

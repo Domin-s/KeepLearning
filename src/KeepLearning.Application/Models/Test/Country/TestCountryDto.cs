@@ -6,12 +6,12 @@ namespace KeepLearning.Domain.Models.Test.Country
 {
     public class TestCountryDto : TestDto
     {
-        public GuessType.Value GuessType { get; set; } = default!;
+        public GuessType.Category Category { get; set; } = default!;
         public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
 
         public TestCountryDto()
         {
-            
+
         }
 
         public TestCountryDto(CreateTestCountryQuery query, IEnumerable<QuestionDto> questions)
@@ -20,7 +20,7 @@ namespace KeepLearning.Domain.Models.Test.Country
             NumberOfQuestion = query.NumberOfQuestion;
             Continents = query.Continents;
             Questions = questions;
-            GuessType = query.GuessType;
+            Category = query.Category;
         }
     }
 }
