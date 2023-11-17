@@ -22,8 +22,16 @@
 
                     <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
 
-                    <div class="col-3">Guess type: <span class="fw-bold">@Model.Category</span></div>
-
+                    <div class="col-3">Guess type:
+                        @if (@Model.Category.ToString() == "Country")
+                        {
+                            <span class="fw-bold">Country</span>
+                        }
+                        else
+                        {
+                            <span class="fw-bold">Capital city</span>
+                        }
+                    </div>
 
                     <div class="col-3">
                         Choosen continents:
