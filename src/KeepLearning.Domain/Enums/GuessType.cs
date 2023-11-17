@@ -11,7 +11,7 @@ namespace KeepLearning.Domain.Models.Enums
         }
 
         public static IEnumerable<string> GetAllLikeStrings()
-            => Enum.GetValues(typeof(Category)).Cast<Category>().ToList().Select(c => c.ToString());
+            => Enum.GetValues(typeof(Category)).Cast<Category>().ToList().Select(c => ToStringValue(c));
 
         public static string ToStringValue(Category category)
         {
