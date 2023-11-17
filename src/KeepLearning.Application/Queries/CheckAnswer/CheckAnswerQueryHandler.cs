@@ -15,13 +15,13 @@ namespace KeepLearning.Domain.Queries.CheckAnswer
 
         public async Task<bool> Handle(CheckAnswerQuery request, CancellationToken cancellationToken)
         {
-            var country = await _countryService.GetCountry(request.Question, request.GuessType);
+            var country = await _countryService.GetCountry(request.Question, request.Category);
             if (country == null)
             {
                 throw new NotFoundException("Not found country");
             }
 
-            var result = _countryService.IsCorrectAnswer(country, request.Answer, request.GuessType);
+            var result = _countryService.IsCorrectAnswer(country, request.Answer, request.Category);
 
             return result;
         }

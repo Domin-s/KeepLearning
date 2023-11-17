@@ -92,6 +92,9 @@ namespace KeepLearning.Infrastructure.Services
 
         public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category category)
         {
+            if (answerText is null)
+                return false;
+
             switch (category)
             {
                 case Category.Country:

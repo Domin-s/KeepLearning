@@ -23,7 +23,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
 
             var randomCountry = await _countryService.GetRandomCountry(continetByList);
 
-            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.GuessType, numberOfQuestion);
+            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.Category, numberOfQuestion);
         }
     }
 }

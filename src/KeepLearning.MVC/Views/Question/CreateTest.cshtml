@@ -4,71 +4,68 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create country test</h1>
+<div class="col-12 col-md-12 col-sm-12">
+    <h1>Create country test</h1>
 
-<hr />
+    <hr />
 
-<div class="form-group">
-    <div class="container">
-        <div class="row align-items-start">
-            <form method="post" action="#">
-                <div class="col-10">
-                    <div class="row m-2">
-                        <div class="col-3">Test name: </div>
-                        <input id="Name" class="col-5" name="Name" />
-                    </div>
-                    <div class="row m-2">
-                        <div class="col-3">Choose number of questions:</div>
-                        <select name="NumberOfQuestion" class="col-5" id="NumberOfQuestion">
-                            <option>You have to choose at least one continet</option>
-                        </select>
-                    </div>
-                    <div class="row m-2">
-                        <div class="col-3">Choose continents: </div>
-
-                        <div class="form-group col-5">
-                            @foreach (var continent in Model.Continents)
-                            {
-                                <input type="checkbox" class="continentInput form-check-input" name="Continents"
-                                    for="continent" value="@continent" />
-                                <label class="form-check-label" id="continent">@continent</label>
-                                <br />
-                            }
+    <div class="form-group">
+        <div class="container">
+            <div class="row align-items-start">
+                <form method="post" action="#">
+                    <div class="col-10 col-md-12 col-sm-12">
+                        <div class="row m-2 ">
+                            <div class="col-4 col-sm-5 col-md-4">Test name: </div>
+                            <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
                         </div>
-                    </div>
-                    <div class="row m-2">
-                        <div class="col-3">Choose a guess type:</div>
-                        <div class="form-group col-5">
-                            <select name="GuessType" class="col-5" id="GuessType">
-                                @foreach (var guessType in Model.GuessTypes)
-                                {
-                                    if (@guessType == "Country")
-                                    {
-                                        <option value="@guessType">Country</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@guessType">Capital city</option>
-                                    }
-                                }
+                        <div class="row m-2">
+                            <div class="col-4 col-sm-5 col-md-4">Choose number of questions:</div>
+                            <select name="NumberOfQuestion" class="col-5 col-sm-6 col-md-5" id="NumberOfQuestion">
+                                <option>You have to choose at least one continet</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row m-2">
+                        <div class="row m-2">
+                            <div class="col-4 col-sm-5 col-md-4">Choose continents: </div>
 
-                    </div>
-                </div>
+                            <div class="col-5 col-sm-6 col-md-5">
+                                @foreach (var continent in Model.Continents)
+                                {
+                                    <input type="checkbox" class="continentInput form-check-input" name="Continents"
+                                           for="continent" value="@continent" />
+                                    <label class="form-check-label" id="continent">@continent</label>
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-4 col-sm-5 col-md-4">Choose a guess type:</div>
+                            <div class="form-group col-5 col-sm-6 col-md-5">
+                                <select name="Category" class="col-10 col-sm-10 col-md-5" id="Category">
+                                    @foreach (var category in Model.Category)
+                                    {
+                                        <option value="@category">@category</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row m-2">
 
-                <div class="row m-4 col-6">
-                    <div class="col-4">
-                        <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to
-                            list</a>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <input type="submit" value="Create" class="btn btn-primary" id="createTest" />
+
+                    <div class="row m-4 col-10 col-md-12 col-sm-12">
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">
+                                Back to
+                                list
+                            </a>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <input type="submit" value="Create" class="btn btn-primary" id="createTest" />
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

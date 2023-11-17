@@ -14,10 +14,10 @@
             <form method="get" asp-action="Random">
                 <div class="col-10">
                     <div class="row m-2">
-                        <div for="GuessType" class="col-3">Chosse what you want to guess: </div>
-                        <div class="col-6">
-                            <select class="form-select" name="GuessType" id="GuessType">
-                                @foreach (var guessType in Model.GuessTypes)
+                        <div for="Category" class="col-4 col-sm-5 col-md-4">Chosse what you want to guess: </div>
+                        <div class="col-5 col-sm-6 col-md-5">
+                            <select class="form-select" name="Category" id="Category">
+                                @foreach (var guessType in Model.Category)
                                 {
                                     <option value="@guessType">@guessType</option>
                                 }
@@ -25,8 +25,8 @@
                         </div>
                     </div>
                     <div class="row m-2">
-                        <div for="Continent" class="col-3">Choose a continent</div>
-                        <div class="col-6">
+                        <div for="Continent" class="col-4 col-sm-5 col-md-4">Choose a continent</div>
+                        <div class="col-5 col-sm-6 col-md-5">
                             <select class="form-select" name="Continent" id="Continent">
                                 @foreach (var continent in Model.Continents)
                                 {
@@ -37,12 +37,12 @@
                     </div>
                 </div>
 
-                <div class="row m-4 col-6">
-                    <div class="col-4">
+                <div class="row m-4 col-10 col-md-12 col-sm-12">
+                    <div class="col-3 col-md-3 col-sm-4">
                         <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">Back to
                             list</a>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3 col-md-3 col-sm-4">
                         <input type="submit" value="Create random question" class="btn btn-primary" />
                     </div>
                 </div>
