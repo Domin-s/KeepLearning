@@ -16,13 +16,13 @@
                     @if (Model.Name != null)
                     {
                         <div class="row m-2">
-                            <div class="col-3">Test name: @Model.Name</div>
+                            <div class="col-10">Test name: @Model.Name</div>
                         </div>
                     }
 
-                    <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
+                    <div class="col-10">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
 
-                    <div class="col-3">Guess type:
+                    <div class="col-10">Guess type:
                         @if (@Model.Category.ToString() == "Country")
                         {
                             <span class="fw-bold">Country</span>
@@ -33,7 +33,7 @@
                         }
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-10">
                         Choosen continents:
                         <ul>
                             @foreach (var continent in Model.Continents)
@@ -46,12 +46,11 @@
 
                 <hr />
 
-                <div class="row m-4 col-6">
-                    <div class="col-4">
+                <div class="row m-4">
+                    <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
                         <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
                     </div>
-                    <div class="col-4">
-
+                    <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
                         <form method="post" action="CreateTest">
                             <div hidden>
                                 <input id="Name" name="Name" value="@Model.Name" />
@@ -77,13 +76,27 @@
         <thead>
             <tr>
                 <th class="col-1">
-                    Number of question
+                    Number
                 </th>
                 <th class="col-4">
-                    Question
+                    @if (@Model.Category.ToString() == "Country")
+                    {
+                        <div>Capital city</div>
+                    }
+                    else
+                    {
+                        <div>Country</div>
+                    }
                 </th>
                 <th class="col-4">
-                    Your answers
+                    @if (@Model.Category.ToString() == "Country")
+                    {
+                        <div>Country</div>
+                    }
+                    else
+                    {
+                        <div>Capital city</div>
+                    }
                 </th>
             </tr>
         </thead>
@@ -119,9 +132,9 @@
 
 
     <hr />
-    <div class="row m-4 col-6">
-        <div class="col-4">
-            <a id="checkAnswers" class="btn btn-success" role="button">Check answers</a>
+    <div class="row m-4">
+        <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+            <a id="checkAnswers" class="btn btn-success col-sm-10" role="button">Check answers</a>
         </div>
     </div>
 </div>

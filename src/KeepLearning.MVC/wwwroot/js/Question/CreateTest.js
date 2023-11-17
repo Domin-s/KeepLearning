@@ -4,18 +4,29 @@ $(document).ready(function () {
 
     var createTest = $("#createTest");
     var continentInputs = $(".continentInput");
+    var numberOfQuestionDiv = $('.numberOfQuestionDiv');
 
-    ConfigureContinentInputs(createTest, continentInputs);
+    ConfigureContinentInputs(createTest, continentInputs, numberOfQuestionDiv);
 
-    function ConfigureContinentInputs(createTest, continentInputs) {
-        createTest.prop("disabled", true);
+    function ConfigureContinentInputs(createTest, continentInputs, numberOfQuestionDiv) {
+        DiableButton(createTest, continentInputs);
+        HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs)
 
         continentInputs.click(function (event) {
             GetMaxNumberOfQuestion(continentInputs);
             DiableButton(createTest, continentInputs);
+            HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs);
         });
     }
 
+    function HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs) {
+        console.log(numberOfQuestionDiv);
+        if (CheckIfAnyContinentIsChecked(continentInputs)) {
+            numberOfQuestionDiv.show();
+        } else {
+            numberOfQuestionDiv.hide();
+        }
+    }
     function DiableButton(createTest, continentInputs) {
         if (CheckIfAnyContinentIsChecked(continentInputs)) {
             createTest.prop("disabled", false);
@@ -44,12 +55,7 @@ $(document).ready(function () {
         var numberOfQuestionsSelects = $("#NumberOfQuestion");
         numberOfQuestionsSelects.find('option').remove().end();
 
-        if (maxNumberOfQuestions == 0) {
-            var defaultSelect = "Yoy must have choosen at least one continet";
-            AddOption(defaultSelect, numberOfQuestionsSelects);
-        } else {
-            SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionsSelects);
-        }
+        SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionsSelects);
     }
 
     function SetMaxNumberOfQuestion(maxNumberOfQuestions, numberOfQuestionSelects) {
