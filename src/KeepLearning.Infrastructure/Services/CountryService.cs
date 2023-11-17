@@ -16,7 +16,7 @@ namespace KeepLearning.Infrastructure.Services
         }
 
         public async Task<Country> GetRandomCountry(IEnumerable<Continent.Name> continents)
-        {;
+        {
             var countries = await GetCountries(continents);
 
             var randomNumber = new Random().Next(0, countries.Count());
@@ -42,14 +42,14 @@ namespace KeepLearning.Infrastructure.Services
             return pickedUpCountries;
         }
 
-        public async Task<Country?> GetCountry(string questionText, GuessType.Value guessType)
+        public async Task<Country?> GetCountry(string questionText, GuessType.Category category)
         {
-            switch (guessType)
+            switch (category)
             {
-                case Value.CapitalCity:
+                case Category.CapitalCity:
                     return await _countryRepository.GetByName(questionText);
 
-                case Value.Country:
+                case Category.Country:
                     return await _countryRepository.GetByCapitalCity(questionText);
 
                 default:
@@ -57,19 +57,19 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public async Task<string> GetCorrectAnswer(string questionText, GuessType.Value guessType)
+        public async Task<string> GetCorrectAnswer(string questionText, GuessType.Category category)
         {
-            var country = await GetCountry(questionText, guessType);
+            var country = await GetCountry(questionText, category);
 
             if (country == null)
                 throw new NotFoundException("Not found conutry");
 
-            switch (guessType)
+            switch (category)
             {
-                case Value.CapitalCity:
+                case Category.CapitalCity:
                     return country.CapitalCity;
 
-                case Value.Country:
+                case Category.Country:
                     return country.Name;
 
                 default:
@@ -90,15 +90,15 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Value guessType)
+        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category category)
         {
-            switch (guessType)
+            switch (category)
             {
-                case Value.Country:
-                    return country.Name.Equals(answerText);
+                case Category.Country:
+                    return country.Name.ToLower().Equals(answerText.ToLower());
 
-                case Value.CapitalCity:
-                    return country.CapitalCity.Equals(answerText);
+                case Category.CapitalCity:
+                    return country.CapitalCity.ToLower().Equals(answerText.ToLower());
 
                 default: return false;
             }

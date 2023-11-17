@@ -8,7 +8,7 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry
     {
         public string? Name { get; set; }
         public int NumberOfQuestion { get; set; } = 10;
-        public GuessType.Value GuessType { get; set; } = default!;
+        public GuessType.Category Category { get; set; } = default!;
         public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
     }
 }

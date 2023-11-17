@@ -22,8 +22,16 @@
 
                     <div class="col-3">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
 
-                    <div class="col-3">Guess type: <span class="fw-bold">@Model.GuessType</span></div>
-
+                    <div class="col-3">Guess type:
+                        @if (@Model.Category.ToString() == "Country")
+                        {
+                            <span class="fw-bold">Country</span>
+                        }
+                        else
+                        {
+                            <span class="fw-bold">Capital city</span>
+                        }
+                    </div>
 
                     <div class="col-3">
                         Choosen continents:
@@ -48,13 +56,13 @@
                             <div hidden>
                                 <input id="Name" name="Name" value="@Model.Name" />
                                 <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
-                                <input id="GuessType" name="GuessType" value="@Model.GuessType" />
+                                <input id="GuessType" name="Category" value="@Model.Category" />
                                 @foreach (var continent in Model.Continents)
                                 {
                                     <input value="@continent" id="Continents" name="Continents">
                                 }
                             </div>
-                            <input type="submit" value="Create different test with to the same parameters"
+                            <input type="submit" value="Create a different test with the same parameters"
                                 class="btn btn-primary" />
                         </form>
                     </div>
@@ -95,7 +103,7 @@
                     </td>
                     <td>
                         <input type="text" class="form-control Answer" name="Answer[@item.NumberQuestion]"
-                            id="Answer_@item.NumberQuestion" placeholder="Tape answer">
+                            id="Answer_@item.NumberQuestion" placeholder="Type answer">
                     </td>
                 </tr>
             }
@@ -103,9 +111,9 @@
     </table>
 
     <div class="Result" style="display: none">
-        <div>Good answers: <spn class="GoodAnswers"></spn>
+        <div>Corect answers: <spn class="CorrectAnswers"></spn>
         </div>
-        <div>Bad answers: <spn class="BadAnswers"></spn>
+        <div>Incorrect answers: <spn class="IncorrectAnswers"></spn>
         </div>
     </div>
 
@@ -115,22 +123,9 @@
         <div class="col-4">
             <a id="checkAnswers" class="btn btn-success" role="button">Check answers</a>
         </div>
-        @*
-        TODO: Add in a next branch
-
-        <div class="col-4">
-        <a asp-controller="Donwload" asp-action="Pdf" class="btn btn-success" role="button">Back to creator</a>
-        </div>
-        <div class="col-4">
-        <a asp-action="Word" class="btn btn-success" role="button">Back to creator</a>
-        </div>
-        *@
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script src="~/js/Question/Test.js"></script>
+    <script src="~/js/Question/CheckTest.js"></script>
 }

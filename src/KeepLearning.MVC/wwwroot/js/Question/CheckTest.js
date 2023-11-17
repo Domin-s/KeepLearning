@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     class CheckTestQuery {
-        constructor(guessType, answers) {
-            this.GuessType = guessType;
+        constructor(category, answers) {
+            this.Category = category;
             this.Answers = answers
         }
     }
@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     function CheckAnswers() {
-        var guessType = $("#GuessType").val();
+        var guessType = $("#Category").val();
         var questions = $(".Question");
 
         var dataToSend = CreateDataToSend(guessType, questions);
@@ -70,21 +70,24 @@ $(document).ready(function () {
 
     function ChangeColorOfUserAnswer(numberOfQuestion, correctAnswer) {
         var answerInput = $('#Answer_' + numberOfQuestion);
-        if (answerInput.val() == correctAnswer) {
+        var answerInputLowerCase = answerInput.val().toLowerCase();
+        var correctAnswerLowerCase = correctAnswer.toLowerCase();
+
+        if (answerInputLowerCase == correctAnswerLowerCase) {
             answerInput.css({ 'background-color': 'green', 'font-weight': 'bold' });
-        } else if (answerInput.val() == "") {
+        } else if (answerInputLowerCase == "") {
             answerInput.val("Empty!").css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
         } else {
             answerInput.css({ 'background-color': 'red', 'font-weight': 'bold', 'color': 'white' });
         }
     }
 
-    function ShowResult(goodAnswers, badAnswers) {
+    function ShowResult(correctAnswers, incorrectAnswers) {
         var result = $('.Result');
-        console.log(result);
+
         result.show();
-        $('.GoodAnswers').text(goodAnswers);
-        $('.BadAnswers').text(badAnswers);
+        $('.CorrectAnswers').text(correctAnswers);
+        $('.IncorrectAnswers').text(incorrectAnswers);
     }
 
     function HiddeButton(name) {
@@ -96,10 +99,10 @@ $(document).ready(function () {
         inputs.prop("disabled", true);
     }
 
-    function CreateDataToSend(guessType, questions) {
+    function CreateDataToSend(category, questions) {
         var answers = CreateAnswersToSend(questions);
 
-        return new CheckTestQuery(guessType, answers);
+        return new CheckTestQuery(category, answers);
     }
 
     function CreateAnswersToSend(questions) {

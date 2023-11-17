@@ -14,9 +14,9 @@ $(document).ready(function () {
 
     function RefreshDataOnWebsite() {
         var continent = $("#Continent").val();
-        var guessType = $("#GuessType").val();
+        var category = $("#Category").val();
 
-        var dataToSend = 'Continent=' + continent + "&GuessType=" + guessType;
+        var dataToSend = 'Continent=' + continent + "&Category=" + category;
 
         $.ajax({
             url: `/Question/RandomAnotherQuestion`,
@@ -33,15 +33,14 @@ $(document).ready(function () {
     }
 
     function CheckAnswer() {
-        var guessType = $("#GuessType").val();
-        var dataToSend = 'Question=' + question.text() + "&Answer=" + answer.val() + "&GuessType=" + guessType;
+        var category = $("#Category").val();
+        var dataToSend = 'Question=' + question.text() + "&Answer=" + answer.val() + "&Category=" + category;
 
         $.ajax({
             url: `/Question/CheckAnswer`,
             type: 'get',
             data: dataToSend,
             success: function (data) {
-                console.log("val :: " + answer.val());
                 AddAnswerToHistory(question.text(), answer.val(), data);
                 RefreshDataOnWebsite();
             },

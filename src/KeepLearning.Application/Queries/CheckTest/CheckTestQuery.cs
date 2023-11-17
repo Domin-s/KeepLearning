@@ -7,7 +7,7 @@ namespace KeepLearning.Domain.Queries.CheckTest
 {
     public class CheckTestQuery : IRequest<TestResultDto>
     {
-        public GuessType.Value GuessType { get; set; }
+        public GuessType.Category GuessType { get; set; }
         public required IEnumerable<AnswerDto> Answers { get; set; }
     }
 }

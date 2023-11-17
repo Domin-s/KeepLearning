@@ -2,7 +2,6 @@
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 using KeepLearning.Domain.Models.Result;
-using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.Domain.Queries.CheckTest
 {
@@ -26,10 +25,11 @@ namespace KeepLearning.Domain.Queries.CheckTest
             {
                 var correctAnswer = await _countryService.GetCorrectAnswer(answer.QuestionText, request.GuessType);
 
-                if (answer.AnswerText == correctAnswer)
+                if (answer.AnswerText is not null && answer.AnswerText?.ToLower() == correctAnswer.ToLower())
                 {
                     goodAnswers++;
-                } else
+                }
+                else
                 {
                     badAnswers++;
                 }

@@ -18,7 +18,7 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry
         {
             var randomCountries = await _countryService.GetRandomCountries(request.Continents, request.NumberOfQuestion);
 
-            var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.GuessType);
+            var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.Category);
 
             var test = new TestCountryDto(request, questions);
 
