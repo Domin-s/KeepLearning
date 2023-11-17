@@ -6,7 +6,7 @@
 
 <div>
     <div>
-        @if (Model.GetRandomQuestionQuery.GuessType.ToString() == "CapitalCity")
+        @if (Model.GetRandomQuestionQuery.Category.ToString() == "CapitalCity")
         {
             <h1 class="m-2">Guess the capital city of country: <span class="fw-bolder"
                     id="Question">@Model.Question.QuestionText</span></h1>
@@ -28,7 +28,7 @@
 
     <div hidden>
         <input value="@Model.GetRandomQuestionQuery.Continent" id="Continent">
-        <input value="@Model.GetRandomQuestionQuery.GuessType" id="GuessType">
+        <input value="@Model.GetRandomQuestionQuery.Category" id="Category">
     </div>
 
     <div class="container text-center">

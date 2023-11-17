@@ -7,6 +7,6 @@ namespace KeepLearning.Domain.Queries.CheckAnswer
     {
         public string Question { get; set; } = default!;
         public string Answer { get; set; } = default!;
-        public GuessType.Category GuessType { get; set; }
+        public GuessType.Category Category { get; set; }
     }
 }

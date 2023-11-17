@@ -20,10 +20,10 @@ $(document).ready(function () {
     });
 
     function CheckAnswers() {
-        var guessType = $("#Category").val();
+        var category = $("#Category").val();
         var questions = $(".Question");
 
-        var dataToSend = CreateDataToSend(guessType, questions);
+        var dataToSend = CreateDataToSend(category, questions);
 
         $.post(`/Question/CheckTest`, dataToSend, (result, status) => {
             AddColumnWithAnswer(result);

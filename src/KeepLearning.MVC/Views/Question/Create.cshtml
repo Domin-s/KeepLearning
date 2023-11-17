@@ -14,10 +14,10 @@
             <form method="get" asp-action="Random">
                 <div class="col-10">
                     <div class="row m-2">
-                        <div for="GuessType" class="col-3">Chosse what you want to guess: </div>
+                        <div for="Category" class="col-3">Chosse what you want to guess: </div>
                         <div class="col-6">
-                            <select class="form-select" name="GuessType" id="GuessType">
-                                @foreach (var guessType in Model.GuessTypes)
+                            <select class="form-select" name="Category" id="Category">
+                                @foreach (var guessType in Model.Category)
                                 {
                                     <option value="@guessType">@guessType</option>
                                 }

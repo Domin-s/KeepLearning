@@ -39,17 +39,10 @@
                     <div class="row m-2">
                         <div class="col-3">Choose a guess type:</div>
                         <div class="form-group col-5">
-                            <select name="GuessType" class="col-5" id="GuessType">
-                                @foreach (var guessType in Model.GuessTypes)
+                            <select name="Category" class="col-5" id="Category">
+                                @foreach (var category in Model.Category)
                                 {
-                                    if (@guessType == "Country")
-                                    {
-                                        <option value="@guessType">Country</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@guessType">Capital city</option>
-                                    }
+                                    <option value="@category">@category</option>
                                 }
                             </select>
                         </div>

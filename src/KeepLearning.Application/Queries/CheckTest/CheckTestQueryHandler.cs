@@ -17,26 +17,26 @@ namespace KeepLearning.Domain.Queries.CheckTest
         public async Task<TestResultDto> Handle(CheckTestQuery request, CancellationToken cancellationToken)
         {
             var answers = new List<AnswerResultDto>();
-            var goodAnswers = 0;
-            var badAnswers = 0;
+            var numberOfCorrectAnswers = 0;
+            var numberOfIncorrectAnswers = 0;
 
 
             foreach (var answer in request.Answers)
             {
-                var correctAnswer = await _countryService.GetCorrectAnswer(answer.QuestionText, request.GuessType);
+                var correctAnswer = await _countryService.GetCorrectAnswer(answer.QuestionText, request.Category);
 
                 if (answer.AnswerText is not null && answer.AnswerText?.ToLower() == correctAnswer.ToLower())
                 {
-                    goodAnswers++;
+                    numberOfCorrectAnswers++;
                 }
                 else
                 {
-                    badAnswers++;
+                    numberOfIncorrectAnswers++;
                 }
                 answers.Add(new AnswerResultDto(answer.NumberOfQuestion, answer.AnswerText, correctAnswer));
             }
 
-            var testResultDto = new TestResultDto(answers, goodAnswers, badAnswers);
+            var testResultDto = new TestResultDto(answers, numberOfCorrectAnswers, numberOfIncorrectAnswers);
 
             return testResultDto;
         }
