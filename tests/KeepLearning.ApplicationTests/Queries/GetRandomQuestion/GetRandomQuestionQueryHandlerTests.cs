@@ -12,7 +12,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
         [Theory]
         [InlineData(GuessType.Category.Country, Continent.Name.Europe, "Warsaw")]
         [InlineData(GuessType.Category.CapitalCity, Continent.Name.Europe, "Poland")]
-        public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GuessType.Category guessType, Continent.Name continent, string questionText)
+        public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GuessType.Category category, Continent.Name continent, string questionText)
         {
             // arrange
             var poland = new Domain.Enteties.Country()
@@ -29,7 +29,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
             var query = new GetRandomQuestionQuery()
             {
-                GuessType = guessType,
+                Category = category,
                 Continent = continent
             };
 
