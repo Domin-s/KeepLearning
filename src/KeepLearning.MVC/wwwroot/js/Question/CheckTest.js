@@ -73,11 +73,6 @@ $(document).ready(function () {
         var answerInputLowerCase = answerInput.val().toLowerCase();
         var correctAnswerLowerCase = correctAnswer.toLowerCase();
 
-        console.log("answerInputLowerCase");
-        console.log(answerInputLowerCase);
-        console.log("correctAnswerLowerCase");
-        console.log(correctAnswerLowerCase);
-
         if (answerInputLowerCase == correctAnswerLowerCase) {
             answerInput.css({ 'background-color': 'green', 'font-weight': 'bold' });
         } else if (answerInputLowerCase == "") {
@@ -87,12 +82,12 @@ $(document).ready(function () {
         }
     }
 
-    function ShowResult(goodAnswers, badAnswers) {
+    function ShowResult(correctAnswers, incorrectAnswers) {
         var result = $('.Result');
-        console.log(result);
+
         result.show();
-        $('.GoodAnswers').text(goodAnswers);
-        $('.BadAnswers').text(badAnswers);
+        $('.CorrectAnswers').text(correctAnswers);
+        $('.IncorrectAnswers').text(incorrectAnswers);
     }
 
     function HiddeButton(name) {
