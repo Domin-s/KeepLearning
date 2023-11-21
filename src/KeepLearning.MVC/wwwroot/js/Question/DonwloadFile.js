@@ -4,38 +4,30 @@ $(document).ready(function () {
     var downloadWord = $("#downloadWord");
 
     downloadPDF.click(function (event) {
-        DownloadPDF();
+        Download("pdf");
     });
 
     downloadWord.click(function (event) {
-        DownloadWord();
+        Download("word");
     });
 
-    function DownloadPDF() {
-        var dataToSend = CreateDataToSend();
+    function Download(fileType) {
+        var dataToSend = CreateDataToSend(fileType);
 
-        $.post(`/Question/DownloadPDF`, dataToSend, (result, status) => {
+        $.post(`/Question/Download`, dataToSend, (result, status) => {
             console.log("status: " + status);
             console.log(result);
         });
     }
 
-    function DownloadWord() {
-        var dataToSend = CreateDataToSend();
-
-        $.post(`/Question/DownloadWord`, dataToSend, (result, status) => {
-            console.log("status: " + status);
-            console.log(result);
-        });
-    }
-
-    class Test {
-        constructor(name, numberOfQuestion, category, continents, question) {
+    class TestToDownload {
+        constructor(name, numberOfQuestion, category, continents, question, fileType) {
             this.Name = name;
             this.NumberOfQuestion = numberOfQuestion;
             this.Question = question;
             this.Category = category;
             this.Continents = continents;
+            this.FileType = fileType;
         }
     }
 
@@ -46,7 +38,7 @@ $(document).ready(function () {
         }
     }
 
-    function CreateDataToSend() {
+    function CreateDataToSend(fileType) {
         var name = $("#Name").val();
         var numberOfQuestion = $("#NumberOFQuestion").val();
         var category = $("#Category").val();
@@ -55,7 +47,16 @@ $(document).ready(function () {
 
         var questionsToSend = CreateQuestionsToSend(questions);
 
-        return new Test(name, numberOfQuestion, category, continents, questionsToSend);
+        var testToDownload = new TestToDownload(
+            name,
+            numberOfQuestion,
+            category,
+            continents,
+            questionsToSend,
+            fileType
+        );
+
+        return testToDownload
     }
 
     function CreateQuestionsToSend(questions) {

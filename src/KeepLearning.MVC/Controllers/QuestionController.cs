@@ -3,6 +3,7 @@ using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
 using KeepLearning.Domain.Queries.CreateTestCountry;
 using KeepLearning.Domain.Queries.GetRandomQuestion;
+using KeepLearning.Domain.Queries.TestToDownload;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -87,7 +88,7 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckTest([FromForm]CheckTestQuery query)
+        public async Task<IActionResult> CheckTest([FromForm] CheckTestQuery query)
         {
             var result = await _mediator.Send(query);
 
@@ -109,6 +110,14 @@ namespace KeepLearning.MVC.Controllers
             }
 
             return serializedString;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Download([FromForm] TestToDownloadQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
         }
     }
 }
