@@ -4,6 +4,7 @@ using KeepLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KeepLearning.Infrastructure.Migrations
 {
     [DbContext(typeof(KeepLearningDbContext))]
-    partial class KeepLearningDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231121113256_Add_tables_tast_and_question")]
+    partial class Add_tables_tast_and_question
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,6 +10,19 @@ namespace KeepLearning.Infrastructure.Persistence
         {
 
         }
+
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Test>()
+                .HasMany(t => t.Questions)
+                .WithOne(q => q.Test)
+                .HasForeignKey(q => q.TestId);
+        }
     }
 }
