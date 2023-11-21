@@ -1,6 +1,6 @@
 ﻿using KeepLearning.Domain.Models.Enums;
 using KeepLearning.Domain.Models.Question;
-using KeepLearning.Domain.Queries.CreateTestCountry;
+using KeepLearning.Domain.Commands.CreateTestCountry;
 
 namespace KeepLearning.Domain.Models.Test.Country
 {
@@ -14,13 +14,13 @@ namespace KeepLearning.Domain.Models.Test.Country
 
         }
 
-        public TestCountryDto(CreateTestCountryQuery query, IEnumerable<QuestionDto> questions)
+        public TestCountryDto(CreateTestCountryCommand command, IEnumerable<QuestionDto> questions)
         {
-            Name = query.Name;
-            NumberOfQuestion = query.NumberOfQuestion;
-            Continents = query.Continents;
+            Name = command.Name;
+            NumberOfQuestion = command.NumberOfQuestion;
+            Continents = command.Continents;
             Questions = questions;
-            Category = query.Category;
+            Category = command.Category;
         }
     }
 }

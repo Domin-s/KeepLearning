@@ -3,18 +3,18 @@ using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Domain.Queries.CreateTestCountry
+namespace KeepLearning.Domain.Commands.CreateTestCountry
 {
-    public class CreateTestCountryQueryHandler : IRequestHandler<CreateTestCountryQuery, TestCountryDto>
+    public class CreateTestCountryCommandHandler : IRequestHandler<CreateTestCountryCommand, TestCountryDto>
     {
         private readonly ICountryService _countryService;
 
-        public CreateTestCountryQueryHandler(ICountryService countryService)
+        public CreateTestCountryCommandHandler(ICountryService countryService)
         {
             _countryService = countryService;
         }
 
-        public async Task<TestCountryDto> Handle(CreateTestCountryQuery request, CancellationToken cancellationToken)
+        public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
         {
             var randomCountries = await _countryService.GetRandomCountries(request.Continents, request.NumberOfQuestion);
 

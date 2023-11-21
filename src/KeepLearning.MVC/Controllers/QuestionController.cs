@@ -1,7 +1,7 @@
-﻿using KeepLearning.Domain.Models.Test.Country;
+﻿using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
-using KeepLearning.Domain.Queries.CreateTestCountry;
 using KeepLearning.Domain.Queries.GetRandomQuestion;
 using KeepLearning.Domain.Queries.TestToDownload;
 using KeepLearning.MVC.Models;
@@ -66,9 +66,9 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(CreateTestCountryQuery query)
+        public async Task<IActionResult> CreateTest(CreateTestCountryCommand command)
         {
-            var test = await _mediator.Send(query);
+            var test = await _mediator.Send(command);
 
             var serializedTest = JsonConvert.SerializeObject(test);
             TempData[STDTestCountry] = serializedTest;
