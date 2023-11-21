@@ -61,7 +61,7 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.Property<DateTime>("ExpiredAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NumberOfQuestion")
+                    b.Property<int>("QuestionNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("QuestionText")
@@ -87,10 +87,13 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfQuestion")
+                    b.Property<int>("NumberOfQuestions")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
