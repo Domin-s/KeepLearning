@@ -17,7 +17,7 @@ namespace KeepLearning.Infrastructure.Services
 
         public async Task<Country> GetRandomCountry(IEnumerable<Continent.Name> continents)
         {
-            var countries = await GetCountries(continents);
+            var countries = await _countryRepository.GetByContinents(continents.Select(Continent.MapContinentToString));
 
             var randomNumber = new Random().Next(0, countries.Count());
 
@@ -27,7 +27,7 @@ namespace KeepLearning.Infrastructure.Services
         public async Task<IEnumerable<Country>> GetRandomCountries(IEnumerable<Continent.Name> continents, int numberOfQuestions)
         {
             var pickedUpCountries = new List<Country>();
-            var countriesToChoose = await GetCountries(continents);
+            var countriesToChoose = await _countryRepository.GetByContinents(continents.Select(Continent.MapContinentToString));
 
             while (pickedUpCountries.Count < numberOfQuestions)
             {
@@ -77,18 +77,18 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public async Task<IEnumerable<Country>> GetCountries(IEnumerable<Continent.Name> continents)
-        {
-            if (continents.Any())
-            {
-                var stringContinents = continents.Select(Continent.MapContinentToString);
-                return await _countryRepository.GetByContinents(stringContinents);
-            }
-            else
-            {
-                return await _countryRepository.GetAll();
-            }
-        }
+        // public async Task<IEnumerable<Country>> GetCountries(IEnumerable<Continent.Name> continents)
+        // {
+        //     if (continents.Any())
+        //     {
+        //         var stringContinents = continents.Select(Continent.MapContinentToString);
+        //         return await _countryRepository.GetByContinents(stringContinents);
+        //     }
+        //     else
+        //     {
+        //         return await _countryRepository.GetAll();
+        //     }
+        // }
 
         public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category category)
         {
