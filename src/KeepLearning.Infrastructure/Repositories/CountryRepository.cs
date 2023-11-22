@@ -24,13 +24,16 @@ namespace KeepLearning.Infrastructure.Repositories
             => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByContinent @Continent = {continent}").ToListAsync();
 
         public async Task<List<Country>> GetByContinents(IEnumerable<string> continents)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByContinents @Continents = {continents}").ToListAsync();
+            => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByContinents @Continents = {continents.ToString}").ToListAsync();
 
         public async Task<Country?> GetByName(string name)
             => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByCapitalCity @Name = {name}").FirstAsync();
 
-        public async Task<int> GetNumberOfCountries(IEnumerable<string> continents)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetNumberOfCountriesByContinents @Continents = {continents}").CountAsync();
+        public async Task<int> GetNumberOfCountries(string continents)
+        {
+            var countries = await _dbContext.Countries.FromSqlRaw($"Exec GetCountriesByContinents @Continents = '{continents}'").ToListAsync();
+            return countries.Count;
+        }
 
         public async Task<IEnumerable<Country>> GetRandomCountries(IEnumerable<string> continents, int numberOfQuestions)
             => await _dbContext.Countries.FromSqlRaw($"Exec GetRandomCountries @Continents = {continents} @NumberOfQuestion = {numberOfQuestions}").ToListAsync();
