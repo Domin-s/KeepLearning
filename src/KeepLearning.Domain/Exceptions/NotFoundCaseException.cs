@@ -1,10 +1,10 @@
 ﻿namespace RestaurantAPI.Exceptions
 {
-    public class AlreadyExists : Exception
+    public class NotFoundCaseException : Exception
     {
-        public AlreadyExists(string message) : base(message) 
+        public NotFoundCaseException(string message) : base(message)
         {
-        
+
         }
     }
 }
