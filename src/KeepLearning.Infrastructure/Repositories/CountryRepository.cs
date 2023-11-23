@@ -23,13 +23,13 @@ namespace KeepLearning.Infrastructure.Repositories
         public async Task<Country?> GetRandom(string continent)
             => await GetCountry($"Exec GetRandomCountry @Continent = \"{continent}\";");
 
-        public async Task<IEnumerable<Country>> GetAll()
+        public async Task<List<Country>> GetAll()
             => await GetCountries("Exec GetAllCountries;");
 
-        public async Task<IEnumerable<Country>> GetByContinents(string continents)
+        public async Task<List<Country>> GetByContinents(string continents)
             => await GetCountries($"Exec GetCountriesByContinents @Continents = \"{continents}\";");
 
-        public async Task<IEnumerable<Country>> GetRandomCountries(string continents, int numberOfCountries)
+        public async Task<List<Country>> GetRandomCountries(string continents, int numberOfCountries)
             => await GetCountries($"Exec GetRandomCountries @Continents = \"{continents}\", @NumberOfCountries = \"{numberOfCountries}\";");
 
         public async Task<int> GetNumberOfCountries(string continents)
@@ -46,7 +46,7 @@ namespace KeepLearning.Infrastructure.Repositories
             return result.First();
         }
 
-        private async Task<IEnumerable<Country>> GetCountries(string sqlScript)
+        private async Task<List<Country>> GetCountries(string sqlScript)
         {
             var result = await _dbContext.Countries.FromSqlRaw(sqlScript).ToListAsync();
 
