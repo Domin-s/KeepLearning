@@ -8,7 +8,7 @@ namespace KeepLearning.Domain.Enteties
         public string AnswerText { get; set; } = default!;
         public DateTime CreatedAt { get; set; }
         public DateTime ExpiredAt { get; set; }
-        public Guid TestId { get; set; }
-        public Test Test { get; set; }
+        public Guid? TestId { get; set; }
+        public Test? Test { get; set; }
     }
 }
