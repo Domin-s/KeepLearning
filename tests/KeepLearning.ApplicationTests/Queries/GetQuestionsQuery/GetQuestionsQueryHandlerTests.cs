@@ -45,14 +45,15 @@ namespace KeepLearning.Domain.Queries.CreateTestCountry.Tests
         public async void Handle_GetRandomQuestions_WhenNumberOfQuestionIsLowerThanCountriesFromContinent(CreateTestCountryCommand createTestCountryCommand)
         {
             // arrange
-            var continentsString = createTestCountryCommand.Continents.Select(c => Continent.MapContinentToString(c));
+            var continentsOneString = string.Join(",", createTestCountryCommand.Continents);
+            var listOfContinents = createTestCountryCommand.Continents.Select(c => Continent.MapContinentToString(c));
 
-            var listOfCountry = GetCountries(continentsString);
+            var listOfCountry = GetCountries(listOfContinents);
 
-            var countryServiceMock = new Mock<ICountryService>();
-            countryServiceMock.Setup(country => country.GetRandomCountries(createTestCountryCommand.Continents, createTestCountryCommand.NumberOfQuestion)).ReturnsAsync(listOfCountry);
+            var countryRepositoryMock = new Mock<ICountryRepository>();
+            countryRepositoryMock.Setup(cr => cr.GetRandomCountries(continentsOneString, createTestCountryCommand.NumberOfQuestion)).ReturnsAsync(listOfCountry);
 
-            var handler = new CreateTestCountryCommandHandler(countryServiceMock.Object);
+            var handler = new CreateTestCountryCommandHandler(countryRepositoryMock.Object);
 
             // act
             var result = await handler.Handle(createTestCountryCommand, CancellationToken.None);

@@ -2,28 +2,30 @@
 using KeepLearning.Domain.Models.Question;
 using KeepLearning.Domain.Interfaces;
 using MediatR;
+using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.Domain.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {
-        private readonly ICountryService _countryService;
+        private readonly ICountryRepository _countryRepository;
 
-        public GetRandomQuestionQueryHandler(ICountryService countryService)
+        public GetRandomQuestionQueryHandler(ICountryRepository countryRepository)
         {
-            _countryService = countryService;
+            _countryRepository = countryRepository;
         }
 
-        // TODO: Move getting random country to get random country in database ussing TSQL
         public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
         {
-            int numberOfQuestion = new Random().Next(0, 10);
+            var continent = Continent.MapContinentToString(request.Continent);
+            var randomCountry = await _countryRepository.GetRandomCountry(continent);
 
-            var continetByList = new List<Continent.Name>() { request.Continent };
+            if (randomCountry is null)
+            {
+                throw new NotFoundException("Not found country");
+            }
 
-            var randomCountry = await _countryService.GetRandomCountry(continetByList);
-
-            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.Category, numberOfQuestion);
+            return QuestionHelper.FromCountryAndGuessType(randomCountry, request.Category);
         }
     }
 }

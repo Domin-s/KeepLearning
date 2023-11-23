@@ -7,16 +7,17 @@ namespace KeepLearning.Domain.Commands.CreateTestCountry
 {
     public class CreateTestCountryCommandHandler : IRequestHandler<CreateTestCountryCommand, TestCountryDto>
     {
-        private readonly ICountryService _countryService;
+        private readonly ICountryRepository _countryRepository;
 
-        public CreateTestCountryCommandHandler(ICountryService countryService)
+        public CreateTestCountryCommandHandler(ICountryRepository countryRepository)
         {
-            _countryService = countryService;
+            _countryRepository = countryRepository;
         }
 
         public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
         {
-            var randomCountries = await _countryService.GetRandomCountries(request.Continents, request.NumberOfQuestion);
+            var continents = string.Join(",", request.Continents);
+            var randomCountries = await _countryRepository.GetRandomCountries(continents, request.NumberOfQuestion);
 
             var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.Category);
 

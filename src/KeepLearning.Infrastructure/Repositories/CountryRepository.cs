@@ -34,5 +34,8 @@ namespace KeepLearning.Infrastructure.Repositories
 
         public async Task<IEnumerable<Country>> GetRandomCountries(string continents, int numberOfCountries)
             => await _dbContext.Countries.FromSqlRaw($"Exec GetRandomCountries @Continents = '{continents}', @NumberOfCountries = {numberOfCountries};").ToListAsync();
+
+        public async Task<Country?> GetRandomCountry(string continent)
+            => await _dbContext.Countries.FromSqlRaw($"Exec GetRandomCountries @Continents = '{continent}', @NumberOfCountries = 1;").FirstAsync();
     }
 }
