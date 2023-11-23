@@ -1,6 +1,5 @@
 ﻿using KeepLearning.Domain.Interfaces;
 using MediatR;
-using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.Domain.Queries.CheckAnswer
 {
@@ -15,13 +14,7 @@ namespace KeepLearning.Domain.Queries.CheckAnswer
 
         public async Task<bool> Handle(CheckAnswerQuery request, CancellationToken cancellationToken)
         {
-            var country = await _countryService.GetCountry(request.Question, request.Category);
-            if (country == null)
-            {
-                throw new NotFoundException("Not found country");
-            }
-
-            var result = _countryService.IsCorrectAnswer(country, request.Answer, request.Category);
+            var result = await _countryService.IsCorrectAnswer(request.Question, request.Answer, request.Category);
 
             return result;
         }

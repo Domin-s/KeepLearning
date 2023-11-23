@@ -35,8 +35,12 @@ namespace KeepLearning.Infrastructure.Services
             }
         }
 
-        public bool IsCorrectAnswer(Country country, string answerText, GuessType.Category category)
+        public async Task<bool> IsCorrectAnswer(string questionText, string answerText, GuessType.Category category)
         {
+            var country = await GetCountry(questionText, category);
+            if (country == null)
+                throw new NotFoundException("Not found conutry");
+
             if (answerText is null)
                 return false;
 
