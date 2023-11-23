@@ -37,10 +37,10 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
             var continentString = Continent.MapContinentToString(query.Continent);
 
-            var countryServiceMock = new Mock<ICountryService>();
-            countryServiceMock.Setup(country => country.GetRandomCountry(continents)).ReturnsAsync(poland);
+            var countryRepositoryMock = new Mock<ICountryRepository>();
+            countryRepositoryMock.Setup(country => country.GetRandom(continentString)).ReturnsAsync(poland);
 
-            var handler = new GetRandomQuestionQueryHandler(countryServiceMock.Object);
+            var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object);
 
             // act
             var result = await handler.Handle(query, CancellationToken.None);

@@ -7,18 +7,19 @@ namespace KeepLearning.Domain.Queries.GetCountries
 {
     public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, Countries>
     {
-        private readonly ICountryService _countryService;
+        private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
 
-        public GetCountriesQueryHandler(ICountryService countryService, IMapper mapper)
+        public GetCountriesQueryHandler(ICountryRepository countryRepository, IMapper mapper)
         {
-            _countryService = countryService;
+            _countryRepository = countryRepository;
             _mapper = mapper;
         }
 
         public async Task<Countries> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
-            var countries = await _countryService.GetCountries(request.Continents);
+            var continents = string.Join(",", request.Continents);
+            var countries = await _countryRepository.GetByContinents(continents);
 
             var contriesDto = _mapper.Map<Countries>(countries);
 

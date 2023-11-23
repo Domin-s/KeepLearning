@@ -20,6 +20,7 @@ $(document).ready(function () {
     }
 
     function HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs) {
+        // TODO: remove console.log from this file
         console.log(numberOfQuestionDiv);
         if (CheckIfAnyContinentIsChecked(continentInputs)) {
             numberOfQuestionDiv.show();

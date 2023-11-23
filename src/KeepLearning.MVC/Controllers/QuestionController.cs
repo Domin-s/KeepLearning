@@ -1,8 +1,9 @@
-﻿using KeepLearning.Domain.Models.Test.Country;
+﻿using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
-using KeepLearning.Domain.Queries.CreateTestCountry;
 using KeepLearning.Domain.Queries.GetRandomQuestion;
+using KeepLearning.Domain.Queries.TestToDownload;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -65,9 +66,9 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(CreateTestCountryQuery query)
+        public async Task<IActionResult> CreateTest(CreateTestCountryCommand command)
         {
-            var test = await _mediator.Send(query);
+            var test = await _mediator.Send(command);
 
             var serializedTest = JsonConvert.SerializeObject(test);
             TempData[STDTestCountry] = serializedTest;
@@ -87,7 +88,7 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckTest([FromForm]CheckTestQuery query)
+        public async Task<IActionResult> CheckTest([FromForm] CheckTestQuery query)
         {
             var result = await _mediator.Send(query);
 
@@ -109,6 +110,14 @@ namespace KeepLearning.MVC.Controllers
             }
 
             return serializedString;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Download([FromForm] TestToDownloadQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
         }
     }
 }

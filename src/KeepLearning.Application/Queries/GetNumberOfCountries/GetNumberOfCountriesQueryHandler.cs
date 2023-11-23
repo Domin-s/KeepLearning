@@ -1,5 +1,4 @@
-﻿using KeepLearning.Domain.Models.Enums;
-using KeepLearning.Domain.Interfaces;
+﻿using KeepLearning.Domain.Interfaces;
 using MediatR;
 
 namespace KeepLearning.Domain.Queries.GetNumberOfCountries
@@ -15,9 +14,9 @@ namespace KeepLearning.Domain.Queries.GetNumberOfCountries
 
         public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
         {
-            var mappedContinent = request.Continents.Select(c => Continent.MapContinentToString(c));
+            var continents = string.Join(",", request.Continents);
 
-            var numberOfCountries = await _countryRepository.GetNumberOfCountries(mappedContinent);
+            var numberOfCountries = await _countryRepository.GetNumberOfCountries(continents);
 
             return numberOfCountries;
         }

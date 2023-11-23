@@ -4,7 +4,7 @@ namespace KeepLearning.Domain.Models.Question
 {
     public static class QuestionHelper
     {
-        public static QuestionDto FromCountryAndGuessType(Domain.Enteties.Country country, GuessType.Category guessType, int numberOfQuestion)
+        public static QuestionDto FromCountryAndGuessType(Domain.Enteties.Country country, GuessType.Category guessType, int numberOfQuestion = 1)
         {
             switch (guessType)
             {

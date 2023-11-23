@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // TODO: Add ";" to line with answers
     class CheckTestQuery {
         constructor(category, answers) {
             this.Category = category;
