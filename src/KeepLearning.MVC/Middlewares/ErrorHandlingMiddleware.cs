@@ -37,7 +37,7 @@ namespace KeepLearning.MVC.Middlewares
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundException.Message);
             }
-            catch (AlreadyExists alreadyExist)
+            catch (AlreadyExistsException alreadyExist)
             {
                 context.Response.StatusCode = 409;
                 await context.Response.WriteAsync(alreadyExist.Message);
