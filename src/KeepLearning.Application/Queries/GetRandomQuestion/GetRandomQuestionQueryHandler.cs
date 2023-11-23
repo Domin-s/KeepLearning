@@ -18,7 +18,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
         public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
         {
             var continent = Continent.MapContinentToString(request.Continent);
-            var randomCountry = await _countryRepository.GetRandomCountry(continent);
+            var randomCountry = await _countryRepository.GetRandom(continent);
 
             if (randomCountry is null)
             {

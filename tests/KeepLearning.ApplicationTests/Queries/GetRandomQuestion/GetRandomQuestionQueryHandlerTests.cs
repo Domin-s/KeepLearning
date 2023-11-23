@@ -38,7 +38,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             var continentString = Continent.MapContinentToString(query.Continent);
 
             var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetRandomCountry(continentString)).ReturnsAsync(poland);
+            countryRepositoryMock.Setup(country => country.GetRandom(continentString)).ReturnsAsync(poland);
 
             var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object);
 

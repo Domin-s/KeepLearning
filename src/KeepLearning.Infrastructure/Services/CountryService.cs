@@ -15,21 +15,6 @@ namespace KeepLearning.Infrastructure.Services
             _countryRepository = countryRepository;
         }
 
-        public async Task<Country?> GetCountry(string questionText, GuessType.Category category)
-        {
-            switch (category)
-            {
-                case Category.CapitalCity:
-                    return await _countryRepository.GetByName(questionText);
-
-                case Category.Country:
-                    return await _countryRepository.GetByCapitalCity(questionText);
-
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
         public async Task<string> GetCorrectAnswer(string questionText, GuessType.Category category)
         {
             var country = await GetCountry(questionText, category);
@@ -64,6 +49,21 @@ namespace KeepLearning.Infrastructure.Services
                     return country.CapitalCity.ToLower().Equals(answerText.ToLower());
 
                 default: return false;
+            }
+        }
+
+        private async Task<Country?> GetCountry(string questionText, GuessType.Category category)
+        {
+            switch (category)
+            {
+                case Category.CapitalCity:
+                    return await _countryRepository.GetByName(questionText);
+
+                case Category.Country:
+                    return await _countryRepository.GetByCapitalCity(questionText);
+
+                default:
+                    throw new NotImplementedException();
             }
         }
     }

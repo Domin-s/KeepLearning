@@ -14,28 +14,43 @@ namespace KeepLearning.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Country>> GetAll()
-            => await _dbContext.Countries.FromSqlRaw("Exec GetAllCountries;").ToListAsync();
-
         public async Task<Country?> GetByCapitalCity(string capitalCity)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByCapitalCity @CapitalCity = {capitalCity};").FirstAsync();
-
-        public async Task<List<Country>> GetByContinents(string continents)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetCountriesByContinents @Continents = '{continents}';").ToListAsync();
+            => await GetCountry($"Exec GetCountryByCapitalCity @CapitalCity = \"{capitalCity}\";");
 
         public async Task<Country?> GetByName(string name)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetCountryByName @Name = {name};").FirstAsync();
+            => await GetCountry($"Exec GetCountryByName @Name = \"{name}\";");
+
+        public async Task<Country?> GetRandom(string continent)
+            => await GetCountry($"Exec GetRandomCountry @Continent = \"{continent}\";");
+
+        public async Task<IEnumerable<Country>> GetAll()
+            => await GetCountries("Exec GetAllCountries;");
+
+        public async Task<IEnumerable<Country>> GetByContinents(string continents)
+            => await GetCountries($"Exec GetCountriesByContinents @Continents = \"{continents}\";");
+
+        public async Task<IEnumerable<Country>> GetRandomCountries(string continents, int numberOfCountries)
+            => await GetCountries($"Exec GetRandomCountries @Continents = \"{continents}\", @NumberOfCountries = \"{numberOfCountries}\";");
 
         public async Task<int> GetNumberOfCountries(string continents)
         {
-            var countries = await _dbContext.Countries.FromSqlRaw($"Exec GetCountriesByContinents @Continents = '{continents}';").ToListAsync();
-            return countries.Count;
+            var countries = await GetCountries($"Exec GetCountriesByContinents @Continents = \"{continents}\";");
+
+            return countries.Count();
         }
 
-        public async Task<IEnumerable<Country>> GetRandomCountries(string continents, int numberOfCountries)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetRandomCountries @Continents = '{continents}', @NumberOfCountries = {numberOfCountries};").ToListAsync();
+        private async Task<Country?> GetCountry(string sqlScript)
+        {
+            var result = await _dbContext.Countries.FromSqlRaw(sqlScript).ToListAsync();
 
-        public async Task<Country?> GetRandomCountry(string continent)
-            => await _dbContext.Countries.FromSqlRaw($"Exec GetRandomCountries @Continents = '{continent}', @NumberOfCountries = 1;").FirstAsync();
+            return result.First();
+        }
+
+        private async Task<IEnumerable<Country>> GetCountries(string sqlScript)
+        {
+            var result = await _dbContext.Countries.FromSqlRaw(sqlScript).ToListAsync();
+
+            return result;
+        }
     }
 }
