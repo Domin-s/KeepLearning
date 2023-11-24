@@ -3,9 +3,10 @@
     public class Country
     {
         public Guid Id { get; set; }
-        public string Name { get; set; } = default!;
-        public string Abbreviation { get; set; } = default!;
-        public string CapitalCity { get; set; } = default!;
-        public string Continent { get; set; } = default!;
+        public required string Name { get; set; }
+        public required string Abbreviation { get; set; }
+        public required string CapitalCity { get; set; }
+        public required Guid ContinentId { get; set; }
+        public required Continent Continent { get; set; }
     }
 }
