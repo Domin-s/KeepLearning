@@ -22,6 +22,21 @@ namespace KeepLearning.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("KeepLearning.Domain.Enteties.Continent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Continents");
+                });
+
             modelBuilder.Entity("KeepLearning.Domain.Enteties.Country", b =>
                 {
                     b.Property<Guid>("Id")
@@ -36,15 +51,16 @@ namespace KeepLearning.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Continent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ContinentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ContinentId");
 
                     b.ToTable("Countries");
                 });
@@ -54,6 +70,10 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AnswerText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -68,7 +88,7 @@ namespace KeepLearning.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TestId")
+                    b.Property<Guid?>("TestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -92,9 +112,6 @@ namespace KeepLearning.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfQuestions")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -303,13 +320,22 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("KeepLearning.Domain.Enteties.Country", b =>
+                {
+                    b.HasOne("KeepLearning.Domain.Enteties.Continent", "Continent")
+                        .WithMany()
+                        .HasForeignKey("ContinentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Continent");
+                });
+
             modelBuilder.Entity("KeepLearning.Domain.Enteties.Question", b =>
                 {
                     b.HasOne("KeepLearning.Domain.Enteties.Test", "Test")
                         .WithMany("Questions")
-                        .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TestId");
 
                     b.Navigation("Test");
                 });

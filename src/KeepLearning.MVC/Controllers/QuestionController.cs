@@ -2,6 +2,7 @@
 using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
+using KeepLearning.Domain.Queries.GetAllContinents;
 using KeepLearning.Domain.Queries.GetRandomQuestion;
 using KeepLearning.Domain.Queries.TestToDownload;
 using KeepLearning.MVC.Models;
@@ -24,9 +25,10 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var questionDataViewModel = new QuestionDataViewModel();
+            var continents = await _mediator.Send(new GetAllContinentsQuery());
+            var questionDataViewModel = new QuestionDataViewModel(continents);
 
             return View(questionDataViewModel);
         }
@@ -58,9 +60,10 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateTest()
+        public async Task<IActionResult> CreateTest()
         {
-            var questionDataViewModel = new QuestionDataViewModel();
+            var continents = await _mediator.Send(new GetAllContinentsQuery());
+            var questionDataViewModel = new QuestionDataViewModel(continents);
 
             return View(questionDataViewModel);
         }

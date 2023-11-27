@@ -1,4 +1,5 @@
-﻿using KeepLearning.Domain.Models.Enums;
+﻿using KeepLearning.Domain.Models.Continent;
+using KeepLearning.Domain.Models.Enums;
 
 namespace KeepLearning.MVC.Models
 {
@@ -7,9 +8,9 @@ namespace KeepLearning.MVC.Models
         public IEnumerable<string> Continents;
         public IEnumerable<string> Category;
 
-        public QuestionDataViewModel(IEnumerable<string> continents)
+        public QuestionDataViewModel(IEnumerable<ContinentDto> continents)
         {
-            Continents = continents;
+            Continents = continents.Select(c => c.Name);
             Category = GuessType.GetAllLikeStrings();
         }
     }
