@@ -1,7 +1,7 @@
 using KeepLearning.Domain.Models.Continent;
-using KeepLearning.Domain.Models.Enums;
 using KeepLearning.Domain.Models.Question;
 using KeepLearning.Domain.Models.Test.Country;
+using static KeepLearning.Domain.Models.Enums.GuessType;
 
 namespace KeepLearning.Domain.Models.Test
 {
@@ -19,7 +19,7 @@ namespace KeepLearning.Domain.Models.Test
             return testDto;
         }
 
-        public static TestCountryDto CreateTestCountry(string? name, List<QuestionDto> questions, GuessType.Category category, List<ContinentDto> continents)
+        public static TestCountryDto CreateTestCountry(string? name, List<QuestionDto> questions, Category category, List<ContinentDto> continents)
         {
             var testDto = new TestCountryDto()
             {
