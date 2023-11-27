@@ -14,13 +14,13 @@ namespace KeepLearning.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        // public async Task<Test> Save(Test test)
-        //     => await _dbContext.Tests.FromSqlRaw($"Exec SaveTest {test}").FirstAsync();
+        public async Task<Test> Save(Test test)
+            => await _dbContext.Tests.FromSqlRaw($"Exec SaveTest {test}").FirstAsync();
 
-        // public async Task<Test> GetById(Guid testId)
-        //     => await _dbContext.Tests.FromSqlRaw($"Exec GetTestById @Id = {testId}").FirstAsync();
+        public async Task<Test> GetById(Guid testId)
+            => await _dbContext.Tests.FromSqlRaw($"Exec GetTestById @Id = {testId}").FirstAsync();
 
-        // public async Task<int> RemoveById(Guid testId)
-        //     => await _dbContext.Tests.FromSqlRaw($"Exec RemoveTestById @Id = {testId}").ExecuteDeleteAsync();
+        public async Task<int> RemoveById(Guid testId)
+            => await _dbContext.Tests.FromSqlRaw($"Exec RemoveTestById @Id = {testId}").ExecuteDeleteAsync();
     }
 }
