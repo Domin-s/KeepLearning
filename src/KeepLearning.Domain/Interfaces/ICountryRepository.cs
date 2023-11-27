@@ -11,5 +11,6 @@ namespace KeepLearning.Domain.Interfaces
         Task<IEnumerable<Country>> GetByContinents(string continents);
         Task<IEnumerable<Country>> GetRandomCountries(string continents, int numberOfQuestions);
         Task<int> GetNumberOfCountries(string continents);
+        Task<bool> Save(string name, string abbreviation, string capitalCity, string continent);
     }
 }

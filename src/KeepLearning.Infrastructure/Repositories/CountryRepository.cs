@@ -52,5 +52,17 @@ namespace KeepLearning.Infrastructure.Repositories
 
             return result;
         }
+
+        public async Task<bool> Save(string name, string abbreviation, string capitalCity, string continent)
+        {
+            var sqlScript = "Exec GetCountriesByContinents" +
+                                $"@Id = \"{Guid.NewGuid}\", " +
+                                $"@Name = \"{name}\", " +
+                                $"@Abbreviation = \"{abbreviation}\", " +
+                                $"@CapitalCity = \"{capitalCity}\", " +
+                                $"@Continent = \"{continent}\";";
+
+            return await _dbContext.Countries.FromSqlRaw(sqlScript).AnyAsync();
+        }
     }
 }

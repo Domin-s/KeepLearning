@@ -23,6 +23,9 @@ namespace KeepLearning.Infrastructure.Repositories
         public async Task<Continent?> GetByName(string name)
             => await GetContient($"Exec GetContinentByName @Id = \"{name}\";");
 
+        public async Task<bool> Save(string name)
+            => await _dbContext.Continents.FromSqlRaw($"Exec SaveContinent @Id = {Guid.NewGuid}, @Name = {name}").AnyAsync();
+
         private async Task<Continent?> GetContient(string sqlScript)
         {
             var result = await _dbContext.Continents.FromSqlRaw(sqlScript).ToListAsync<Continent>();

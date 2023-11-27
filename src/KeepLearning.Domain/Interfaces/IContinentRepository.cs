@@ -7,5 +7,6 @@ namespace KeepLearning.Domain.Interfaces
         Task<Continent?> GetById(Guid id);
         Task<Continent?> GetByName(string name);
         Task<IEnumerable<Continent>> GetAll();
+        Task<bool> Save(string name);
     }
 }
