@@ -60,6 +60,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             var polandDto = new CountryDto()
             {
                 Name = "Poland",
+                Abbreviation = "POL",
                 CapitalCity = "Warsaw",
                 Continent = new ContinentDto(continent.Name)
             };

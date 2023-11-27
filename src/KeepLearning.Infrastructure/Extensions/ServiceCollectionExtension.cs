@@ -26,10 +26,12 @@ namespace KeepLearning.Infrastructure.Extensions
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<KeepLearningDbContext>();
 
-            services.AddScoped<CountrySeeder>();
-
+            services.AddScoped<IContinentRepository, ContinentRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ICountryService, CountryService>();
+
+            services.AddScoped<ContinentSeeder>();
+            services.AddScoped<CountrySeeder>();
         }
     }
 }
