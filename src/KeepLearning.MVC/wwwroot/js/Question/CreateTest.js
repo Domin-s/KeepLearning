@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    class GetNumberOfCountriesQuery {
+        constructor(continents) {
+            this.Continents = continents
+        }
+    }
+
+    class Continents {
+        constructor(name) {
+            this.Name = name;
+        }
+    }
+
     const NumberOfQuestions = [5, 10, 20, 25, 50];
 
     var createTest = $("#createTest");
@@ -37,18 +49,10 @@ $(document).ready(function () {
     }
 
     function GetMaxNumberOfQuestion(continentInputs) {
-        var dataToSend = CreatePathParamsWithContinents(continentInputs);
+        var dataToSend = CreateDataToSend(continentInputs);
 
-        $.ajax({
-            url: `/Country/GetNumberOfCountries`,
-            type: 'get',
-            data: dataToSend,
-            success: function (maxNumberOfQuestions) {
-                ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions);
-            },
-            error: function (data) {
-                toastr["error"]("Something went wrong")
-            }
+        $.post(`/Country/GetNumberOfCountries`, dataToSend, (maxNumberOfQuestions, status) => {
+            ConfigureSelectForNumberOfQuestions(maxNumberOfQuestions);
         });
     }
 
@@ -75,28 +79,30 @@ $(document).ready(function () {
         numberOfQuestionSelect.append("<option value=" + value + ">" + value + "</option>");
     }
 
-    function CreatePathParamsWithContinents(continentInputs) {
-        var continentsAsString = "";
+    function CreateDataToSend(continentInputs) {
+        var continents = CreateContientsToSend(continentInputs);
+
+        return new GetNumberOfCountriesQuery(continents);
+    }
+
+    function CreateContientsToSend() {
+        var continents = [];
 
         for (let i = 0; i < continentInputs.length; i++) {
             if (continentInputs.get(i).checked) {
-                if (continentsAsString == "") {
-                    continentsAsString += "Continents=" + SetProperNameForContinent(continentInputs.get(i).value);
-                } else {
-                    continentsAsString += "&Continents=" + SetProperNameForContinent(continentInputs.get(i).value);
-                }
+                var element = CreateOneContinentToSend(continentInputs[i]);
+
+                continents.push(element);
             }
         }
 
-        return continentsAsString;
+        return continents;
     }
 
-    function SetProperNameForContinent(continent) {
-        switch (continent) {
-            case "N. America": return "NorthAmerica";
-            case "S. America": return "SouthAmerica";
-            default: return continent;
-        }
+    function CreateOneContinentToSend(question) {
+        var name = question.value;
+
+        return new Continents(name);
     }
 
     function CheckIfAnyContinentIsChecked(continents) {

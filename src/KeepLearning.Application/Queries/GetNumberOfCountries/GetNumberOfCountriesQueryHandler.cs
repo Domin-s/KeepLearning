@@ -1,4 +1,5 @@
-﻿using KeepLearning.Domain.Interfaces;
+﻿using KeepLearning.Domain.Exceptions;
+using KeepLearning.Domain.Interfaces;
 using MediatR;
 
 namespace KeepLearning.Domain.Queries.GetNumberOfCountries

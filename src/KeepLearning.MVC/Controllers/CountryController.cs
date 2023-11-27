@@ -22,7 +22,7 @@ namespace KeepLearning.MVC.Controllers
             return View(countries);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetNumberOfCountries(GetNumberOfCountriesQuery query)
         {
             var numberOfCountries = await _mediator.Send(query);
