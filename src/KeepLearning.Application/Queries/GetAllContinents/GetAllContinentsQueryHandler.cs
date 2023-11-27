@@ -7,10 +7,10 @@ namespace KeepLearning.Domain.Queries.GetAllContinents
 {
     public class GetAllContinentsQueryHandler : IRequestHandler<GetAllContinentsQuery, IEnumerable<ContinentDto>>
     {
-        private readonly ICountryRepository _continentRepository;
+        private readonly IContinentRepository _continentRepository;
         private readonly IMapper _mapper;
 
-        public GetAllContinentsQueryHandler(ICountryRepository continentRepository, IMapper mapper)
+        public GetAllContinentsQueryHandler(IContinentRepository continentRepository, IMapper mapper)
         {
             _continentRepository = continentRepository;
             _mapper = mapper;
