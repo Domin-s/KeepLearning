@@ -7,9 +7,9 @@ namespace KeepLearning.MVC.Models
         public IEnumerable<string> Continents;
         public IEnumerable<string> Category;
 
-        public QuestionDataViewModel()
+        public QuestionDataViewModel(IEnumerable<string> continents)
         {
-            Continents = Continent.GetAllLikeStrings();
+            Continents = continents;
             Category = GuessType.GetAllLikeStrings();
         }
     }

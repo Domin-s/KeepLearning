@@ -41,12 +41,23 @@ namespace KeepLearning.Infrastructure.Seeders
                 countries = File.ReadAllLines("../KeepLearning.Infrastructure/Seeders/FilesWithData/WorldCountriesList.csv")
                     .Skip(1)
                     .Select(c => c.Split(','))
-                    .Select(d => new Country()
+                    .Select(d =>
                     {
-                        Name = d[0],
-                        Abbreviation = d[1],
-                        CapitalCity = d[2],
-                        Continent = d[3]
+                        var continent = new Continent()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = d[3]
+                        };
+
+                        return new Country()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = d[0],
+                            Abbreviation = d[1],
+                            CapitalCity = d[2],
+                            ContinentId = continent.Id,
+                            Continent = continent
+                        };
                     });
 
             }

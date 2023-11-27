@@ -1,10 +1,11 @@
-﻿using KeepLearning.Domain.Models.Enums;
+﻿using KeepLearning.Domain.Models.Continent;
+using static KeepLearning.Domain.Models.Enums.GuessType;
 
 namespace KeepLearning.Domain.Models.Test.Country
 {
     public class TestCountryDto : TestDto
     {
-        public GuessType.Category Category { get; set; } = default!;
-        public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
+        public required Category Category { get; set; }
+        public IEnumerable<ContinentDto> Continents { get; set; } = new List<ContinentDto>();
     }
 }

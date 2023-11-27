@@ -6,6 +6,7 @@ namespace KeepLearning.Domain.Interfaces
     {
         public Task<Test> GetById(Guid testId);
         public Task<int> RemoveById(Guid testId);
-        public Task<Guid> Save(Test test);
+        // TODO: Change result for id
+        public Task<Test> Save(Test test);
     }
 }

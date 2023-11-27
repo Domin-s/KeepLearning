@@ -20,7 +20,7 @@
                         </div>
                     }
 
-                    <div class="col-10">Number of questions: <span class="fw-bold">@Model.NumberOfQuestion</span></div>
+                    <div class="col-10">Number of questions: <span class="fw-bold">@Model.Questions.Count()</span></div>
 
                     <div class="col-10">Guess type:
                         @if (@Model.Category.ToString() == "Country")
@@ -38,7 +38,7 @@
                         <ul>
                             @foreach (var continent in Model.Continents)
                             {
-                                <li class="fw-bold">@continent</li>
+                                <li class="fw-bold">@continent.Name</li>
                             }
                         </ul>
                     </div>
@@ -54,7 +54,7 @@
                         <form method="post" action="CreateTest">
                             <div hidden>
                                 <input id="Name" name="Name" value="@Model.Name" />
-                                <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.NumberOfQuestion" />
+                                <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.Questions.Count()" />
                                 <input id="GuessType" name="Category" value="@Model.Category" />
                                 @foreach (var continent in Model.Continents)
                                 {
@@ -103,20 +103,20 @@
         <tbody>
             @foreach (var item in Model.Questions)
             {
-                <tr class="Question_@item.NumberQuestion Question">
+                <tr class="Question_@item.QuestionNumber Question">
                     <td>
-                        <div>@item.NumberQuestion</div>
-                        <input type="text" class="form-control" name="NumberQuestion[@item.NumberQuestion]"
-                            id="NumberQuestion_@item.NumberQuestion" value="@item.NumberQuestion" hidden>
+                        <div>@item.QuestionNumber</div>
+                        <input type="text" class="form-control" name="NumberQuestion[@item.QuestionNumber]"
+                            id="NumberQuestion_@item.QuestionNumber" value="@item.QuestionNumber" hidden>
                     </td>
                     <td>
                         <div>@item.QuestionText</div>
-                        <input type="text" class="form-control" name="QuestionText[@item.NumberQuestion]"
-                            id="QuestionText_@item.NumberQuestion" value="@item.QuestionText" hidden>
+                        <input type="text" class="form-control" name="QuestionText[@item.QuestionNumber]"
+                            id="QuestionText_@item.QuestionNumber" value="@item.QuestionText" hidden>
                     </td>
                     <td>
-                        <input type="text" class="form-control Answer" name="Answer[@item.NumberQuestion]"
-                            id="Answer_@item.NumberQuestion" placeholder="Type answer">
+                        <input type="text" class="form-control Answer" name="Answer[@item.QuestionNumber]"
+                            id="Answer_@item.QuestionNumber" placeholder="Type answer">
                     </td>
                 </tr>
             }

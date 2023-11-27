@@ -1,11 +1,11 @@
-﻿using KeepLearning.Domain.Models;
-using KeepLearning.Domain.Models.Enums;
+﻿using KeepLearning.Domain.Enteties;
+using KeepLearning.Domain.Models;
 using MediatR;
 
 namespace KeepLearning.Domain.Queries.GetCountries
 {
     public class GetCountriesQuery : IRequest<Countries>
     {
-        public IEnumerable<Continent.Name> Continents { get; set; } = new List<Continent.Name>();
+        public IEnumerable<Continent> Continents { get; set; } = new List<Continent>();
     }
 }
