@@ -1,7 +1,7 @@
 ﻿using KeepLearning.Domain.Enteties;
+using KeepLearning.Domain.Exceptions;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Domain.Models.Enums;
-using RestaurantAPI.Exceptions;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
 namespace KeepLearning.Infrastructure.Services

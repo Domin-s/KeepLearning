@@ -7,6 +7,6 @@
         public required string Abbreviation { get; set; }
         public required string CapitalCity { get; set; }
         public required Guid ContinentId { get; set; }
-        public Continent Continent { get; set; }
+        public Continent? Continent { get; set; }
     }
 }

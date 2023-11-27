@@ -1,4 +1,4 @@
-﻿using RestaurantAPI.Exceptions;
+﻿using KeepLearning.Domain.Exceptions;
 
 namespace KeepLearning.MVC.Middlewares
 {

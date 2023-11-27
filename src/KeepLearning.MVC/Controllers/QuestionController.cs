@@ -1,4 +1,5 @@
 ﻿using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Exceptions;
 using KeepLearning.Domain.Models.Test.Country;
 using KeepLearning.Domain.Queries.CheckAnswer;
 using KeepLearning.Domain.Queries.CheckTest;
@@ -9,7 +10,6 @@ using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.MVC.Controllers
 {

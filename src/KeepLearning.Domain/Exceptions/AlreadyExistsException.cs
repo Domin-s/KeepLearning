@@ -1,4 +1,4 @@
-﻿namespace RestaurantAPI.Exceptions
+﻿namespace KeepLearning.Domain.Exceptions
 {
     public class AlreadyExistsException : Exception
     {

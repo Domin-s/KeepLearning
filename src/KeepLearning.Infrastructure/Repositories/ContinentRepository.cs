@@ -22,5 +22,8 @@ namespace KeepLearning.Infrastructure.Repositories
 
         public async Task<Continent?> GetByName(string name)
             => await _dbContext.Continents.Where(c => c.Name == name).FirstAsync();
+
+        public async Task<IEnumerable<Continent>> GetByNames(IEnumerable<string> names)
+            => await _dbContext.Continents.Where(c => names.Contains(c.Name)).ToListAsync();
     }
 }

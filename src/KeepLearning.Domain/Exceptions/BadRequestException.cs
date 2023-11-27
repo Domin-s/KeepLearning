@@ -1,10 +1,10 @@
-﻿namespace RestaurantAPI.Exceptions
+﻿namespace KeepLearning.Domain.Exceptions
 {
     public class BadRequestException : Exception
     {
         public BadRequestException(string message) : base(message)
         {
-            
+
         }
     }
 }

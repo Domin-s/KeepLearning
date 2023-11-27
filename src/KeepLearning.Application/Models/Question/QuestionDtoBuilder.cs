@@ -1,8 +1,8 @@
 using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Exceptions;
 using KeepLearning.Domain.Models.Country;
 using KeepLearning.Domain.Models.Enums;
 using KeepLearning.Domain.Models.Question;
-using RestaurantAPI.Exceptions;
 
 namespace KeepLearning.Domain.Models
 {

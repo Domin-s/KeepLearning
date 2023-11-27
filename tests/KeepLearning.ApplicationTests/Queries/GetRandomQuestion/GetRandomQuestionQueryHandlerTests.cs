@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Models;
 using KeepLearning.Domain.Models.Continent;
 using KeepLearning.Domain.Models.Country;
 using KeepLearning.Domain.Models.Enums;
@@ -19,17 +18,11 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             var list = new List<GetRandomQuestionQuery>(){
                 new GetRandomQuestionQuery() {
                     Category=GuessType.Category.Country,
-                    Continent= new Continent(){
-                        Id = Guid.NewGuid(),
-                        Name = "Europe"
-                    }
+                    Continent= new ContinentDto("Europe"){}
                 },
                 new GetRandomQuestionQuery() {
                     Category=GuessType.Category.CapitalCity,
-                    Continent= new Continent(){
-                        Id = Guid.NewGuid(),
-                        Name = "Europe"
-                    }
+                    Continent= new ContinentDto("Europe"){}
                 },
             };
 
@@ -37,17 +30,20 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
         }
 
-        // [InlineData(GuessType.Category.Country, Continent, "Warsaw")]
-        // [InlineData(GuessType.Category.CapitalCity, Continent, "Poland")]
-
         [Theory]
         [MemberData(nameof(GetRandomQuestionData))]
         public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GetRandomQuestionQuery getRandomQuestionQuery)
         {
             // arrange
-            var continent = getRandomQuestionQuery.Continent;
+            var continent = new Continent()
+            {
+                Id = Guid.NewGuid(),
+                Name = getRandomQuestionQuery.Continent.Name
+            };
 
-            var poland = new Country()
+            var continentDto = getRandomQuestionQuery.Continent;
+
+            var country = new Country()
             {
                 Id = Guid.NewGuid(),
                 Name = "Poland",
@@ -57,23 +53,26 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
                 Continent = continent
             };
 
-            var polandDto = new CountryDto()
+            var countryDto = new CountryDto()
             {
                 Name = "Poland",
                 Abbreviation = "POL",
                 CapitalCity = "Warsaw",
-                Continent = new ContinentDto(continent.Name)
+                Continent = new ContinentDto(continentDto.Name)
             };
 
+            var continentRepositoryMock = new Mock<IContinentRepository>();
+            continentRepositoryMock.Setup(country => country.GetByName(continent.Name)).ReturnsAsync(continent);
+
             var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetRandom(getRandomQuestionQuery.Continent.Name)).ReturnsAsync(poland);
+            countryRepositoryMock.Setup(country => country.GetRandom(continent)).ReturnsAsync(country);
 
             var mapper = new Mock<IMapper>();
-            mapper.Setup(m => m.Map<CountryDto>(poland)).Returns(polandDto);
+            mapper.Setup(m => m.Map<CountryDto>(country)).Returns(countryDto);
 
-            var handler = new GetRandomQuestionQueryHandler(countryRepositoryMock.Object, mapper.Object);
+            var handler = new GetRandomQuestionQueryHandler(continentRepositoryMock.Object, countryRepositoryMock.Object, mapper.Object);
 
-            var expectedResult = getRandomQuestionQuery.Category.Equals(GuessType.Category.Country) ? polandDto.Name : polandDto.CapitalCity;
+            var expectedResult = getRandomQuestionQuery.Category.Equals(GuessType.Category.Country) ? countryDto.Name : countryDto.CapitalCity;
 
             // act
             var result = await handler.Handle(getRandomQuestionQuery, CancellationToken.None);
