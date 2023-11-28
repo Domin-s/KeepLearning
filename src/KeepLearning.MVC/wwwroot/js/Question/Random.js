@@ -32,7 +32,6 @@ $(document).ready(function () {
             data: dataToSend,
             success: function (data) {
                 question.text(data.questionText);
-                answer.val(data.answerText);
             },
             error: function (data) {
                 toastr["error"]("Something went wrong")
@@ -50,7 +49,6 @@ $(document).ready(function () {
             data: dataToSend,
             success: function (data) {
                 AddAnswerToHistory(question.text(), answer.val(), data);
-                RefreshDataOnWebsite();
             },
             error: function (data) {
                 toastr["error"]("Something went wrong")
@@ -66,11 +64,15 @@ $(document).ready(function () {
 
             var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'green', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
+
+            RefreshDataOnWebsite();
+            answer.val("");
         } else {
             toastr["error"]("Wrong answer. Write another or click in another random question.");
 
             var nextLi = $("<li></li>").text(question + " => " + userAnswer).css({ 'color': 'red', 'font-weight': 'bold' });
             answerHistory.append(nextLi);
+            answer.val("");
         }
     };
 });
