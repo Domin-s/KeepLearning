@@ -1,4 +1,6 @@
-﻿namespace KeepLearning.ApplicationTests.Helper.Country
+﻿using KeepLearning.Domain.Enteties;
+
+namespace KeepLearning.ApplicationTests.Helper.Country
 {
     public static class CountryData
     {
@@ -12,12 +14,24 @@
                 countries = File.ReadAllLines("../../../../KeepLearning.ApplicationTests/Helper/Files/WorldCountriesList.csv")
                     .Skip(1)
                     .Select(c => c.Split(','))
-                    .Select(d => new Domain.Enteties.Country()
+                    .Select(d =>
                     {
-                        Name = d[0],
-                        Abbreviation = d[1],
-                        CapitalCity = d[2],
-                        Continent = d[3]
+                        var continent = new Continent()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = d[3]
+                        };
+
+
+                        return new Domain.Enteties.Country()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = d[0],
+                            Abbreviation = d[1],
+                            CapitalCity = d[2],
+                            ContinentId = continent.Id,
+                            Continent = continent
+                        };
                     });
 
             }

@@ -1,29 +1,50 @@
-﻿using KeepLearning.Domain.Models.Question;
-using KeepLearning.Domain.Models.Test.Country;
+﻿using AutoMapper;
 using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Models;
+using KeepLearning.Domain.Models.Country;
+using KeepLearning.Domain.Models.Test.Country;
 using MediatR;
+using KeepLearning.Domain.Models.Test;
+using KeepLearning.Domain.Models.Continent;
+using KeepLearning.Domain.Exceptions;
 
 namespace KeepLearning.Domain.Commands.CreateTestCountry
 {
     public class CreateTestCountryCommandHandler : IRequestHandler<CreateTestCountryCommand, TestCountryDto>
     {
+        private readonly IContinentRepository _continentRepository;
         private readonly ICountryRepository _countryRepository;
+        private readonly IMapper _mapper;
 
-        public CreateTestCountryCommandHandler(ICountryRepository countryRepository)
+        public CreateTestCountryCommandHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
         {
+            _continentRepository = continentRepository;
             _countryRepository = countryRepository;
+            _mapper = mapper;
         }
 
         public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
         {
-            var continents = string.Join(",", request.Continents);
-            var randomCountries = await _countryRepository.GetRandomCountries(continents, request.NumberOfQuestion);
+            var continents = await _continentRepository.GetByNames(request.Continents);
+            if (!continents.Any())
+            {
+                throw new NotFoundException("Not found any continents");
+            }
 
-            var questions = QuestionHelper.FromCountriesAndGuessType(randomCountries, request.Category);
+            var continentIds = continents.Select(c => c.Id);
+            var randomCountries = await _countryRepository.GetRandomCountries(continentIds, request.NumberOfQuestion);
+            if (!randomCountries.Any())
+            {
+                throw new NotFoundException("Not found any country for these continents");
+            }
 
-            var test = new TestCountryDto(request, questions);
+            var countriesDto = randomCountries.Select(c => _mapper.Map<CountryDto>(c)).ToList();
+            var continentsDto = request.Continents.Select(c => _mapper.Map<ContinentDto>(c)).ToList();
 
-            return test;
+            var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
+            var testDto = TestDtoBuilder.CreateTestCountry(request.Name, questionsDto, request.Category, continentsDto);
+
+            return testDto;
         }
     }
 }

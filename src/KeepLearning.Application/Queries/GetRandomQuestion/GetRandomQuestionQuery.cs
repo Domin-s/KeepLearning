@@ -7,6 +7,6 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
     public class GetRandomQuestionQuery : IRequest<QuestionDto>
     {
         public GuessType.Category Category { get; set; }
-        public Continent.Name Continent { get; set; }
+        public required string Continent { get; set; }
     }
 }

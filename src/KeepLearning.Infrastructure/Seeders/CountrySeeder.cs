@@ -1,5 +1,9 @@
-﻿using KeepLearning.Domain.Enteties;
+﻿using AutoMapper;
+using KeepLearning.Domain.Enteties;
+using KeepLearning.Domain.Models.Continent;
+using KeepLearning.Domain.Models.Country;
 using KeepLearning.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace KeepLearning.Infrastructure.Seeders
 {
@@ -14,6 +18,8 @@ namespace KeepLearning.Infrastructure.Seeders
 
         public async Task Seed()
         {
+            var continents = await _dbContext.Continents.ToListAsync();
+
             if (await _dbContext.Database.CanConnectAsync())
             {
                 if (!_dbContext.Countries.Any())
@@ -22,31 +28,46 @@ namespace KeepLearning.Infrastructure.Seeders
 
                     if (countries != null)
                     {
-                        countries.ToList().ForEach(country =>
+                        countries.ToList().ForEach(countryDto =>
                         {
-                            _dbContext.Countries.AddRangeAsync(country);
-                            _dbContext.SaveChangesAsync();
+                            var newCountry = CreateCountry(continents, countryDto);
+
+                            _dbContext.Countries.Add(newCountry);
+                            _dbContext.SaveChanges();
                         });
                     }
                 }
             }
         }
 
-        private IEnumerable<Country> GetCountriesFromFile()
+        private Country CreateCountry(List<Continent> continents, CountryDto countryDto)
         {
-            IEnumerable<Country> countries = new List<Country>();
+            var continent = continents.First(c => c.Name == countryDto.Continent.Name);
+
+            return new Country()
+            {
+                Name = countryDto.Name,
+                Abbreviation = countryDto.Abbreviation,
+                CapitalCity = countryDto.CapitalCity,
+                ContinentId = continent.Id
+            };
+        }
+
+        private IEnumerable<CountryDto> GetCountriesFromFile()
+        {
+            IEnumerable<CountryDto> countries = new List<CountryDto>();
 
             try
             {
                 countries = File.ReadAllLines("../KeepLearning.Infrastructure/Seeders/FilesWithData/WorldCountriesList.csv")
                     .Skip(1)
                     .Select(c => c.Split(','))
-                    .Select(d => new Country()
+                    .Select(c => new CountryDto()
                     {
-                        Name = d[0],
-                        Abbreviation = d[1],
-                        CapitalCity = d[2],
-                        Continent = d[3]
+                        Name = c[0],
+                        Abbreviation = c[1],
+                        CapitalCity = c[2],
+                        Continent = new ContinentDto(c[3])
                     });
 
             }

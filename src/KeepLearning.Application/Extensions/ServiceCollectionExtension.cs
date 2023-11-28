@@ -12,6 +12,7 @@ namespace KeepLearning.Domain.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ContinentMappingProfile));
             services.AddAutoMapper(typeof(CountryMappingProfile));
 
             services.AddMediatR(typeof(GetCountriesQuery));

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace KeepLearning.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity : Migration
+    public partial class InitialMigrationsUsersCountriesContinents : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,18 @@ namespace KeepLearning.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Continents",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Continents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +168,27 @@ namespace KeepLearning.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Abbreviation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CapitalCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContinentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Countries_Continents_ContinentId",
+                        column: x => x.ContinentId,
+                        principalTable: "Continents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +227,11 @@ namespace KeepLearning.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Countries_ContinentId",
+                table: "Countries",
+                column: "ContinentId");
         }
 
         /// <inheritdoc />
@@ -215,10 +253,16 @@ namespace KeepLearning.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Countries");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Continents");
         }
     }
 }
