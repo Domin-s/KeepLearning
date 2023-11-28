@@ -1,7 +1,6 @@
-﻿using AutoMapper;
+﻿using KeepLearning.Application.Common.Models.Continent;
+using KeepLearning.Application.Common.Models.Country;
 using KeepLearning.Domain.Enteties;
-using KeepLearning.Domain.Models.Continent;
-using KeepLearning.Domain.Models.Country;
 using KeepLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

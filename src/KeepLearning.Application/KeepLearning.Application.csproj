@@ -7,9 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Models\Enums\**" />
-	  <EmbeddedResource Remove="Models\Enums\**" />
-	  <None Remove="Models\Enums\**" />
+	  <Compile Remove="Country\Commands\**" />
+	  <Compile Remove="Common\Models\Enums\**" />
+	  <Compile Remove="Queries\**" />
+	  <EmbeddedResource Remove="Country\Commands\**" />
+	  <EmbeddedResource Remove="Common\Models\Enums\**" />
+	  <EmbeddedResource Remove="Queries\**" />
+	  <None Remove="Country\Commands\**" />
+	  <None Remove="Common\Models\Enums\**" />
+	  <None Remove="Queries\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -21,6 +27,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\KeepLearning.Domain\KeepLearning.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Question\Commands\" />
 	</ItemGroup>
 
 </Project>

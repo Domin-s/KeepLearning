@@ -1,5 +1,5 @@
-﻿using KeepLearning.Domain.Queries.GetAllCountries;
-using KeepLearning.Domain.Queries.GetNumberOfCountries;
+﻿using KeepLearning.Application.Country.Queries.GetAllCountries;
+using KeepLearning.Application.Country.Queries.GetNumberOfCountries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
