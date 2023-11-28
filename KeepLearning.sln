@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure", "src\KeepLearning.Infrastructure\KeepLearning.Infrastructure.csproj", "{DD7952C4-22B7-4408-8AF9-1FECA4D68A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Infrastructure.Tests", "src\KeepLearning.Infrastructure.Tests\KeepLearning.Infrastructure.Tests.csproj", "{5EC1DD8E-613D-4951-9699-F7ACF053DA2E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Infrastructure.Tests", "tests\KeepLearning.Infrastructure.Tests\KeepLearning.Infrastructure.Tests.csproj", "{5EC1DD8E-613D-4951-9699-F7ACF053DA2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Application.Tests", "src\KeepLearning.Application.Tests\KeepLearning.Application.Tests.csproj", "{87BBC0BE-8065-4D64-A188-ECC59B35062C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Application.Tests", "tests\KeepLearning.Application.Tests\KeepLearning.Application.Tests.csproj", "{87BBC0BE-8065-4D64-A188-ECC59B35062C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8681EB6A-A66E-4026-8209-9CF79FC6D4DD}"
 EndProject
