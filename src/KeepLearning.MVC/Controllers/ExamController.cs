@@ -1,8 +1,8 @@
+using KeepLearning.Application.Common.Models.Exam.Country;
+using KeepLearning.Application.Exam.Queries.CheckExam;
+using KeepLearning.Application.Exam.Queries.DownloadExam;
 using KeepLearning.Domain.Commands.CreateExamCountry;
 using KeepLearning.Domain.Exceptions;
-using KeepLearning.Domain.Models.Exam.Country;
-using KeepLearning.Domain.Queries.CheckExam;
-using KeepLearning.Domain.Queries.DownloadExam;
 using KeepLearning.Domain.Queries.GetAllContinents;
 using KeepLearning.MVC.Models;
 using MediatR;

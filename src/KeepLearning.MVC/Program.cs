@@ -1,7 +1,7 @@
 using KeepLearning.Infrastructure.Extensions;
-using KeepLearning.Domain.Extensions;
 using KeepLearning.MVC.Middlewares;
 using KeepLearning.MVC.HealthChecker;
+using KeepLearning.Application.Common.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -6,7 +6,7 @@ using static KeepLearning.Domain.Models.Enums.GuessType;
 
 namespace KeepLearning.Infrastructure.Services
 {
-    internal class CountryService : ICountryService
+    public class CountryService : ICountryService
     {
         private readonly ICountryRepository _countryRepository;
 
