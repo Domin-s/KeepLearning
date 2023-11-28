@@ -50,7 +50,7 @@ namespace KeepLearning.Infrastructure.Repositories
         public async Task<int> GetNumberOfCountries(IEnumerable<Guid> continentIds)
             => await _dbContext.Countries.Where(country => continentIds.Contains(country.ContinentId)).CountAsync();
 
-        private IEnumerable<Country> RandomSortedCountries(IEnumerable<Country> countries, int numberOfCountries)
+        public IEnumerable<Country> RandomSortedCountries(IEnumerable<Country> countries, int numberOfCountries)
         {
             var random = new Random();
 
