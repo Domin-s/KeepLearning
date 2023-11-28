@@ -26,7 +26,7 @@ namespace KeepLearning.Domain.Commands.CreateTestCountry
 
         public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
         {
-            var continents = await _continentRepository.GetByNames(request.Continents.Select(c => c.Name));
+            var continents = await _continentRepository.GetByNames(request.Continents);
             if (!continents.Any())
             {
                 throw new NotFoundException("Not found any continents");
