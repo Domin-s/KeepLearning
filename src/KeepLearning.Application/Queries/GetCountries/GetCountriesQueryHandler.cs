@@ -27,7 +27,8 @@ namespace KeepLearning.Domain.Queries.GetCountries
                 throw new NotFoundException("Not found any continents");
             }
 
-            var countries = await _countryRepository.GetByContinents(continents);
+            var continentIds = continents.Select(c => c.Id);
+            var countries = await _countryRepository.GetByContinents(continentIds);
 
             var contriesDto = _mapper.Map<Countries>(countries);
 

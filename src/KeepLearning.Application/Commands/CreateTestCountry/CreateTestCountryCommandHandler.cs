@@ -32,7 +32,8 @@ namespace KeepLearning.Domain.Commands.CreateTestCountry
                 throw new NotFoundException("Not found any continents");
             }
 
-            var randomCountries = await _countryRepository.GetRandomCountries(continents, request.NumberOfQuestion);
+            var continentIds = continents.Select(c => c.Id);
+            var randomCountries = await _countryRepository.GetRandomCountries(continentIds, request.NumberOfQuestion);
             if (!randomCountries.Any())
             {
                 throw new NotFoundException("Not found any country for these continents");

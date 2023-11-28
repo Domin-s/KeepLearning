@@ -20,37 +20,41 @@ namespace KeepLearning.Infrastructure.Repositories
         public async Task<Country?> GetByName(string name)
             => await _dbContext.Countries.FirstAsync(country => country.Name == name);
 
-        public async Task<Country?> GetRandom(Continent continent)
+        public async Task<Country?> GetRandom(Guid continentId)
         {
-            var random = new Random();
 
-            return await _dbContext.Countries
-                    .Where(country => country.Continent == continent)
-                    .OrderBy(country => random.Next())
-                    .FirstAsync();
+            var countries = await _dbContext.Countries
+                   .Where(country => country.ContinentId == continentId)
+                   .OrderBy(country => country.Name)
+                   .ToListAsync();
+
+            var random = new Random();
+            var randomNumber = random.Next(0, countries.Count() - 1);
+
+            return countries[randomNumber];
         }
 
-        public async Task<IEnumerable<Country>> GetByContinents(IEnumerable<Continent> continents)
+        public async Task<IEnumerable<Country>> GetByContinents(IEnumerable<Guid> continentIds)
             => await _dbContext.Countries
-                    .Where(country => continents.Contains(country.Continent))
+                    .Where(country => continentIds.Contains(country.ContinentId))
                     .ToListAsync();
 
 
         public async Task<IEnumerable<Country>> GetAll()
             => await _dbContext.Countries.ToListAsync();
 
-        public async Task<IEnumerable<Country>> GetRandomCountries(IEnumerable<Continent> continents, int numberOfQuestions)
+        public async Task<IEnumerable<Country>> GetRandomCountries(IEnumerable<Guid> continentIds, int numberOfQuestions)
         {
             var random = new Random();
 
             return await _dbContext.Countries
-                    .Where(country => continents.Contains(country.Continent))
+                    .Where(country => continentIds.Contains(country.ContinentId))
                     .OrderBy(country => random.Next())
                     .Take(numberOfQuestions)
                     .ToListAsync();
         }
 
-        public async Task<int> GetNumberOfCountries(IEnumerable<Continent> continents)
-            => await _dbContext.Countries.Where(country => continents.Contains(country.Continent)).CountAsync();
+        public async Task<int> GetNumberOfCountries(IEnumerable<Guid> continentIds)
+            => await _dbContext.Countries.Where(country => continentIds.Contains(country.ContinentId)).CountAsync();
     }
 }

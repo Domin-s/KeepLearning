@@ -18,11 +18,11 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             var list = new List<GetRandomQuestionQuery>(){
                 new GetRandomQuestionQuery() {
                     Category=GuessType.Category.Country,
-                    Continent= new ContinentDto("Europe"){}
+                    Continent= "Europe"
                 },
                 new GetRandomQuestionQuery() {
                     Category=GuessType.Category.CapitalCity,
-                    Continent= new ContinentDto("Europe"){}
+                    Continent= "Europe"
                 },
             };
 
@@ -38,10 +38,10 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             var continent = new Continent()
             {
                 Id = Guid.NewGuid(),
-                Name = getRandomQuestionQuery.Continent.Name
+                Name = getRandomQuestionQuery.Continent
             };
 
-            var continentDto = getRandomQuestionQuery.Continent;
+            var continentDto = new ContinentDto(getRandomQuestionQuery.Continent);
 
             var country = new Country()
             {
@@ -65,7 +65,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
             continentRepositoryMock.Setup(country => country.GetByName(continent.Name)).ReturnsAsync(continent);
 
             var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetRandom(continent)).ReturnsAsync(country);
+            countryRepositoryMock.Setup(country => country.GetRandom(continent.Id)).ReturnsAsync(country);
 
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<CountryDto>(country)).Returns(countryDto);

@@ -23,13 +23,13 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion
 
         public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
         {
-            var continent = await _continentRepository.GetByName(request.Continent.Name);
+            var continent = await _continentRepository.GetByName(request.Continent);
             if (continent is null)
             {
                 throw new NotFoundException("Not found continent!");
             }
 
-            var randomCountry = await _countryRepository.GetRandom(continent);
+            var randomCountry = await _countryRepository.GetRandom(continent.Id);
             if (randomCountry is null)
             {
                 throw new NotFoundException("Not found country");

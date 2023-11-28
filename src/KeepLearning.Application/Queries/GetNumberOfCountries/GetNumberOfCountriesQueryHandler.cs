@@ -18,7 +18,8 @@ namespace KeepLearning.Domain.Queries.GetNumberOfCountries
         public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
         {
             var continents = await _continentRepository.GetByNames(request.Continents.Select(c => c.Name));
-            var numberOfCountries = await _countryRepository.GetNumberOfCountries(continents);
+            var continentIds = continents.Select(c => c.Id);
+            var numberOfCountries = await _countryRepository.GetNumberOfCountries(continentIds);
 
             return numberOfCountries;
         }
