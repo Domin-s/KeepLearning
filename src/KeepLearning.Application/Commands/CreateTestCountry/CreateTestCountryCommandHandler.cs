@@ -45,8 +45,6 @@ namespace KeepLearning.Domain.Commands.CreateTestCountry
             var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
             var testDto = TestDtoBuilder.CreateTestCountry(request.Name, questionsDto, request.Category, continentsDto);
 
-            var test = _mapper.Map<Test>(testDto);
-
             return testDto;
         }
     }
