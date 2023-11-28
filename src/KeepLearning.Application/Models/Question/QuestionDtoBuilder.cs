@@ -1,4 +1,4 @@
-using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Commands.CreateExamCountry;
 using KeepLearning.Domain.Exceptions;
 using KeepLearning.Domain.Models.Country;
 using KeepLearning.Domain.Models.Enums;
@@ -8,7 +8,7 @@ namespace KeepLearning.Domain.Models
 {
     public static class QuestionDtoBuilder
     {
-        public static List<QuestionDto> CreateQuestions(List<CountryDto> countries, CreateTestCountryCommand command)
+        public static List<QuestionDto> CreateQuestions(List<CountryDto> countries, CreateExamCountryCommand command)
         {
             var questions = new List<QuestionDto>() { };
 

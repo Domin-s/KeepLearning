@@ -14,37 +14,35 @@ $(document).ready(function () {
 
     const NumberOfQuestions = [5, 10, 20, 25, 50];
 
-    var createTest = $("#createTest");
+    var createExam = $("#createExam");
     var continentInputs = $(".continentInput");
     var numberOfQuestionDiv = $('.numberOfQuestionDiv');
 
-    ConfigureContinentInputs(createTest, continentInputs, numberOfQuestionDiv);
+    ConfigureContinentInputs(createExam, continentInputs, numberOfQuestionDiv);
 
-    function ConfigureContinentInputs(createTest, continentInputs, numberOfQuestionDiv) {
-        DiableButton(createTest, continentInputs);
+    function ConfigureContinentInputs(createExam, continentInputs, numberOfQuestionDiv) {
+        DiableButton(createExam, continentInputs);
         HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs)
 
         continentInputs.click(function (event) {
             GetMaxNumberOfQuestion(continentInputs);
-            DiableButton(createTest, continentInputs);
+            DiableButton(createExam, continentInputs);
             HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs);
         });
     }
 
     function HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs) {
-        // TODO: remove console.log from this file
-        console.log(numberOfQuestionDiv);
         if (CheckIfAnyContinentIsChecked(continentInputs)) {
             numberOfQuestionDiv.show();
         } else {
             numberOfQuestionDiv.hide();
         }
     }
-    function DiableButton(createTest, continentInputs) {
+    function DiableButton(createExam, continentInputs) {
         if (CheckIfAnyContinentIsChecked(continentInputs)) {
-            createTest.prop("disabled", false);
+            createExam.prop("disabled", false);
         } else {
-            createTest.prop("disabled", true);
+            createExam.prop("disabled", true);
         }
     }
 

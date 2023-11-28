@@ -1,10 +1,10 @@
 ﻿using KeepLearning.Domain.Models.Enums;
-using KeepLearning.Domain.Models.Test.Country;
+using KeepLearning.Domain.Models.Exam.Country;
 using MediatR;
 
-namespace KeepLearning.Domain.Commands.CreateTestCountry
+namespace KeepLearning.Domain.Commands.CreateExamCountry
 {
-    public class CreateTestCountryCommand : IRequest<TestCountryDto>
+    public class CreateExamCountryCommand : IRequest<ExamCountryDto>
     {
         public string? Name { get; set; }
         public int NumberOfQuestion { get; set; } = 10;

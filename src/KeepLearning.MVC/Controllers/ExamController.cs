@@ -1,10 +1,9 @@
-
-using KeepLearning.Domain.Commands.CreateTestCountry;
+using KeepLearning.Domain.Commands.CreateExamCountry;
 using KeepLearning.Domain.Exceptions;
-using KeepLearning.Domain.Models.Test.Country;
-using KeepLearning.Domain.Queries.CheckTest;
+using KeepLearning.Domain.Models.Exam.Country;
+using KeepLearning.Domain.Queries.CheckExam;
+using KeepLearning.Domain.Queries.DownloadExam;
 using KeepLearning.Domain.Queries.GetAllContinents;
-using KeepLearning.Domain.Queries.TestToDownload;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +23,7 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateTest()
+        public async Task<IActionResult> Create()
         {
             var continents = await _mediator.Send(new GetAllContinentsQuery());
             var questionDataViewModel = new QuestionDataViewModel(continents);
@@ -33,29 +32,37 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTest(CreateTestCountryCommand command)
+        public async Task<IActionResult> Create(CreateExamCountryCommand command)
         {
             var test = await _mediator.Send(command);
 
             var serializedTest = JsonConvert.SerializeObject(test);
             TempData[SerializedExamCountry] = serializedTest;
 
-            return RedirectToAction(nameof(Test));
+            return RedirectToAction(nameof(Exam));
         }
 
-        public IActionResult Test()
+        public IActionResult Exam()
         {
-            var serializedTest = CheckTempData(SerializedExamCountry);
+            var serializedExam = CheckTempData(SerializedExamCountry);
 
-            var testCountryDto = JsonConvert.DeserializeObject<TestCountryDto>(serializedTest);
+            var examCountryDto = JsonConvert.DeserializeObject<ExamCountryDto>(serializedExam);
 
-            TempData[SerializedExamCountry] = serializedTest;
+            TempData[SerializedExamCountry] = serializedExam;
 
-            return View(testCountryDto);
+            return View(examCountryDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckTest([FromForm] CheckTestQuery query)
+        public async Task<IActionResult> Check([FromForm] CheckExamQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Download([FromForm] DownloadExamQuery query)
         {
             var result = await _mediator.Send(query);
 
@@ -77,14 +84,6 @@ namespace KeepLearning.MVC.Controllers
             }
 
             return serializedString;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Download([FromForm] TestToDownloadQuery query)
-        {
-            var result = await _mediator.Send(query);
-
-            return Ok(result);
         }
     }
 }

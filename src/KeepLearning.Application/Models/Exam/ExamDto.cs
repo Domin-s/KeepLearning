@@ -1,8 +1,8 @@
 ﻿using KeepLearning.Domain.Models.Question;
 
-namespace KeepLearning.Domain.Models.Test
+namespace KeepLearning.Domain.Models.Exam
 {
-    public class TestDto
+    public class ExamDto
     {
         public string? Name { get; set; }
         public IEnumerable<QuestionDto> Questions { get; set; } = new List<QuestionDto>();
