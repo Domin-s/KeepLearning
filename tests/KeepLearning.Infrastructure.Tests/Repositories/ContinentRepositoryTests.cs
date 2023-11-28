@@ -15,7 +15,7 @@ namespace KeepLearning.Infrastructure.Tests.Repositories
         public ContinentRepositoryTests()
         {
             var builder = new DbContextOptionsBuilder<KeepLearningDbContext>();
-            builder.UseInMemoryDatabase("TestKeepLearningDb-ContinetnRepository");
+            builder.UseInMemoryDatabase("TestKeepLearningDb-ContinentRepositoryTests");
 
             _dbContext = new KeepLearningDbContext(builder.Options);
             var continentSeederTest = new ContinentSeederTest(_dbContext);
