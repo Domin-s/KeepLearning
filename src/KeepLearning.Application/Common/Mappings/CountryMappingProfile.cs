@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Domain.Enteties;
 
 namespace KeepLearning.Application.Common.Mappings
 {
@@ -8,7 +7,7 @@ namespace KeepLearning.Application.Common.Mappings
     {
         public CountryMappingProfile()
         {
-            CreateMap<Country, CountryDto>();
+            CreateMap<Domain.Enteties.Country, CountryDto>();
         }
     }
 }

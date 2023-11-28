@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Question.Queries.CheckAnswer;
-using KeepLearning.Domain.Queries.GetAllContinents;
-using KeepLearning.Domain.Queries.GetRandomQuestion;
+﻿using KeepLearning.Application.Continent.Queries.GetAllContinents;
+using KeepLearning.Application.Question.Queries.CheckAnswer;
+using KeepLearning.Application.Question.Queries.GetRandomQuestion;
 using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

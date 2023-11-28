@@ -1,5 +1,5 @@
 using KeepLearning.Domain.Enteties;
-using KeepLearning.Domain.Interfaces;
+using KeepLearning.Domain.Interfaces.Repositories;
 using KeepLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

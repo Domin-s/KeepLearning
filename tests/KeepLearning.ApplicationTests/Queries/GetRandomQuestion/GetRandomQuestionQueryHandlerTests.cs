@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using KeepLearning.Application.Common.Models.Continent;
 using KeepLearning.Application.Common.Models.Country;
 using KeepLearning.Application.Question.Queries.GetRandomQuestion;
 using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Models.Continent;
 using KeepLearning.Domain.Models.Enums;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestPlatform.TestHost;

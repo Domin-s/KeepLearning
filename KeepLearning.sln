@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.ApplicationTests", "tests\KeepLearning.ApplicationTests\KeepLearning.ApplicationTests.csproj", "{B2613351-642E-47BD-BAC5-0E4EA433254D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Infrastructure.Tests", "src\KeepLearning.Infrastructure.Tests\KeepLearning.Infrastructure.Tests.csproj", "{E6B3189D-09E2-4D9B-A133-81A2BA54A858}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
