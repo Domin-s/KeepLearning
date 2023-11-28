@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Models;
 using KeepLearning.Domain.Models.Country;
 using KeepLearning.Domain.Models.Test.Country;
