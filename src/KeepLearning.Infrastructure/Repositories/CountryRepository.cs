@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KeepLearning.Infrastructure.Repositories
 {
-    internal class CountryRepository : ICountryRepository
+    public class CountryRepository : ICountryRepository
     {
         private readonly KeepLearningDbContext _dbContext;
 

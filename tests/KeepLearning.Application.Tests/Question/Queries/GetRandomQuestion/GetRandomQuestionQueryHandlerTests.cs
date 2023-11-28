@@ -5,9 +5,7 @@ using KeepLearning.Application.Question.Queries.GetRandomQuestion;
 using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Domain.Models.Enums;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
-using Moq;
 
 namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 {
