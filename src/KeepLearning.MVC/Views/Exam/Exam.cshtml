@@ -1,6 +1,6 @@
-﻿@using KeepLearning.Domain.Models.Test.Country
+﻿@using KeepLearning.Domain.Models.Exam.Country
 
-@model TestCountryDto
+@model ExamCountryDto
 
 @{
     ViewData["Title"] = "Resolve";
@@ -51,7 +51,7 @@
                         <a asp-action="CreateTest" class="btn btn-primary" role="button">Back to creator</a>
                     </div>
                     <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                        <form method="post" action="CreateTest">
+                        <form method="post" action="Create">
                             <div hidden>
                                 <input id="Name" name="Name" value="@Model.Name" />
                                 <input id="NumberOfQuestion" name="NumberOfQuestion" value="@Model.Questions.Count()" />
@@ -61,7 +61,7 @@
                                     <input value="@continent.Name" id="Continents" name="Continents">
                                 }
                             </div>
-                            <input type="submit" value="Create a different test with the same parameters"
+                            <input type="submit" value="Create a different exam with the same parameters"
                                 class="btn btn-primary" />
                         </form>
                     </div>
@@ -155,5 +155,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Question/CheckTest.js"></script>
+    <script src="~/js/Exam/Check.js"></script>
 }

@@ -2,28 +2,28 @@
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Domain.Models;
 using KeepLearning.Domain.Models.Country;
-using KeepLearning.Domain.Models.Test.Country;
 using MediatR;
-using KeepLearning.Domain.Models.Test;
 using KeepLearning.Domain.Models.Continent;
 using KeepLearning.Domain.Exceptions;
+using KeepLearning.Domain.Models.Exam.Country;
+using KeepLearning.Domain.Models.Exam;
 
-namespace KeepLearning.Domain.Commands.CreateTestCountry
+namespace KeepLearning.Domain.Commands.CreateExamCountry
 {
-    public class CreateTestCountryCommandHandler : IRequestHandler<CreateTestCountryCommand, TestCountryDto>
+    public class CreateExamCountryCommandHandler : IRequestHandler<CreateExamCountryCommand, ExamCountryDto>
     {
         private readonly IContinentRepository _continentRepository;
         private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
 
-        public CreateTestCountryCommandHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
+        public CreateExamCountryCommandHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
         {
             _continentRepository = continentRepository;
             _countryRepository = countryRepository;
             _mapper = mapper;
         }
 
-        public async Task<TestCountryDto> Handle(CreateTestCountryCommand request, CancellationToken cancellationToken)
+        public async Task<ExamCountryDto> Handle(CreateExamCountryCommand request, CancellationToken cancellationToken)
         {
             var continents = await _continentRepository.GetByNames(request.Continents);
             if (!continents.Any())
@@ -42,7 +42,7 @@ namespace KeepLearning.Domain.Commands.CreateTestCountry
             var continentsDto = request.Continents.Select(c => _mapper.Map<ContinentDto>(c)).ToList();
 
             var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
-            var testDto = TestDtoBuilder.CreateTestCountry(request.Name, questionsDto, request.Category, continentsDto);
+            var testDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
 
             return testDto;
         }

@@ -1,10 +1,9 @@
 $(document).ready(function () {
 
-    // TODO: Add ";" to line with answers
-    class CheckTestQuery {
+    class CheckExamQuery {
         constructor(category, answers) {
             this.Category = category;
-            this.Answers = answers
+            this.Answers = answers;
         }
     }
 
@@ -26,7 +25,7 @@ $(document).ready(function () {
 
         var dataToSend = CreateDataToSend(category, questions);
 
-        $.post(`/Question/CheckTest`, dataToSend, (result, status) => {
+        $.post(`/Exam/Check`, dataToSend, (result, status) => {
             AddColumnWithAnswer(result);
             DisableInputs("Answer");
         });
@@ -103,7 +102,7 @@ $(document).ready(function () {
     function CreateDataToSend(category, questions) {
         var answers = CreateAnswersToSend(questions);
 
-        return new CheckTestQuery(category, answers);
+        return new CheckExamQuery(category, answers);
     }
 
     function CreateAnswersToSend(questions) {

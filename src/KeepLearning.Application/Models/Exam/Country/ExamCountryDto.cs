@@ -1,8 +1,7 @@
 ﻿using KeepLearning.Domain.Models.Continent;
-using KeepLearning.Domain.Models.Exam;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Domain.Models.Test.Country
+namespace KeepLearning.Domain.Models.Exam.Country
 {
     public class ExamCountryDto : ExamDto
     {

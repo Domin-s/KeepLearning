@@ -5,7 +5,7 @@
 }
 
 <div class="col-12 col-md-12 col-sm-12">
-    <h1>Create country test</h1>
+    <h1>Create country exam</h1>
 
     <hr />
 
@@ -15,7 +15,7 @@
                 <form method="post" action="#">
                     <div class="col-10 col-md-12 col-sm-12">
                         <div class="row m-2 ">
-                            <div class="col-4 col-sm-5 col-md-4">Test name: </div>
+                            <div class="col-4 col-sm-5 col-md-4">Exam name: </div>
                             <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
                         </div>
                         <div class="row m-2">
@@ -57,7 +57,7 @@
                             </a>
                         </div>
                         <div class="col-3 col-md-3 col-sm-4">
-                            <input type="submit" value="Create" class="btn btn-primary" id="createTest" />
+                            <input type="submit" value="Create" class="btn btn-primary" id="createExam" />
                         </div>
                     </div>
                 </form>
@@ -70,5 +70,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script src="~/js/Question/CreateTest.js"></script>
+    <script src="~/js/Exam/Create.js"></script>
 }
