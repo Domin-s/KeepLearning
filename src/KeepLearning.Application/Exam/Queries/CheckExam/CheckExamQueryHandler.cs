@@ -14,6 +14,7 @@ namespace KeepLearning.Application.Exam.Queries.CheckExam
             _countryService = countryService;
         }
 
+        // TODO: Refactor to use one method for all questions - easier to test in future
         public async Task<ExamResultDto> Handle(CheckExamQuery request, CancellationToken cancellationToken)
         {
             var answers = new List<AnswerResultDto>();
