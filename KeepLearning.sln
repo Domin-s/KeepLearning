@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8681EB6A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure.UnitTests", "tests\KeepLearning.Infrastructure.UnitTests\KeepLearning.Infrastructure.UnitTests.csproj", "{E29E17E1-7BE4-480B-9FCF-7C30A70BE3A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Infrastructure.IntegrationTests", "tests\KeepLearning.Infrastructure.IntegrationTests\KeepLearning.Infrastructure.IntegrationTests.csproj", "{34766885-F816-4A12-92A9-98751F1108BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeepLearning.Infrastructure.IntegrationTests", "tests\KeepLearning.Application.FunctionalTests\KeepLearning.Application.FunctionalTests.csproj", "{34766885-F816-4A12-92A9-98751F1108BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
