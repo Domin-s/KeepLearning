@@ -2,12 +2,11 @@
 using KeepLearning.Application.Common.Models.Continent;
 using KeepLearning.Application.Common.Models.Country;
 using KeepLearning.Application.Question.Queries.GetRandomQuestion;
-using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
 using Moq;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
+namespace KeepLearning.Application.UnitTests.Question.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQueryHandlerTests
     {
@@ -34,7 +33,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
         public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GetRandomQuestionQuery getRandomQuestionQuery)
         {
             // arrange
-            var continent = new Continent()
+            var continent = new Domain.Enteties.Continent()
             {
                 Id = Guid.NewGuid(),
                 Name = getRandomQuestionQuery.Continent
@@ -42,7 +41,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
             var continentDto = new ContinentDto(getRandomQuestionQuery.Continent);
 
-            var country = new Country()
+            var country = new Domain.Enteties.Country()
             {
                 Id = Guid.NewGuid(),
                 Name = "Poland",
