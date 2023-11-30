@@ -1,7 +1,7 @@
 ﻿using KeepLearning.Infrastructure.Persistence;
 using EContinent = KeepLearning.Domain.Enteties.Continent;
 
-namespace KeepLearning.Application.FunctionalTests.Helper.Seeders
+namespace KeepLearning.Application.Helper.Seeders.IntegrationTests
 {
     public class ContinentSeederTest
     {

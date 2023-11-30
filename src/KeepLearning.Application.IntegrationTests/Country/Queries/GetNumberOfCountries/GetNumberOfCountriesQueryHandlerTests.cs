@@ -1,5 +1,5 @@
 using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.FunctionalTests.Helper.Seeders;
+using KeepLearning.Application.Helper.Seeders.IntegrationTests;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;

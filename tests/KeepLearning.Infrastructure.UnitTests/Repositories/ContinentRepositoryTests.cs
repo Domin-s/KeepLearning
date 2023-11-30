@@ -1,10 +1,9 @@
 using KeepLearning.Domain.Interfaces;
+using KeepLearning.Infrastructure.Helper.Seeders.UnitTests;
 using KeepLearning.Infrastructure.Persistence;
-using KeepLearning.Infrastructure.Repositories;
-using KeepLearning.Infrastructure.UnitTests.Helper.Seeders;
 using Microsoft.EntityFrameworkCore;
 
-namespace KeepLearning.Infrastructure.UnitTests.Repositories
+namespace KeepLearning.Infrastructure.Repositories.UnitTests
 {
     public class ContinentRepositoryTests
     {

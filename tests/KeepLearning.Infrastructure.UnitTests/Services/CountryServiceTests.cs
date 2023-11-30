@@ -1,10 +1,9 @@
 using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Infrastructure.Services;
 using Moq;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Infrastructure.UnitTests.Services
+namespace KeepLearning.Infrastructure.Services.UnitTests
 {
     public class CountryServiceTests
     {

@@ -3,7 +3,7 @@ using KeepLearning.Application.Common.Models.Country;
 using KeepLearning.Domain.Enteties;
 using KeepLearning.Infrastructure.Persistence;
 
-namespace KeepLearning.Infrastructure.UnitTests.Helper.Seeders
+namespace KeepLearning.Infrastructure.Helper.Seeders.UnitTests
 {
     public class CountrySeederTest
     {

@@ -4,7 +4,7 @@ using KeepLearning.Infrastructure.Persistence;
 using EContinent = KeepLearning.Domain.Enteties.Continent;
 using ECountry = KeepLearning.Domain.Enteties.Country;
 
-namespace KeepLearning.Application.FunctionalTests.Helper.Seeders
+namespace KeepLearning.Application.Helper.Seeders.IntegrationTests
 {
     public class CountrySeederTest
     {
