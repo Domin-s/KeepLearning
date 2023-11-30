@@ -1,28 +1,24 @@
 ﻿using AutoMapper;
 using KeepLearning.Application.Common.Models.Continent;
 using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Application.Question.Queries.GetRandomQuestion;
-using KeepLearning.Domain.Enteties;
 using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Models.Enums;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
+using static KeepLearning.Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
+namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.UnitTests
 {
-    public class GetRandomQuestionQueryHandlerTests : IClassFixture<WebApplicationFactory<Program>>
+    public class GetRandomQuestionQueryHandlerTests
     {
         public static IEnumerable<object[]> GetRandomQuestionData()
         {
 
             var list = new List<GetRandomQuestionQuery>(){
                 new GetRandomQuestionQuery() {
-                    Category=GuessType.Category.Country,
-                    Continent= "Europe"
+                    Category = Category.Country,
+                    Continent = "Europe"
                 },
                 new GetRandomQuestionQuery() {
-                    Category=GuessType.Category.CapitalCity,
+                    Category = Category.CapitalCity,
                     Continent= "Europe"
                 },
             };
@@ -36,7 +32,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
         public async void Handle_GetRandomQuestion_WhenGiveGuessTypeAndContinent(GetRandomQuestionQuery getRandomQuestionQuery)
         {
             // arrange
-            var continent = new Continent()
+            var continent = new Domain.Enteties.Continent()
             {
                 Id = Guid.NewGuid(),
                 Name = getRandomQuestionQuery.Continent
@@ -44,7 +40,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
             var continentDto = new ContinentDto(getRandomQuestionQuery.Continent);
 
-            var country = new Country()
+            var country = new Domain.Enteties.Country()
             {
                 Id = Guid.NewGuid(),
                 Name = "Poland",
@@ -59,7 +55,7 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
                 Name = "Poland",
                 Abbreviation = "POL",
                 CapitalCity = "Warsaw",
-                Continent = new ContinentDto(continentDto.Name)
+                ContinentDto = new ContinentDto(continentDto.Name)
             };
 
             var continentRepositoryMock = new Mock<IContinentRepository>();
@@ -73,13 +69,35 @@ namespace KeepLearning.Domain.Queries.GetRandomQuestion.Tests
 
             var handler = new GetRandomQuestionQueryHandler(continentRepositoryMock.Object, countryRepositoryMock.Object, mapper.Object);
 
-            var expectedResult = getRandomQuestionQuery.Category.Equals(GuessType.Category.Country) ? countryDto.Name : countryDto.CapitalCity;
+            var expectedAnswerText = GetAnswerText(countryDto, getRandomQuestionQuery.Category);
+            var expectedQuestionText = GetQuestionText(countryDto, getRandomQuestionQuery.Category);
 
             // act
             var result = await handler.Handle(getRandomQuestionQuery, CancellationToken.None);
 
             // assert
-            result.QuestionText.Should().Be(expectedResult);
+            result.AnswerText.Should().Be(expectedAnswerText);
+            result.QuestionText.Should().Be(expectedQuestionText);
+        }
+
+        private string GetQuestionText(CountryDto countryDto, Category categry)
+        {
+            switch (categry)
+            {
+                case Category.Country: return countryDto.CapitalCity;
+                case Category.CapitalCity: return countryDto.Name;
+                default: throw new NotImplementedException();
+            }
+        }
+
+        private string GetAnswerText(CountryDto countryDto, Category categry)
+        {
+            switch (categry)
+            {
+                case Category.Country: return countryDto.Name;
+                case Category.CapitalCity: return countryDto.CapitalCity;
+                default: throw new NotImplementedException();
+            }
         }
     }
 }

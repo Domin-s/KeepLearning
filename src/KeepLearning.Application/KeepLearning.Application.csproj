@@ -10,12 +10,15 @@
 	  <Compile Remove="Country\Commands\**" />
 	  <Compile Remove="Common\Models\Enums\**" />
 	  <Compile Remove="Queries\**" />
+	  <Compile Remove="Question\Commands\**" />
 	  <EmbeddedResource Remove="Country\Commands\**" />
 	  <EmbeddedResource Remove="Common\Models\Enums\**" />
 	  <EmbeddedResource Remove="Queries\**" />
+	  <EmbeddedResource Remove="Question\Commands\**" />
 	  <None Remove="Country\Commands\**" />
 	  <None Remove="Common\Models\Enums\**" />
 	  <None Remove="Queries\**" />
+	  <None Remove="Question\Commands\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -27,10 +30,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\KeepLearning.Domain\KeepLearning.Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Question\Commands\" />
 	</ItemGroup>
 
 </Project>
