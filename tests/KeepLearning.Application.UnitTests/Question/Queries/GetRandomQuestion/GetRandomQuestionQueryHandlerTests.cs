@@ -55,7 +55,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.UnitTests
                 Name = "Poland",
                 Abbreviation = "POL",
                 CapitalCity = "Warsaw",
-                Continent = new ContinentDto(continentDto.Name)
+                ContinentDto = new ContinentDto(continentDto.Name)
             };
 
             var continentRepositoryMock = new Mock<IContinentRepository>();

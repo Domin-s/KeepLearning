@@ -41,7 +41,7 @@ namespace KeepLearning.Infrastructure.Seeders
 
         private Country CreateCountry(List<Continent> continents, CountryDto countryDto)
         {
-            var continent = continents.First(c => c.Name == countryDto.Continent.Name);
+            var continent = continents.First(c => c.Name == countryDto.ContinentDto.Name);
 
             return new Country()
             {
@@ -66,7 +66,7 @@ namespace KeepLearning.Infrastructure.Seeders
                         Name = c[0],
                         Abbreviation = c[1],
                         CapitalCity = c[2],
-                        Continent = new ContinentDto(c[3])
+                        ContinentDto = new ContinentDto(c[3])
                     });
 
             }
