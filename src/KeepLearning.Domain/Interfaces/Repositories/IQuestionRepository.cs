@@ -4,11 +4,11 @@ namespace KeepLearning.Domain.Interfaces.Repositories
 {
     public interface IQuestionRepository
     {
-        // public Task<Question?> GetById(Guid questionId);
-        // public Task<IEnumerable<Question>> GetByTestId(Guid questionId);
-        // public Task<int> RemoveById(Guid questionId);
-        // public Task<int> RemoveByTestId(Guid testId);
-        // public Task<Question> Save(Question question);
-        // public Task<IEnumerable<Question>> SaveMany(IEnumerable<Question> questions);
+        public Task<Question?> GetById(Guid questionId);
+        public Task<IEnumerable<Question>> GetByExamId(Guid examId);
+        public Task RemoveById(Guid questionId);
+        public Task RemoveByExamId(Guid examId);
+        public Task<Question> Save(Question question);
+        public Task SaveMany(IEnumerable<Question> questions);
     }
 }
