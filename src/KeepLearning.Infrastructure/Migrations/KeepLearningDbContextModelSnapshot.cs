@@ -65,6 +65,29 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("KeepLearning.Domain.Enteties.Exam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ExtraInformations")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Exams");
+                });
+
             modelBuilder.Entity("KeepLearning.Domain.Enteties.Question", b =>
                 {
                     b.Property<Guid>("Id")
@@ -78,6 +101,9 @@ namespace KeepLearning.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("ExpiredAt")
                         .HasColumnType("datetime2");
 
@@ -88,34 +114,11 @@ namespace KeepLearning.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TestId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TestId");
+                    b.HasIndex("ExamId");
 
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("KeepLearning.Domain.Enteties.Test", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExpiredAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -333,11 +336,11 @@ namespace KeepLearning.Infrastructure.Migrations
 
             modelBuilder.Entity("KeepLearning.Domain.Enteties.Question", b =>
                 {
-                    b.HasOne("KeepLearning.Domain.Enteties.Test", "Test")
+                    b.HasOne("KeepLearning.Domain.Enteties.Exam", "Exam")
                         .WithMany("Questions")
-                        .HasForeignKey("TestId");
+                        .HasForeignKey("ExamId");
 
-                    b.Navigation("Test");
+                    b.Navigation("Exam");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -391,7 +394,7 @@ namespace KeepLearning.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("KeepLearning.Domain.Enteties.Test", b =>
+            modelBuilder.Entity("KeepLearning.Domain.Enteties.Exam", b =>
                 {
                     b.Navigation("Questions");
                 });

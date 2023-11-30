@@ -13,7 +13,7 @@ namespace KeepLearning.Infrastructure.Persistence
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<Continent> Continents { get; set; }
-        public DbSet<Test> Tests { get; set; }
+        public DbSet<Exam> Exams { get; set; }
         public DbSet<Question> Questions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,10 +23,10 @@ namespace KeepLearning.Infrastructure.Persistence
             modelBuilder.Entity<Country>()
                 .HasOne(country => country.Continent);
 
-            modelBuilder.Entity<Test>()
-                .HasMany(t => t.Questions)
-                .WithOne(q => q.Test)
-                .HasForeignKey(q => q.TestId);
+            modelBuilder.Entity<Exam>()
+                .HasMany(e => e.Questions)
+                .WithOne(q => q.Exam)
+                .HasForeignKey(q => q.ExamId);
         }
     }
 }

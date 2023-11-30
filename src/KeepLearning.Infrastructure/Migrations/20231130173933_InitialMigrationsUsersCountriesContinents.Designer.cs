@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KeepLearning.Infrastructure.Migrations
 {
     [DbContext(typeof(KeepLearningDbContext))]
-    [Migration("20231127124400_InitialMigrationsUsersCountriesContinents")]
+    [Migration("20231130173933_InitialMigrationsUsersCountriesContinents")]
     partial class InitialMigrationsUsersCountriesContinents
     {
         /// <inheritdoc />

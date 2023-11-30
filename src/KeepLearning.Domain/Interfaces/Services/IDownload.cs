@@ -4,7 +4,7 @@ namespace KeepLearning.Domain.Interfaces
 {
     public interface IDownload
     {
-        public string CreateFile(Test test);
+        public string CreateFile(Exam test);
     }
 
 }
