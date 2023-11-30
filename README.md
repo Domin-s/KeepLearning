@@ -1,6 +1,6 @@
 # Keep Learning
 
-Project to learning, testing and trying new things about C#, .NET and other technologies.
+Project to learning, testing and trying new things.
 
 Website: https://keeplearningwebsite.azurewebsites.net
 
