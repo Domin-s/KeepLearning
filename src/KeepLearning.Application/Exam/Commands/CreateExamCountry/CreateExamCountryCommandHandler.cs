@@ -42,9 +42,9 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry
             var continentsDto = request.Continents.Select(c => _mapper.Map<ContinentDto>(c)).ToList();
 
             var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
-            var testDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
+            var examDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
 
-            return testDto;
+            return examDto;
         }
     }
 }
