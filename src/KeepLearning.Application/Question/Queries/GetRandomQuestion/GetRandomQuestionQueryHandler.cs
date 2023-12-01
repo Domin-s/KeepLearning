@@ -10,13 +10,13 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion
     public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {
         private readonly IContinentRepository _continentRepository;
-        private readonly ICountryRepository _countryRepository;
+        private readonly ICountryService _countryService;
         private readonly IMapper _mapper;
 
-        public GetRandomQuestionQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
+        public GetRandomQuestionQueryHandler(IContinentRepository continentRepository, ICountryService countryService, IMapper mapper)
         {
             _continentRepository = continentRepository;
-            _countryRepository = countryRepository;
+            _countryService = countryService;
             _mapper = mapper;
         }
 
@@ -28,7 +28,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion
                 throw new NotFoundException("Not found continent!");
             }
 
-            var randomCountry = await _countryRepository.GetRandom(continent.Id);
+            var randomCountry = await _countryService.GetRandom(continent.Id);
             if (randomCountry is null)
             {
                 throw new NotFoundException("Not found country");
