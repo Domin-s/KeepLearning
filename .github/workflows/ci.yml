@@ -1,0 +1,48 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOs-latest]
+
+    steps:
+      - 
+        uses: actions/checkout@v2
+
+      - 
+        name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.9.0 
+        with:
+          dotnet-version: 7.0.x
+
+      - 
+        name: Restore dependencies
+        working-directory: ./src/KeepLearning.MVC
+        run: dotnet restore
+
+      - 
+        name: Build
+        working-directory: ./src/KeepLearning.MVC
+        run: dotnet build --no-restore
+
+      - 
+        name: KeepLearning.Application.IntegrationTests
+        working-directory: ./tests/KeepLearning.Application.IntegrationTests
+        run: dotnet test
+
+      - 
+        name: KeepLearning.Application.UnitTests
+        working-directory: ./tests/KeepLearning.Application.UnitTests
+        run: dotnet test
+
+      - 
+        name: KeepLearning.Infrastructure.UnitTests
+        working-directory: ./tests/KeepLearning.Infrastructure.UnitTests
+        run: dotnet test
