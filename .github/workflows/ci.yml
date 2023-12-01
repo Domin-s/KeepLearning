@@ -26,18 +26,22 @@ jobs:
         name: Restore dependencies
         working-directory: ./src/KeepLearning.MVC
         run: dotnet restore
+
       - 
         name: Build
         working-directory: ./src/KeepLearning.MVC
         run: dotnet build --no-restore
+
       - 
         name: KeepLearning.Application.IntegrationTests
         working-directory: ./tests/KeepLearning.Application.IntegrationTests
         run: dotnet test
+
       - 
         name: KeepLearning.Application.UnitTests
         working-directory: ./tests/KeepLearning.Application.UnitTests
         run: dotnet test
+
       - 
         name: KeepLearning.Infrastructure.UnitTests
         working-directory: ./tests/KeepLearning.Infrastructure.UnitTests
