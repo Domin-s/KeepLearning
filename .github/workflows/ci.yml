@@ -39,6 +39,6 @@ jobs:
         working-directory: ./tests/KeepLearning.Application.UnitTests
         run: dotnet test
       - 
-        name: Test
+        name: KeepLearning.Infrastructure.UnitTests
         working-directory: ./tests/KeepLearning.Infrastructure.UnitTests
         run: dotnet test
