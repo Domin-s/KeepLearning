@@ -8,7 +8,7 @@ namespace KeepLearning.Domain.Enteties
         public required string AnswerText { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime ExpiredAt { get; set; } = DateTime.Now.AddMinutes(70);
-        public Guid? TestId { get; set; }
-        public Test? Test { get; set; }
+        public Guid? ExamId { get; set; }
+        public Exam? Exam { get; set; }
     }
 }

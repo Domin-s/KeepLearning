@@ -61,13 +61,13 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.UnitTests
             var continentRepositoryMock = new Mock<IContinentRepository>();
             continentRepositoryMock.Setup(country => country.GetByName(continent.Name)).ReturnsAsync(continent);
 
-            var countryRepositoryMock = new Mock<ICountryRepository>();
-            countryRepositoryMock.Setup(country => country.GetRandom(continent.Id)).ReturnsAsync(country);
+            var countryServiceMock = new Mock<ICountryService>();
+            countryServiceMock.Setup(country => country.GetRandom(continent.Id)).ReturnsAsync(country);
 
             var mapper = new Mock<IMapper>();
             mapper.Setup(m => m.Map<CountryDto>(country)).Returns(countryDto);
 
-            var handler = new GetRandomQuestionQueryHandler(continentRepositoryMock.Object, countryRepositoryMock.Object, mapper.Object);
+            var handler = new GetRandomQuestionQueryHandler(continentRepositoryMock.Object, countryServiceMock.Object, mapper.Object);
 
             var expectedAnswerText = GetAnswerText(countryDto, getRandomQuestionQuery.Category);
             var expectedQuestionText = GetQuestionText(countryDto, getRandomQuestionQuery.Category);

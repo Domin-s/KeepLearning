@@ -14,22 +14,41 @@ namespace KeepLearning.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<Question>> GetByExamId(Guid examId)
+            => await _dbContext.Questions.Where(q => q.ExamId == examId).ToListAsync();
+
         public async Task<Question?> GetById(Guid questionId)
-            => await _dbContext.Questions.FromSqlRaw($"Exec GetQuestionById @Id = {questionId}").FirstAsync();
+            => await _dbContext.Questions.Where(q => q.Id == questionId).FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<Question>> GetByTestId(Guid testId)
-            => await _dbContext.Questions.FromSqlRaw($"Exec GetQuestionByTestId @{testId}").ToListAsync();
+        public async Task RemoveByExamId(Guid examId)
+        {
+            var questions = await _dbContext.Questions.Where(q => q.ExamId == examId).ToListAsync();
+            _dbContext.RemoveRange(questions);
+        }
 
-        public async Task<int> RemoveById(Guid questionId)
-            => await _dbContext.Questions.FromSqlRaw($"Exec RemoveById @Id = @{questionId}").ExecuteDeleteAsync();
+        public async Task RemoveById(Guid questionId)
+        {
+            var questions = await _dbContext.Questions.Where(q => q.Id == questionId).FirstOrDefaultAsync();
+            if (questions is null)
+            {
+                throw new DirectoryNotFoundException($"Not found question with id {questionId}");
+            }
 
-        public async Task<int> RemoveByTestId(Guid testId)
-            => await _dbContext.Questions.FromSqlRaw($"Exec RemoveByTestId @{testId}").ExecuteDeleteAsync();
+            _dbContext.RemoveRange(questions);
+        }
 
         public async Task<Question> Save(Question question)
-            => await _dbContext.Questions.FromSqlRaw("Exec SaveQuestion ").FirstAsync();
+        {
+            var savedQuestion = await _dbContext.Questions.AddAsync(question);
+            _dbContext.SaveChanges();
 
-        public async Task<IEnumerable<Question>> SaveMany(IEnumerable<Question> questions)
-            => await _dbContext.Questions.FromSqlRaw("Exec SaveQuestions").ToListAsync();
+            return savedQuestion.Entity;
+        }
+
+        public async Task SaveMany(IEnumerable<Question> questions)
+        {
+            await _dbContext.Questions.AddRangeAsync(questions);
+            _dbContext.SaveChanges();
+        }
     }
 }

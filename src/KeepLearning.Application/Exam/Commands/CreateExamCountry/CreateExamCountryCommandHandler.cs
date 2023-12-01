@@ -13,13 +13,13 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry
     public class CreateExamCountryCommandHandler : IRequestHandler<CreateExamCountryCommand, ExamCountryDto>
     {
         private readonly IContinentRepository _continentRepository;
-        private readonly ICountryRepository _countryRepository;
+        private readonly ICountryService _countryService;
         private readonly IMapper _mapper;
 
-        public CreateExamCountryCommandHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
+        public CreateExamCountryCommandHandler(IContinentRepository continentRepository, ICountryService countryService, IMapper mapper)
         {
             _continentRepository = continentRepository;
-            _countryRepository = countryRepository;
+            _countryService = countryService;
             _mapper = mapper;
         }
 
@@ -32,7 +32,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry
             }
 
             var continentIds = continents.Select(c => c.Id);
-            var randomCountries = await _countryRepository.GetRandomCountries(continentIds, request.NumberOfQuestion);
+            var randomCountries = await _countryService.RandomCountries(continentIds, request.NumberOfQuestion);
             if (!randomCountries.Any())
             {
                 throw new NotFoundException("Not found any country for these continents");
@@ -42,9 +42,9 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry
             var continentsDto = request.Continents.Select(c => _mapper.Map<ContinentDto>(c)).ToList();
 
             var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
-            var testDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
+            var examDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
 
-            return testDto;
+            return examDto;
         }
     }
 }
