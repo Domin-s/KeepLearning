@@ -4,6 +4,7 @@ using KeepLearning.Application.Helper.Seeders.IntegrationTests;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
+using KeepLearning.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
@@ -14,6 +15,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.Integratio
         private readonly KeepLearningDbContext _dbContext;
         private readonly IContinentRepository _continentRepositoryTest;
         private readonly ICountryRepository _countryRepositoryTest;
+        private readonly ICountryService _countryServiceTest;
         private readonly IMapper _mapper;
 
         public GetRandomQuestionQueryHandlerIntegrationTests()
@@ -31,6 +33,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.Integratio
 
             _continentRepositoryTest = new ContinentRepository(_dbContext);
             _countryRepositoryTest = new CountryRepository(_dbContext);
+            _countryServiceTest = new CountryService(_countryRepositoryTest);
 
             var mappingProfiles = new List<Profile>() {
                 new CountryMappingProfile(),
@@ -77,7 +80,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.Integratio
         public async void Handle_WithCorrectData_ReturnQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
         {
             // arrange
-            var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
+            var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
 
             // act
             var result = await getRandomQuestionQueryHandler.Handle(getRandomQuestionQuery, CancellationToken.None);

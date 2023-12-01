@@ -6,6 +6,7 @@ using KeepLearning.Domain.Exceptions;
 using KeepLearning.Domain.Interfaces;
 using KeepLearning.Infrastructure.Persistence;
 using KeepLearning.Infrastructure.Repositories;
+using KeepLearning.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static KeepLearning.Domain.Models.Enums.GuessType;
 
@@ -17,6 +18,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry.IntegrationTests
         private readonly KeepLearningDbContext _dbContext;
         private readonly IContinentRepository _continentRepositoryTest;
         private readonly ICountryRepository _countryRepositoryTest;
+        private readonly ICountryService _countryServiceTest;
         private readonly IMapper _mapper;
 
         public CreateExamCountryCommandHandlerIntegrationTests()
@@ -34,6 +36,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry.IntegrationTests
 
             _continentRepositoryTest = new ContinentRepository(_dbContext);
             _countryRepositoryTest = new CountryRepository(_dbContext);
+            _countryServiceTest = new CountryService(_countryRepositoryTest);
 
             var mappingProfiles = new List<Profile>() {
                 new CountryMappingProfile(),
@@ -84,7 +87,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry.IntegrationTests
         public async void Handle_CreateExamWithAllValidData_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
+            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act
@@ -117,7 +120,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry.IntegrationTests
         public void Handle_CreateExamWithNumberOfQuestionIsBiggerThanCountriesInContinent_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
+            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act
@@ -125,7 +128,7 @@ namespace KeepLearning.Domain.Commands.CreateExamCountry.IntegrationTests
 
             // assert
             action.Invoking(action => action.Invoke())
-                .Should().ThrowAsync<TooBigNumberOfQuestionExsception>();
+                .Should().ThrowAsync<Exceptions.InvalidDataException>();
         }
     }
 }
