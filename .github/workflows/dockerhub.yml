@@ -11,11 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check login
-        run: |
-          echo "Login = ${{ secrets.DOCKERHUB_USERNAME }}"
-          echo "Login = $LOGIN"
-
       -
         name: Checkout
         uses: actions/checkout@v4
