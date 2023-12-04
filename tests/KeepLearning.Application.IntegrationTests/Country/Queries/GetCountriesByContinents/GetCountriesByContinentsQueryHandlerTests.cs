@@ -82,7 +82,7 @@ namespace KeepLearning.Application.Country.Queries.GetCountriesByContinents.Inte
 
         [Theory()]
         [MemberData(nameof(GetQueryWithExpectedResult))]
-        public async void Handle_GetCountriesFromContients(QueryWithExpectedResult queryWithExpectedResult)
+        public async void Handle_WithNotEmptyListOfContinents_ReturnCountries(QueryWithExpectedResult queryWithExpectedResult)
         {
             // arrange
             var handler = new GetAllCountriesByContinentsQueryHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
@@ -92,6 +92,21 @@ namespace KeepLearning.Application.Country.Queries.GetCountriesByContinents.Inte
 
             // assert
             result.Count().Should().Be(queryWithExpectedResult.result);
+        }
+
+        [Fact()]
+        public async void Handle_WithEmptyListOfContinents_ReturnAllCountries()
+        {
+            // arrange
+            var getAllCountriesByContinentsQuery = new GetAllCountriesByContinentsQuery();
+            var handler = new GetAllCountriesByContinentsQueryHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
+            var numerOfAllCountries = 195;
+
+            // act
+            var result = await handler.Handle(getAllCountriesByContinentsQuery, CancellationToken.None);
+
+            // assert
+            result.Count().Should().Be(numerOfAllCountries);
         }
 
     }

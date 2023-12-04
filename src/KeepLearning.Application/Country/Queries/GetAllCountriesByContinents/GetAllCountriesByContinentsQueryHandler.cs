@@ -21,16 +21,20 @@ namespace KeepLearning.Application.Country.Queries.GetAllCountriesByContinents
 
         public async Task<IEnumerable<CountryDto>> Handle(GetAllCountriesByContinentsQuery request, CancellationToken cancellationToken)
         {
+            IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
+
             var continentNames = request.ContinentDtos.Select(c => c.Name);
             var continents = await _continentRepository.GetByNames(continentNames);
-            if (continents is null )
+
+            if (continents.Count() == 0)
             {
-                throw new NotFoundException("Not found any continent");
+                countries = await _countryRepository.GetAll();
+            } else
+            {
+                var continentIds = continents.Select(c => c.Id);
+
+                countries = await _countryRepository.GetByContinents(continentIds);
             }
-
-            var continentIds = continents.Select(c => c.Id);
-
-            var countries = await _countryRepository.GetByContinents(continentIds);
 
             var contriesDto = countries.Select( c => _mapper.Map<CountryDto>(c));
 
