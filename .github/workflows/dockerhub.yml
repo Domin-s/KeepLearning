@@ -14,7 +14,7 @@ jobs:
       - name: Check login
         run: |
           echo "Login = ${{ secrets.DOCKERHUB_USERNAME }}"
-          echo "Login = ${ LOGIN }"
+          echo "Login = $LOGIN"
 
       -
         name: Checkout
