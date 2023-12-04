@@ -1,4 +1,4 @@
-﻿using KeepLearning.Application.Country.Queries.GetAllCountries;
+﻿using KeepLearning.Application.Country.Queries.GetAllCountriesByContinents;
 using KeepLearning.Application.Country.Queries.GetNumberOfCountries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(GetAllCountriesQuery query)
+        public async Task<IActionResult> List(GetAllCountriesByContinentsQuery query)
         {
             var countries = await _mediator.Send(query);
 
