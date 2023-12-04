@@ -26,7 +26,7 @@ namespace KeepLearning.Infrastructure.Repositories
                     .ToListAsync();
 
         public async Task<IEnumerable<Country>> GetAll()
-            => await _dbContext.Countries.ToListAsync();
+            => await _dbContext.Countries.Include(c => c.Continent).ToListAsync();
 
         public async Task<int> GetNumberOfCountries(IEnumerable<Guid> continentIds)
             => await _dbContext.Countries.Where(country => continentIds.Contains(country.ContinentId)).CountAsync();
