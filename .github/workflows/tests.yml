@@ -1,13 +1,16 @@
-name: CI
+name: Run all tests
+
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
 
 jobs:
   build:
     runs-on: ${{matrix.os}}
+
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOs-latest]
@@ -45,4 +48,5 @@ jobs:
       - 
         name: KeepLearning.Infrastructure.UnitTests
         working-directory: ./tests/KeepLearning.Infrastructure.UnitTests
-        run: dotnet test
+        run: dotnet test    
+                
