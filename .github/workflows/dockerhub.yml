@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Check login
         run: |
-            echo "Login :" ${{ secrets.DOCKERHUB_USERNAME }}
+          echo "Login = ${{ secrets.DOCKERHUB_USERNAME }}"
+          echo "Login = " ${{ secrets.DOCKERHUB_USERNAME }}
 
       -
         name: Checkout
