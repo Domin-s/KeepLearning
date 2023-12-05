@@ -68,7 +68,7 @@ namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.Integratio
                 new GetRandomQuestionQuery()
                 {
                     Category = Category.Country,
-                    Continent = "N. America",
+                    Continent = "North America",
                 }
             };
 
