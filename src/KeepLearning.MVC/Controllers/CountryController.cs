@@ -1,5 +1,7 @@
-﻿using KeepLearning.Application.Country.Queries.GetAllCountries;
+﻿using KeepLearning.Application.Continent.Queries.GetAllContinents;
+using KeepLearning.Application.Country.Queries.GetAllCountriesByContinents;
 using KeepLearning.Application.Country.Queries.GetNumberOfCountries;
+using KeepLearning.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,11 +17,14 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List(GetAllCountriesQuery query)
+        public async Task<IActionResult> List(GetAllCountriesByContinentsQuery query)
         {
             var countries = await _mediator.Send(query);
+            var continents = await _mediator.Send(new GetAllContinentsQuery());
 
-            return View(countries);
+            var viewModel = new ListOfCountriesModelView(countries, continents);
+
+            return View(viewModel);
         }
 
         [HttpPost]

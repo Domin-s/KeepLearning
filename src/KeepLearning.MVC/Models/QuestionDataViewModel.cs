@@ -5,12 +5,12 @@ namespace KeepLearning.MVC.Models
 {
     public class QuestionDataViewModel
     {
-        public IEnumerable<string> Continents;
+        public IEnumerable<ContinentViewModel> ContinentViewModel;
         public IEnumerable<string> Category;
 
-        public QuestionDataViewModel(IEnumerable<ContinentDto> continents)
+        public QuestionDataViewModel(IEnumerable<ContinentDto> continents, IEnumerable<string> continentsChecked)
         {
-            Continents = continents.Select(c => c.Name);
+            ContinentViewModel = continents.Select(c => new ContinentViewModel(c, continentsChecked));
             Category = GuessType.GetAllLikeStrings();
         }
     }
