@@ -22,7 +22,8 @@ $(document).ready(function () {
 
     function ConfigureContinentInputs(createExam, continentInputs, numberOfQuestionDiv) {
         DiableButton(createExam, continentInputs);
-        HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs)
+        HideOrShowNumberOfQuestion(numberOfQuestionDiv, continentInputs);
+        GetMaxNumberOfQuestion(continentInputs);
 
         continentInputs.click(function (event) {
             GetMaxNumberOfQuestion(continentInputs);
@@ -47,6 +48,7 @@ $(document).ready(function () {
     }
 
     function GetMaxNumberOfQuestion(continentInputs) {
+        console.log(continentInputs);
         var dataToSend = CreateDataToSend(continentInputs);
 
         $.post(`/Country/GetNumberOfCountries`, dataToSend, (maxNumberOfQuestions, status) => {

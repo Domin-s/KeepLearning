@@ -13,30 +13,35 @@ else
 {
     <h1>Countries</h1>
 
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item m-3">
-                        <a class="btn btn-primary" asp-area="" asp-controller="Exam" asp-action="Create">Create exam</a>
-                    </li>
-                    <li class="nav-item m-3">
-                        <a class="btn btn-primary" asp-area="" asp-controller="Question" asp-action="Create">Random question</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <form method="get" asp-controller="Exam" asp-action="Create">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item m-3">
 
-    <div class="text-center">
-        @foreach (var continent in Model.Continents)
-        {
-            <div class="form-check form-check-inline">
-                <input class="continentSelect form-check-input" type="checkbox" name="Continents" for="continent" value="@continent.Name" checked />
-                <label class="form-check-label" id="continent">@continent.Name</label>
+                            <div class="col-3 col-md-3 col-sm-4">
+                                <input type="submit" value="Create exam" class="btn btn-primary" id="createExam" />
+                            </div>
+                        </li>
+                        <li class="nav-item m-3">
+                            <a class="btn btn-primary" asp-area="" asp-controller="Question" asp-action="Create">Random question</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        }
-    </div>
+        </nav>
+
+        <div class="text-center">
+            @foreach (var continent in Model.Continents)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="continentSelect form-check-input" type="checkbox" name="Continents" for="continent" value="@continent.Name" checked />
+                    <label class="form-check-label" id="continent">@continent.Name</label>
+                </div>
+            }
+        </div>
+    </form>
 
     <hr />
 

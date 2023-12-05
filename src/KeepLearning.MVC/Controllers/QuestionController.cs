@@ -21,7 +21,7 @@ namespace KeepLearning.MVC.Controllers
         public async Task<IActionResult> Create()
         {
             var continents = await _mediator.Send(new GetAllContinentsQuery());
-            var questionDataViewModel = new QuestionDataViewModel(continents);
+            var questionDataViewModel = new QuestionDataViewModel(continents, new List<string>());
 
             return View(questionDataViewModel);
         }

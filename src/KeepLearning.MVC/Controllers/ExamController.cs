@@ -23,10 +23,10 @@ namespace KeepLearning.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromQuery]List<string> Continents)
         {
             var continents = await _mediator.Send(new GetAllContinentsQuery());
-            var questionDataViewModel = new QuestionDataViewModel(continents);
+            var questionDataViewModel = new QuestionDataViewModel(continents, Continents);
 
             return View(questionDataViewModel);
         }

@@ -22,11 +22,19 @@
                             <div class="col-4 col-sm-5 col-md-4">Choose continents: </div>
 
                             <div class="col-5 col-sm-6 col-md-5">
-                                @foreach (var continent in Model.Continents)
+                                @foreach (var continent in Model.ContinentViewModel)
                                 {
-                                    <input type="checkbox" class="continentInput form-check-input" name="Continents"
-                                           for="continent" value="@continent" />
-                                    <label class="form-check-label" id="continent">@continent</label>
+                                    @if (continent.IsChecked)
+                                    {
+                                        <input type="checkbox" class="continentInput form-check-input" name="Continents"
+                                               for="continent" value="@continent.ContinentDto.Name" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="continentInput form-check-input" name="Continents"
+                                               for="continent" value="@continent.ContinentDto.Name" />
+                                    }
+                                    <label class="form-check-label" id="continent">@continent.ContinentDto.Name</label>
                                     <br />
                                 }
                             </div>
