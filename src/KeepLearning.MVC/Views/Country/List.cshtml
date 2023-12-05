@@ -21,23 +21,24 @@ else
                         <a class="btn btn-primary" asp-area="" asp-controller="Exam" asp-action="Create">Create exam</a>
                     </li>
                     <li class="nav-item m-3">
-                        <a class="btn btn-primary" asp-area="" asp-controller="Question" asp-action="Create">
-                            Random
-                            question
-                        </a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Question" asp-action="Create">Random question</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    @foreach (var continent in Model.Continents)
-    {
-        <div class="form-check form-check-inline">
-            <input class="continentSelect form-check-input" type="checkbox" name="Continents" for="continent" value="@continent" />
-            <label class="form-check-label" id="continent">@continent.Name</label>
-        </div>
-    }
+    <div class="text-center">
+        @foreach (var continent in Model.Continents)
+        {
+            <div class="form-check form-check-inline">
+                <input class="continentSelect form-check-input" type="checkbox" name="Continents" for="continent" value="@continent.Name" checked />
+                <label class="form-check-label" id="continent">@continent.Name</label>
+            </div>
+        }
+    </div>
+
+    <hr />
 
     <table class="table">
         <thead>
@@ -56,7 +57,7 @@ else
         <tbody>
             @foreach (var item in Model.CountryDtos)
             {
-                <tr>
+                <tr class="cotinent @item.ContinentDto.Name">
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -70,4 +71,8 @@ else
             }
         </tbody>
     </table>
+}
+
+@section Scripts {
+    <script src="~/js/Country/List.js"></script>
 }
