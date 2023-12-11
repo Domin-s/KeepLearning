@@ -27,12 +27,12 @@ jobs:
 
       - 
         name: Restore dependencies
-        working-directory: ./src/KeepLearning.MVC
+        working-directory: ./api/KeepLearning.MVC
         run: dotnet restore
 
       - 
         name: Build
-        working-directory: ./src/KeepLearning.MVC
+        working-directory: ./api/KeepLearning.MVC
         run: dotnet build --no-restore
 
       - 
