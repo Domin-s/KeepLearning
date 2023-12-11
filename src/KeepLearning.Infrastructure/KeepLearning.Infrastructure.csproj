@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\KeepLearning.Application\KeepLearning.Application.csproj" />
+		<ProjectReference Include="..\Application\Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
