@@ -11,15 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Application.IntegrationTests", "tests\KeepLearning.Application.IntegrationTests\KeepLearning.Application.IntegrationTests.csproj", "{1D10D291-4B46-4002-8503-E538F85D5E94}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{31CAE653-AB7D-4B4C-BE48-AE17590193E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31CAE653-AB7D-4B4C-BE48-AE17590193E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Application", "api\KeepLearning.Application\KeepLearning.Application.csproj", "{784696A6-CAE9-496D-9FD9-78317FCB7706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Application", "src\KeepLearning.Application\KeepLearning.Application.csproj", "{784696A6-CAE9-496D-9FD9-78317FCB7706}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Domain", "api\KeepLearning.Domain\KeepLearning.Domain.csproj", "{2FBA6831-1B98-4EA8-AEE6-9CA381B2E593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Domain", "src\KeepLearning.Domain\KeepLearning.Domain.csproj", "{2FBA6831-1B98-4EA8-AEE6-9CA381B2E593}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure", "api\KeepLearning.Infrastructure\KeepLearning.Infrastructure.csproj", "{3C17D3E8-0A46-489F-A72F-9B2B6296BBCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.Infrastructure", "src\KeepLearning.Infrastructure\KeepLearning.Infrastructure.csproj", "{3C17D3E8-0A46-489F-A72F-9B2B6296BBCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.MVC", "api\KeepLearning.MVC\KeepLearning.MVC.csproj", "{9A8F118A-2D8A-43AA-821E-23EAEE9F0385}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeepLearning.MVC", "src\KeepLearning.MVC\KeepLearning.MVC.csproj", "{9A8F118A-2D8A-43AA-821E-23EAEE9F0385}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

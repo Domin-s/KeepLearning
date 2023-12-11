@@ -3,11 +3,11 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 5242
 
-COPY ["/api/KeepLearning.Application/KeepLearning.Application.csproj", "/api/KeepLearning.Application/"]
-COPY ["/api/KeepLearning.Domain/KeepLearning.Domain.csproj", "/api/KeepLearning.Domain/"]
-COPY ["/api/KeepLearning.Infrastructure/KeepLearning.Infrastructure.csproj", "/api/KeepLearning.Infrastructure/"]
-COPY ["/api/KeepLearning.MVC/KeepLearning.MVC.csproj", "/api/KeepLearning.MVC/"]
-RUN dotnet restore "/api/KeepLearning.MVC/KeepLearning.MVC.csproj"
+COPY ["/src/KeepLearning.Application/KeepLearning.Application.csproj", "/src/KeepLearning.Application/"]
+COPY ["/src/KeepLearning.Domain/KeepLearning.Domain.csproj", "/src/KeepLearning.Domain/"]
+COPY ["/src/KeepLearning.Infrastructure/KeepLearning.Infrastructure.csproj", "/src/KeepLearning.Infrastructure/"]
+COPY ["/src/KeepLearning.MVC/KeepLearning.MVC.csproj", "/src/KeepLearning.MVC/"]
+RUN dotnet restore "/src/KeepLearning.MVC/KeepLearning.MVC.csproj"
 
 COPY . ./
 RUN dotnet publish -c Release -o out
