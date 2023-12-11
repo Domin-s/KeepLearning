@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace KeepLearning.Application.Exam.Queries.DownloadExam
+namespace Application.Exam.Queries.DownloadExam
 {
     public class DownloadExamQueryHandler : IRequestHandler<DownloadExamQuery, string>
     {

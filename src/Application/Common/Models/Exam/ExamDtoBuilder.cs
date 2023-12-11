@@ -1,9 +1,9 @@
-using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.Common.Models.Exam.Country;
-using KeepLearning.Application.Common.Models.Question;
-using static KeepLearning.Domain.Models.Enums.GuessType;
+using Application.Common.Models.Continent;
+using Application.Common.Models.Exam.Country;
+using Application.Common.Models.Question;
+using static Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Application.Common.Models.Exam
+namespace Application.Common.Models.Exam
 {
     public static class ExamDtoBuilder
     {

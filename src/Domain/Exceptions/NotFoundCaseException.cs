@@ -1,4 +1,4 @@
-﻿namespace KeepLearning.Domain.Exceptions
+﻿namespace Domain.Exceptions
 {
     public class NotFoundCaseException : Exception
     {

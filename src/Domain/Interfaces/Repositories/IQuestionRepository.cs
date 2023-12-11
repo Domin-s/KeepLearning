@@ -1,6 +1,6 @@
-using KeepLearning.Domain.Enteties;
+using Domain.Enteties;
 
-namespace KeepLearning.Domain.Interfaces.Repositories
+namespace Domain.Interfaces.Repositories
 {
     public interface IQuestionRepository
     {

@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
-using KeepLearning.Domain.Commands.CreateExamCountry;
 
-namespace KeepLearning.Domain.Commands.CreateTestCountry
+using Domain.Commands.CreateExamCountry;
+
+namespace Domain.Commands.CreateTestCountry
 {
     public class CreateExamCountryCommandValidator : AbstractValidator<CreateExamCountryCommand>
     {

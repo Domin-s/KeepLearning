@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Common.Models.Continent;
+﻿using Application.Common.Models.Continent;
 
-namespace KeepLearning.Application.Common.Models.Country
+namespace Application.Common.Models.Country
 {
     public class CountryDto
     {

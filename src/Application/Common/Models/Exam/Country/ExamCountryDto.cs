@@ -1,8 +1,8 @@
-﻿using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.Common.Models.Exam;
-using static KeepLearning.Domain.Models.Enums.GuessType;
+﻿using Application.Common.Models.Continent;
+using Application.Common.Models.Exam;
+using static Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Application.Common.Models.Exam.Country
+namespace Application.Common.Models.Exam.Country
 {
     public class ExamCountryDto : ExamDto
     {

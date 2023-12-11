@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Domain.Interfaces;
+using Application.Common.Models.Continent;
+using Application.Common.Models.Country;
+using Domain.Interfaces;
 using Moq;
-using static KeepLearning.Domain.Models.Enums.GuessType;
+using static Domain.Models.Enums.GuessType;
 
-namespace KeepLearning.Application.Question.Queries.GetRandomQuestion.UnitTests
+namespace Application.Question.Queries.GetRandomQuestion.UnitTests
 {
     public class GetRandomQuestionQueryHandlerTests
     {

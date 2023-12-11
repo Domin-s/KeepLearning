@@ -1,9 +1,9 @@
-using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Domain.Commands.CreateExamCountry;
-using KeepLearning.Domain.Exceptions;
-using KeepLearning.Domain.Models.Enums;
+using Application.Common.Models.Country;
+using Domain.Commands.CreateExamCountry;
+using Domain.Exceptions;
+using Domain.Models.Enums;
 
-namespace KeepLearning.Application.Common.Models.Question
+namespace Application.Common.Models.Question
 {
     public static class QuestionDtoBuilder
     {

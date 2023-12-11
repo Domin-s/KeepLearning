@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Application.Common.Models.Question;
-using KeepLearning.Domain.Exceptions;
-using KeepLearning.Domain.Interfaces;
+using Application.Common.Models.Country;
+using Application.Common.Models.Question;
+using Domain.Exceptions;
+using Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Question.Queries.GetRandomQuestion
+namespace Application.Question.Queries.GetRandomQuestion
 {
     public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
     {

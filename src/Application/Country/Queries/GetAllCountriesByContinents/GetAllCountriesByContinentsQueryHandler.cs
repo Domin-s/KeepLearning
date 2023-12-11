@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Domain.Exceptions;
-using KeepLearning.Domain.Interfaces;
+using Application.Common.Models.Country;
+using Domain.Exceptions;
+using Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Country.Queries.GetAllCountriesByContinents
+namespace Application.Country.Queries.GetAllCountriesByContinents
 {
     public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCountriesByContinentsQuery, IEnumerable<CountryDto>>
     {

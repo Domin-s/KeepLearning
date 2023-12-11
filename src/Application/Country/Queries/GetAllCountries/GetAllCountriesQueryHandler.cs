@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using KeepLearning.Domain.Interfaces;
-using KeepLearning.Domain.Models;
+using Domain.Interfaces;
+using Domain.Models;
 using MediatR;
 
-namespace KeepLearning.Application.Country.Queries.GetAllCountries
+namespace Application.Country.Queries.GetAllCountries
 {
     public class GetAllCountriesQueryHandler : IRequestHandler<GetAllCountriesQuery, Countries>
     {

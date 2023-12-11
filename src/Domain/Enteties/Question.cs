@@ -1,4 +1,4 @@
-namespace KeepLearning.Domain.Enteties
+namespace Domain.Enteties
 {
     public class Question
     {

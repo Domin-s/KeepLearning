@@ -1,7 +1,7 @@
-﻿using KeepLearning.Domain.Interfaces;
+﻿using Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Question.Queries.CheckAnswer
+namespace Application.Question.Queries.CheckAnswer
 {
     public class CheckAnswerQueryHandler : IRequestHandler<CheckAnswerQuery, bool>
     {

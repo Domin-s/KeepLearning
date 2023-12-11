@@ -1,7 +1,7 @@
-﻿using KeepLearning.Domain.Models.Enums;
+﻿using Domain.Models.Enums;
 using MediatR;
 
-namespace KeepLearning.Application.Question.Queries.CheckAnswer
+namespace Application.Question.Queries.CheckAnswer
 {
     public class CheckAnswerQuery : IRequest<bool>
     {

@@ -1,9 +1,9 @@
-﻿using KeepLearning.Application.Common.Models.Result.Answer;
-using KeepLearning.Application.Common.Models.Result.Exam;
-using KeepLearning.Domain.Interfaces;
+﻿using Application.Common.Models.Result.Answer;
+using Application.Common.Models.Result.Exam;
+using Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Exam.Queries.CheckExam
+namespace Application.Exam.Queries.CheckExam
 {
     public class CheckExamQueryHandler : IRequestHandler<CheckExamQuery, ExamResultDto>
     {

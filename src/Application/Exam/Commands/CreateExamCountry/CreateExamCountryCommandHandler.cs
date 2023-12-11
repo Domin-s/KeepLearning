@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using KeepLearning.Domain.Interfaces;
+using Domain.Interfaces;
 using MediatR;
-using KeepLearning.Domain.Exceptions;
-using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.Common.Models.Country;
-using KeepLearning.Application.Common.Models.Exam;
-using KeepLearning.Application.Common.Models.Question;
-using KeepLearning.Application.Common.Models.Exam.Country;
+using Domain.Exceptions;
+using Application.Common.Models.Continent;
+using Application.Common.Models.Country;
+using Application.Common.Models.Exam;
+using Application.Common.Models.Question;
+using Application.Common.Models.Exam.Country;
 
-namespace KeepLearning.Domain.Commands.CreateExamCountry
+namespace Domain.Commands.CreateExamCountry
 {
     public class CreateExamCountryCommandHandler : IRequestHandler<CreateExamCountryCommand, ExamCountryDto>
     {

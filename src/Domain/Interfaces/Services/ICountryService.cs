@@ -1,7 +1,7 @@
-﻿using KeepLearning.Domain.Enteties;
-using KeepLearning.Domain.Models.Enums;
+﻿using Domain.Enteties;
+using Domain.Models.Enums;
 
-namespace KeepLearning.Domain.Interfaces
+namespace Domain.Interfaces
 {
     public interface ICountryService
     {

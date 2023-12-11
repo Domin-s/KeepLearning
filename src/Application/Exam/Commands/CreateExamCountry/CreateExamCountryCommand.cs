@@ -1,8 +1,8 @@
-﻿using KeepLearning.Application.Common.Models.Exam.Country;
-using KeepLearning.Domain.Models.Enums;
+﻿using Application.Common.Models.Exam.Country;
+using Domain.Models.Enums;
 using MediatR;
 
-namespace KeepLearning.Domain.Commands.CreateExamCountry
+namespace Domain.Commands.CreateExamCountry
 {
     public class CreateExamCountryCommand : IRequest<ExamCountryDto>
     {

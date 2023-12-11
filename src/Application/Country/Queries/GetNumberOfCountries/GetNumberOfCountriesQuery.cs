@@ -1,7 +1,7 @@
-﻿using KeepLearning.Application.Common.Models.Continent;
+﻿using Application.Common.Models.Continent;
 using MediatR;
 
-namespace KeepLearning.Application.Country.Queries.GetNumberOfCountries
+namespace Application.Country.Queries.GetNumberOfCountries
 {
     public class GetNumberOfCountriesQuery : IRequest<int>
     {

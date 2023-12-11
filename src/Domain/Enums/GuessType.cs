@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace KeepLearning.Domain.Models.Enums
+namespace Domain.Models.Enums
 {
     public static class GuessType
     {

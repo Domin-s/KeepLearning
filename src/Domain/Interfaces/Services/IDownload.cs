@@ -1,6 +1,6 @@
-using KeepLearning.Domain.Enteties;
+using Domain.Enteties;
 
-namespace KeepLearning.Domain.Interfaces
+namespace Domain.Interfaces
 {
     public interface IDownload
     {

@@ -1,8 +1,8 @@
-using KeepLearning.Application.Common.Models.Exam.Country;
-using KeepLearning.Domain.Models.Enums;
+using Application.Common.Models.Exam.Country;
+using Domain.Models.Enums;
 using MediatR;
 
-namespace KeepLearning.Application.Exam.Queries.DownloadExam
+namespace Application.Exam.Queries.DownloadExam
 {
     public class DownloadExamQuery : ExamCountryDto, IRequest<string>
     {

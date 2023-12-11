@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Domain.Interfaces;
+using Application.Common.Models.Continent;
+using Domain.Interfaces;
 using MediatR;
 
-namespace KeepLearning.Application.Continent.Queries.GetAllContinents
+namespace Application.Continent.Queries.GetAllContinents
 {
     public class GetAllContinentsQueryHandler : IRequestHandler<GetAllContinentsQuery, IEnumerable<ContinentDto>>
     {

@@ -1,6 +1,6 @@
-﻿using KeepLearning.Domain.Enteties;
+﻿using Domain.Enteties;
 
-namespace KeepLearning.Domain.Models
+namespace Domain.Models
 {
     public record Countries(IEnumerable<Country> ListOfCountry)
     {

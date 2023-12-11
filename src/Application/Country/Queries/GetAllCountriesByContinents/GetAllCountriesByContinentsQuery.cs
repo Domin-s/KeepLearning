@@ -1,8 +1,8 @@
-using KeepLearning.Application.Common.Models.Continent;
-using KeepLearning.Application.Common.Models.Country;
+using Application.Common.Models.Continent;
+using Application.Common.Models.Country;
 using MediatR;
 
-namespace KeepLearning.Application.Country.Queries.GetAllCountriesByContinents
+namespace Application.Country.Queries.GetAllCountriesByContinents
 {
     public class GetAllCountriesByContinentsQuery : IRequest<IEnumerable<CountryDto>>
     {

@@ -1,6 +1,6 @@
-﻿using KeepLearning.Application.Common.Models.Question;
+﻿using Application.Common.Models.Question;
 
-namespace KeepLearning.Application.Common.Models.Exam
+namespace Application.Common.Models.Exam
 {
     public class ExamDto
     {
