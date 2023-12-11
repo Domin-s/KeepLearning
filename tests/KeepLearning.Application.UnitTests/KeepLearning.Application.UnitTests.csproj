@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KeepLearning.Application\KeepLearning.Application.csproj" />
+    <ProjectReference Include="..\..\api\KeepLearning.Application\KeepLearning.Application.csproj" />
   </ItemGroup>
-
 </Project>
