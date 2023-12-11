@@ -16,37 +16,29 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOs-latest]
 
     steps:
-      - 
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - 
-        name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v1.9.0 
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: 7.0.x
 
-      - 
-        name: Restore dependencies
-        working-directory: ./api/KeepLearning.MVC
+      - name: Restore dependencies
+        working-directory: ./api/MVC
         run: dotnet restore
 
-      - 
-        name: Build
-        working-directory: ./api/KeepLearning.MVC
+      - name: Build
+        working-directory: ./api/MVC
         run: dotnet build --no-restore
 
-      - 
-        name: KeepLearning.Application.IntegrationTests
-        working-directory: ./tests/KeepLearning.Application.IntegrationTests
+      - name: Application.IntegrationTests
+        working-directory: ./tests/Application.IntegrationTests
         run: dotnet test
 
-      - 
-        name: KeepLearning.Application.UnitTests
-        working-directory: ./tests/KeepLearning.Application.UnitTests
+      - name: Application.UnitTests
+        working-directory: ./tests/Application.UnitTests
         run: dotnet test
 
-      - 
-        name: KeepLearning.Infrastructure.UnitTests
-        working-directory: ./tests/KeepLearning.Infrastructure.UnitTests
-        run: dotnet test    
-                
+      - name: Infrastructure.UnitTests
+        working-directory: ./tests/Infrastructure.UnitTests
+        run: dotnet test

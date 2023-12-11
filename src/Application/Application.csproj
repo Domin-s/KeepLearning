@@ -7,21 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Country\Commands\**" />
-	  <Compile Remove="Common\Models\Enums\**" />
-	  <Compile Remove="Queries\**" />
-	  <Compile Remove="Question\Commands\**" />
-	  <EmbeddedResource Remove="Country\Commands\**" />
-	  <EmbeddedResource Remove="Common\Models\Enums\**" />
-	  <EmbeddedResource Remove="Queries\**" />
-	  <EmbeddedResource Remove="Question\Commands\**" />
-	  <None Remove="Country\Commands\**" />
-	  <None Remove="Common\Models\Enums\**" />
-	  <None Remove="Queries\**" />
-	  <None Remove="Question\Commands\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />

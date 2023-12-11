@@ -1,10 +1,9 @@
 ﻿using Domain.Enteties;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence
 {
-    public class KeepLearningDbContext : IdentityDbContext
+    public class KeepLearningDbContext : DbContext
     {
         public KeepLearningDbContext(DbContextOptions<KeepLearningDbContext> options) : base(options)
         {

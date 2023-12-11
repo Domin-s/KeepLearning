@@ -3,7 +3,6 @@ using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Infrastructure.Seeders;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,13 +17,6 @@ namespace Infrastructure.Extensions
             services.AddDbContext<KeepLearningDbContext>(options =>
                 options.UseSqlServer(connectionString)
             );
-
-            services.AddDefaultIdentity<IdentityUser>(options =>
-            {
-                options.Stores.MaxLengthForKeys = 450;
-            })
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<KeepLearningDbContext>();
 
             services.AddScoped<IContinentRepository, ContinentRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
