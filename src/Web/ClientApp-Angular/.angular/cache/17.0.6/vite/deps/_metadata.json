@@ -1,0 +1,47 @@
+{
+  "hash": "2c2dae8b",
+  "browserHash": "a8b57991",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "26d99447",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "be5596b1",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "8aa8643b",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "ded71323",
+      "needsInterop": false
+    },
+    "@ng-bootstrap/ng-bootstrap": {
+      "src": "../../../../../node_modules/@ng-bootstrap/ng-bootstrap/fesm2022/ng-bootstrap.mjs",
+      "file": "@ng-bootstrap_ng-bootstrap.js",
+      "fileHash": "f7811ef4",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-AJSRQEJT": {
+      "file": "chunk-AJSRQEJT.js"
+    },
+    "chunk-PEFKQI4B": {
+      "file": "chunk-PEFKQI4B.js"
+    },
+    "chunk-C4QVR2ZX": {
+      "file": "chunk-C4QVR2ZX.js"
+    }
+  }
+}
