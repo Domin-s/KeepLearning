@@ -44,14 +44,14 @@ namespace Application.Country.Queries.GetCountriesByContinents.IntegrationTests
             _mapper = configuration.CreateMapper();
         }
 
-        public record QueryWithExpectedResult(GetAllCountriesByContinentsQuery getAllCountriesByContinentsQuery, int result) { }
+        public record QueryWithExpectedResult(GetCountriesByContinentsQuery getAllCountriesByContinentsQuery, int result) { }
 
         public static IEnumerable<object[]> GetQueryWithExpectedResult()
         {
             var list = new List<QueryWithExpectedResult>()
             {
                 new QueryWithExpectedResult(
-                    new GetAllCountriesByContinentsQuery(){
+                    new GetCountriesByContinentsQuery(){
                             ContinentDtos = new List<ContinentDto>() {
                                 new ContinentDto("Asia")
                             }
@@ -59,7 +59,7 @@ namespace Application.Country.Queries.GetCountriesByContinents.IntegrationTests
                     48
                 ),
                 new QueryWithExpectedResult(
-                    new GetAllCountriesByContinentsQuery(){
+                    new GetCountriesByContinentsQuery(){
                             ContinentDtos= new List<ContinentDto>() {
                                 new ContinentDto("Asia"),
                                 new ContinentDto("Europe")
@@ -68,7 +68,7 @@ namespace Application.Country.Queries.GetCountriesByContinents.IntegrationTests
                     92
                 ),
                 new QueryWithExpectedResult(
-                    new GetAllCountriesByContinentsQuery(){
+                    new GetCountriesByContinentsQuery(){
                             ContinentDtos= new List<ContinentDto>() {
                                 new ContinentDto("Europe")
                             }
@@ -98,7 +98,7 @@ namespace Application.Country.Queries.GetCountriesByContinents.IntegrationTests
         public async void Handle_WithEmptyListOfContinents_ReturnAllCountries()
         {
             // arrange
-            var getAllCountriesByContinentsQuery = new GetAllCountriesByContinentsQuery();
+            var getAllCountriesByContinentsQuery = new GetCountriesByContinentsQuery();
             var handler = new GetAllCountriesByContinentsQueryHandler(_continentRepositoryTest, _countryRepositoryTest, _mapper);
             var numerOfAllCountries = 195;
 

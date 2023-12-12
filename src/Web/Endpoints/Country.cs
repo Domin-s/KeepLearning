@@ -13,7 +13,7 @@ namespace Web.Endpoints
             .MapGet(GetNumberOfCountries, "numberOfCountries");
         }
 
-        public async Task<IEnumerable<CountryDto>> GetCountries(ISender sender, [AsParameters] GetAllCountriesByContinentsQuery query)
+        public async Task<IEnumerable<CountryDto>> GetCountries(ISender sender, [AsParameters] GetCountriesByContinentsQuery query)
         {
             return await sender.Send(query);
         }

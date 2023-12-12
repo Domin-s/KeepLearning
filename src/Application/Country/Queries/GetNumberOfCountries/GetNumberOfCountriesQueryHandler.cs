@@ -1,23 +1,22 @@
-﻿using Domain.Interfaces;
+﻿using Application.Common.Interfaces;
 
 namespace Application.Country.Queries.GetNumberOfCountries;
 
 public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCountriesQuery, int>
 {
-    private readonly IContinentRepository _continentRepository;
-    private readonly ICountryRepository _countryRepository;
+    private readonly IKeepLearningDbContext _dbContext;
 
-    public GetNumberOfCountriesQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository)
+    public GetNumberOfCountriesQueryHandler(IKeepLearningDbContext dbContext)
     {
-        _continentRepository = continentRepository;
-        _countryRepository = countryRepository;
+        _dbContext = dbContext;
     }
 
     public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
     {
-        var continents = await _continentRepository.GetByNames(request.Continents.Select(c => c.Name));
+        var continentNames = request.Continents.Select(c => c.Name);
+        var continents = await _dbContext.Continents.Where(c => continentNames.Contains(c.Name)).ToListAsync();
         var continentIds = continents.Select(c => c.Id);
-        var numberOfCountries = await _countryRepository.GetNumberOfCountries(continentIds);
+        var numberOfCountries = await _dbContext.Countries.Where(country => continentIds.Contains(country.ContinentId)).CountAsync();
 
         return numberOfCountries;
     }

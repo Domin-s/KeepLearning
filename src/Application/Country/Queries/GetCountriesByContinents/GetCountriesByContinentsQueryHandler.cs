@@ -3,18 +3,18 @@ using Application.Common.Models.Country;
 
 namespace Application.Country.Queries.GetAllCountriesByContinents;
 
-public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCountriesByContinentsQuery, IEnumerable<CountryDto>>
+public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountriesByContinentsQuery, IEnumerable<CountryDto>>
 {
     private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
 
-    public GetAllCountriesByContinentsQueryHandler(IKeepLearningDbContext dbContext, IMapper mapper)
+    public GetCountriesByContinentsQueryHandler(IKeepLearningDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<CountryDto>> Handle(GetAllCountriesByContinentsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<CountryDto>> Handle(GetCountriesByContinentsQuery request, CancellationToken cancellationToken)
     {
         IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
 

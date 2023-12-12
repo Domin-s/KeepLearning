@@ -1,4 +1,5 @@
-﻿using Domain.Enteties;
+﻿using Application.Common.Interfaces;
+using Domain.Enteties;
 using Domain.Interfaces;
 using Domain.Models.Enums;
 using static Domain.Models.Enums.GuessType;
@@ -7,11 +8,11 @@ namespace Infrastructure.Services
 {
     public class CountryService : ICountryService
     {
-        private readonly ICountryRepository _countryRepository;
+        private readonly IKeepLearningDbContext _dbContext;
 
-        public CountryService(ICountryRepository countryRepository)
+        public CountryService(IKeepLearningDbContext dbContext)
         {
-            _countryRepository = countryRepository;
+            _dbContext = dbContext;
         }
 
         public async Task<Country?> GetRandom(Guid continentId)
@@ -23,7 +24,9 @@ namespace Infrastructure.Services
 
         public async Task<IEnumerable<Country>> RandomCountries(IEnumerable<Guid> continentIds, int numberOfCountries)
         {
-            var countries = await _countryRepository.GetByContinents(continentIds);
+            var countries = await _dbContext.Countries
+                    .Where(country => continentIds.Contains(country.ContinentId))
+                    .ToListAsync();
 
             if (countries is null)
             {
@@ -88,10 +91,10 @@ namespace Infrastructure.Services
             switch (category)
             {
                 case Category.CapitalCity:
-                    return await _countryRepository.GetByName(questionText);
+                    return await _dbContext.Countries.FirstAsync(country => country.Name == questionText);
 
                 case Category.Country:
-                    return await _countryRepository.GetByCapitalCity(questionText);
+                    return await _dbContext.Countries.FirstAsync(country => country.CapitalCity == questionText);
 
                 default:
                     throw new NotImplementedException();

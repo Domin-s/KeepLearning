@@ -3,7 +3,7 @@ using Application.Common.Models.Country;
 
 namespace Application.Country.Queries.GetAllCountriesByContinents;
 
-public class GetAllCountriesByContinentsQuery : IRequest<IEnumerable<CountryDto>>
+public class GetCountriesByContinentsQuery : IRequest<IEnumerable<CountryDto>>
 {
     public IEnumerable<ContinentDto> ContinentDtos { get; set; } = new List<ContinentDto>();
 }
