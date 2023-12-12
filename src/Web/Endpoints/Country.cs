@@ -8,7 +8,9 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-            throw new NotImplementedException();
+            app.MapGroup(this)
+            .MapGet(GetCountries)
+            .MapGet(GetNumberOfCountries, "numberOfCountries");
         }
 
         public async Task<IEnumerable<CountryDto>> GetCountries(ISender sender, [AsParameters] GetAllCountriesByContinentsQuery query)

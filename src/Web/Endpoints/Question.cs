@@ -8,10 +8,12 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-
+            app.MapGroup(this)
+            .MapGet(GenerateQuestion, "generate");
         }
 
-        public async Task<QuestionDto> GetRandomQuestion(ISender sender, [AsParameters] GetRandomQuestionQuery query)
+        // TODO: change GetRandomQuestionQuery to GenerateQuestion
+        public async Task<QuestionDto> GenerateQuestion(ISender sender, [AsParameters] GetRandomQuestionQuery query)
         {
             return await sender.Send(query);
         }
