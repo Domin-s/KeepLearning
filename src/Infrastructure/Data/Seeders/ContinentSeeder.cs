@@ -1,7 +1,7 @@
 ﻿using Domain.Enteties;
 using Infrastructure.Persistence;
 
-namespace Infrastructure.Seeders
+namespace Infrastructure.Data.Seeders
 {
     public class ContinentSeeder
     {

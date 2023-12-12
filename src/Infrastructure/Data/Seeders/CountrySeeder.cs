@@ -4,7 +4,7 @@ using Domain.Enteties;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Seeders
+namespace Infrastructure.Data.Seeders
 {
     public class CountrySeeder
     {

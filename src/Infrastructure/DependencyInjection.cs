@@ -1,7 +1,7 @@
 using Domain.Interfaces;
+using Infrastructure.Data.Seeders;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
-using Infrastructure.Seeders;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 

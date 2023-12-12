@@ -2,7 +2,6 @@
 using Domain.Exceptions;
 using Domain.Interfaces;
 using Domain.Models.Enums;
-using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
 
 namespace Infrastructure.Services
