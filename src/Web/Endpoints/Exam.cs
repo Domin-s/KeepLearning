@@ -11,10 +11,12 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-            throw new NotImplementedException();
+            app.MapGroup(this)
+            .MapGet(GenerateExam, "generate")
+            .MapGet(CheckExam, "check");
         }
 
-        public async Task<ExamDto> CreateExam(ISender sender, [AsParameters] CreateExamCountryCommand command)
+        public async Task<ExamDto> GenerateExam(ISender sender, [AsParameters] CreateExamCountryCommand command)
         {
             return await sender.Send(command);
         }
