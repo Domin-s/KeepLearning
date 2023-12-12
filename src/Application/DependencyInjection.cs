@@ -1,4 +1,5 @@
 using Application.Common.Behaviours;
+using Infrastructure.Services;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -19,6 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             });
+
+            services.AddScoped<CountryService>();
 
             return services;
         }

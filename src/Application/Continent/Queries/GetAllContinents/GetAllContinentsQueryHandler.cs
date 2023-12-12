@@ -1,22 +1,22 @@
-﻿using Application.Common.Models.Continent;
-using Domain.Interfaces;
+﻿using Application.Common.Interfaces;
+using Application.Common.Models.Continent;
 
 namespace Application.Continent.Queries.GetAllContinents;
 
 public class GetAllContinentsQueryHandler : IRequestHandler<GetAllContinentsQuery, IEnumerable<ContinentDto>>
 {
-    private readonly IContinentRepository _continentRepository;
+    private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
 
-    public GetAllContinentsQueryHandler(IContinentRepository continentRepository, IMapper mapper)
+    public GetAllContinentsQueryHandler(IKeepLearningDbContext dbContext, IMapper mapper)
     {
-        _continentRepository = continentRepository;
+        _dbContext = dbContext;
         _mapper = mapper;
     }
 
     public async Task<IEnumerable<ContinentDto>> Handle(GetAllContinentsQuery request, CancellationToken cancellationToken)
     {
-        var continents = await _continentRepository.GetAll();
+        var continents = await _dbContext.Continents.ToListAsync();
 
         var continentsDto = continents.Select(c => _mapper.Map<ContinentDto>(c));
 

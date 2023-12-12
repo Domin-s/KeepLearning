@@ -1,8 +1,9 @@
 using Application.Common.Models.Exam;
 using Application.Common.Models.Exam.Country;
 using Application.Exam.Queries.CheckExam;
+using Application.Exam.Queries.GenerateExamCountry;
+
 // TODO: KL-29: Check namespaces in queries and command
-using Domain.Commands.CreateExamCountry;
 
 namespace Web.Endpoints
 {
@@ -10,12 +11,12 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-            app.MapGroup(this)
-            .MapGet(GenerateExam, "generate")
-            .MapGet(CheckExam, "check");
+            app.MapGroup(this);
+            //.MapGet(GenerateExam, "generate")
+            //.MapGet(CheckExam, "check");
         }
 
-        public async Task<ExamCountryDto> GenerateExam(ISender sender, [AsParameters] CreateExamCountryCommand command)
+        public async Task<ExamCountryDto> GenerateExam(ISender sender, [AsParameters] GenerateExamCountryQuery command)
         {
             return await sender.Send(command);
         }

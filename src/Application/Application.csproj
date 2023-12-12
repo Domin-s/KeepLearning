@@ -8,8 +8,11 @@
 
 	<ItemGroup>
 	  <Compile Remove="Common\Models\Result\**" />
+	  <Compile Remove="Exam\Commands\**" />
 	  <EmbeddedResource Remove="Common\Models\Result\**" />
+	  <EmbeddedResource Remove="Exam\Commands\**" />
 	  <None Remove="Common\Models\Result\**" />
+	  <None Remove="Exam\Commands\**" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,25 +1,26 @@
-﻿using Application.Common.Models.Country;
+﻿using Application.Common.Interfaces;
+using Application.Common.Models.Country;
 using Application.Common.Models.Question;
-using Domain.Interfaces;
+using Infrastructure.Services;
 
 namespace Application.Question.Queries.GetRandomQuestion;
 
 public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
 {
-    private readonly IContinentRepository _continentRepository;
-    private readonly ICountryService _countryService;
+    private readonly IKeepLearningDbContext _dbContext;
+    private readonly CountryService _countryService;
     private readonly IMapper _mapper;
 
-    public GetRandomQuestionQueryHandler(IContinentRepository continentRepository, ICountryService countryService, IMapper mapper)
+    public GetRandomQuestionQueryHandler(IKeepLearningDbContext dbContext, CountryService countryService, IMapper mapper)
     {
-        _continentRepository = continentRepository;
+        _dbContext = dbContext;
         _countryService = countryService;
         _mapper = mapper;
     }
 
     public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
     {
-        var continent = await _continentRepository.GetByName(request.Continent);
+        var continent = await _dbContext.Continents.Where(c => c.Name == request.Continent).FirstAsync();
         if (continent is null)
         {
             throw new NotFoundException(request.Continent, "Not found continent!");

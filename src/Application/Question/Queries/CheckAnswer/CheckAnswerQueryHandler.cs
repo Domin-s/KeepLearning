@@ -1,12 +1,12 @@
-﻿using Domain.Interfaces;
+﻿using Infrastructure.Services;
 
 namespace Application.Question.Queries.CheckAnswer;
 
 public class CheckAnswerQueryHandler : IRequestHandler<CheckAnswerQuery, bool>
 {
-    private readonly ICountryService _countryService;
+    private readonly CountryService _countryService;
 
-    public CheckAnswerQueryHandler(ICountryService countryService)
+    public CheckAnswerQueryHandler(CountryService countryService)
     {
         _countryService = countryService;
     }

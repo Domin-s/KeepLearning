@@ -7,8 +7,8 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-            app.MapGroup(this)
-                .MapGet(IsCorrectAnswer, "isCorrect");
+            app.MapGroup(this);
+                //.MapGet(IsCorrectAnswer, "isCorrect");
         }
 
         public async Task<bool> IsCorrectAnswer(ISender sender, [AsParameters] CheckAnswerQuery query)

@@ -8,8 +8,9 @@ using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
 using Ardalis.GuardClauses;
+using Application.Exam.Queries.GenerateExamCountry;
 
-namespace Domain.Commands.CreateExamCountry.IntegrationTests
+namespace Domain.Commands.GenerateExamCountry.IntegrationTests
 {
     public class CreateExamCountryCommandHandlerIntegrationTests
     {
@@ -50,27 +51,27 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         public static IEnumerable<object[]> GetCommands()
         {
-            var list = new List<CreateExamCountryCommand>()
+            var list = new List<GenerateExamCountryQuery>()
             {
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 1",
                     NumberOfQuestion = 5,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 2",
                     NumberOfQuestion = 10,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 3",
                     NumberOfQuestion = 25,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "",
                     NumberOfQuestion = 50,
                     Category = Category.Country,
@@ -83,10 +84,10 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         [Theory()]
         [MemberData(nameof(GetCommands))]
-        public async void Handle_CreateExamWithAllValidData_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
+        public async void Handle_CreateExamWithAllValidData_ReturnExam(GenerateExamCountryQuery createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
+            var createExamCountryCommandHandler = new GenerateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act
@@ -101,9 +102,9 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         public static IEnumerable<object[]> GetInvalidCommands()
         {
-            var list = new List<CreateExamCountryCommand>()
+            var list = new List<GenerateExamCountryQuery>()
             {
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 1",
                     NumberOfQuestion = 105,
                     Category = Category.Country,
@@ -116,10 +117,10 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         [Theory()]
         [MemberData(nameof(GetCommands))]
-        public void Handle_CreateExamWithNumberOfQuestionIsBiggerThanCountriesInContinent_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
+        public void Handle_CreateExamWithNumberOfQuestionIsBiggerThanCountriesInContinent_ReturnExam(GenerateExamCountryQuery createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
+            var createExamCountryCommandHandler = new GenerateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act

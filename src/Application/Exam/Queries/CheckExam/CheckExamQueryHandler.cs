@@ -1,14 +1,14 @@
 ﻿using Application.Common.Models.Answer;
 using Application.Common.Models.Exam;
-using Domain.Interfaces;
+using Infrastructure.Services;
 
 namespace Application.Exam.Queries.CheckExam;
 
 public class CheckExamQueryHandler : IRequestHandler<CheckExamQuery, ExamResultDto>
 {
-    private readonly ICountryService _countryService;
+    private readonly CountryService _countryService;
 
-    public CheckExamQueryHandler(ICountryService countryService)
+    public CheckExamQueryHandler(CountryService countryService)
     {
         _countryService = countryService;
     }

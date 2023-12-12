@@ -8,8 +8,8 @@ namespace Web.Endpoints
     {
         public override void Map(WebApplication app)
         {
-            app.MapGroup(this)
-            .MapGet(GenerateQuestion, "generate");
+            app.MapGroup(this);
+            //.MapGet(GenerateQuestion, "generate");
         }
 
         // TODO: change GetRandomQuestionQuery to GenerateQuestion

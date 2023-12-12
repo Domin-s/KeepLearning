@@ -1,9 +1,9 @@
 ﻿using Application.Common.Models.Exam.Country;
 using Domain.Models.Enums;
 
-namespace Domain.Commands.CreateExamCountry;
+namespace Application.Exam.Queries.GenerateExamCountry;
 
-public class CreateExamCountryCommand : IRequest<ExamCountryDto>
+public class GenerateExamCountryQuery : IRequest<ExamCountryDto>
 {
     public string? Name { get; set; }
     public int NumberOfQuestion { get; set; } = 10;

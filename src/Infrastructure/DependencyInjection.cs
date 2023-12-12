@@ -1,12 +1,9 @@
 using Application.Common.Interfaces;
 using Infrastructure.Data.Interceptors;
 using Domain.Constants;
-using Domain.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Data.Seeders;
 using Infrastructure.Identity;
-using Infrastructure.Repositories;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -48,10 +45,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddAuthorization(options =>
                 options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
-
-            services.AddScoped<IContinentRepository, ContinentRepository>();
-            services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<ICountryService, CountryService>();
 
             services.AddScoped<ContinentSeeder>();
             services.AddScoped<CountrySeeder>();

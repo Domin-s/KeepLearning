@@ -1,12 +1,12 @@
 using Application.Common.Models.Country;
-using Domain.Commands.CreateExamCountry;
+using Application.Exam.Queries.GenerateExamCountry;
 using Domain.Models.Enums;
 
 namespace Application.Common.Models.Question;
 
 public static class QuestionDtoBuilder
 {
-    public static List<QuestionDto> CreateQuestions(List<CountryDto> countries, CreateExamCountryCommand command)
+    public static List<QuestionDto> CreateQuestions(List<CountryDto> countries, GenerateExamCountryQuery command)
     {
         var questions = new List<QuestionDto>() { };
 

@@ -1,28 +1,29 @@
-﻿using Domain.Interfaces;
-using Application.Common.Models.Continent;
+﻿using Application.Common.Models.Continent;
 using Application.Common.Models.Country;
 using Application.Common.Models.Exam;
 using Application.Common.Models.Question;
 using Application.Common.Models.Exam.Country;
+using Application.Common.Interfaces;
+using Infrastructure.Services;
 
-namespace Domain.Commands.CreateExamCountry;
+namespace Application.Exam.Queries.GenerateExamCountry;
 
-public class CreateExamCountryCommandHandler : IRequestHandler<CreateExamCountryCommand, ExamCountryDto>
+public class GenerateExamCountryQueryHandler : IRequestHandler<GenerateExamCountryQuery, ExamCountryDto>
 {
-    private readonly IContinentRepository _continentRepository;
-    private readonly ICountryService _countryService;
+    private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
+    private readonly CountryService _countryService;
 
-    public CreateExamCountryCommandHandler(IContinentRepository continentRepository, ICountryService countryService, IMapper mapper)
+    public GenerateExamCountryQueryHandler(IKeepLearningDbContext dbContext, IMapper mapper, CountryService countryService)
     {
-        _continentRepository = continentRepository;
-        _countryService = countryService;
+        _dbContext = dbContext;
         _mapper = mapper;
+        _countryService = countryService;
     }
 
-    public async Task<ExamCountryDto> Handle(CreateExamCountryCommand request, CancellationToken cancellationToken)
+    public async Task<ExamCountryDto> Handle(GenerateExamCountryQuery request, CancellationToken cancellationToken)
     {
-        var continents = await _continentRepository.GetByNames(request.Continents);
+        var continents = await _dbContext.Continents.Where(c => request.Continents.Contains(c.Name)).ToListAsync();
         if (!continents.Any())
         {
             throw new NotFoundException(string.Join(",", request.Continents), "Not found any continents");
