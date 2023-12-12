@@ -1,8 +1,7 @@
-namespace Domain.Models.Enums
+namespace Domain.Models.Enums;
+
+public enum FileType
 {
-    public enum FileType
-    {
-        PDF,
-        WORD
-    }
+    PDF,
+    WORD
 }
