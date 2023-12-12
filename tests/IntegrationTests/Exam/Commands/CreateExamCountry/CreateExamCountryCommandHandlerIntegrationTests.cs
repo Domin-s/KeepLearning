@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using Application.Common.Mappings;
 using Application.Helper.Seeders.IntegrationTests;
-using Domain.Enteties;
-using Domain.Exceptions;
 using Domain.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
+using Ardalis.GuardClauses;
 
 namespace Domain.Commands.CreateExamCountry.IntegrationTests
 {
@@ -128,7 +127,7 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
             // assert
             action.Invoking(action => action.Invoke())
-                .Should().ThrowAsync<Exceptions.InvalidDataException>();
+                .Should().ThrowAsync<NotFoundException>();
         }
     }
 }

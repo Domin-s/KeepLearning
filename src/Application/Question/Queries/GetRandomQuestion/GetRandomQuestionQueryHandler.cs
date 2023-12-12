@@ -22,13 +22,13 @@ public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQu
         var continent = await _continentRepository.GetByName(request.Continent);
         if (continent is null)
         {
-            throw new Domain.Exceptions.NotFoundException("Not found continent!");
+            throw new NotFoundException(request.Continent, "Not found continent!");
         }
 
         var randomCountry = await _countryService.GetRandom(continent.Id);
         if (randomCountry is null)
         {
-            throw new Domain.Exceptions.NotFoundException("Not found country");
+            throw new NotFoundException(continent.Id.ToString(), "Not found country");
         }
 
         var countryDto = _mapper.Map<CountryDto>(randomCountry);

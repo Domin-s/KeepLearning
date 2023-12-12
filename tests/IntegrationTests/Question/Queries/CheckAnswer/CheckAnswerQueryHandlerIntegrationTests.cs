@@ -1,5 +1,5 @@
 ﻿using Application.Helper.Seeders.IntegrationTests;
-using Domain.Exceptions;
+using Ardalis.GuardClauses;
 using Domain.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;

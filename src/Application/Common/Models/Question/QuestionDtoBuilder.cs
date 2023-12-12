@@ -1,6 +1,5 @@
 using Application.Common.Models.Country;
 using Domain.Commands.CreateExamCountry;
-using Domain.Exceptions;
 using Domain.Models.Enums;
 
 namespace Application.Common.Models.Question;
@@ -29,7 +28,7 @@ public static class QuestionDtoBuilder
             case GuessType.Category.Country:
                 return new QuestionDto(questionNumber, country.CapitalCity, country.Name);
             default:
-                throw new NotFoundCaseException("Choosen category not exists");
+                throw new ArgumentException();
         }
     }
 }

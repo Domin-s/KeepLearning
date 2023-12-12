@@ -1,6 +1,5 @@
-
+using Application.Common.Models.Exam;
 using Application.Common.Models.Exam.Country;
-using Application.Common.Models.Result.Exam;
 using Application.Exam.Queries.CheckExam;
 // TODO: KL-29: Check namespaces in queries and command
 using Domain.Commands.CreateExamCountry;

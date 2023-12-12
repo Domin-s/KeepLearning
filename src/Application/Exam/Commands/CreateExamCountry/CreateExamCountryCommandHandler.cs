@@ -25,14 +25,14 @@ public class CreateExamCountryCommandHandler : IRequestHandler<CreateExamCountry
         var continents = await _continentRepository.GetByNames(request.Continents);
         if (!continents.Any())
         {
-            throw new Exceptions.NotFoundException("Not found any continents");
+            throw new NotFoundException(string.Join(",", request.Continents), "Not found any continents");
         }
 
         var continentIds = continents.Select(c => c.Id);
         var randomCountries = await _countryService.RandomCountries(continentIds, request.NumberOfQuestion);
         if (!randomCountries.Any())
         {
-            throw new Exceptions.NotFoundException("Not found any country for these continents");
+            throw new NotFoundException(string.Join(",", continentIds), "Not found any country for these continents");
         }
 
         var countriesDto = randomCountries.Select(c => _mapper.Map<CountryDto>(c)).ToList();

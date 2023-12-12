@@ -3,7 +3,6 @@ using Application.Continent.Queries.GetAllContinents;
 using Application.Exam.Queries.CheckExam;
 using Application.Exam.Queries.DownloadExam;
 using Domain.Commands.CreateExamCountry;
-using Domain.Exceptions;
 using MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create([FromQuery]List<string> Continents)
+        public async Task<IActionResult> Create([FromQuery] List<string> Continents)
         {
             var continents = await _mediator.Send(new GetAllContinentsQuery());
             var questionDataViewModel = new QuestionDataViewModel(continents, Continents);

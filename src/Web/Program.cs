@@ -1,6 +1,9 @@
+using Infrastructure.Data;
 using Web;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
