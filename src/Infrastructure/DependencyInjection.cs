@@ -1,9 +1,15 @@
+using Application.Common.Interfaces;
+using Infrastructure.Data.Interceptors;
+using Domain.Constants;
 using Domain.Interfaces;
+using Infrastructure.Data;
 using Infrastructure.Data.Seeders;
-using Infrastructure.Persistence;
+using Infrastructure.Identity;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,10 +18,36 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING_KL_DB");
+            
+            Guard.Against.Null(connectionString, message: "Connection string not found.");
 
-            services.AddDbContext<KeepLearningDbContext>(options =>
-                options.UseSqlServer(connectionString)
-            );
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+            services.AddDbContext<KeepLearningDbContext>((sp, options) => {
+                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddScoped<IKeepLearningDbContext>(provider => provider.GetRequiredService<KeepLearningDbContext>());
+            services.AddScoped<KeepLearningDbContextInitialiser>();
+
+            services.AddAuthentication()
+            .AddBearerToken(IdentityConstants.BearerScheme);
+
+            services.AddAuthorizationBuilder();
+
+            services
+                .AddIdentityCore<KeepLearningUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<KeepLearningDbContext>()
+                .AddApiEndpoints();
+
+            services.AddSingleton(TimeProvider.System);
+            services.AddTransient<IIdentityService, IdentityService>();
+
+            services.AddAuthorization(options =>
+                options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
             services.AddScoped<IContinentRepository, ContinentRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();

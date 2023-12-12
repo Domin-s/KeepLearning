@@ -4,7 +4,7 @@ using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Persistence;
+namespace Infrastructure.Data;
 
 public class KeepLearningDbContext : IdentityDbContext<KeepLearningUser>, IKeepLearningDbContext
 {

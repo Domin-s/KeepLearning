@@ -1,13 +1,12 @@
 ﻿using Domain.Constants;
 using Infrastructure.Identity;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.Infrastructure.Data;
+namespace Infrastructure.Data;
 
 public static class InitialiserExtensions
 {

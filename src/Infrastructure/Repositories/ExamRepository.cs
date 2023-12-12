@@ -1,7 +1,6 @@
 using Domain.Enteties;
-using Domain.Exceptions;
 using Domain.Interfaces;
-using Infrastructure.Persistence;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -32,7 +31,7 @@ namespace Infrastructure.Repositories
 
             if (exam is null)
             {
-                throw new NotFoundException($"Not found exam with id: {examId}");
+                throw new NotFoundException(examId.ToString(), "Exam");
             }
 
             var result = _dbContext.Exams.Remove(exam);

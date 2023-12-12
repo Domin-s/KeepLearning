@@ -1,5 +1,5 @@
 ﻿using Domain.Enteties;
-using Infrastructure.Persistence;
+using Infrastructure.Data;
 
 namespace Infrastructure.Data.Seeders
 {

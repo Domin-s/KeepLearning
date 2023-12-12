@@ -1,5 +1,4 @@
 ﻿using Domain.Enteties;
-using Domain.Exceptions;
 using Domain.Interfaces;
 using Domain.Models.Enums;
 using static Domain.Models.Enums.GuessType;
@@ -28,12 +27,12 @@ namespace Infrastructure.Services
 
             if (countries is null)
             {
-                throw new Domain.Exceptions.NotFoundException("Not found countires");
+                throw new NotFoundException(string.Join(",", continentIds), "Countries");
             }
 
             if (countries.Count() < numberOfCountries)
             {
-                throw new Domain.Exceptions.InvalidDataException("Number of countries to choose is bigger than number of countries in continents that user chosen");
+                throw new InvalidDataException("Number of countries to choose is bigger than number of countries in continents that user chosen");
             }
 
             var random = new Random();
@@ -48,7 +47,7 @@ namespace Infrastructure.Services
             var country = await GetCountry(questionText, category);
 
             if (country == null)
-                throw new NotFoundException("Not found conutry");
+                throw new NotFoundException(questionText, "Country");
 
             switch (category)
             {
@@ -67,7 +66,7 @@ namespace Infrastructure.Services
         {
             var country = await GetCountry(questionText, category);
             if (country == null)
-                throw new NotFoundException("Not found conutry");
+                throw new NotFoundException(questionText, "Country");
 
             if (answerText is null)
                 return false;
