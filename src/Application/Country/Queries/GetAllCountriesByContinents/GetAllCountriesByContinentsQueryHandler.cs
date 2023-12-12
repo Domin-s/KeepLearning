@@ -1,18 +1,16 @@
-﻿using Application.Common.Models.Country;
-using Domain.Interfaces;
+﻿using Application.Common.Interfaces;
+using Application.Common.Models.Country;
 
 namespace Application.Country.Queries.GetAllCountriesByContinents;
 
 public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCountriesByContinentsQuery, IEnumerable<CountryDto>>
 {
-    private readonly IContinentRepository _continentRepository;
-    private readonly ICountryRepository _countryRepository;
+    private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
 
-    public GetAllCountriesByContinentsQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
+    public GetAllCountriesByContinentsQueryHandler(IKeepLearningDbContext dbContext, IMapper mapper)
     {
-        _continentRepository = continentRepository;
-        _countryRepository = countryRepository;
+        _dbContext = dbContext;
         _mapper = mapper;
     }
 
@@ -21,16 +19,21 @@ public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCou
         IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
 
         var continentNames = request.ContinentDtos.Select(c => c.Name);
-        var continents = await _continentRepository.GetByNames(continentNames);
+        var continents = await _dbContext.Continents.Where(c => continentNames.Contains(c.Name)).ToListAsync();
 
         if (continents.Count() == 0)
         {
-            countries = await _countryRepository.GetAll();
+            countries = await _dbContext.Countries
+                .Include(c => c.Continent)
+                .ToListAsync();
         } else
         {
             var continentIds = continents.Select(c => c.Id);
 
-            countries = await _countryRepository.GetByContinents(continentIds);
+            countries = await _dbContext.Countries
+                .Include(c => c.Continent)
+                .Where(country => continentIds.Contains(country.ContinentId))
+                .ToListAsync();
         }
 
         var contriesDto = countries.Select( c => _mapper.Map<CountryDto>(c));
