@@ -1,4 +1,5 @@
 using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
 using ZymLabs.NSwag.FluentValidation;
 
 namespace Web
@@ -7,6 +8,8 @@ namespace Web
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services)
         {
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddHttpContextAccessor();
 
             services.AddHealthChecks()
@@ -22,12 +25,15 @@ namespace Web
                 return new FluentValidationSchemaProcessor(provider, validationRules, loggerFactory);
             });
 
+            services.Configure<ApiBehaviorOptions>(options =>
+                options.SuppressModelStateInvalidFilter = true);
+
+            services.AddEndpointsApiExplorer();
+
             services.AddOpenApiDocument((configure, sp) =>
             {
                 configure.Title = "CleanArchitecture API";
 
-
-                // Add the fluent validations schema processor
                 var fluentValidationSchemaProcessor =
                     sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
 
