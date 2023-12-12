@@ -1,12 +1,11 @@
-﻿using AutoMapper;
-using Application.Common.Models.Continent;
-namespace Application.Common.Mappings
+﻿using Application.Common.Models.Continent;
+
+namespace Application.Common.Mappings;
+
+public class ContinentMappingProfile : Profile
 {
-    public class ContinentMappingProfile : Profile
+    public ContinentMappingProfile()
     {
-        public ContinentMappingProfile()
-        {
-            CreateMap<Domain.Enteties.Continent, ContinentDto>();
-        }
+        CreateMap<Domain.Enteties.Continent, ContinentDto>();
     }
 }

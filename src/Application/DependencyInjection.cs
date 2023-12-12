@@ -1,7 +1,3 @@
-using Application.Common.Mappings;
-using Domain.Commands.CreateExamCountry;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -10,12 +6,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ContinentMappingProfile));
-            services.AddAutoMapper(typeof(CountryMappingProfile));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddValidatorsFromAssemblyContaining<CreateExamCountryCommand>()
-                .AddFluentValidationAutoValidation()
-                .AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddMediatR(cfg =>
             {

@@ -1,28 +1,25 @@
-﻿using AutoMapper;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Domain.Models;
-using MediatR;
 
-namespace Application.Country.Queries.GetAllCountries
+namespace Application.Country.Queries.GetAllCountries;
+
+public class GetAllCountriesQueryHandler : IRequestHandler<GetAllCountriesQuery, Countries>
 {
-    public class GetAllCountriesQueryHandler : IRequestHandler<GetAllCountriesQuery, Countries>
+    private readonly ICountryRepository _countryRepository;
+    private readonly IMapper _mapper;
+
+    public GetAllCountriesQueryHandler(ICountryRepository countryRepository, IMapper mapper)
     {
-        private readonly ICountryRepository _countryRepository;
-        private readonly IMapper _mapper;
+        _countryRepository = countryRepository;
+        _mapper = mapper;
+    }
 
-        public GetAllCountriesQueryHandler(ICountryRepository countryRepository, IMapper mapper)
-        {
-            _countryRepository = countryRepository;
-            _mapper = mapper;
-        }
+    public async Task<Countries> Handle(GetAllCountriesQuery request, CancellationToken cancellationToken)
+    {
+        var countries = await _countryRepository.GetAll();
 
-        public async Task<Countries> Handle(GetAllCountriesQuery request, CancellationToken cancellationToken)
-        {
-            var countries = await _countryRepository.GetAll();
+        var contriesDto = _mapper.Map<Countries>(countries);
 
-            var contriesDto = _mapper.Map<Countries>(countries);
-
-            return contriesDto;
-        }
+        return contriesDto;
     }
 }

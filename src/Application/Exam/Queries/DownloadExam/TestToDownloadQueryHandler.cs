@@ -1,12 +1,9 @@
-using MediatR;
+namespace Application.Exam.Queries.DownloadExam;
 
-namespace Application.Exam.Queries.DownloadExam
+public class DownloadExamQueryHandler : IRequestHandler<DownloadExamQuery, string>
 {
-    public class DownloadExamQueryHandler : IRequestHandler<DownloadExamQuery, string>
+    public Task<string> Handle(DownloadExamQuery request, CancellationToken cancellationToken)
     {
-        public Task<string> Handle(DownloadExamQuery request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

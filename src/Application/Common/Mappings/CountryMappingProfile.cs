@@ -1,15 +1,12 @@
-﻿using AutoMapper;
-using Application.Common.Models.Continent;
-using Application.Common.Models.Country;
+﻿using Application.Common.Models.Country;
 
-namespace Application.Common.Mappings
+namespace Application.Common.Mappings;
+
+public class CountryMappingProfile : Profile
 {
-    public class CountryMappingProfile : Profile
+    public CountryMappingProfile()
     {
-        public CountryMappingProfile()
-        {
-            CreateMap<Domain.Enteties.Country, CountryDto>()
-                .ForMember( countryDto => countryDto.ContinentDto, opt => opt.MapFrom(src => src.Continent));
-        }
+        CreateMap<Domain.Enteties.Country, CountryDto>()
+            .ForMember( countryDto => countryDto.ContinentDto, opt => opt.MapFrom(src => src.Continent));
     }
 }

@@ -1,44 +1,40 @@
-﻿using AutoMapper;
-using Application.Common.Models.Country;
-using Domain.Exceptions;
+﻿using Application.Common.Models.Country;
 using Domain.Interfaces;
-using MediatR;
 
-namespace Application.Country.Queries.GetAllCountriesByContinents
+namespace Application.Country.Queries.GetAllCountriesByContinents;
+
+public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCountriesByContinentsQuery, IEnumerable<CountryDto>>
 {
-    public class GetAllCountriesByContinentsQueryHandler : IRequestHandler<GetAllCountriesByContinentsQuery, IEnumerable<CountryDto>>
+    private readonly IContinentRepository _continentRepository;
+    private readonly ICountryRepository _countryRepository;
+    private readonly IMapper _mapper;
+
+    public GetAllCountriesByContinentsQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
     {
-        private readonly IContinentRepository _continentRepository;
-        private readonly ICountryRepository _countryRepository;
-        private readonly IMapper _mapper;
+        _continentRepository = continentRepository;
+        _countryRepository = countryRepository;
+        _mapper = mapper;
+    }
 
-        public GetAllCountriesByContinentsQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository, IMapper mapper)
+    public async Task<IEnumerable<CountryDto>> Handle(GetAllCountriesByContinentsQuery request, CancellationToken cancellationToken)
+    {
+        IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
+
+        var continentNames = request.ContinentDtos.Select(c => c.Name);
+        var continents = await _continentRepository.GetByNames(continentNames);
+
+        if (continents.Count() == 0)
         {
-            _continentRepository = continentRepository;
-            _countryRepository = countryRepository;
-            _mapper = mapper;
+            countries = await _countryRepository.GetAll();
+        } else
+        {
+            var continentIds = continents.Select(c => c.Id);
+
+            countries = await _countryRepository.GetByContinents(continentIds);
         }
 
-        public async Task<IEnumerable<CountryDto>> Handle(GetAllCountriesByContinentsQuery request, CancellationToken cancellationToken)
-        {
-            IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
+        var contriesDto = countries.Select( c => _mapper.Map<CountryDto>(c));
 
-            var continentNames = request.ContinentDtos.Select(c => c.Name);
-            var continents = await _continentRepository.GetByNames(continentNames);
-
-            if (continents.Count() == 0)
-            {
-                countries = await _countryRepository.GetAll();
-            } else
-            {
-                var continentIds = continents.Select(c => c.Id);
-
-                countries = await _countryRepository.GetByContinents(continentIds);
-            }
-
-            var contriesDto = countries.Select( c => _mapper.Map<CountryDto>(c));
-
-            return contriesDto;
-        }
+        return contriesDto;
     }
 }

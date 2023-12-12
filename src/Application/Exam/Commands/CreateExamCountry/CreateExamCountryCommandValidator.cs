@@ -1,14 +1,11 @@
-﻿using FluentValidation;
+﻿using Domain.Commands.CreateExamCountry;
 
-using Domain.Commands.CreateExamCountry;
+namespace Domain.Commands.CreateTestCountry;
 
-namespace Domain.Commands.CreateTestCountry
+public class CreateExamCountryCommandValidator : AbstractValidator<CreateExamCountryCommand>
 {
-    public class CreateExamCountryCommandValidator : AbstractValidator<CreateExamCountryCommand>
+    public CreateExamCountryCommandValidator()
     {
-        public CreateExamCountryCommandValidator()
-        {
-            RuleFor(q => q.Continents).NotEmpty().NotNull();
-        }
+        RuleFor(q => q.Continents).NotEmpty().NotNull();
     }
 }
