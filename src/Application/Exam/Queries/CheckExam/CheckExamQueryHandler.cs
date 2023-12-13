@@ -13,6 +13,7 @@ public class CheckExamQueryHandler : IRequestHandler<CheckExamQuery, ExamResultD
         _countryService = countryService;
     }
 
+    // TODO: Add validation to CheckExamQuery
     public async Task<ExamResultDto> Handle(CheckExamQuery request, CancellationToken cancellationToken)
     {
         var answers = new List<AnswerResultDto>();

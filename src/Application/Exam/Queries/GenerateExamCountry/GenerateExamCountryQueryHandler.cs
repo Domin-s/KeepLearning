@@ -21,6 +21,7 @@ public class GenerateExamCountryQueryHandler : IRequestHandler<GenerateExamCount
         _countryService = countryService;
     }
 
+    // TODO: Add more specific validation to GenerateExamCountryQuery
     public async Task<ExamCountryDto> Handle(GenerateExamCountryQuery request, CancellationToken cancellationToken)
     {
         var continents = await _dbContext.Continents.Where(c => request.Continents.Contains(c.Name)).ToListAsync();

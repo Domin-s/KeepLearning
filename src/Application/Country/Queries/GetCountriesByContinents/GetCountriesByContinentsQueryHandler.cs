@@ -14,6 +14,7 @@ public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountries
         _mapper = mapper;
     }
 
+    // TODO: Add more specific validation to GetCountriesByContinentsQuery
     public async Task<IEnumerable<CountryDto>> Handle(GetCountriesByContinentsQuery request, CancellationToken cancellationToken)
     {
         IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();

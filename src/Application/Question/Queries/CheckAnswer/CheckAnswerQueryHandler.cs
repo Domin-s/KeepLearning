@@ -11,6 +11,7 @@ public class CheckAnswerQueryHandler : IRequestHandler<CheckAnswerQuery, bool>
         _countryService = countryService;
     }
 
+    // TODO: Add validation to CheckAnswerQuery
     public async Task<bool> Handle(CheckAnswerQuery request, CancellationToken cancellationToken)
     {
         var result = await _countryService.IsCorrectAnswer(request.Question, request.Answer, request.Category);

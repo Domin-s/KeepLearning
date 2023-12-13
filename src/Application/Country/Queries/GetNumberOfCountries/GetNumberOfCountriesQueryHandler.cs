@@ -11,6 +11,7 @@ public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCount
         _dbContext = dbContext;
     }
 
+    // TODO: Add more specific validation to GetNumberOfCountriesQuery
     public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
     {
         var continentIds = await _dbContext.Continents

@@ -18,6 +18,7 @@ public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQu
         _mapper = mapper;
     }
 
+    // TODO: Add validation to GetRandomQuestionQuery
     public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
     {
         var continent = await _dbContext.Continents.Where(c => c.Name == request.Continent).FirstAsync();
