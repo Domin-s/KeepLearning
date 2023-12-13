@@ -1,13 +1,13 @@
-﻿using Infrastructure.Persistence;
+﻿using Application.UnitTests.Helper;
 using EContinent = Domain.Enteties.Continent;
 
 namespace Application.Helper.Seeders.IntegrationTests
 {
-    public class ContinentSeederTest
+    internal class ContinentSeederTest
     {
-        private readonly KeepLearningDbContext _dbContext;
+        private readonly KeepLearningDbContextTest _dbContext;
 
-        public ContinentSeederTest(KeepLearningDbContext dbContext)
+        public ContinentSeederTest(KeepLearningDbContextTest dbContext)
         {
             _dbContext = dbContext;
         }

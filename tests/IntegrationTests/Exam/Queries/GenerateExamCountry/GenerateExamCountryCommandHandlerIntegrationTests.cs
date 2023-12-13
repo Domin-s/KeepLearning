@@ -1,32 +1,28 @@
-﻿using AutoMapper;
-using Application.Common.Mappings;
+﻿using Application.Common.Mappings;
+using Application.Exam.Queries.GenerateExamCountry;
 using Application.Helper.Seeders.IntegrationTests;
-using Domain.Enteties;
-using Domain.Exceptions;
-using Domain.Interfaces;
-using Infrastructure.Persistence;
-using Infrastructure.Repositories;
+using Application.UnitTests.Helper;
+using Ardalis.GuardClauses;
+using AutoMapper;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
 
 namespace Domain.Commands.CreateExamCountry.IntegrationTests
 {
-    public class CreateExamCountryCommandHandlerIntegrationTests
+    public class GenerateExamCountryCommandHandlerIntegrationTests
     {
 
-        private readonly KeepLearningDbContext _dbContext;
-        private readonly IContinentRepository _continentRepositoryTest;
-        private readonly ICountryRepository _countryRepositoryTest;
-        private readonly ICountryService _countryServiceTest;
+        private readonly KeepLearningDbContextTest _dbContext;
+        private readonly CountryService _countryServiceTest;
         private readonly IMapper _mapper;
 
-        public CreateExamCountryCommandHandlerIntegrationTests()
+        public GenerateExamCountryCommandHandlerIntegrationTests()
         {
-            var builder = new DbContextOptionsBuilder<KeepLearningDbContext>();
+            var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
             builder.UseInMemoryDatabase("TestKeepLearningDb-CreateExamCountryCommandHandlerIntegrationTests");
 
-            _dbContext = new KeepLearningDbContext(builder.Options);
+            _dbContext = new KeepLearningDbContextTest(builder.Options);
 
             var continentSeederTest = new ContinentSeederTest(_dbContext);
             continentSeederTest.Seed();
@@ -34,9 +30,7 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
             var countrySeederTest = new CountrySeederTest(_dbContext);
             countrySeederTest.Seed();
 
-            _continentRepositoryTest = new ContinentRepository(_dbContext);
-            _countryRepositoryTest = new CountryRepository(_dbContext);
-            _countryServiceTest = new CountryService(_countryRepositoryTest);
+            _countryServiceTest = new CountryService(_dbContext);
 
             var mappingProfiles = new List<Profile>() {
                 new CountryMappingProfile(),
@@ -51,27 +45,27 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         public static IEnumerable<object[]> GetCommands()
         {
-            var list = new List<CreateExamCountryCommand>()
+            var list = new List<GenerateExamCountryQuery>()
             {
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 1",
                     NumberOfQuestion = 5,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 2",
                     NumberOfQuestion = 10,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 3",
                     NumberOfQuestion = 25,
                     Category = Category.Country,
                     Continents = new List<string>() { "Europe", "Asia" }
                 },
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "",
                     NumberOfQuestion = 50,
                     Category = Category.Country,
@@ -84,10 +78,10 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         [Theory()]
         [MemberData(nameof(GetCommands))]
-        public async void Handle_CreateExamWithAllValidData_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
+        public async void Handle_CreateExamWithAllValidData_ReturnExam(GenerateExamCountryQuery createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
+            var createExamCountryCommandHandler = new GenerateExamCountryQueryHandler(_dbContext, _mapper, _countryServiceTest);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act
@@ -102,9 +96,9 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         public static IEnumerable<object[]> GetInvalidCommands()
         {
-            var list = new List<CreateExamCountryCommand>()
+            var list = new List<GenerateExamCountryQuery>()
             {
-                new CreateExamCountryCommand(){
+                new GenerateExamCountryQuery(){
                     Name = "Exam 1",
                     NumberOfQuestion = 105,
                     Category = Category.Country,
@@ -117,10 +111,10 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
         [Theory()]
         [MemberData(nameof(GetCommands))]
-        public void Handle_CreateExamWithNumberOfQuestionIsBiggerThanCountriesInContinent_ReturnExam(CreateExamCountryCommand createExamCountryCommand)
+        public void Handle_CreateExamWithNumberOfQuestionIsBiggerThanCountriesInContinent_ReturnExam(GenerateExamCountryQuery createExamCountryCommand)
         {
             // arrange
-            var createExamCountryCommandHandler = new CreateExamCountryCommandHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
+            var createExamCountryCommandHandler = new GenerateExamCountryQueryHandler(_dbContext, _mapper, _countryServiceTest);
             var continents = createExamCountryCommand.Continents.Select(c => c);
 
             // act
@@ -128,7 +122,7 @@ namespace Domain.Commands.CreateExamCountry.IntegrationTests
 
             // assert
             action.Invoking(action => action.Invoke())
-                .Should().ThrowAsync<Exceptions.InvalidDataException>();
+                .Should().ThrowAsync<NotFoundException>();
         }
     }
 }

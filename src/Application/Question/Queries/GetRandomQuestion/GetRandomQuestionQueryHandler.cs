@@ -10,7 +10,7 @@ public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQu
     private readonly IKeepLearningDbContext _dbContext;
     private readonly CountryService _countryService;
     private readonly IMapper _mapper;
-
+    
     public GetRandomQuestionQueryHandler(IKeepLearningDbContext dbContext, CountryService countryService, IMapper mapper)
     {
         _dbContext = dbContext;

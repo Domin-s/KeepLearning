@@ -1,29 +1,25 @@
 ﻿using AutoMapper;
 using Application.Common.Mappings;
 using Application.Helper.Seeders.IntegrationTests;
-using Domain.Interfaces;
-using Infrastructure.Persistence;
-using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
+using Application.UnitTests.Helper;
 
 namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests
 {
     public class GetRandomQuestionQueryHandlerIntegrationTests
     {
-        private readonly KeepLearningDbContext _dbContext;
-        private readonly IContinentRepository _continentRepositoryTest;
-        private readonly ICountryRepository _countryRepositoryTest;
-        private readonly ICountryService _countryServiceTest;
+        private readonly KeepLearningDbContextTest _dbContext;
+        private readonly CountryService _countryServiceTest;
         private readonly IMapper _mapper;
 
         public GetRandomQuestionQueryHandlerIntegrationTests()
         {
-            var builder = new DbContextOptionsBuilder<KeepLearningDbContext>();
+            var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
             builder.UseInMemoryDatabase("TestKeepLearningDb-GetRandomQuestionQueryHandlerIntegrationTests");
 
-            _dbContext = new KeepLearningDbContext(builder.Options);
+            _dbContext = new KeepLearningDbContextTest(builder.Options);
 
             var continentSeederTest = new ContinentSeederTest(_dbContext);
             continentSeederTest.Seed();
@@ -31,9 +27,7 @@ namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests
             var countrySeederTest = new CountrySeederTest(_dbContext);
             countrySeederTest.Seed();
 
-            _continentRepositoryTest = new ContinentRepository(_dbContext);
-            _countryRepositoryTest = new CountryRepository(_dbContext);
-            _countryServiceTest = new CountryService(_countryRepositoryTest);
+            _countryServiceTest = new CountryService(_dbContext);
 
             var mappingProfiles = new List<Profile>() {
                 new CountryMappingProfile(),
@@ -80,7 +74,7 @@ namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests
         public async void Handle_WithCorrectData_ReturnQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
         {
             // arrange
-            var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_continentRepositoryTest, _countryServiceTest, _mapper);
+            var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_dbContext, _countryServiceTest, _mapper);
 
             // act
             var result = await getRandomQuestionQueryHandler.Handle(getRandomQuestionQuery, CancellationToken.None);

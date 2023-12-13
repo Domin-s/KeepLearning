@@ -1,8 +1,6 @@
 ﻿using Application.Helper.Seeders.IntegrationTests;
-using Domain.Exceptions;
-using Domain.Interfaces;
-using Infrastructure.Persistence;
-using Infrastructure.Repositories;
+using Application.UnitTests.Helper;
+using Ardalis.GuardClauses;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
@@ -11,17 +9,15 @@ namespace Application.Question.Queries.CheckAnswer.IntegrationTests
 {
     public class CheckAnswerQueryHandlerIntegrationTests
     {
-        private readonly KeepLearningDbContext _dbContext;
-        private readonly IContinentRepository _continentRepositoryTest;
-        private readonly ICountryRepository _countryRepositoryTest;
-        private readonly ICountryService _countryService;
+        private readonly KeepLearningDbContextTest _dbContext;
+        private readonly CountryService _countryService;
 
         public CheckAnswerQueryHandlerIntegrationTests()
         {
-            var builder = new DbContextOptionsBuilder<KeepLearningDbContext>();
+            var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
             builder.UseInMemoryDatabase("TestKeepLearningDb-CheckAnswerQueryHandlerIntegrationTests");
 
-            _dbContext = new KeepLearningDbContext(builder.Options);
+            _dbContext = new KeepLearningDbContextTest(builder.Options);
 
             var continentSeederTest = new ContinentSeederTest(_dbContext);
             continentSeederTest.Seed();
@@ -29,10 +25,7 @@ namespace Application.Question.Queries.CheckAnswer.IntegrationTests
             var countrySeederTest = new CountrySeederTest(_dbContext);
             countrySeederTest.Seed();
 
-            _continentRepositoryTest = new ContinentRepository(_dbContext);
-            _countryRepositoryTest = new CountryRepository(_dbContext);
-
-            _countryService = new CountryService(_countryRepositoryTest);
+            _countryService = new CountryService(_dbContext);
         }
 
         public static IEnumerable<object[]> GetCheckAnswerQueryWithCorrectAnswer()

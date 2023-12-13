@@ -1,12 +1,11 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Enteties;
-using Domain.Interfaces;
 using Domain.Models.Enums;
 using static Domain.Models.Enums.GuessType;
 
 namespace Infrastructure.Services;
 
-public class CountryService : ICountryService
+public class CountryService
 {
     private readonly IKeepLearningDbContext _dbContext;
 

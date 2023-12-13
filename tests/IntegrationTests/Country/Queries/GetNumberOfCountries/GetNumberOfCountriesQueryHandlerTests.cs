@@ -1,33 +1,27 @@
 using Application.Common.Models.Continent;
 using Application.Helper.Seeders.IntegrationTests;
-using Domain.Interfaces;
-using Infrastructure.Persistence;
-using Infrastructure.Repositories;
+using Application.UnitTests.Helper;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Country.Queries.GetNumberOfCountries.IntegrationTests
 {
     public class GetNumberOfCountriesQueryHandlerTests
     {
-        private readonly KeepLearningDbContext _dbContext;
-        private readonly IContinentRepository _continentRepositoryTest;
-        private readonly ICountryRepository _countryRepositoryTest;
+        private readonly KeepLearningDbContextTest _dbContext;
 
         public GetNumberOfCountriesQueryHandlerTests()
         {
-            var builder = new DbContextOptionsBuilder<KeepLearningDbContext>();
+            var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
             builder.UseInMemoryDatabase("TestKeepLearningDb-GetNumberOfCountriesQueryHandlerTests");
 
-            _dbContext = new KeepLearningDbContext(builder.Options);
+            _dbContext = new KeepLearningDbContextTest(builder.Options);
 
             var continentSeederTest = new ContinentSeederTest(_dbContext);
             continentSeederTest.Seed();
 
             var countrySeederTest = new CountrySeederTest(_dbContext);
             countrySeederTest.Seed();
-
-            _continentRepositoryTest = new ContinentRepository(_dbContext);
-            _countryRepositoryTest = new CountryRepository(_dbContext);
         }
 
         public record QueryWithExpectedResult(GetNumberOfCountriesQuery getNumberOfCountriesQuery, int numbersOfCountries) { }
@@ -71,7 +65,7 @@ namespace Application.Country.Queries.GetNumberOfCountries.IntegrationTests
         public async void Handle_GetSpecificNumberOfCountries_ForMoreOrQuealContinent(QueryWithExpectedResult queryWithExpectedResult)
         {
             // arrange
-            var handler = new GetNumberOfCountriesQueryHandler(_continentRepositoryTest, _countryRepositoryTest);
+            var handler = new GetNumberOfCountriesQueryHandler(_dbContext);
 
             // act
             var result = await handler.Handle(queryWithExpectedResult.getNumberOfCountriesQuery, CancellationToken.None);

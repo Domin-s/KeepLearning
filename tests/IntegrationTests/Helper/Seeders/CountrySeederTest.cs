@@ -1,16 +1,16 @@
 ﻿using Application.Common.Models.Continent;
 using Application.Common.Models.Country;
-using Infrastructure.Persistence;
+using Application.UnitTests.Helper;
 using EContinent = Domain.Enteties.Continent;
 using ECountry = Domain.Enteties.Country;
 
 namespace Application.Helper.Seeders.IntegrationTests
 {
-    public class CountrySeederTest
+    internal class CountrySeederTest
     {
-        private readonly KeepLearningDbContext _dbContext;
+        private readonly KeepLearningDbContextTest _dbContext;
 
-        public CountrySeederTest(KeepLearningDbContext dbContext)
+        public CountrySeederTest(KeepLearningDbContextTest dbContext)
         {
             _dbContext = dbContext;
         }
