@@ -6,84 +6,83 @@ using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
 using Application.UnitTests.Helper;
 
-namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests
+namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests;
+
+public class GetRandomQuestionQueryHandlerIntegrationTests
 {
-    public class GetRandomQuestionQueryHandlerIntegrationTests
+    private readonly KeepLearningDbContextTest _dbContext;
+    private readonly CountryService _countryServiceTest;
+    private readonly IMapper _mapper;
+
+    public GetRandomQuestionQueryHandlerIntegrationTests()
     {
-        private readonly KeepLearningDbContextTest _dbContext;
-        private readonly CountryService _countryServiceTest;
-        private readonly IMapper _mapper;
+        var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
+        builder.UseInMemoryDatabase("TestKeepLearningDb-GetRandomQuestionQueryHandlerIntegrationTests");
 
-        public GetRandomQuestionQueryHandlerIntegrationTests()
-        {
-            var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
-            builder.UseInMemoryDatabase("TestKeepLearningDb-GetRandomQuestionQueryHandlerIntegrationTests");
+        _dbContext = new KeepLearningDbContextTest(builder.Options);
 
-            _dbContext = new KeepLearningDbContextTest(builder.Options);
+        var continentSeederTest = new ContinentSeederTest(_dbContext);
+        continentSeederTest.Seed();
 
-            var continentSeederTest = new ContinentSeederTest(_dbContext);
-            continentSeederTest.Seed();
+        var countrySeederTest = new CountrySeederTest(_dbContext);
+        countrySeederTest.Seed();
 
-            var countrySeederTest = new CountrySeederTest(_dbContext);
-            countrySeederTest.Seed();
+        _countryServiceTest = new CountryService(_dbContext);
 
-            _countryServiceTest = new CountryService(_dbContext);
-
-            var mappingProfiles = new List<Profile>() {
-                new CountryMappingProfile(),
-                new ContinentMappingProfile()
-                };
-
-            var configuration = new MapperConfiguration(cfg =>
-                   cfg.AddProfiles(mappingProfiles));
-
-            _mapper = configuration.CreateMapper();
-        }
-
-        public static IEnumerable<object[]> GetRandomQuestionQuerySamples()
-        {
-            var list = new List<GetRandomQuestionQuery>()
-            {
-                new GetRandomQuestionQuery()
-                {
-                    Category = Category.Country,
-                    Continent = "Asia",
-                },
-                new GetRandomQuestionQuery()
-                {
-                    Category = Category.CapitalCity,
-                    Continent = "Asia",
-                },
-                new GetRandomQuestionQuery()
-                {
-                    Category = Category.CapitalCity,
-                    Continent = "Europe",
-                },
-                new GetRandomQuestionQuery()
-                {
-                    Category = Category.Country,
-                    Continent = "North America",
-                }
+        var mappingProfiles = new List<Profile>() {
+            new CountryMappingProfile(),
+            new ContinentMappingProfile()
             };
 
-            return list.Select(el => new object[] { el });
-        }
+        var configuration = new MapperConfiguration(cfg =>
+               cfg.AddProfiles(mappingProfiles));
 
-        [Theory()]
-        [MemberData(nameof(GetRandomQuestionQuerySamples))]
-        public async void Handle_WithCorrectData_ReturnQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
+        _mapper = configuration.CreateMapper();
+    }
+
+    public static IEnumerable<object[]> GetRandomQuestionQuerySamples()
+    {
+        var list = new List<GetRandomQuestionQuery>()
         {
-            // arrange
-            var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_dbContext, _countryServiceTest, _mapper);
+            new GetRandomQuestionQuery()
+            {
+                Category = Category.Country,
+                Continent = "Asia",
+            },
+            new GetRandomQuestionQuery()
+            {
+                Category = Category.CapitalCity,
+                Continent = "Asia",
+            },
+            new GetRandomQuestionQuery()
+            {
+                Category = Category.CapitalCity,
+                Continent = "Europe",
+            },
+            new GetRandomQuestionQuery()
+            {
+                Category = Category.Country,
+                Continent = "North America",
+            }
+        };
 
-            // act
-            var result = await getRandomQuestionQueryHandler.Handle(getRandomQuestionQuery, CancellationToken.None);
+        return list.Select(el => new object[] { el });
+    }
 
-            // assert
-            result.Should().NotBeNull();
-            result.QuestionText.Should().NotBeNullOrWhiteSpace();
-            result.AnswerText.Should().NotBeNullOrWhiteSpace();
-            result.QuestionNumber.Should().Be(1);
-        }
+    [Theory()]
+    [MemberData(nameof(GetRandomQuestionQuerySamples))]
+    public async void Handle_WithCorrectData_ReturnQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
+    {
+        // arrange
+        var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_dbContext, _countryServiceTest, _mapper);
+
+        // act
+        var result = await getRandomQuestionQueryHandler.Handle(getRandomQuestionQuery, CancellationToken.None);
+
+        // assert
+        result.Should().NotBeNull();
+        result.QuestionText.Should().NotBeNullOrWhiteSpace();
+        result.AnswerText.Should().NotBeNullOrWhiteSpace();
+        result.QuestionNumber.Should().Be(1);
     }
 }

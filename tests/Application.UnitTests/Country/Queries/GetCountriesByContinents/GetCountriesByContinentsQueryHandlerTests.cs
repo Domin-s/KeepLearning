@@ -1,12 +1,12 @@
 using Application.Common.Mappings;
 using Application.Common.Models.Continent;
 using Application.Country.Queries.GetAllCountriesByContinents;
-using Application.Helper.Seeders.IntegrationTests;
 using Application.UnitTests.Helper;
 using AutoMapper;
+using Infrastructure.Helper.Seeders.UnitTests;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Country.Queries.GetCountriesByContinents.IntegrationTests;
+namespace Application.Country.Queries.GetCountriesByContinents.UnitTest;
 
 public class GetCountriesByContinentsQueryHandlerTests
 {
@@ -101,5 +101,4 @@ public class GetCountriesByContinentsQueryHandlerTests
         // assert
         result.Count().Should().Be(numerOfAllCountries);
     }
-
 }

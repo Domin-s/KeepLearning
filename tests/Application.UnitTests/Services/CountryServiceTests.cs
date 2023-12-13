@@ -4,7 +4,6 @@ using AutoMapper;
 using Infrastructure.Helper.Seeders.UnitTests;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using static Domain.Models.Enums.GuessType;
 using EntityCountry = Domain.Enteties.Country;
 
@@ -142,21 +141,8 @@ public class CountryServiceTests
     public async void GetRandomCountry_ForValidContinent_ReturnRadnomCountryWithGivenContinent()
     {
         // arrange
-        var continentIds = new List<Guid>() { Guid.NewGuid() };
-        var continentId = continentIds.First();
-
-        var countries = new List<EntityCountry>() {
-            new EntityCountry()
-            {
-                Name = "Australia",
-                Abbreviation = "AUS",
-                CapitalCity = "Canberra",
-                ContinentId = continentId
-            }
-        };
-
+        var continentId = await _dbContext.Continents.Where(c => c.Name == "Asia").Select(c => c.Id).FirstAsync();
         var countryService = new CountryService(_dbContext);
-
 
         // act
         var randomCountry = await countryService.GetRandom(continentId);
@@ -172,25 +158,7 @@ public class CountryServiceTests
     public async void GetRandomCountries_ForValidContinent_ReturnRadnomCountriesWithoutDuplicate(int numberOfElemetns)
     {
         // arrange
-        var continentIds = new List<Guid>() { Guid.NewGuid() };
-        var continentId = continentIds.First();
-
-        var countries = new List<EntityCountry>() {
-            new EntityCountry()
-            {
-                Name = "Croatia",
-                Abbreviation = "HRV",
-                CapitalCity = "Zagreb",
-                ContinentId = continentId
-            },
-            new EntityCountry()
-            {
-                Name = "Greece",
-                Abbreviation = "GRC",
-                CapitalCity = "Athens",
-                ContinentId = continentId
-            },
-        };
+        var continentIds = await _dbContext.Continents.Where(c => c.Name == "Asia").Select(c => c.Id).ToListAsync();
 
         var countryService = new CountryService(_dbContext);
 
