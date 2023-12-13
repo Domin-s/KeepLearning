@@ -1,26 +1,10 @@
-﻿using Domain.Constants;
+﻿using Infrastructure.Data.Seeders;
 using Infrastructure.Identity;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data;
-
-public static class InitialiserExtensions
-{
-    public static async Task InitialiseDatabaseAsync(this WebApplication app)
-    {
-        using var scope = app.Services.CreateScope();
-
-        var initialiser = scope.ServiceProvider.GetRequiredService<KeepLearningDbContextInitialiser>();
-
-        await initialiser.InitialiseAsync();
-
-        await initialiser.SeedAsync();
-    }
-}
 
 public class KeepLearningDbContextInitialiser
 {
@@ -66,23 +50,19 @@ public class KeepLearningDbContextInitialiser
     public async Task TrySeedAsync()
     {
         // Default roles
-        var administratorRole = new IdentityRole(Roles.Administrator);
-
-        if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
-        {
-            await _roleManager.CreateAsync(administratorRole);
-        }
+        var roleSeeder = new RoleSeeder(_roleManager);
+        var administratorRole = await roleSeeder.Seed();
 
         // Default users
-        var administrator = new KeepLearningUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
+        var userSeeder = new UserSeeder(_userManager);
+        await userSeeder.Seed(administratorRole);
 
-        if (_userManager.Users.All(u => u.UserName != administrator.UserName))
-        {
-            await _userManager.CreateAsync(administrator, "Administrator1!");
-            if (!string.IsNullOrWhiteSpace(administratorRole.Name))
-            {
-                await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
-            }
-        }
+        // contientns
+        var continentSeeder = new ContinentSeeder(_dbContext);
+        await continentSeeder.Seed();
+
+        // countries
+        var countrySeeder = new CountrySeeder(_dbContext);
+        await countrySeeder.Seed();
     }
 }

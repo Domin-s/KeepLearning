@@ -1,57 +1,52 @@
 ﻿using Domain.Enteties;
-using Infrastructure.Data;
 
-namespace Infrastructure.Data.Seeders
+namespace Infrastructure.Data.Seeders;
+
+public class ContinentSeeder
 {
-    public class ContinentSeeder
+    private readonly KeepLearningDbContext _dbContext;
+
+    public ContinentSeeder(KeepLearningDbContext dbContext)
     {
-        private readonly KeepLearningDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public ContinentSeeder(KeepLearningDbContext dbContext)
+    public async Task Seed()
+    {
+        if (!_dbContext.Continents.Any())
         {
-            _dbContext = dbContext;
-        }
+            var continents = GetContinentsFromFile();
 
-        public async Task Seed()
-        {
-            if (await _dbContext.Database.CanConnectAsync())
+            if (continents != null)
             {
-                if (!_dbContext.Continents.Any())
+                continents.ToList().ForEach(continent =>
                 {
-                    var continents = GetContinentsFromFile();
-
-                    if (continents != null)
-                    {
-                        continents.ToList().ForEach(continent =>
-                        {
-                            _dbContext.Continents.Add(continent);
-                            _dbContext.SaveChanges();
-                        });
-                    }
-                }
+                    _dbContext.Continents.Add(continent);
+                    _dbContext.SaveChanges();
+                });
             }
         }
+    }
 
-        private IEnumerable<Continent> GetContinentsFromFile()
+    private IEnumerable<Continent> GetContinentsFromFile()
+    {
+        IEnumerable<Continent> continents = new List<Continent>();
+
+        try
         {
-            IEnumerable<Continent> countries = new List<Continent>();
+            continents = File.ReadAllLines("../../Infrastructure/Data/Seeders/FilesWithData/ContinentsList.csv")
+                .Skip(1)
+                .Select(name => new Continent()
+                {
+                    Name = name
+                });
 
-            try
-            {
-                countries = File.ReadAllLines("../KeepLearning.Infrastructure/Seeders/FilesWithData/ContinentsList.csv")
-                    .Skip(1)
-                    .Select(name => new Continent()
-                    {
-                        Name = name
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            return countries;
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        return continents;
     }
 }

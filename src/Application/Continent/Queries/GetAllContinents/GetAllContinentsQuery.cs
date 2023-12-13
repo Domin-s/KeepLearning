@@ -2,4 +2,4 @@
 
 namespace Application.Continent.Queries.GetAllContinents;
 
-public class GetAllContinentsQuery : IRequest<IEnumerable<ContinentDto>> { }
+public class GetContinentsQuery : IRequest<IEnumerable<ContinentDto>> { }

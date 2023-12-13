@@ -3,7 +3,7 @@ using Application.Common.Models.Continent;
 
 namespace Application.Continent.Queries.GetAllContinents;
 
-public class GetAllContinentsQueryHandler : IRequestHandler<GetAllContinentsQuery, IEnumerable<ContinentDto>>
+public class GetAllContinentsQueryHandler : IRequestHandler<GetContinentsQuery, IEnumerable<ContinentDto>>
 {
     private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
@@ -14,7 +14,7 @@ public class GetAllContinentsQueryHandler : IRequestHandler<GetAllContinentsQuer
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<ContinentDto>> Handle(GetAllContinentsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ContinentDto>> Handle(GetContinentsQuery request, CancellationToken cancellationToken)
     {
         var continents = await _dbContext.Continents.ToListAsync();
 

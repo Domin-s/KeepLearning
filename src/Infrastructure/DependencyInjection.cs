@@ -7,6 +7,7 @@ using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -52,5 +53,19 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
+    }
+
+    public static class InitialiserExtensions
+    {
+        public static async Task InitialiseDatabaseAsync(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+
+            var initialiser = scope.ServiceProvider.GetRequiredService<KeepLearningDbContextInitialiser>();
+
+            await initialiser.InitialiseAsync();
+
+            await initialiser.SeedAsync();
+        }
     }
 }
