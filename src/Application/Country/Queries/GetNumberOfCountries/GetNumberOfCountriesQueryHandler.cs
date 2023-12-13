@@ -13,10 +13,14 @@ public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCount
 
     public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
     {
-        var continentNames = request.Continents.Select(c => c.Name);
-        var continents = await _dbContext.Continents.Where(c => continentNames.Contains(c.Name)).ToListAsync();
-        var continentIds = continents.Select(c => c.Id);
-        var numberOfCountries = await _dbContext.Countries.Where(country => continentIds.Contains(country.ContinentId)).CountAsync();
+        var continentIds = await _dbContext.Continents
+            .Where(continent => request.Continents.Contains(continent.Name))
+            .Select(c => c.Id)
+            .ToListAsync();
+
+        var numberOfCountries = await _dbContext.Countries
+            .Where(country => continentIds.Contains(country.ContinentId))
+            .CountAsync();
 
         return numberOfCountries;
     }

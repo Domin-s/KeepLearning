@@ -18,15 +18,15 @@ public class CountryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetCountriesByContinents(GetCountriesByContinentsQuery query)
+    public async Task<IActionResult> GetCountriesByContinents([FromQuery]GetCountriesByContinentsQuery query)
     {
         var countries = await _mediator.Send(query);
 
         return Ok(countries);
     }
 
-    [HttpPost("numberOfCountries")]
-    public async Task<IActionResult> GetNumberOfCountries(GetNumberOfCountriesQuery query)
+    [HttpGet("numberOfCountries")]
+    public async Task<IActionResult> GetNumberOfCountries([FromQuery]GetNumberOfCountriesQuery query)
     {
         var numberOfCountries = await _mediator.Send(query);
 

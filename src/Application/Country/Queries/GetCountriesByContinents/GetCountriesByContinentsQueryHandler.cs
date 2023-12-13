@@ -18,20 +18,21 @@ public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountries
     {
         IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
 
-        var continentNames = request.ContinentDtos.Select(c => c.Name);
-        var continents = await _dbContext.Continents.Where(c => continentNames.Contains(c.Name)).ToListAsync();
+        var continents = await _dbContext.Continents
+            .Where(continent => request.Continents.Contains(continent.Name))
+            .ToListAsync();
 
         if (continents.Count() == 0)
         {
             countries = await _dbContext.Countries
-                .Include(c => c.Continent)
+                .Include(continent => continent.Continent)
                 .ToListAsync();
         } else
         {
             var continentIds = continents.Select(c => c.Id);
 
             countries = await _dbContext.Countries
-                .Include(c => c.Continent)
+                .Include(continent => continent.Continent)
                 .Where(country => continentIds.Contains(country.ContinentId))
                 .ToListAsync();
         }

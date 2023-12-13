@@ -16,7 +16,7 @@ namespace Web.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet("check")]
+        [HttpPost("check")]
         public async Task<IActionResult> CheckAnswer(CheckAnswerQuery checkAnswerQuery)
         {
             var result = await _mediator.Send(checkAnswerQuery);
