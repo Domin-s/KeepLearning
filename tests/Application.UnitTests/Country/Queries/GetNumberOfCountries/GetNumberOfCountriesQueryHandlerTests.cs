@@ -31,26 +31,19 @@ public class GetNumberOfCountriesQueryHandlerTests
         {
             new QueryWithExpectedResult(
                 new GetNumberOfCountriesQuery(){
-                        Continents= new List<ContinentDto>() {
-                            new ContinentDto("Asia")
-                        }
+                    Continents = new List<String>() { "Asia" }
                 },
                 48
             ),
             new QueryWithExpectedResult(
                 new GetNumberOfCountriesQuery(){
-                        Continents= new List<ContinentDto>() {
-                            new ContinentDto("Asia"),
-                            new ContinentDto("Europe")
-                        }
+                    Continents = new List<String>() { "Asia", "Europe" }
                 },
                 92
             ),
             new QueryWithExpectedResult(
                 new GetNumberOfCountriesQuery(){
-                        Continents= new List<ContinentDto>() {
-                            new ContinentDto("Europe")
-                        }
+                    Continents = new List<String>() { "Europe" }
                 },
                 44
             ),

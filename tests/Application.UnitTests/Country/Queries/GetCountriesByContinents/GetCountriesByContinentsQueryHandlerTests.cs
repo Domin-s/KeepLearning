@@ -45,26 +45,19 @@ public class GetCountriesByContinentsQueryHandlerTests
         {
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                        ContinentDtos = new List<ContinentDto>() {
-                            new ContinentDto("Asia")
-                        }
+                    Continents = new List<String>() { "Asia" }
                 },
                 48
             ),
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                        ContinentDtos= new List<ContinentDto>() {
-                            new ContinentDto("Asia"),
-                            new ContinentDto("Europe")
-                        }
+                    Continents = new List<String>() { "Asia", "Europe" }
                 },
                 92
             ),
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                        ContinentDtos= new List<ContinentDto>() {
-                            new ContinentDto("Europe")
-                        }
+                    Continents = new List<String>() { "Europe" }
                 },
                 44
             ),

@@ -16,7 +16,7 @@ public class QuestionController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("generate")]
+    [HttpPost("generate")]
     public async Task<IActionResult> GenerateRandomQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
     {
         var question = await _mediator.Send(getRandomQuestionQuery);
