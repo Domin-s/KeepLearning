@@ -1,4 +1,3 @@
-namespace Application.Common.Models.Continent
-{
-    public record ContinentDto(string Name) { }
-}
+namespace Application.Common.Models.Continent;
+
+public record ContinentDto(string Name) { }

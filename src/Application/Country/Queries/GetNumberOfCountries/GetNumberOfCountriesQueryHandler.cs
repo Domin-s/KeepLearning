@@ -1,26 +1,28 @@
-﻿using Domain.Interfaces;
-using MediatR;
+﻿using Application.Common.Interfaces;
 
-namespace Application.Country.Queries.GetNumberOfCountries
+namespace Application.Country.Queries.GetNumberOfCountries;
+
+public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCountriesQuery, int>
 {
-    public class GetNumberOfCountriesQueryHandler : IRequestHandler<GetNumberOfCountriesQuery, int>
+    private readonly IKeepLearningDbContext _dbContext;
+
+    public GetNumberOfCountriesQueryHandler(IKeepLearningDbContext dbContext)
     {
-        private readonly IContinentRepository _continentRepository;
-        private readonly ICountryRepository _countryRepository;
+        _dbContext = dbContext;
+    }
 
-        public GetNumberOfCountriesQueryHandler(IContinentRepository continentRepository, ICountryRepository countryRepository)
-        {
-            _continentRepository = continentRepository;
-            _countryRepository = countryRepository;
-        }
+    // TODO: Add more specific validation to GetNumberOfCountriesQuery
+    public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
+    {
+        var continentIds = await _dbContext.Continents
+            .Where(continent => request.Continents.Contains(continent.Name))
+            .Select(c => c.Id)
+            .ToListAsync();
 
-        public async Task<int> Handle(GetNumberOfCountriesQuery request, CancellationToken cancellationToken)
-        {
-            var continents = await _continentRepository.GetByNames(request.Continents.Select(c => c.Name));
-            var continentIds = continents.Select(c => c.Id);
-            var numberOfCountries = await _countryRepository.GetNumberOfCountries(continentIds);
+        var numberOfCountries = await _dbContext.Countries
+            .Where(country => continentIds.Contains(country.ContinentId))
+            .CountAsync();
 
-            return numberOfCountries;
-        }
+        return numberOfCountries;
     }
 }
