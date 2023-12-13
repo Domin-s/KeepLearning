@@ -47,12 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddAuthorization(options =>
                 options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
-            services.AddScoped<ContinentSeeder>();
-            services.AddScoped<CountrySeeder>();
-
             return services;
         }
-
     }
 
     public static class InitialiserExtensions
