@@ -1,10 +1,10 @@
 ﻿using Application.Common.Models.Continent;
 using Application.Common.Models.Country;
 using Domain.Enteties;
-using Infrastructure.Persistence;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Seeders
+namespace Infrastructure.Data.Seeders
 {
     public class CountrySeeder
     {
