@@ -6,8 +6,9 @@ EXPOSE 5242
 COPY ["/src/Application/Application.csproj", "/src/Application/"]
 COPY ["/src/Domain/Domain.csproj", "/src/Domain/"]
 COPY ["/src/Infrastructure/Infrastructure.csproj", "/src/Infrastructure/"]
-COPY ["/src/MVC/MVC.csproj", "/src/MVC/"]
-RUN dotnet restore "/src/MVC/MVC.csproj"
+COPY ["/src/Web/Server/Server.csproj", "/src/Web/Server/"]
+COPY ["/src/Web/Client/Client.csproj", "/src/Web/Client/"]
+RUN dotnet restore "/src/Web/Server/Server.csproj"
 
 COPY . ./
 RUN dotnet publish -c Release -o out
