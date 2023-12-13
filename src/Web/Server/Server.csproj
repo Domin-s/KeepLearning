@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <SpaRoot>..\web.client</SpaRoot>
+    <SpaRoot>..\Client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
   </PropertyGroup>
@@ -21,7 +21,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\web.client\Client.esproj">
+    <ProjectReference Include="..\Client\Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
