@@ -1,8 +1,7 @@
-namespace Domain.Enteties
+namespace Domain.Enteties;
+
+public class Continent
 {
-    public class Continent
-    {
-        public Guid Id { get; set; }
-        public required string Name { get; set; }
-    }
+    public Guid Id { get; set; }
+    public required string Name { get; set; }
 }
