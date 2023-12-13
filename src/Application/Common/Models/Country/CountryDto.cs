@@ -1,12 +1,11 @@
 ﻿using Application.Common.Models.Continent;
 
-namespace Application.Common.Models.Country
+namespace Application.Common.Models.Country;
+
+public class CountryDto
 {
-    public class CountryDto
-    {
-        public required string Name { get; set; }
-        public required string Abbreviation { get; set; }
-        public required string CapitalCity { get; set; }
-        public required ContinentDto ContinentDto { get; set; }
-    }
+    public required string Name { get; set; }
+    public required string Abbreviation { get; set; }
+    public required string CapitalCity { get; set; }
+    public required ContinentDto ContinentDto { get; set; }
 }
