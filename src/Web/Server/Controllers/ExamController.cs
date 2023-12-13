@@ -1,10 +1,10 @@
-using Application.Common.Models.Exam.Country;
-using Application.Continent.Queries.GetAllContinents;
 using Application.Exam.Queries.CheckExam;
 using Application.Exam.Queries.GenerateExamCountry;
 
 namespace MVC.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class ExamController : ControllerBase
 {
 
@@ -17,7 +17,7 @@ public class ExamController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet("generate")]
+    [HttpPost("generate")]
     public async Task<IActionResult> GenerateExam(GenerateExamCountryQuery query)
     {
         var exam = await _mediator.Send(query);
@@ -25,7 +25,7 @@ public class ExamController : ControllerBase
         return Ok(exam);
     }
 
-    [HttpGet("check")]
+    [HttpPost("check")]
     public async Task<IActionResult> CheckExam(CheckExamQuery query)
     {
         var result = await _mediator.Send(query);

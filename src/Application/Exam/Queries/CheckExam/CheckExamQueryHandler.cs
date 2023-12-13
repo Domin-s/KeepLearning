@@ -13,13 +13,11 @@ public class CheckExamQueryHandler : IRequestHandler<CheckExamQuery, ExamResultD
         _countryService = countryService;
     }
 
-    // TODO: Refactor to use one method for all questions - easier to test in future
     public async Task<ExamResultDto> Handle(CheckExamQuery request, CancellationToken cancellationToken)
     {
         var answers = new List<AnswerResultDto>();
         var numberOfCorrectAnswers = 0;
         var numberOfIncorrectAnswers = 0;
-
 
         foreach (var answer in request.Answers)
         {
