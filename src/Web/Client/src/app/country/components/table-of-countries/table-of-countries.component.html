@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <div>Name</div>
+            </th>
+            <th>
+                <div>Capital city</div>
+            </th>
+            <th>
+                <div>Continent</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (country of countries; track $index) {
+            <app-row-country [country]="country"/>
+        }
+    </tbody>
+</table>
