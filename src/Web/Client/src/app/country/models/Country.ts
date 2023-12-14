@@ -1,6 +1,8 @@
+import { Continent } from "./Continent";
+
 export interface Country {
-  Name: string;
-  Abbreviation: string;
-  CapitalCity: string;
-  ContinentName: string;
+  name: string;
+  abbreviation: string;
+  capitalCity: string;
+  continentDto: Continent;
 }

@@ -1,20 +1,28 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                <div>Name</div>
-            </th>
-            <th>
-                <div>Capital city</div>
-            </th>
-            <th>
-                <div>Continent</div>
-            </th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Capital city</th>
+            <th scope="col">Continent</th>
         </tr>
     </thead>
     <tbody>
-        @for (country of countries; track $index) {
-            <app-row-country [country]="country"/>
+        @for (country of countries; track country.name; let i= $index) {
+            <tr>
+                <th scope="row">
+                    {{ i + 1 }}
+                </th>
+                <td>
+                    {{ country.name }}
+                </td>
+                <td>
+                    {{ country.capitalCity }}
+                </td>
+                <td>
+                    {{ country.continentDto.name }}
+                </td>
+            </tr>
         }
     </tbody>
 </table>

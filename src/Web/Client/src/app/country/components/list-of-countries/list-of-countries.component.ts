@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Country } from '../../models/Country';
 
 @Component({
@@ -8,7 +8,7 @@ import { Country } from '../../models/Country';
   styleUrl: './list-of-countries.component.scss'
 })
 export class ListOfCountriesComponent implements OnInit {
-  public countries: Country[] = [];
+  @Output() countries: Country[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +19,7 @@ export class ListOfCountriesComponent implements OnInit {
   getCountries() {
     this.http.get<Country[]>('/country').subscribe(
       (result) => {
+        console.log(result);
         this.countries = result;
       },
       (error) => {
