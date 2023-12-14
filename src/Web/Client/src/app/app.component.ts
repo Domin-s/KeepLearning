@@ -1,23 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { ListOfCountriesComponent } from './country/components/list-of-countries/list-of-countries.component';
+import { NgbNav } from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
+  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  imports: [ListOfCountriesComponent, NgbNav]
 })
-export class AppComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+export class AppComponent {
+  private router = inject(Router);
 
-  ngOnInit() {
+  constructor() {
+    this.router.navigateByUrl;
   }
-
-  title = 'client';
 }

@@ -10,15 +10,15 @@ import { TableOfCountriesComponent } from './country/components/table-of-countri
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ListOfCountriesComponent,
-    TableOfCountriesComponent
   ],
   imports: [
+    AppComponent,
     AppRoutingModule,
     BrowserModule, 
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ListOfCountriesComponent,
+    TableOfCountriesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
