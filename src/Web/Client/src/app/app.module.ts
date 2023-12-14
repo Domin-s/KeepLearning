@@ -4,10 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ListOfCountriesComponent } from './country/components/list-of-countries/list-of-countries.component';
+import { RowCountryComponent } from './country/components/row-country/row-country.component';
+import { TableOfCountriesComponent } from './country/components/table-of-countries/table-of-countries.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListOfCountriesComponent,
+    RowCountryComponent,
+    TableOfCountriesComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
