@@ -15,11 +15,18 @@ export class ListOfCountriesComponent implements OnInit {
   ngOnInit(): void {
     this.getCountries();
   }
+  
+  goToCreatorToGenerateExam() {
+    console.log("ListOfCountriesComponent => goToCreatorToGenerateExam");
+  }
+
+  goToCreatorToGenerateRandomQuestion(){
+    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
+  }
 
   getCountries() {
     this.http.get<Country[]>('/country').subscribe(
       (result) => {
-        console.log(result);
         this.countries = result;
       },
       (error) => {

@@ -1,38 +1,19 @@
 ﻿<header>
-    <div class="text-center">
-        <nav
-            class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <!-- TODO: Angular =>  asp-area="" asp-controller="Home" asp-action="Index" <= -->
-                <a class="navbar-brand">
-                    <h2>Choose category:</h2>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <!-- TODO: Angular =>  asp-controller="Country" asp-action="List" <= -->
-                            <a class="nav-link text-dark">
-                                <h2>Country</h2>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <nav >
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+            <li ngbNavItem>
+                <a ngbNavLink><h2>Country</h2></a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
-<main role="main" class="pb-3">
+<main>
     <app-list-of-countries/>
 </main>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
+<footer>
+    <div>
         &copy; 2023 - Keep Learning Website
     </div>
 </footer>
