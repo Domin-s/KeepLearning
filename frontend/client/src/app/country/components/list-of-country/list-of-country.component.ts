@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../models/Country';
 import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
+import { ContinentsCheckboxComponent } from '../../../continent/continents-checkbox/continents-checkbox.component';
 
 @Component({
   standalone: true,
   selector: 'app-list-of-countries',
   templateUrl: './list-of-country.component.html',
   styleUrl: './list-of-country.component.scss',
-  imports: [TableOfCountriesComponent]
+  imports: [TableOfCountriesComponent, ContinentsCheckboxComponent]
 })
 export class ListOfCountriesComponent implements OnInit {
   private URL = "https://localhost:5001/api/Country";
@@ -32,7 +33,6 @@ export class ListOfCountriesComponent implements OnInit {
   getCountries() {
     this.http.get<Country[]>("https://localhost:5001/api/Country").subscribe({
       next: (result) => {
-        console.log(result);
         this.countries = result;
       },
       error: (error) => {

@@ -9,18 +9,6 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
   styleUrl: './checkbox-list.component.css',
   imports: [CheckboxComponent]
 })
-export class CheckboxListComponent implements OnInit {
+export class CheckboxListComponent {
   @Input({ required: true}) checkboxes!: Checkbox[];
-
-  constructor() {
-    console.log("constructor");
-    console.log("CheckboxListComponent");
-    console.log(this.checkboxes);
-  }
-
-  ngOnInit(): void {
-    console.log("ngOnInit");
-    console.log("CheckboxListComponent");
-    console.log(this.checkboxes);
-  }
 }
