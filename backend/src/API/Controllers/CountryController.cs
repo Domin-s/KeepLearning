@@ -4,7 +4,7 @@ using Application.Country.Queries.GetNumberOfCountries;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CountryController : ControllerBase
 {
 
@@ -18,7 +18,7 @@ public class CountryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetCountriesByContinents([FromQuery]GetCountriesByContinentsQuery query)
+    public async Task<IActionResult> GetCountriesByContinents([FromQuery] GetCountriesByContinentsQuery query)
     {
         var countries = await _mediator.Send(query);
 
@@ -26,7 +26,7 @@ public class CountryController : ControllerBase
     }
 
     [HttpGet("numberOfCountries")]
-    public async Task<IActionResult> GetNumberOfCountries([FromQuery]GetNumberOfCountriesQuery query)
+    public async Task<IActionResult> GetNumberOfCountries([FromQuery] GetNumberOfCountriesQuery query)
     {
         var numberOfCountries = await _mediator.Send(query);
 

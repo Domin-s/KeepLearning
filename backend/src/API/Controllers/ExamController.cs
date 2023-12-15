@@ -4,7 +4,7 @@ using Application.Exam.Queries.GenerateExamCountry;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ExamController : ControllerBase
 {
 
