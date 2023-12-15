@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../models/Country';
 import { TableOfCountriesComponent } from '../table-of-countries/table-of-countries.component';
@@ -14,10 +15,10 @@ export class ListOfCountriesComponent implements OnInit {
 
   countries: Country[] = [];
 
-  // http: HttpClient = inject(HttpClient);
+  private http: HttpClient = inject(HttpClient);
 
   ngOnInit(): void {
-    // this.getCountries();
+    this.getCountries();
   }
   
   goToCreatorToGenerateExam() {
@@ -29,14 +30,15 @@ export class ListOfCountriesComponent implements OnInit {
   }
 
   getCountries() {
-    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
-  //   this.http.get<Country[]>('URL').subscribe({
-  //     next: (result) => {
-  //       this.countries = result;
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     }
-  // })
+    console.log("ListOfCountriesComponent => ListOfCountriesComponent");
+    this.http.get<Country[]>("https://localhost:5001/api/Country").subscribe({
+      next: (result) => {
+        console.log(result);
+        this.countries = result;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+  })
   }
 }
