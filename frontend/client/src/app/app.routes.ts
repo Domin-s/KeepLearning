@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { StartComponent } from './start/start.component';
-import { ListOfCountriesComponent } from './country/components/list-of-countries/list-of-countries.component';
+import { ListOfCountriesComponent } from './country/components/list-of-country/list-of-country.component';
 
 export const routes: Routes = [
     {

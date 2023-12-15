@@ -6,8 +6,8 @@ import { TableOfCountriesComponent } from '../table-of-country/table-of-country.
 @Component({
   standalone: true,
   selector: 'app-list-of-countries',
-  templateUrl: './list-of-countries.component.html',
-  styleUrl: './list-of-countries.component.scss',
+  templateUrl: './list-of-country.component.html',
+  styleUrl: './list-of-country.component.scss',
   imports: [TableOfCountriesComponent]
 })
 export class ListOfCountriesComponent implements OnInit {
