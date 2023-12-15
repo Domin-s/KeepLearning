@@ -11,7 +11,7 @@ public class ContinentSeeder
         _dbContext = dbContext;
     }
 
-    public async Task Seed()
+    public void Seed()
     {
         if (!_dbContext.Continents.Any())
         {

@@ -59,7 +59,7 @@ public class KeepLearningDbContextInitialiser
 
         // contientns
         var continentSeeder = new ContinentSeeder(_dbContext);
-        await continentSeeder.Seed();
+        continentSeeder.Seed();
 
         // countries
         var countrySeeder = new CountrySeeder(_dbContext);
