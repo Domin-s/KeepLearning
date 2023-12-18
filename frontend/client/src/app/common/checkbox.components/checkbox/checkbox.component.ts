@@ -9,8 +9,4 @@ import { Checkbox } from '../model/checkbox';
 })
 export class CheckboxComponent {
   @Input({ required: true }) checkbox!: Checkbox;
-
-  chengeStage() {
-    this.checkbox.changeIsChecked();
-  }
 }

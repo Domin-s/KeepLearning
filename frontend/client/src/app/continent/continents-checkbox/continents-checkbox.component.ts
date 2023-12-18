@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CheckboxListComponent } from '../../common/checkbox.components/checkbox-list/checkbox-list.component';
 import { Checkbox } from '../../common/checkbox.components/model/checkbox';
-import { HttpClient } from '@angular/common/http';
-import { Continent } from '../../country/models/Continent';
+import { ContinentService } from '../services/continent.service';
+import { ContinentMapper } from '../mapper/continent.mapper';
 
 @Component({
   selector: 'app-continents-checkbox',
@@ -14,30 +14,24 @@ import { Continent } from '../../country/models/Continent';
 export class ContinentsCheckboxComponent implements OnInit {
   public continents: Checkbox[] = [];
 
-  private http: HttpClient = inject(HttpClient);
+  private continentMapper: ContinentMapper = inject(ContinentMapper);
+  private continentService: ContinentService = inject(ContinentService);
 
   ngOnInit(): void {
     this.getContinents();
   }
 
   getContinents() {
-    this.http.get<Continent[]>('https://localhost:5001/api/Continent').subscribe({
-      next: (result) => this.mapToCheckbox(result),
-      error: (error) => console.log(error)
-  })}
-
-  mapToCheckbox(continents: Continent[]) {
-    for (let i = 0; i < continents.length; i++) {
-      const continent = continents[i];
-
-      let checkbox: Checkbox  = new Checkbox(
-        continent.name,
-        "Continent",
-        continent.name,
-        true
-      );
-      
-      this.continents.concat(checkbox);
-    }
+    this.continentService.getContinents().subscribe({
+      next: (result) => {
+        console.log(result);
+        this.continents = this.continentMapper.mapToCheckbox(result);
+        console.log(this.continents);
+      },
+      error: (err) => {
+        console.log(err);
+        this.continents = [];
+      }
+    })
   }
 }

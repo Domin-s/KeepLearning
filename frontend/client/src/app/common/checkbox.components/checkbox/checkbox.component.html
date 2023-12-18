@@ -1,11 +1,10 @@
-<h2>asdasd</h2>
 <div class="form-check form-check-inline">
     <input 
         class="form-check-input"
         type="checkbox"
         name=" {{ checkbox.name }}"
-        value="{{ checkbox.value }}" 
-        @if( checkbox.isChecked ) checked 
+        value="{{ checkbox.value }}"
+        checked = "{{ checkbox.isChecked }}"
     />
     <label class="form-check-label" id="{{ checkbox.id }}">{{ checkbox.value }}</label>
 </div>

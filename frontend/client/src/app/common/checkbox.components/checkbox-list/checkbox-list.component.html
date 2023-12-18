@@ -1,4 +1,3 @@
-<div>{{ this.checkboxes }}</div>
 @for (checkbox of checkboxes; track checkbox.name; let i= $index) {
-    {{ checkbox }}
+    <app-checkbox [checkbox]="checkbox"/>
 }
