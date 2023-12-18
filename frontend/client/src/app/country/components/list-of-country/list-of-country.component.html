@@ -1,0 +1,18 @@
+@if (countries.length < 1) {
+    <h1>Not find any country</h1>
+} @else {
+    <h1>Countries</h1>
+    
+    <nav>
+        <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateExam()">Generate exam</button>
+        <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateRandomQuestion()">Generate random question</button>
+    </nav>
+    
+    <hr />
+
+    <app-continents-checkbox/>
+
+    <hr />
+    
+    <app-table-of-countries [countries]="this.countries"/>
+}
