@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../models/Country';
 import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
 import { ContinentsCheckboxComponent } from '../../../continent/continents-checkbox/continents-checkbox.component';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   standalone: true,
@@ -12,11 +12,9 @@ import { ContinentsCheckboxComponent } from '../../../continent/continents-check
   imports: [TableOfCountriesComponent, ContinentsCheckboxComponent]
 })
 export class ListOfCountriesComponent implements OnInit {
-  private URL = "https://localhost:5001/api/Country";
+  @Output() countries: Country[] = [];
 
-  countries: Country[] = [];
-
-  private http: HttpClient = inject(HttpClient);
+  private countryService: CountryService = inject(CountryService);
 
   ngOnInit(): void {
     this.getCountries();
@@ -31,11 +29,12 @@ export class ListOfCountriesComponent implements OnInit {
   }
 
   getCountries() {
-    this.http.get<Country[]>("https://localhost:5001/api/Country").subscribe({
+    this.countryService.getCountries().subscribe({
       next: (result) => {
         this.countries = result;
       },
       error: (error) => {
+        this.countries = [];
         console.log(error);
       }
     })
