@@ -3,12 +3,12 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 5242
 
-COPY ["/src/Application/Application.csproj", "/src/Application/"]
-COPY ["/src/Domain/Domain.csproj", "/src/Domain/"]
-COPY ["/src/Infrastructure/Infrastructure.csproj", "/src/Infrastructure/"]
-COPY ["/src/Web/Server/Server.csproj", "/src/Web/Server/"]
-COPY ["/src/Web/Client/Client.csproj", "/src/Web/Client/"]
-RUN dotnet restore "/src/Web/Server/Server.csproj"
+#backend
+COPY ["/backend/src/Application/Application.csproj", "/backend/src/Application/"]
+COPY ["/backend/src/Domain/Domain.csproj", "/backend/src/Domain/"]
+COPY ["/backend/src/Infrastructure/Infrastructure.csproj", "/backend/src/Infrastructure/"]
+COPY ["/backend/src/API/API.csproj", "/backend/src/API/"]
+RUN dotnet restore "/backend/src/API/API.csproj"
 
 COPY . ./
 RUN dotnet publish -c Release -o out

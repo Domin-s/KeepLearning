@@ -24,17 +24,17 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        working-directory: ./src/Web/Server
+        working-directory: ./backend/src/API
         run: dotnet restore
 
       - name: Build
-        working-directory: ./src/Web/Server
+        working-directory: ./backend/src/API
         run: dotnet build --no-restore
 
       - name: Application.UnitTests
-        working-directory: ./tests/Application.UnitTests
+        working-directory: ./backend/tests/Application.UnitTests
         run: dotnet test
 
       - name: Application.IntegrationTests
-        working-directory: ./tests/Application.IntegrationTests
+        working-directory: ./backend/tests/Application.IntegrationTests
         run: dotnet test
