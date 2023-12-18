@@ -1,4 +1,4 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Continent } from "../../country/models/Continent";
 import { Checkbox } from "../../common/checkbox.components/model/checkbox";
 

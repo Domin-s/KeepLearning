@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Country } from '../../models/Country';
+import { Country } from '../../../models/Country';
 
 @Component({
   standalone: true,
