@@ -10,8 +10,4 @@ export class Checkbox {
         this.value = value;
         this.isChecked = isChecked;
     }
-
-    changeIsChecked() {
-        this.isChecked = !this.isChecked;
-    }
 } 

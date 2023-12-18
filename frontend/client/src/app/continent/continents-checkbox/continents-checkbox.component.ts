@@ -24,9 +24,7 @@ export class ContinentsCheckboxComponent implements OnInit {
   getContinents() {
     this.continentService.getContinents().subscribe({
       next: (result) => {
-        console.log(result);
         this.continents = this.continentMapper.mapToCheckbox(result);
-        console.log(this.continents);
       },
       error: (err) => {
         console.log(err);
