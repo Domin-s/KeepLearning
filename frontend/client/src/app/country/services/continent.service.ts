@@ -7,7 +7,7 @@ import { Continent } from "../../country/models/Continent";
 })
 export class ContinentService {
 
-  private URL = 'https://localhost:5001/api/continent';
+  private URL = 'https://localhost:5001/api/country/continent';
 
   private http: HttpClient = inject(HttpClient);
 
