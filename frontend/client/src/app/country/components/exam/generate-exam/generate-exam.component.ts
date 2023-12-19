@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ContinentsCheckboxComponent } from '../../continents/continents-checkbox/continents-checkbox.component';
 import { SelectComponent } from '../../../../common/select/component/select.component';
 import { Select } from '../../../../common/select/model/select';
 import { ExamService } from '../../../services/exam.service';
 import { ContinentService } from '../../../services/continent.service';
+import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 
 @Component({
   standalone: true,
