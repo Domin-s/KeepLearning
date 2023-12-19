@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
-import { ContinentsCheckboxComponent } from '../../continents/continents-checkbox/continents-checkbox.component';
 import { RouterLink } from '@angular/router';
 import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
+import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 
 @Component({
   standalone: true,

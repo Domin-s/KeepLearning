@@ -4,10 +4,10 @@ export class Select {
     description!: string;
     options!: any[];
 
-    constructor(id: string, name: string, title: string, options: any[]) {
+    constructor(id: string, name: string, description: string, options: any[]) {
         this.id = id;
         this.name = name;
-        this.description = title;
+        this.description = description;
         this.options = options;
     }
 } 
