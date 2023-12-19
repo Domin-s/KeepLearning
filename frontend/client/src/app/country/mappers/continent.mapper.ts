@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Continent } from "../../country/models/Continent";
-import { Checkbox } from "../../common/checkbox.components/model/checkbox";
+import { Checkbox } from "../../common/checkbox/model/checkbox";
 
 @Injectable({
   providedIn: "root",

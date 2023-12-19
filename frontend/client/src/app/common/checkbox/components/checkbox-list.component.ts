@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
-import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { CheckboxComponent } from '../component/checkbox.component';
 
 @Component({
   standalone: true,
