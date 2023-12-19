@@ -16,7 +16,7 @@
                             <div class="col-4 col-sm-5 col-md-4">Choose continents: </div>
 
                             <div class="col-5 col-sm-6 col-md-5">
-                                Cintinents
+                                <app-continents-checkbox />
                             </div>
                         </div>
                         <div class="row m-2">
@@ -37,12 +37,10 @@
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">
                         <div class="col-3 col-md-3 col-sm-4">
-                            <a asp-controller="Country" asp-action="List" class="btn btn-primary" role="button">
-                                Back to list
-                            </a>
+                            <a [routerLink]="['/country']" class="btn btn-lg btn-outline-primary m-2">Back to list</a>
                         </div>
                         <div class="col-3 col-md-3 col-sm-4">
-                            <input type="submit" value="Create" class="btn btn-primary" id="createExam" />
+                            <input type="submit" value="Create" class="btn btn-lg btn-outline-primary m-2" id="createExam" />
                         </div>
                     </div>
                 </form>

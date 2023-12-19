@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContinentsCheckboxComponent } from '../../continents/continents-checkbox/continents-checkbox.component';
 
 @Component({
-  selector: 'app-generate-exam',
   standalone: true,
-  imports: [],
+  selector: 'app-generate-exam',
   templateUrl: './generate-exam.component.html',
-  styleUrl: './generate-exam.component.scss'
+  styleUrl: './generate-exam.component.scss',
+  imports: [
+    ContinentsCheckboxComponent,
+    RouterLink
+  ]
 })
 export class GenerateExamComponent {
 

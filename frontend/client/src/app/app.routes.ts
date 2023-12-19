@@ -13,13 +13,11 @@ export const routes: Routes = [
       title: "Country",
       path: "country",
       component: ListOfCountriesComponent,
-      children: [
-        {
-          title: "Generate exam",
-          path: "generateExam",
-          component: GenerateExamComponent
-        },
-      ]
+    },
+    {
+      title: "Generate exam",
+      path: "country/generateExam",
+      component: GenerateExamComponent
     },
     {
       path: "**",

@@ -4,7 +4,7 @@
     <h1>Countries</h1>
     
     <nav>
-        <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateExam()">Generate exam</button>
+        <button [routerLink]="['/country/generateExam']" class="btn btn-lg btn-outline-primary m-2" >Generate exam</button>
         <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateRandomQuestion()">Generate random question</button>
     </nav>
     

@@ -18,10 +18,11 @@ export class ContinentsCheckboxComponent implements OnInit {
   private continentService: ContinentService = inject(ContinentService);
 
   ngOnInit(): void {
-    this.getContinents();
+    this.getContinents(this.continents);
   }
 
-  getContinents() {
+  getContinents(continents: Checkbox[]) {
+    console.log(continents);
     this.continentService.getContinents().subscribe({
       next: (result) => {
         this.continents = this.continentMapper.mapToCheckbox(result);
