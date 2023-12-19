@@ -1,0 +1,5 @@
+<select name=" {{ select.name }}" class="col-5 col-sm-6 col-md-5" id=" {{ select.id }}">
+    @for (option of select.options; track $index) {
+        <option value="{{option}}">{{option}}</option>
+    }
+</select>

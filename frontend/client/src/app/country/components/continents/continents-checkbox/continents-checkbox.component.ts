@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CheckboxListComponent } from '../../../../common/checkbox.components/checkbox-list/checkbox-list.component';
+import { CheckboxListComponent } from '../../../../common/checkbox.components/components/checkbox-list.component';
 import { ContinentMapper } from '../../../mappers/continent.mapper';
 import { ContinentService } from '../../../services/continent.service';
 import { Checkbox } from '../../../../common/checkbox.components/model/checkbox';
