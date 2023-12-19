@@ -1,10 +1,11 @@
 using Application.Exam.Queries.CheckExam;
 using Application.Exam.Queries.GenerateExamCountry;
+using Application.Exam.Queries.GetCategoryCountryExam;
 
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/country/[controller]")]
 public class ExamController : ControllerBase
 {
 
@@ -29,6 +30,14 @@ public class ExamController : ControllerBase
     public async Task<IActionResult> CheckExam(CheckExamQuery query)
     {
         var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    [HttpGet("category")]
+    public async Task<IActionResult> GetCategory()
+    {
+        var result = await _mediator.Send(new GetCategoryCountryExamQuery());
 
         return Ok(result);
     }

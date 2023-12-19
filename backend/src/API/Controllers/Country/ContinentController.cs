@@ -3,7 +3,7 @@
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/country/[controller]")]
 public class ContinentController : ControllerBase
 {
 
