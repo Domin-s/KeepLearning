@@ -6,19 +6,17 @@ import { Checkbox } from "../../common/checkbox/model/checkbox";
   providedIn: "root",
 })
 export class ContinentMapper {
-  mapToCheckbox(continents: Continent[], continentsChecked: string[] = []): Checkbox[] {
+  mapToCheckbox(continents: Continent[]): Checkbox[] {
     var checkboxes: Checkbox[] = [];
 
     for (let i = 0; i < continents.length; i++) {
       const continent = continents[i];
 
-      let isChecked = this.checkIfContinentIsChecked(continent, continentsChecked);
-
       let checkbox: Checkbox  = new Checkbox(
         continent.name,
         "Continent",
         continent.name,
-        isChecked
+        true
       );
       
       checkboxes.push(checkbox);

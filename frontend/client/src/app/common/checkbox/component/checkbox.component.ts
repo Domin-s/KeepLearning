@@ -7,6 +7,21 @@ import { Checkbox } from '../model/checkbox';
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.css'
 })
-export class CheckboxComponent {
+export class CheckboxComponent implements OnInit {
   @Input({ required: true }) checkbox!: Checkbox;
+  @Input({ required: true }) inOneLine!: boolean;
+
+  public classes = ""
+
+  ngOnInit(): void {
+    this.setClassToComponent();
+  }
+
+  setClassToComponent() {
+    if (this.inOneLine) {
+      this.classes = "form-check form-check-inline"
+    } else {
+      this.classes = "form-check"
+    }
+  }
 }

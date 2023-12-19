@@ -11,4 +11,5 @@ import { CheckboxComponent } from '../component/checkbox.component';
 })
 export class CheckboxListComponent {
   @Input({ required: true}) checkboxes!: Checkbox[];
+  @Input({ required: true }) inOneLine!: boolean;
 }
