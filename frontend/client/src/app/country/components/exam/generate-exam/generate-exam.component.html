@@ -12,23 +12,12 @@
                             <div class="col-4 col-sm-5 col-md-4">Exam name: </div>
                             <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
                         </div>
-                        <div class="row m-2">
-                            <div class="col-4 col-sm-5 col-md-4">Choose continents: </div>
-                            <div class="col-5 col-sm-6 col-md-5">
-                                <app-continents-checkbox />
-                            </div>
-                        </div>
                         
-                        <app-select [select]="select"/>
-                    
-                        <div class="row m-2">
-                            <div class="col-4 col-sm-5 col-md-4">Choose number of questions:</div>
-                            <select name="NumberOfQuestion" class="col-5 col-sm-6 col-md-5"
-                                    id="NumberOfQuestion"></select>
-                        </div>
-                        <div class="row m-2">
-
-                        </div>
+                        <app-continents-checkbox/>
+                        
+                        <app-select [select]="cetegoriesSelect"/>
+                        
+                        <app-select [select]="numberOfQuestionSelect"/>
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">

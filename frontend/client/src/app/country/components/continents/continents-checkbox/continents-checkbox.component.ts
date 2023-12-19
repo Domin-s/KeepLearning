@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ContinentMapper } from '../../../mappers/continent.mapper';
 import { ContinentService } from '../../../services/continent.service';
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
@@ -11,7 +11,7 @@ import { Checkbox } from '../../../../common/checkbox/model/checkbox';
   templateUrl: './continents-checkbox.component.html',
   styleUrl: './continents-checkbox.component.scss'
 })
-export class ContinentsCheckboxComponent implements OnInit {
+export class ContinentsCheckboxComponent implements OnInit { 
   public continents: Checkbox[] = [];
 
   private continentMapper: ContinentMapper = inject(ContinentMapper);

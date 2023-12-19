@@ -4,6 +4,7 @@ import { ContinentsCheckboxComponent } from '../../continents/continents-checkbo
 import { SelectComponent } from '../../../../common/select/component/select.component';
 import { Select } from '../../../../common/select/model/select';
 import { ExamService } from '../../../services/exam.service';
+import { ContinentService } from '../../../services/continent.service';
 
 @Component({
   standalone: true,
@@ -17,31 +18,89 @@ import { ExamService } from '../../../services/exam.service';
   ]
 })
 export class GenerateExamComponent {
-  public select!: Select;
+  public cetegoriesSelect!: Select;
+  public numberOfQuestionSelect!: Select;
 
+  private numberOfQuestionToChoose: number[] = [5, 10, 20, 25, 50, 100];
+  
+  
   private examService: ExamService = inject(ExamService);
+  private continentService: ContinentService = inject(ContinentService);
 
   ngOnInit(): void {
-    this.getCategories();
+    this.cetegoriesSelect = this.getCategoriesSelect();
+    this.setNumberOfQuestionSelect();
   }
 
-  goToCreatorToGenerateRandomQuestion(){
-    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
+  getCategoriesSelect(): Select {
+    let categories: string[] = this.getCategories();
+
+    return new Select(
+      "Select-Categories",
+      "Categories",
+      "Choose guess type",
+      categories
+    );
   }
 
-  getCategories() {
+  getCategories(): string[] {
+    let categories: string[] = [];
+
     this.examService.getCategories().subscribe({
       next: (result) => {
-        this.select = new Select(
-          "Category",
-          "Category",
-          "Choose a guess type:",
-          result
-        );
+        categories = result;
       },
       error: (error) => {
         console.log(error);
       }
     })
+
+    return categories;
+  }
+
+  setNumberOfQuestionSelect(){
+    let maxNumberOfQuestion: number = this.getMaxNumbersOfQuestion();
+    let numersOfQuestion: number[] = this.getNumbersOfQuestion(maxNumberOfQuestion, this.numberOfQuestionToChoose);
+
+    this.cetegoriesSelect = new Select(
+      "Select-NumberOfQuestion",
+      "NumberOfQuestion",
+      "Choose number of question",
+      numersOfQuestion
+    );
+  }
+
+  getMaxNumbersOfQuestion(): number {
+    let numberOfQuestion = 0;
+
+    this.continentService.getNumberOfCountries().subscribe({
+      next: (result) => {
+        numberOfQuestion = result;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+
+    return numberOfQuestion;
+  }
+
+  getNumbersOfQuestion(maxNumber: number, numbersToChoose: number[]): number[] {
+    let numbers: number[] = [];
+
+    for (let i = 0; i < numbersToChoose.length; i++) {
+      const element = numbersToChoose[i];
+      if(element < maxNumber) {
+        numbers.push(element);
+      } else {
+        break;
+      }
+    }
+
+    return numbers;
+  }
+
+  goToCreatorToGenerateRandomQuestion(){
+    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
   }
 }

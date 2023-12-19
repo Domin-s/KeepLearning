@@ -7,11 +7,15 @@ import { Continent } from "../../country/models/Continent";
 })
 export class ContinentService {
 
-  private URL = 'https://localhost:5001/api/Continent';
+  private URL = 'https://localhost:5001/api/continent';
 
   private http: HttpClient = inject(HttpClient);
 
   getContinents() {
     return this.http.get<Continent[]>(this.URL);
+  }
+
+  getNumberOfCountries() {
+    return this.http.get<number>(this.URL + '/numberOfCountries');
   }
 }
