@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { StartComponent } from './start/start.component';
-import { ListOfCountriesComponent } from './country/components/countries/list-of-country/list-of-country.component';
-import { GenerateExamComponent } from './country/components/exam/generate-exam/generate-exam.component';
+import { ListOfCountriesComponent } from './country/ui/countries/list-of-country/list-of-country.component';
+import { GenerateExamComponent } from './country/ui/exam/generate-exam/generate-exam.component';
 
 export const routes: Routes = [
     {
