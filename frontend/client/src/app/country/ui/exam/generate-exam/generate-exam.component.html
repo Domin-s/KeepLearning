@@ -13,12 +13,15 @@
                             <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
                         </div>
                         
-                        <app-continents-checkbox [inOneLine]="false" [isForm]="true"/>
+                        <app-continents-checkbox 
+                            [inOneLine]="false"
+                            [isForm]="true"
+                            [continents]="continents"
+                            (checkOrUncheckEvent)="checkOrUncheckChild($event)"/>
 
                         <app-category-select />
 
-                        <app-number-of-questions-select />
-
+                        <app-number-of-questions-select [continents]="continents"/>
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
 import { ContinentMapper } from '../../../mappers/continent.mapper';
 import { ContinentService } from '../../../services/continent.service';
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
@@ -14,6 +14,10 @@ import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
+  @Input() continents: string[] = [];
+
+  @Output() checkOrUncheckEvent = new EventEmitter();
+
   public continentCheckboxes: Checkbox[] = [];
 
   private continentMapper: ContinentMapper = inject(ContinentMapper);
@@ -26,11 +30,15 @@ export class ContinentsCheckboxComponent implements OnInit {
   getContinents(){
     this.continentService.getContinents().subscribe({
       next: (result) => {
-        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result);
+        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result, this.continents);
       },
       error: (err) => {
         console.log(err);
       }
     })
+  }
+
+  checkOrUncheckChild(itemValue: string) {
+    this.checkOrUncheckEvent.emit(itemValue)
   }
 }

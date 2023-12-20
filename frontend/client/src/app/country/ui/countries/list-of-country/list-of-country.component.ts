@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, inject } from '@angular/core';
+import { Component, Input, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
 import { RouterLink } from '@angular/router';
@@ -18,6 +18,7 @@ import { ContinentsCheckboxComponent } from '../../../shared/continents/continen
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
+  @Input() continents: string[] = [];
 
   private countryService: CountryService = inject(CountryService);
 

@@ -17,7 +17,24 @@ import { NumberOfQuestionsSelectComponent } from '../../../shared/question/numbe
   ]
 })
 export class GenerateExamComponent {
+  public continents: string[] = [];
+
   goToCreatorToGenerateRandomQuestion(){
     console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
+  }
+
+  checkOrUncheckChild(itemValue: string) {
+    console.log("ListOfCountriesComponent => checkOrUncheckChild => removeOrAddContinent => " + itemValue);
+    this.removeOrAddContinent(itemValue);
+  }
+
+  removeOrAddContinent(continent: string) {
+    let element = this.continents.find(c => c === continent);
+
+    if (element === undefined) {
+      this.continents.push(continent)
+    } else {
+      this.continents = this.continents.filter(c => c !== continent);
+    }
   }
 }

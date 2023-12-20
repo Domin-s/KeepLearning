@@ -1,9 +1,10 @@
 ﻿using Application.Continent.Queries.GetAllContinents;
+using Application.Country.Queries.GetNumberOfCountries;
 
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/country/[controller]")]
+[Route("api/[controller]")]
 public class ContinentController : ControllerBase
 {
 
@@ -22,5 +23,13 @@ public class ContinentController : ControllerBase
         var continents = await _mediator.Send(new GetContinentsQuery());
 
         return Ok(continents);
+    }
+
+    [HttpGet("numberOfCountries")]
+    public async Task<IActionResult> GetNumberOfCountries([FromQuery] GetNumberOfCountriesQuery query)
+    {
+        var numberOfCountries = await _mediator.Send(query);
+
+        return Ok(numberOfCountries);
     }
 }
