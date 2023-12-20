@@ -25,15 +25,12 @@ export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("NumberOfQuestionsSelectComponent => ngOnChanges");
-    console.log(changes);
     this.getMaxNumbersOfQuestion(this.continents);
   }
 
   getMaxNumbersOfQuestion(continents: string[]) {
     this.continentService.getNumberOfCountries(continents).subscribe({
       next: (result) => {
-        console.log("getMaxNumbersOfQuestion ==>>" + result);
         this.numberOfQuestionSelect = new Select(
           "Select-NumberOfQuestion",
           "NumberOfQuestion",
@@ -52,8 +49,6 @@ export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < numbersToChoose.length; i++) {
       const element = numbersToChoose[i];
-      console.log(element);
-      console.log(maxNumber);
       if(element < maxNumber) {
         numbers.push(element);
       } else {

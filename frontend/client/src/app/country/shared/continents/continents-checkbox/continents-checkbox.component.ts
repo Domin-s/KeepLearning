@@ -14,7 +14,6 @@ import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
-  @Input() continents: string[] = [];
 
   @Output() checkOrUncheckEvent = new EventEmitter();
 
@@ -30,7 +29,7 @@ export class ContinentsCheckboxComponent implements OnInit {
   getContinents(){
     this.continentService.getContinents().subscribe({
       next: (result) => {
-        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result, this.continents);
+        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result);
       },
       error: (err) => {
         console.log(err);
@@ -39,6 +38,7 @@ export class ContinentsCheckboxComponent implements OnInit {
   }
 
   checkOrUncheckChild(itemValue: string) {
+    console.log("ContinentsCheckboxComponent => checkOrUncheckChild => itemValue: " + itemValue);
     this.checkOrUncheckEvent.emit(itemValue)
   }
 }

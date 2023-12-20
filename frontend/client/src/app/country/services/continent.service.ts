@@ -16,9 +16,8 @@ export class ContinentService {
   }
 
   getNumberOfCountries(continents: string[]) {
-    console.log("ContinentService => getNumberOfCountries");
-    console.log(continents);
     let params = this.createContinentsParam(continents);
+    console.log("ContinentService => getNumberOfCountries => " + params);
     return this.http.get<number>(this.URL + '/numberOfCountries', {params});
   }
 

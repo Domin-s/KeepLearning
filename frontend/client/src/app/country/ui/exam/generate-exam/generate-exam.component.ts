@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
@@ -16,15 +16,15 @@ import { NumberOfQuestionsSelectComponent } from '../../../shared/question/numbe
     RouterLink
   ]
 })
-export class GenerateExamComponent {
+export class GenerateExamComponent implements OnInit {
   public continents: string[] = [];
 
-  goToCreatorToGenerateRandomQuestion(){
-    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
   checkOrUncheckChild(itemValue: string) {
-    console.log("ListOfCountriesComponent => checkOrUncheckChild => removeOrAddContinent => " + itemValue);
+    console.log("GenerateExamComponent => checkOrUncheckChild => removeOrAddContinent => " + itemValue);
     this.removeOrAddContinent(itemValue);
   }
 
