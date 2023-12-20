@@ -6,7 +6,7 @@ import { Country } from "../models/Country";
     providedIn: "root",
   })
   export class CountryService {
-    private URL = "https://localhost:5001/api/Country";
+    private URL = "https://localhost:5001/api/country";
 
     private http: HttpClient = inject(HttpClient);
 

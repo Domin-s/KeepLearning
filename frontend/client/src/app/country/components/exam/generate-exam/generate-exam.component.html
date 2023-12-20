@@ -1,0 +1,36 @@
+<div class="col-12 col-md-12 col-sm-12">
+    <h1>Generate country exam</h1>
+
+    <hr />
+
+    <div class="form-group">
+        <div class="container">
+            <div class="row align-items-start">
+                <form method="post" action="#">
+                    <div class="col-10 col-md-12 col-sm-12">
+                        <div class="row m-2 ">
+                            <div class="col-4 col-sm-5 col-md-4">Exam name: </div>
+                            <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
+                        </div>
+                        
+                        <app-continents-checkbox [inOneLine]="false" [isForm]="true"/>
+
+                        <app-category-select />
+
+                        <app-number-of-questions-select />
+
+                    </div>
+
+                    <div class="row m-4 col-10 col-md-12 col-sm-12">
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <a [routerLink]="['/country']" class="btn btn-lg btn-outline-primary m-2">Back to list</a>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <input type="submit" value="Create" class="btn btn-lg btn-outline-primary m-2" id="createExam" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
