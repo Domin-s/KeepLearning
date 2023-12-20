@@ -18,32 +18,22 @@ export class CategorySelectComponent implements OnInit {
   private examService: ExamService = inject(ExamService);
   
   ngOnInit(): void {
-    this.cetegoriesSelect = this.createCategoriesSelect();
+    this.getCategories();
   }
 
-  createCategoriesSelect(): Select {
-    let categories: string[] = this.getCategories();
-
-    return new Select(
-      "Select-Categories",
-      "Categories",
-      "Choose guess type",
-      categories
-    );
-  }
-
-  getCategories(): string[] {
-    let categories: string[] = [];
-
+  getCategories() {
     this.examService.getCategories().subscribe({
       next: (result) => {
-        categories = result;
+        this.cetegoriesSelect = new Select(
+          "Select-Categories",
+          "Categories",
+          "Choose guess type",
+          result
+        );;
       },
       error: (error) => {
         console.log(error);
       }
     })
-
-    return categories;
   }
 }
