@@ -4,13 +4,13 @@
     <h1>Countries</h1>
     
     <nav>
-        <button [routerLink]="['/country/generateExam']" class="btn btn-lg btn-outline-primary m-2" >Generate exam</button>
+        <button [routerLink]="['/country/generateExam']" [queryParams]="{continents}" class="btn btn-lg btn-outline-primary m-2" >Generate exam</button>
         <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateRandomQuestion()">Generate random question</button>
     </nav>
     
     <hr />
 
-    <app-continents-checkbox [inOneLine]="true" [isForm]="false" (checkOrUncheckEvent)="checkOrUncheckChild($event)"/>
+    <app-continents-checkbox [inOneLine]="true" [isForm]="false" (updateCheckoboxesEvent)="updateCheckedContinents($event)"/>
 
     <hr />
     

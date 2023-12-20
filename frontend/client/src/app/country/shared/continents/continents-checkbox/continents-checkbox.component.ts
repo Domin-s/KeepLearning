@@ -15,7 +15,7 @@ export class ContinentsCheckboxComponent implements OnInit {
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
 
-  @Output() checkOrUncheckEvent = new EventEmitter();
+  @Output() updateCheckoboxesEvent = new EventEmitter<Checkbox[]>();
 
   public continentCheckboxes: Checkbox[] = [];
 
@@ -37,8 +37,8 @@ export class ContinentsCheckboxComponent implements OnInit {
     })
   }
 
-  checkOrUncheckChild(itemValue: string) {
-    console.log("ContinentsCheckboxComponent => checkOrUncheckChild => itemValue: " + itemValue);
-    this.checkOrUncheckEvent.emit(itemValue)
+  updateCheckoboxes(checkboxes: Checkbox[]) {
+    this.continentCheckboxes = checkboxes;
+    this.updateCheckoboxesEvent.emit(this.continentCheckboxes)
   }
 }

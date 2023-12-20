@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
 
 @Component({
@@ -11,7 +11,7 @@ export class CheckboxComponent implements OnInit {
   @Input({ required: true }) checkbox!: Checkbox;
   @Input({ required: true }) inOneLine!: boolean;
 
-  @Output() checkOrUncheckEvent = new EventEmitter();
+  @Output() changeCheckForCheckboxEvent = new EventEmitter();
 
   public classes = ""
 
@@ -27,7 +27,17 @@ export class CheckboxComponent implements OnInit {
     }
   }
 
-  checkOrUncheck(itemValue: string) {
-    this.checkOrUncheckEvent.emit(itemValue);
+  changeCheck() {
+    this.checkbox = this.changeStatus(this.checkbox);
+    this.changeCheckForCheckboxEvent.emit(this.checkbox);
+  }
+
+  changeStatus(checkbox: Checkbox): Checkbox {
+    return new Checkbox(
+      checkbox.id,
+      checkbox.name,
+      checkbox.value,
+      !checkbox.isChecked
+    )
   }
 }

@@ -25,6 +25,20 @@ export class ContinentMapper {
     return checkboxes;
   }
 
+  fromCheckbox(checkboxes: Checkbox[]): Continent[] {
+    var continents: Continent[] = [];
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      const checkbox = checkboxes[i];
+      
+      let continent: Continent  = new Continent(checkbox.value);
+      
+      continents.push(continent);
+    }
+    
+    return continents;
+  }
+
   checkIfContinentIsChecked(continentToCheck: Continent, continentsChecked: string[]): boolean {
 
     if (continentsChecked.length <= 0) {

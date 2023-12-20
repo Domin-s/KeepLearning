@@ -4,6 +4,9 @@ import { CountryService } from '../../../services/country.service';
 import { RouterLink } from '@angular/router';
 import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
+import { Checkbox } from '../../../../common/checkbox/model/checkbox';
+import { Continent } from '../../../models/Continent';
+import { ContinentMapper } from '../../../mappers/continent.mapper';
 
 @Component({
   standalone: true,
@@ -18,12 +21,14 @@ import { ContinentsCheckboxComponent } from '../../../shared/continents/continen
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
-  @Input() continents: string[] = [];
+  @Input() continentsCheckbox: Checkbox[] = [];
 
   private countryService: CountryService = inject(CountryService);
+  public continents: string[] = []
 
   ngOnInit(): void {
     this.getCountries();
+    this.setContinentsToParam();
   }
 
   goToCreatorToGenerateRandomQuestion(){
@@ -42,18 +47,15 @@ export class ListOfCountriesComponent implements OnInit {
     })
   }
 
-  checkOrUncheckChild(itemValue: string) {
-    console.log("ListOfCountriesComponent => checkOrUncheckChild => removeOrAddContinent => " + itemValue);
-    this.removeOrAddContinent(itemValue);
+  updateCheckedContinents(checkboxes: Checkbox[]) {
+    this.continentsCheckbox = checkboxes;
+    this.setContinentsToParam();
   }
 
-  removeOrAddContinent(continent: string) {
-    let element = this.continents.find(c => c === continent);
-
-    if (element === undefined) {
-      this.continents.push(continent)
-    } else {
-      this.continents = this.continents.filter(c => c !== continent);
-    }
+  setContinentsToParam() {
+    console.log("setContinentsToParam");
+    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
+    this.continents = checkedContinents.map( c => c.value);
+    console.log(this.continents);
   }
 }

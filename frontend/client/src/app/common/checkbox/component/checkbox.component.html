@@ -4,8 +4,8 @@
         type="checkbox"
         name=" {{ checkbox.name }}"
         value="{{ checkbox.value }}"
-        checked = "{{ checkbox.isChecked }}"
-        (change)="checkOrUncheck(checkbox.value)"
+        (change)="changeCheck()"
+        checked
     />
     <label class="form-check-label" id="{{ checkbox.id }}">{{ checkbox.value }}</label>
 </div>
