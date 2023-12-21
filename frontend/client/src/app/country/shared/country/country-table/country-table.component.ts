@@ -3,10 +3,10 @@ import { Country } from '../../../models/Country';
 
 @Component({
   standalone: true,
-  selector: 'app-table-of-countries',
-  templateUrl: './table-of-country.component.html',
-  styleUrl: './table-of-country.component.scss',
+  selector: 'app-country-table-component',
+  templateUrl: './country-table.component.html',
+  styleUrl: './country-table.component.scss',
 })
-export class TableOfCountriesComponent {
+export class CountryTableComponent {
   @Input({required: true}) countries: Country[] = [];
 }
