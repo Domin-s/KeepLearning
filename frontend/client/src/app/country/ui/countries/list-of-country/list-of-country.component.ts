@@ -24,11 +24,10 @@ export class ListOfCountriesComponent implements OnInit {
   @Input() continentsCheckbox: Checkbox[] = [];
 
   private countryService: CountryService = inject(CountryService);
-  public continents: string[] = []
+  public continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   ngOnInit(): void {
     this.getCountries();
-    this.setContinentsToParam();
   }
 
   goToCreatorToGenerateRandomQuestion(){
@@ -54,6 +53,7 @@ export class ListOfCountriesComponent implements OnInit {
 
   setContinentsToParam() {
     console.log("setContinentsToParam");
+    console.log(this.continentsCheckbox);
     let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
     this.continents = checkedContinents.map( c => c.value);
     console.log(this.continents);
