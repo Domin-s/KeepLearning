@@ -24,7 +24,7 @@ export class ContinentService {
     let params = new HttpParams();
     
     for (let index = 0; index < continents.length; index++) {
-      params.set("Continents", continents[index]);
+      params = params.append("Continents", continents[index]);
     }
 
     return params;
