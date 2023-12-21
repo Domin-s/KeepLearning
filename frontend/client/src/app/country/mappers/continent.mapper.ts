@@ -13,9 +13,6 @@ export class ContinentMapper {
       const continent = continents[i];
       
       let isChecked = this.checkIfContinentShouldBeChecked(continent, continentsFromPath);
-      console.log(continentsFromPath)
-      console.log(continent)
-      console.log(isChecked)
 
       let checkbox: Checkbox  = new Checkbox(
         continent.name,
@@ -31,14 +28,10 @@ export class ContinentMapper {
   }
 
   checkIfContinentShouldBeChecked(continentToCheck: Continent, continentsFromPath: string[]): boolean {
-    if (continentsFromPath.length <= 0) {
-      return true;
-    }
+    if (continentsFromPath.length <= 0) { return true; }
 
     for (let i = 0; i < continentsFromPath.length; i++) {
-      if (continentToCheck.name === continentsFromPath[i]) {
-        return true;
-      }
+      if (continentToCheck.name === continentsFromPath[i]) { return true; }
     }
 
     return false;

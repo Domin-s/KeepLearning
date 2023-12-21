@@ -26,20 +26,17 @@ export class GenerateExamComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe( params => {
       this.continents = params.getAll('continents');
-      console.log("GenerateExamComponent => this.continents");
-      console.log(this.continents);
     });
   }
 
   checkOrUncheckChild(itemValue: string) {
-    console.log("GenerateExamComponent => checkOrUncheckChild => removeOrAddContinent => " + itemValue);
     this.removeOrAddContinent(itemValue);
   }
 
   removeOrAddContinent(continent: string) {
-    let element = this.continents.find(c => c === continent);
+    let foundContinent = this.continents.find(c => c === continent);
 
-    if (element === undefined) {
+    if (foundContinent === undefined) {
       this.continents.push(continent)
     } else {
       this.continents = this.continents.filter(c => c !== continent);
