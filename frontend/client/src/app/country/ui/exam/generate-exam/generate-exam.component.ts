@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
 import { NumberOfQuestionsSelectComponent } from '../../../shared/question/number-of-questions-select/number-of-questions-select.component';
@@ -19,8 +19,14 @@ import { NumberOfQuestionsSelectComponent } from '../../../shared/question/numbe
 export class GenerateExamComponent implements OnInit {
   public continents: string[] = [];
 
+  private route: ActivatedRoute = inject(ActivatedRoute);
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.route.queryParamMap.subscribe( params => {
+      this.continents = params.getAll('continents');
+      console.log("GenerateExamComponent => this.continents");
+      console.log(this.continents);
+    });
   }
 
   checkOrUncheckChild(itemValue: string) {

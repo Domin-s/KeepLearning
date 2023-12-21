@@ -10,6 +10,4 @@ import { ContinentService } from '../../../services/continent.service';
 })
 export class ContinentSelectComponent {
   private continentServis = inject(ContinentService);
-  
-
 }

@@ -6,17 +6,22 @@ import { Checkbox } from "../../common/checkbox/model/checkbox";
   providedIn: "root",
 })
 export class ContinentMapper {
-  mapToCheckbox(continents: Continent[]): Checkbox[] {
+  mapToCheckbox(continents: Continent[], continentsFromPath: string[] = []): Checkbox[] {
     var checkboxes: Checkbox[] = [];
 
     for (let i = 0; i < continents.length; i++) {
       const continent = continents[i];
       
+      let isChecked = this.checkIfContinentShouldBeChecked(continent, continentsFromPath);
+      console.log(continentsFromPath)
+      console.log(continent)
+      console.log(isChecked)
+
       let checkbox: Checkbox  = new Checkbox(
         continent.name,
         "Continent",
         continent.name,
-        true
+        isChecked
       );
       
       checkboxes.push(checkbox);
@@ -25,30 +30,13 @@ export class ContinentMapper {
     return checkboxes;
   }
 
-  fromCheckbox(checkboxes: Checkbox[]): Continent[] {
-    var continents: Continent[] = [];
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      const checkbox = checkboxes[i];
-      
-      let continent: Continent  = new Continent(checkbox.value);
-      
-      continents.push(continent);
-    }
-    
-    return continents;
-  }
-
-  checkIfContinentIsChecked(continentToCheck: Continent, continentsChecked: string[]): boolean {
-
-    if (continentsChecked.length <= 0) {
-      return false;
+  checkIfContinentShouldBeChecked(continentToCheck: Continent, continentsFromPath: string[]): boolean {
+    if (continentsFromPath.length <= 0) {
+      return true;
     }
 
-    for (let i = 0; i < continentsChecked.length; i++) {
-      const continent = continentsChecked[i];
-
-      if (continentToCheck.name === continent) {
+    for (let i = 0; i < continentsFromPath.length; i++) {
+      if (continentToCheck.name === continentsFromPath[i]) {
         return true;
       }
     }
