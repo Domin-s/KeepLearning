@@ -2,11 +2,9 @@ import { Component, Input, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
 import { RouterLink } from '@angular/router';
-import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
+import { TableOfCountriesComponent } from '../../../shared/country/table-of-country/table-of-country.component';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
-import { Continent } from '../../../models/Continent';
-import { ContinentMapper } from '../../../mappers/continent.mapper';
 
 @Component({
   standalone: true,
