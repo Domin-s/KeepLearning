@@ -13,7 +13,7 @@ import { SelectComponent } from '../../../../common/select/component/select.comp
   styleUrl: './category-select.component.scss'
 })
 export class CategorySelectComponent implements OnInit {
-  public cetegoriesSelect!: Select;
+  public cetegoriesSelect: Select | undefined;
 
   private examService: ExamService = inject(ExamService);
   

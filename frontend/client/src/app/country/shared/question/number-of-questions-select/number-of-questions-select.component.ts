@@ -13,7 +13,7 @@ import { SelectComponent } from '../../../../common/select/component/select.comp
   styleUrl: './number-of-questions-select.component.scss'
 })
 export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
-  public numberOfQuestionSelect!: Select;
+  public numberOfQuestionSelect: Select | undefined;
   
   @Input({ required: true }) continents: string[] = [];
 
