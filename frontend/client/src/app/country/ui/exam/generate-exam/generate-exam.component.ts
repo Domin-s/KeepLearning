@@ -42,7 +42,6 @@ export class GenerateExamComponent implements OnInit {
       this.continents = this.continents.filter(c => c !== continent);
     }
   }
-  
 
   updateCheckedContinents(checkboxes: Checkbox[]) {
     this.continentsCheckbox = checkboxes;
