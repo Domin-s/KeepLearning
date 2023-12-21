@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
@@ -23,7 +23,7 @@ export class ListOfCountriesComponent implements OnInit {
 
   private countryService: CountryService = inject(CountryService);
   public continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
-
+  
   ngOnInit(): void {
     this.getCountries();
   }
@@ -52,7 +52,5 @@ export class ListOfCountriesComponent implements OnInit {
   setContinentsToParam() {
     let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
     this.continents = checkedContinents.map( c => c.value);
-    console.log("setContinentsToParam");
-    console.log(this.continents);
   }
 }

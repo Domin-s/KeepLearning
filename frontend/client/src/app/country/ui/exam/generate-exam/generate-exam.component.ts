@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
 import { NumberOfQuestionsSelectComponent } from '../../../shared/question/number-of-questions-select/number-of-questions-select.component';
+import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ import { NumberOfQuestionsSelectComponent } from '../../../shared/question/numbe
   ]
 })
 export class GenerateExamComponent implements OnInit {
+  @Input() continentsCheckbox: Checkbox[] = [];
   public continents: string[] = [];
 
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -42,5 +44,16 @@ export class GenerateExamComponent implements OnInit {
     } else {
       this.continents = this.continents.filter(c => c !== continent);
     }
+  }
+  
+
+  updateCheckedContinents(checkboxes: Checkbox[]) {
+    this.continentsCheckbox = checkboxes;
+    this.setContinentsToParam();
+  }
+
+  setContinentsToParam() {
+    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
+    this.continents = checkedContinents.map( c => c.value);
   }
 }

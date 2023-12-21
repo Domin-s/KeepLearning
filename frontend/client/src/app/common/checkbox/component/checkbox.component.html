@@ -1,11 +1,21 @@
 <div class=" {{ classes }}">
-    <input 
-        class="form-check-input"
-        type="checkbox"
-        name=" {{ checkbox.name }}"
-        value="{{ checkbox.value }}"
-        (change)="changeCheck()"
-        checked
-    />
+    @if (checkbox.isChecked) {
+        <input 
+            class="form-check-input"
+            type="checkbox"
+            name=" {{ checkbox.name }}"
+            value="{{ checkbox.value }}"
+            (change)="changeCheck()"
+            checked
+        />
+    } @else {
+        <input 
+            class="form-check-input"
+            type="checkbox"
+            name=" {{ checkbox.name }}"
+            value="{{ checkbox.value }}"
+            (change)="changeCheck()"
+        />
+    }
     <label class="form-check-label" id="{{ checkbox.id }}">{{ checkbox.value }}</label>
 </div>
