@@ -1,1 +1,5 @@
-<app-select [select]="numberOfQuestionSelect"/>
+@if(numberOfQuestionSelect !== undefined) {
+    @if(numberOfQuestionSelect.options.length > 0) {
+        <app-select [select]="numberOfQuestionSelect"/>
+    }
+}

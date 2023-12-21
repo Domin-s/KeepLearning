@@ -13,37 +13,27 @@ import { SelectComponent } from '../../../../common/select/component/select.comp
   styleUrl: './category-select.component.scss'
 })
 export class CategorySelectComponent implements OnInit {
-  public cetegoriesSelect!: Select;
+  public cetegoriesSelect: Select | undefined;
 
   private examService: ExamService = inject(ExamService);
   
   ngOnInit(): void {
-    this.cetegoriesSelect = this.createCategoriesSelect();
+    this.getCategories();
   }
 
-  createCategoriesSelect(): Select {
-    let categories: string[] = this.getCategories();
-
-    return new Select(
-      "Select-Categories",
-      "Categories",
-      "Choose guess type",
-      categories
-    );
-  }
-
-  getCategories(): string[] {
-    let categories: string[] = [];
-
+  getCategories() {
     this.examService.getCategories().subscribe({
       next: (result) => {
-        categories = result;
+        this.cetegoriesSelect = new Select(
+          "Select-Categories",
+          "Categories",
+          "Choose guess type",
+          result
+        );;
       },
       error: (error) => {
         console.log(error);
       }
     })
-
-    return categories;
   }
 }

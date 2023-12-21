@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, inject } from '@angular/core';
+import { Component, Input, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
-import { RouterLink } from '@angular/router';
-import { TableOfCountriesComponent } from '../table-of-country/table-of-country.component';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
+import { Checkbox } from '../../../../common/checkbox/model/checkbox';
+import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
 
 @Component({
   standalone: true,
@@ -11,16 +12,18 @@ import { ContinentsCheckboxComponent } from '../../../shared/continents/continen
   templateUrl: './list-of-country.component.html',
   styleUrl: './list-of-country.component.scss',
   imports: [
-    TableOfCountriesComponent,
+    CountryTableComponent,
     ContinentsCheckboxComponent,
     RouterLink
   ]
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
+  @Input() continentsCheckbox: Checkbox[] = [];
 
   private countryService: CountryService = inject(CountryService);
-
+  public continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  
   ngOnInit(): void {
     this.getCountries();
   }
@@ -39,5 +42,15 @@ export class ListOfCountriesComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+
+  updateCheckedContinents(checkboxes: Checkbox[]) {
+    this.continentsCheckbox = checkboxes;
+    this.setContinentsToParam();
+  }
+
+  setContinentsToParam() {
+    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
+    this.continents = checkedContinents.map( c => c.value);
   }
 }

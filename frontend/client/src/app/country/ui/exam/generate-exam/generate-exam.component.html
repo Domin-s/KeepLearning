@@ -13,21 +13,26 @@
                             <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
                         </div>
                         
-                        <app-continents-checkbox [inOneLine]="false" [isForm]="true"/>
+                        <app-continents-checkbox [inOneLine]="false" [isForm]="true" [continentsFromPath]="continents" (updateCheckoboxesEvent)="updateCheckedContinents($event)"/>
 
                         <app-category-select />
 
-                        <app-number-of-questions-select />
-
+                        <app-number-of-questions-select [continents]="continents"/>
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">
                         <div class="col-3 col-md-3 col-sm-4">
                             <a [routerLink]="['/country']" class="btn btn-lg btn-outline-primary m-2">Back to list</a>
                         </div>
-                        <div class="col-3 col-md-3 col-sm-4">
-                            <input type="submit" value="Create" class="btn btn-lg btn-outline-primary m-2" id="createExam" />
-                        </div>
+                        @if (continents.length > 0) {
+                            <div class="col-3 col-md-3 col-sm-4">
+                                <input type="submit" value="Create" class="btn btn-lg btn-outline-primary m-2" id="createExam" />
+                            </div>
+                        } @else {
+                            <div class="col-3 col-md-3 col-sm-4">
+                               To generate exam you have to chose at least one continent :) 
+                            </div>
+                        }
                     </div>
                 </form>
             </div>

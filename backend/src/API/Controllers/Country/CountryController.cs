@@ -1,5 +1,4 @@
 ﻿using Application.Country.Queries.GetAllCountriesByContinents;
-using Application.Country.Queries.GetNumberOfCountries;
 
 namespace API.Controllers;
 
@@ -23,13 +22,5 @@ public class CountryController : ControllerBase
         var countries = await _mediator.Send(query);
 
         return Ok(countries);
-    }
-
-    [HttpGet("numberOfCountries")]
-    public async Task<IActionResult> GetNumberOfCountries([FromQuery] GetNumberOfCountriesQuery query)
-    {
-        var numberOfCountries = await _mediator.Send(query);
-
-        return Ok(numberOfCountries);
     }
 }
