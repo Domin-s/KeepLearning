@@ -3,6 +3,7 @@ import { ContinentMapper } from '../../../mappers/continent.mapper';
 import { ContinentService } from '../../../services/continent.service';
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
+import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
 
 @Component({
   selector: 'app-continents-checkbox',
@@ -14,32 +15,24 @@ import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
-  @Input() continentsFromPath: string[] = [];
+  @Input() continentsChecked: string[] = [];
 
-  @Output() updateCheckoboxesEvent = new EventEmitter<Checkbox[]>();
+  @Output() updateCheckoboxesEvent = new EventEmitter<string[]>();
 
-  public continentCheckboxes: Checkbox[] = [];
+  public continentCheckbox: ContinentCheckbox;
 
-  private continentMapper: ContinentMapper = inject(ContinentMapper);
-  private continentService: ContinentService = inject(ContinentService);
+  constructor(
+  ){
+    this.continentCheckbox = new ContinentCheckbox();
+  }
 
   ngOnInit(): void {
-    this.getContinents();
+    
   }
 
-  getContinents(){
-    this.continentService.getContinents().subscribe({
-      next: (result) => {
-        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result, this.continentsFromPath);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  updateCheckoboxes(checkboxes: Checkbox[]) {
-    this.continentCheckboxes = checkboxes;
-    this.updateCheckoboxesEvent.emit(this.continentCheckboxes)
+  updateContinentChecboxes(checkboxes: Checkbox[]) {
+    this.continentCheckbox.checkOrUncheckContinents(checkboxes);
+    this.continentsChecked = this.continentCheckbox.getCheckedContinents().map(c => c.value);
+    this.updateCheckoboxesEvent.emit(this.continentsChecked)
   }
 }

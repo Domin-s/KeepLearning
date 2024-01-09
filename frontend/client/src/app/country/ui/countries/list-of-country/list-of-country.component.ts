@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
-import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
+import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
 
 @Component({
   standalone: true,
@@ -19,19 +19,17 @@ import { CountryTableComponent } from '../../../shared/country/country-table/cou
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
-  @Input() continentsCheckbox: Checkbox[] = [];
 
-  private countryService: CountryService = inject(CountryService);
-  public continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
-  public continentsFromPath: string[] = [];
+  public continentsChecked: string[] = [];
 
-  private route: ActivatedRoute = inject(ActivatedRoute);
+  constructor(
+    private countryService: CountryService,
+    private route: ActivatedRoute
+  ) {
+  }
   
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe( params => {
-      this.continentsFromPath = params.getAll('continents');
-      this.continents = this.continentsFromPath;
-    });
+    this.continentsChecked = this.getContinentsFromPath();
     this.getCountries();
   }
 
@@ -51,27 +49,17 @@ export class ListOfCountriesComponent implements OnInit {
     })
   }
 
-  checkOrUncheckChild(itemValue: string) {
-    this.removeOrAddContinent(itemValue);
+  getCheckedContinents(continents: string[]){
+    this.continentsChecked = continents;
   }
 
-  removeOrAddContinent(continent: string) {
-    let foundContinent = this.continentsFromPath.find(c => c === continent);
+  getContinentsFromPath(){
+    let continentsFromPath: string[] = []; 
+    
+    this.route.queryParamMap.subscribe( params => {
+      continentsFromPath = params.getAll('continents');
+    });
 
-    if (foundContinent === undefined) {
-      this.continentsFromPath.push(continent)
-    } else {
-      this.continentsFromPath = this.continentsFromPath.filter(c => c !== continent);
-    }
-  }
-
-  updateCheckedContinents(checkboxes: Checkbox[]) {
-    this.continentsCheckbox = checkboxes;
-    this.setContinentsToParam();
-  }
-
-  setContinentsToParam() {
-    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
-    this.continents = checkedContinents.map( c => c.value);
+    return continentsFromPath;
   }
 }

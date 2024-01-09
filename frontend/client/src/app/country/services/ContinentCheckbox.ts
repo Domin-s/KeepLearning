@@ -5,7 +5,7 @@ import { Checkbox } from "../../common/checkbox/model/checkbox";
 @Injectable({
   providedIn: 'root'
 })
-export class ContinentCheckboxService {
+export class ContinentCheckbox {
   continents: Continent[] = [
     {name: 'Africa'}, 
     {name: 'Asia'}, 
@@ -41,12 +41,22 @@ export class ContinentCheckboxService {
     );
   }
 
-  checkOrUncheckContinent(continent: Continent, isChecked: boolean) {
-    let continentIndex = this.continentCheckoboxes.findIndex( c => c.value === continent.name);
+  checkOrUncheckContinents(continents: Checkbox[]) {
+    for (let continent of continents) {
+      this.checkOrUncheckContinent(continent, continent.isChecked);
+    }
+  }
+
+  checkOrUncheckContinent(continent: Checkbox, isChecked: boolean) {
+    let continentIndex = this.continentCheckoboxes.findIndex( c => c.value === continent.value);
     if (continentIndex === -1) {
       console.log("Not found continent");
     }
-
+    
     this.continentCheckoboxes[continentIndex].isChecked = isChecked;
+  }
+
+  getCheckedContinents(): Checkbox[] {
+    return this.continentCheckoboxes.filter(c => c.isChecked);
   }
 }

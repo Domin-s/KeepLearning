@@ -16,20 +16,20 @@
                         <app-continents-checkbox 
                             [inOneLine]="false"
                             [isForm]="true"
-                            [continentsFromPath]="continentsFromPath"
-                            (updateCheckoboxesEvent)="updateCheckedContinents($event)"
+                            [continentsChecked]="continentsChecked"
+                            (updateCheckoboxesEvent)="getCheckedContinents($event)"
                         />
 
                         <app-category-select />
 
-                        <app-number-of-questions-select [continents]="continentsFromPath"/>
+                        <app-number-of-questions-select [continents]="continentsChecked"/>
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">
                         <div class="col-3 col-md-3 col-sm-4">
-                            <button [routerLink]="['/country']" [queryParams]="{continents}" class="btn btn-lg btn-outline-primary m-2">Back to list</button>
+                            <button [routerLink]="['/country']" [queryParams]="{continentsChecked}" class="btn btn-lg btn-outline-primary m-2">Back to list</button>
                         </div>
-                        @if (continentsFromPath.length > 0) {
+                        @if (continentsChecked.length > 0) {
                             <div class="col-3 col-md-3 col-sm-4">
                                 <input type="submit" value="Generate exam" class="btn btn-lg btn-outline-primary m-2"/>
                             </div>

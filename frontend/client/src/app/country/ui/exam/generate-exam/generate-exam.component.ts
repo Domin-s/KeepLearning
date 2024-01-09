@@ -21,14 +21,15 @@ import { FormGroup } from '@angular/forms';
 })
 export class GenerateExamComponent implements OnInit {
   @Input() continentsCheckbox: Checkbox[] = [];
-  public continentsFromPath: string[] = [];
-  public continents: string[] = [];
+  public continentsChecked: string[] = [];
   public url = 'http://localhost:4200/country/resolveExam';
   public form!: FormGroup;
 
-  private route: ActivatedRoute = inject(ActivatedRoute);
-  private router: Router = inject(Router);
-  private examService: ExamService = inject(ExamService); 
+  constructor (
+    private route: ActivatedRoute,
+    private router: Router,
+    private examService: ExamService
+  ) {}
 
   onSubmit() {
     console.log("GenerateExamComponent => onSubmit()")
@@ -43,34 +44,21 @@ export class GenerateExamComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.continentsChecked = this.getContinentsFromPath();
+  }
+  
+
+  getCheckedContinents(continents: string[]){
+    this.continentsChecked = continents;
+  }
+
+  getContinentsFromPath(){
+    let continentsFromPath: string[] = []; 
+    
     this.route.queryParamMap.subscribe( params => {
-      this.continentsFromPath = params.getAll('continents');
-      this.continents = this.continentsFromPath;
+      continentsFromPath = params.getAll('continents');
     });
-  }
 
-  checkOrUncheckChild(itemValue: string) {
-    this.removeOrAddContinent(itemValue);
-  }
-
-  removeOrAddContinent(continent: string) {
-    let foundContinent = this.continentsFromPath.find(c => c === continent);
-
-    if (foundContinent === undefined) {
-      this.continentsFromPath.push(continent)
-    } else {
-      this.continentsFromPath = this.continentsFromPath.filter(c => c !== continent);
-    }
-  }
-
-  updateCheckedContinents(checkboxes: Checkbox[]) {
-    this.continentsCheckbox = checkboxes;
-    this.setContinentsToParam();
-  }
-
-  setContinentsToParam() {
-    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
-    this.continentsFromPath = checkedContinents.map( c => c.value);
-    this.continents = this.continentsFromPath;
+    return continentsFromPath;
   }
 }
