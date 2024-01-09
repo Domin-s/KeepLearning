@@ -1,5 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
+import { GenerateExamForm } from "../forms/GenerateExamForm";
+import { Exam } from "../models/Exam";
 
 @Injectable({
   providedIn: "root",
@@ -11,5 +13,9 @@ export class ExamService {
 
   getCategories() {
     return this.http.get<string[]>(this.URL + '/category');
+  }
+
+  generateExam(generateExamForm: GenerateExamForm) {
+    return this.http.post<Exam>(this.URL + '/generate', generateExamForm);
   }
 }
