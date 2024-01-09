@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, inject } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
@@ -23,8 +23,15 @@ export class ListOfCountriesComponent implements OnInit {
 
   private countryService: CountryService = inject(CountryService);
   public continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  public continentsFromPath: string[] = [];
+
+  private route: ActivatedRoute = inject(ActivatedRoute);
   
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe( params => {
+      this.continentsFromPath = params.getAll('continents');
+      this.continents = this.continentsFromPath;
+    });
     this.getCountries();
   }
 
@@ -42,6 +49,20 @@ export class ListOfCountriesComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+
+  checkOrUncheckChild(itemValue: string) {
+    this.removeOrAddContinent(itemValue);
+  }
+
+  removeOrAddContinent(continent: string) {
+    let foundContinent = this.continentsFromPath.find(c => c === continent);
+
+    if (foundContinent === undefined) {
+      this.continentsFromPath.push(continent)
+    } else {
+      this.continentsFromPath = this.continentsFromPath.filter(c => c !== continent);
+    }
   }
 
   updateCheckedContinents(checkboxes: Checkbox[]) {

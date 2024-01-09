@@ -21,6 +21,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class GenerateExamComponent implements OnInit {
   @Input() continentsCheckbox: Checkbox[] = [];
+  public continentsFromPath: string[] = [];
   public continents: string[] = [];
   public url = 'http://localhost:4200/country/resolveExam';
   public form!: FormGroup;
@@ -43,7 +44,8 @@ export class GenerateExamComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe( params => {
-      this.continents = params.getAll('continents');
+      this.continentsFromPath = params.getAll('continents');
+      this.continents = this.continentsFromPath;
     });
   }
 
@@ -52,12 +54,12 @@ export class GenerateExamComponent implements OnInit {
   }
 
   removeOrAddContinent(continent: string) {
-    let foundContinent = this.continents.find(c => c === continent);
+    let foundContinent = this.continentsFromPath.find(c => c === continent);
 
     if (foundContinent === undefined) {
-      this.continents.push(continent)
+      this.continentsFromPath.push(continent)
     } else {
-      this.continents = this.continents.filter(c => c !== continent);
+      this.continentsFromPath = this.continentsFromPath.filter(c => c !== continent);
     }
   }
 
@@ -68,6 +70,7 @@ export class GenerateExamComponent implements OnInit {
 
   setContinentsToParam() {
     let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
-    this.continents = checkedContinents.map( c => c.value);
+    this.continentsFromPath = checkedContinents.map( c => c.value);
+    this.continents = this.continentsFromPath;
   }
 }

@@ -10,7 +10,12 @@
     
     <hr />
 
-    <app-continents-checkbox [inOneLine]="true" [isForm]="false" (updateCheckoboxesEvent)="updateCheckedContinents($event)"/>
+    <app-continents-checkbox 
+        [inOneLine]="true"
+        [isForm]="false"
+        [continentsFromPath]="continents"
+        (updateCheckoboxesEvent)="updateCheckedContinents($event)"
+    />
 
     <hr />
     
