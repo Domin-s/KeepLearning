@@ -38,11 +38,6 @@ export class ContinentCheckbox {
   }
 
   setCheckedContinents(checkedContients: string[]) {
-    console.log("ContinentCheckbox => setCheckedContinents => ");
-    console.log("Before:");
-    console.log(checkedContients);
-    console.log(this.continentCheckoboxes);
-
     for ( let i = 0; i < this.continentCheckoboxes.length; i++) {
       let shouldBeChecked = this.isInCheckedList(checkedContients, this.continentCheckoboxes[i]);
 
@@ -52,10 +47,6 @@ export class ContinentCheckbox {
         this.continentCheckoboxes[i].isChecked = false;
       }
     }
-
-    console.log("After:");
-    console.log(checkedContients);
-    console.log(this.continentCheckoboxes);
   }
 
   private isInCheckedList(checkedContients: string[], continent: Checkbox): boolean {

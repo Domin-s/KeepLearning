@@ -28,16 +28,11 @@ export class CheckboxComponent implements OnInit {
   }
 
   changeCheck() {
-    this.checkbox = this.changeStatus(this.checkbox);
+    this.changeStatus();
     this.changeCheckForCheckboxEvent.emit(this.checkbox);
   }
 
-  changeStatus(checkbox: Checkbox): Checkbox {
-    return new Checkbox(
-      checkbox.id,
-      checkbox.name,
-      checkbox.value,
-      !checkbox.isChecked
-    )
+  changeStatus() {
+    this.checkbox.isChecked = !this.checkbox.isChecked;
   }
 }
