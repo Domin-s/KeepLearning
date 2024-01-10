@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
 import { CheckboxComponent } from '../component/checkbox.component';
 
@@ -9,11 +9,14 @@ import { CheckboxComponent } from '../component/checkbox.component';
   styleUrl: './checkbox-list.component.css',
   imports: [CheckboxComponent]
 })
-export class CheckboxListComponent {
+export class CheckboxListComponent implements OnInit {
   @Input({ required: true}) checkboxes!: Checkbox[];
   @Input({ required: true }) inOneLine!: boolean;
 
   @Output() changeCheckForCheckboxesEvent = new EventEmitter();
+
+  ngOnInit(): void {
+  }
 
   checkOrUncheckChild(checkbox: Checkbox) {
     this.checkboxes = this.changeCheckForElement(this.checkboxes, checkbox);
@@ -22,7 +25,11 @@ export class CheckboxListComponent {
 
   changeCheckForElement(checkboxes: Checkbox[], checkbox: Checkbox): Checkbox[] {
     let index = checkboxes.findIndex(c => c.value === checkbox.value);
-    checkboxes.splice(index, 1, checkbox);
+    
+    if (index){
+      checkboxes[index].isChecked = !checkboxes[index].isChecked;
+    }
+
     return checkboxes;
   }
 }

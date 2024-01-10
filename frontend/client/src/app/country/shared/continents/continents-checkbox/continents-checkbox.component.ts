@@ -1,6 +1,4 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
-import { ContinentMapper } from '../../../mappers/continent.mapper';
-import { ContinentService } from '../../../services/continent.service';
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
@@ -15,7 +13,7 @@ import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
-  @Input() continentsChecked: string[] = [];
+  @Input() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   @Output() updateCheckoboxesEvent = new EventEmitter<string[]>();
 
@@ -27,7 +25,7 @@ export class ContinentsCheckboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.continentCheckbox.setCheckedContinents(this.continentsChecked);
   }
 
   updateContinentChecboxes(checkboxes: Checkbox[]) {

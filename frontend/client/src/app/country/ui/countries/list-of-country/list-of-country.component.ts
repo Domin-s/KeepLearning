@@ -20,7 +20,7 @@ import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
 
-  public continentsChecked: string[] = [];
+  public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   constructor(
     private countryService: CountryService,
@@ -57,7 +57,7 @@ export class ListOfCountriesComponent implements OnInit {
     let continentsFromPath: string[] = []; 
     
     this.route.queryParamMap.subscribe( params => {
-      continentsFromPath = params.getAll('continents');
+      continentsFromPath = params.getAll('continentsChecked');
     });
 
     return continentsFromPath;

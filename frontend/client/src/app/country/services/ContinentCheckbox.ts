@@ -1,10 +1,6 @@
-import { Injectable } from "@angular/core";
 import { Continent } from "../models/Continent";
 import { Checkbox } from "../../common/checkbox/model/checkbox";
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ContinentCheckbox {
   continents: Continent[] = [
     {name: 'Africa'}, 
@@ -39,6 +35,35 @@ export class ContinentCheckbox {
       continent.name, 
       isChecked
     );
+  }
+
+  setCheckedContinents(checkedContients: string[]) {
+    console.log("ContinentCheckbox => setCheckedContinents => ");
+    console.log("Before:");
+    console.log(checkedContients);
+    console.log(this.continentCheckoboxes);
+
+    for ( let i = 0; i < this.continentCheckoboxes.length; i++) {
+      let shouldBeChecked = this.isInCheckedList(checkedContients, this.continentCheckoboxes[i]);
+
+      if (shouldBeChecked) {
+        this.continentCheckoboxes[i].isChecked = true;
+      } else {
+        this.continentCheckoboxes[i].isChecked = false;
+      }
+    }
+
+    console.log("After:");
+    console.log(checkedContients);
+    console.log(this.continentCheckoboxes);
+  }
+
+  private isInCheckedList(checkedContients: string[], continent: Checkbox): boolean {
+    let foundContient = checkedContients.find(c => c === continent.value);
+    
+    if (foundContient === undefined) return false;
+
+    return true;
   }
 
   checkOrUncheckContinents(continents: Checkbox[]) {

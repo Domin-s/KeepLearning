@@ -20,8 +20,8 @@ import { FormGroup } from '@angular/forms';
   ]
 })
 export class GenerateExamComponent implements OnInit {
-  @Input() continentsCheckbox: Checkbox[] = [];
   public continentsChecked: string[] = [];
+  
   public url = 'http://localhost:4200/country/resolveExam';
   public form!: FormGroup;
 
@@ -56,7 +56,7 @@ export class GenerateExamComponent implements OnInit {
     let continentsFromPath: string[] = []; 
     
     this.route.queryParamMap.subscribe( params => {
-      continentsFromPath = params.getAll('continents');
+      continentsFromPath = params.getAll('continentsChecked');
     });
 
     return continentsFromPath;
