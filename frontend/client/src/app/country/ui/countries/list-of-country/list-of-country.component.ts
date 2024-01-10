@@ -4,7 +4,7 @@ import { CountryService } from '../../../services/country.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
-import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
+import { PreviousRouteService } from '../../../services/previousRoute.service';
 
 @Component({
   standalone: true,
@@ -20,16 +20,21 @@ import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
 
+  previousUrl: string = '';
+  currentUrl: string = '';
+
   public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   constructor(
     private countryService: CountryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private previousRouteService: PreviousRouteService
   ) {
   }
   
   ngOnInit(): void {
-    this.continentsChecked = this.getContinentsFromPath();
+    this.previousUrl = this.previousRouteService.getPreviousUrl();
+    this.continentsChecked = this.setCheckedContinentByDefault()
     this.getCountries();
   }
 
@@ -61,5 +66,13 @@ export class ListOfCountriesComponent implements OnInit {
     });
 
     return continentsFromPath;
+  }
+
+  setCheckedContinentByDefault(): string[]{
+    if (this.previousUrl.includes('/country/generateExam')) {
+      return this.getContinentsFromPath();
+    }
+
+    return this.continentsChecked;
   }
 }
