@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
-import { ContinentCheckbox } from '../../../services/ContinentCheckbox';
+import { ContinentCheckbox } from '../ContinentCheckbox';
 
 @Component({
   selector: 'app-continents-checkbox',

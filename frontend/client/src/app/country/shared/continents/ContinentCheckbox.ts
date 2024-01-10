@@ -1,8 +1,8 @@
-import { Continent } from "../models/Continent";
-import { Checkbox } from "../../common/checkbox/model/checkbox";
+import { Continent } from "../../models/Continent";
+import { Checkbox } from "../../../common/checkbox/model/checkbox";
 
 export class ContinentCheckbox {
-  continents: Continent[] = [
+  private continents: Continent[] = [
     {name: 'Africa'}, 
     {name: 'Asia'}, 
     {name: 'Australia'}, 
@@ -10,8 +10,8 @@ export class ContinentCheckbox {
     {name: 'North America'}, 
     {name: 'South America'}
   ];
-
-  continentCheckoboxes: Checkbox[] = [];
+  
+  public continentCheckoboxes: Checkbox[] = [];
 
   constructor(){
     this.continentCheckoboxes = this.createContinentCheckboxes(this.continents);
