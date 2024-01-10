@@ -6,13 +6,13 @@
     <div class="form-group">
         <div class="container">
             <div class="row align-items-start">
-                <form (ngSubmit)="onSubmit()">
+                <form (ngSubmit)="onSubmit($event)">
                     <div class="col-10 col-md-12 col-sm-12">
                         <div class="row m-2 ">
                             <div class="col-4 col-sm-5 col-md-4">Exam name: </div>
-                            <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
+                            <input id="Name" class="col-5 col-sm-6 col-md-5" [formControl]="generateExamForm.controls.Name"/>
                         </div>
-                        
+
                         <app-continents-checkbox 
                             [inOneLine]="false"
                             [isForm]="true"
@@ -31,7 +31,7 @@
                         </div>
                         @if (continentsChecked.length > 0) {
                             <div class="col-3 col-md-3 col-sm-4">
-                                <input type="submit" value="Generate exam" class="btn btn-lg btn-outline-primary m-2"/>
+                                <button type="submit" class="btn btn-lg btn-outline-primary m-2">Generate exam</button>
                             </div>
                         } @else {
                             <div class="col-3 col-md-3 col-sm-4">

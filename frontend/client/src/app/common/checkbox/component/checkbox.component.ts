@@ -1,17 +1,22 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, inject } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
+import { GenerateExamForm } from '../../../country/forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.css'
+  styleUrl: './checkbox.component.css',
+  imports: [ReactiveFormsModule]
 })
 export class CheckboxComponent implements OnInit {
   @Input({ required: true }) checkbox!: Checkbox;
   @Input({ required: true }) inOneLine!: boolean;
 
   @Output() changeCheckForCheckboxEvent = new EventEmitter();
+
+  readonly generateExamForm = inject(GenerateExamForm).form;
 
   public classes = ""
 

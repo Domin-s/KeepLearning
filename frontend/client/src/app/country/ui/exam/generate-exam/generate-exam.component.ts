@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
 import { NumberOfQuestionsSelectComponent } from '../../../shared/question/number-of-questions-select/number-of-questions-select.component';
-import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { ExamService } from '../../../services/exam.service';
-import { FormGroup } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -16,14 +17,20 @@ import { FormGroup } from '@angular/forms';
     ContinentsCheckboxComponent,
     CategorySelectComponent,
     NumberOfQuestionsSelectComponent,
-    RouterLink
-  ]
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [GenerateExamForm],
 })
 export class GenerateExamComponent implements OnInit {
+  readonly generateExamForm = inject(GenerateExamForm).form;
+
   public continentsChecked: string[] = [];
   
   public url = 'http://localhost:4200/country/resolveExam';
-  public form!: FormGroup;
+
+  defaultQuestion = "pet";
 
   constructor (
     private route: ActivatedRoute,
@@ -31,16 +38,18 @@ export class GenerateExamComponent implements OnInit {
     private examService: ExamService
   ) {}
 
-  onSubmit() {
+  onSubmit(event: Event) {
     console.log("GenerateExamComponent => onSubmit()")
-    this.examService.generateExam(this.form.value).subscribe({
-      next: (result) => {
-        this.router.navigateByUrl('/country/resolveExam')
-      },
-      error: (err) => {
+    console.log(this.generateExamForm);
 
-      }
-    });
+    // this.examService.generateExam(this.form.value).subscribe({
+    //   next: (result) => {
+    //     this.router.navigateByUrl('/country/resolveExam')
+    //   },
+    //   error: (err) => {
+
+    //   }
+    // });
   }
 
   ngOnInit(): void {

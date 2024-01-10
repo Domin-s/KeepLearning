@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { GenerateExamForm } from "../forms/GenerateExamForm";
+import { GenerateExamForm } from "../forms/generateExam.form";
 import { Exam } from "../models/Exam";
 
 @Injectable({

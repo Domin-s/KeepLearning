@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@ang
 import { ContinentService } from '../../../services/continent.service';
 import { Select } from '../../../../common/select/model/select';
 import { SelectComponent } from '../../../../common/select/component/select.component';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
 
 @Component({
   selector: 'app-number-of-questions-select',
@@ -10,9 +11,12 @@ import { SelectComponent } from '../../../../common/select/component/select.comp
     SelectComponent
   ],
   templateUrl: './number-of-questions-select.component.html',
-  styleUrl: './number-of-questions-select.component.scss'
+  styleUrl: './number-of-questions-select.component.scss',
+  providers: [GenerateExamForm]
 })
 export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
+  readonly generateExamForm = inject(GenerateExamForm).form;
+  
   public numberOfQuestionSelect: Select | undefined;
   
   @Input({ required: true }) continents: string[] = [];
