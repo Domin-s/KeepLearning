@@ -1,45 +1,42 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
-import { ContinentMapper } from '../../../mappers/continent.mapper';
-import { ContinentService } from '../../../services/continent.service';
-import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
+import { ContinentCheckbox } from '../ContinentCheckbox';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent } from '../../../../common/checkbox/component/checkbox.component';
 
 @Component({
   selector: 'app-continents-checkbox',
-  standalone: true,
-  imports: [CheckboxListComponent],
   templateUrl: './continents-checkbox.component.html',
-  styleUrl: './continents-checkbox.component.scss'
+  styleUrl: './continents-checkbox.component.scss',
+  standalone: true,
+  imports: [
+    CheckboxComponent,
+    ReactiveFormsModule
+  ],
 })
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
   @Input({ required: true }) isForm!: boolean;
-  @Input() continentsFromPath: string[] = [];
+  @Input() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
-  @Output() updateCheckoboxesEvent = new EventEmitter<Checkbox[]>();
+  @Output() updateCheckoboxesEvent = new EventEmitter<string[]>();
+  
+  readonly generateExamForm = inject(GenerateExamForm).form;
 
-  public continentCheckboxes: Checkbox[] = [];
+  public continentCheckbox: ContinentCheckbox;
 
-  private continentMapper: ContinentMapper = inject(ContinentMapper);
-  private continentService: ContinentService = inject(ContinentService);
+  constructor(){
+    this.continentCheckbox = new ContinentCheckbox();
+  }
 
   ngOnInit(): void {
-    this.getContinents();
+    this.continentCheckbox.setCheckedContinents(this.continentsChecked);
   }
 
-  getContinents(){
-    this.continentService.getContinents().subscribe({
-      next: (result) => {
-        this.continentCheckboxes = this.continentMapper.mapToCheckbox(result, this.continentsFromPath);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  updateCheckoboxes(checkboxes: Checkbox[]) {
-    this.continentCheckboxes = checkboxes;
-    this.updateCheckoboxesEvent.emit(this.continentCheckboxes)
+  updateContinentChecbox(checkbox: Checkbox) {
+    this.continentCheckbox.checkOrUncheckContinent(checkbox);
+    this.continentsChecked = this.continentCheckbox.getCheckedContinents().map(c => c.value);
+    this.updateCheckoboxesEvent.emit(this.continentsChecked)
   }
 }

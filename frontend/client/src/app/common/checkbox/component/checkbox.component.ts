@@ -1,43 +1,52 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, inject, forwardRef } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
+import { GenerateExamForm } from '../../../country/forms/generateExam.form';
+import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessorDirective } from '../../control-value-accessor.directive';
 
 @Component({
-  standalone: true,
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.css'
+  styleUrl: './checkbox.component.scss',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckboxComponent),
+      multi: true,
+    },
+  ],
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent<T> extends ControlValueAccessorDirective<T> {
   @Input({ required: true }) checkbox!: Checkbox;
   @Input({ required: true }) inOneLine!: boolean;
 
   @Output() changeCheckForCheckboxEvent = new EventEmitter();
 
-  public classes = ""
+  public classes = '';
 
-  ngOnInit(): void {
-    this.setClassToComponent();
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.classes = this.setClassToComponent(this.inOneLine);
   }
 
-  setClassToComponent() {
-    if (this.inOneLine) {
-      this.classes = "form-check form-check-inline"
+  setClassToComponent(inOneLine: boolean) {
+    if (inOneLine) {
+      return "form-check form-check-inline";
     } else {
-      this.classes = "form-check"
+      return "form-check";
     }
   }
 
   changeCheck() {
-    this.checkbox = this.changeStatus(this.checkbox);
+    this.changeStatus();
     this.changeCheckForCheckboxEvent.emit(this.checkbox);
   }
 
-  changeStatus(checkbox: Checkbox): Checkbox {
-    return new Checkbox(
-      checkbox.id,
-      checkbox.name,
-      checkbox.value,
-      !checkbox.isChecked
-    )
+  changeStatus() {
+    this.checkbox.isChecked = !this.checkbox.isChecked;
   }
 }

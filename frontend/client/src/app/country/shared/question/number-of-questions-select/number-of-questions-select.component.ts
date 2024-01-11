@@ -2,23 +2,28 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@ang
 import { ContinentService } from '../../../services/continent.service';
 import { Select } from '../../../../common/select/model/select';
 import { SelectComponent } from '../../../../common/select/component/select.component';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-number-of-questions-select',
   standalone: true,
   imports: [
-    SelectComponent
+    SelectComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './number-of-questions-select.component.html',
   styleUrl: './number-of-questions-select.component.scss'
 })
 export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
-  public numberOfQuestionSelect: Select | undefined;
-  
   @Input({ required: true }) continents: string[] = [];
 
+  readonly generateExamForm = inject(GenerateExamForm).form;
+  
   private numberOfQuestionToChoose: number[] = [5, 10, 20, 25, 50, 100];
   private continentService: ContinentService = inject(ContinentService);
+  
+  public numberOfQuestionSelect: Select | undefined;
 
   ngOnInit(): void {
     this.getMaxNumbersOfQuestion(this.continents);

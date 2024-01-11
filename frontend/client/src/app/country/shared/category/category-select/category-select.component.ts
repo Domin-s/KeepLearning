@@ -1,21 +1,28 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Select } from '../../../../common/select/model/select';
 import { ExamService } from '../../../services/exam.service';
 import { SelectComponent } from '../../../../common/select/component/select.component';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-category-select',
   standalone: true,
   imports: [
-    SelectComponent
+    SelectComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './category-select.component.html',
   styleUrl: './category-select.component.scss'
 })
-export class CategorySelectComponent implements OnInit {
-  public cetegoriesSelect: Select | undefined;
+export class CategorySelectComponent implements OnInit {  
+  readonly generateExamForm = inject(GenerateExamForm).form;
 
-  private examService: ExamService = inject(ExamService);
+  public cetegoriesSelect: Select | undefined;
+  
+  constructor(
+    private examService: ExamService
+  ) { }
   
   ngOnInit(): void {
     this.getCategories();

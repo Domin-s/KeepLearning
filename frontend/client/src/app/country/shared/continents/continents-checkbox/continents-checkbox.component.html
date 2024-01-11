@@ -3,9 +3,21 @@
         <div class="col-4 col-sm-5 col-md-4"> Choose continents: </div>
         
         <div class="col-5 col-sm-6 col-md-5">
-            <app-checkbox-list [checkboxes]="continentCheckboxes" [inOneLine]="inOneLine" (changeCheckForCheckboxesEvent)="updateCheckoboxes($event)"/>
+            @for (checkbox of continentCheckbox.continentCheckoboxes; track checkbox.name; let i= $index) {
+                <app-checkbox 
+                    [checkbox]="checkbox" 
+                    [inOneLine]="inOneLine"
+                    (changeCheckForCheckboxEvent)="updateContinentChecbox($event)"
+                />
+            }
         </div>
     </div>
 } @else {
-    <app-checkbox-list [checkboxes]="continentCheckboxes" [inOneLine]="inOneLine" (changeCheckForCheckboxesEvent)="updateCheckoboxes($event)"/>
+    @for (checkbox of continentCheckbox.continentCheckoboxes; track checkbox.name; let i= $index) {
+        <app-checkbox 
+            [checkbox]="checkbox" 
+            [inOneLine]="inOneLine"
+            (changeCheckForCheckboxEvent)="updateContinentChecbox($event)"
+        />
+    }
 }

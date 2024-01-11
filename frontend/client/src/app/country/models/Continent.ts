@@ -1,7 +1,3 @@
-export class Continent {
+export interface Continent {
   name: string
-
-  constructor(name: string) {
-      this.name = name;
-  }
 } 

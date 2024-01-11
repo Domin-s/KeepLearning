@@ -6,27 +6,34 @@
     <div class="form-group">
         <div class="container">
             <div class="row align-items-start">
-                <form method="post" action="#">
+                <form (ngSubmit)="onSubmit($event)">
                     <div class="col-10 col-md-12 col-sm-12">
                         <div class="row m-2 ">
                             <div class="col-4 col-sm-5 col-md-4">Exam name: </div>
-                            <input id="Name" class="col-5 col-sm-6 col-md-5" name="Name" />
+                            <input id="Name" class="col-5 col-sm-6 col-md-5" [formControl]="generateExamForm.controls.Name"/>
                         </div>
-                        
-                        <app-continents-checkbox [inOneLine]="false" [isForm]="true" [continentsFromPath]="continents" (updateCheckoboxesEvent)="updateCheckedContinents($event)"/>
 
-                        <app-category-select />
+                        <app-continents-checkbox 
+                            [inOneLine]="false"
+                            [isForm]="true"
+                            [continentsChecked]="continentsChecked"
+                            (updateCheckoboxesEvent)="getCheckedContinents($event)"
+                        />
 
-                        <app-number-of-questions-select [continents]="continents"/>
+                        <app-category-select/>
+
+                        <app-number-of-questions-select 
+                            [continents]="continentsChecked"
+                        />
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">
                         <div class="col-3 col-md-3 col-sm-4">
-                            <a [routerLink]="['/country']" class="btn btn-lg btn-outline-primary m-2">Back to list</a>
+                            <button [routerLink]="['/country']" [queryParams]="{continentsChecked}" class="btn btn-lg btn-outline-primary m-2">Back to list</button>
                         </div>
-                        @if (continents.length > 0) {
+                        @if (continentsChecked.length > 0) {
                             <div class="col-3 col-md-3 col-sm-4">
-                                <input type="submit" value="Create" class="btn btn-lg btn-outline-primary m-2" id="createExam" />
+                                <button type="submit" class="btn btn-lg btn-outline-primary m-2">Generate exam</button>
                             </div>
                         } @else {
                             <div class="col-3 col-md-3 col-sm-4">

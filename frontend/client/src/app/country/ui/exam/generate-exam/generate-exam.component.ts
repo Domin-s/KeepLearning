@@ -1,9 +1,12 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Component, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
 import { NumberOfQuestionsSelectComponent } from '../../../shared/question/number-of-questions-select/number-of-questions-select.component';
-import { Checkbox } from '../../../../common/checkbox/model/checkbox';
+import { ExamService } from '../../../services/exam.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -14,42 +17,63 @@ import { Checkbox } from '../../../../common/checkbox/model/checkbox';
     ContinentsCheckboxComponent,
     CategorySelectComponent,
     NumberOfQuestionsSelectComponent,
-    RouterLink
-  ]
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [GenerateExamForm],
 })
 export class GenerateExamComponent implements OnInit {
-  @Input() continentsCheckbox: Checkbox[] = [];
-  public continents: string[] = [];
+  readonly generateExamForm = inject(GenerateExamForm).form;
 
-  private route: ActivatedRoute = inject(ActivatedRoute);
+  private examName: string = '';
+  private examContinents: string[] = [];
+  private examCategory: string = '';
+  private examNumberOfQuestion: string = '';
 
-  ngOnInit(): void {
-    this.route.queryParamMap.subscribe( params => {
-      this.continents = params.getAll('continents');
+  public continentsChecked: string[] = [];
+  
+  public url = 'http://localhost:4200/country/resolveExam';
+
+  defaultQuestion = "pet";
+
+  constructor (
+    private route: ActivatedRoute,
+    private router: Router,
+    private examService: ExamService
+  ) {}
+
+  onSubmit(event: Event) {
+    console.log("GenerateExamComponent => onSubmit()")
+    console.log(this.generateExamForm);
+    console.log(this.generateExamForm.value);
+
+    this.examService.generateExam(this.generateExamForm).subscribe({
+      next: (result) => {
+        this.router.navigateByUrl('/country/resolveExam')
+      },
+      error: (err) => {
+
+      }
     });
   }
 
-  checkOrUncheckChild(itemValue: string) {
-    this.removeOrAddContinent(itemValue);
+  ngOnInit(): void {
+    this.continentsChecked = this.getContinentsFromPath();
+  }
+  
+
+  getCheckedContinents(continents: string[]){
+    this.continentsChecked = continents;
   }
 
-  removeOrAddContinent(continent: string) {
-    let foundContinent = this.continents.find(c => c === continent);
+  getContinentsFromPath(){
+    let continentsFromPath: string[] = []; 
+    
+    this.route.queryParamMap.subscribe( params => {
+      continentsFromPath = params.getAll('continentsChecked');
+    });
 
-    if (foundContinent === undefined) {
-      this.continents.push(continent)
-    } else {
-      this.continents = this.continents.filter(c => c !== continent);
-    }
-  }
-
-  updateCheckedContinents(checkboxes: Checkbox[]) {
-    this.continentsCheckbox = checkboxes;
-    this.setContinentsToParam();
-  }
-
-  setContinentsToParam() {
-    let checkedContinents = this.continentsCheckbox.filter(c => c.isChecked);
-    this.continents = checkedContinents.map( c => c.value);
+    return continentsFromPath;
   }
 }
