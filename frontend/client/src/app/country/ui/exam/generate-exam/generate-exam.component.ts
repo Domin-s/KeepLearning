@@ -26,6 +26,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class GenerateExamComponent implements OnInit {
   readonly generateExamForm = inject(GenerateExamForm).form;
 
+  private examName: string = '';
+  private examContinents: string[] = [];
+  private examCategory: string = '';
+  private examNumberOfQuestion: string = '';
+
   public continentsChecked: string[] = [];
   
   public url = 'http://localhost:4200/country/resolveExam';
@@ -43,14 +48,14 @@ export class GenerateExamComponent implements OnInit {
     console.log(this.generateExamForm);
     console.log(this.generateExamForm.value);
 
-    // this.examService.generateExam(this.form.value).subscribe({
-    //   next: (result) => {
-    //     this.router.navigateByUrl('/country/resolveExam')
-    //   },
-    //   error: (err) => {
+    this.examService.generateExam(this.generateExamForm).subscribe({
+      next: (result) => {
+        this.router.navigateByUrl('/country/resolveExam')
+      },
+      error: (err) => {
 
-    //   }
-    // });
+      }
+    });
   }
 
   ngOnInit(): void {
