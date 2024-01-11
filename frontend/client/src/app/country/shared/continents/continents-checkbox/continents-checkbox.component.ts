@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
-import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { ContinentCheckbox } from '../ContinentCheckbox';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent } from '../../../../common/checkbox/component/checkbox.component';
 
 @Component({
   selector: 'app-continents-checkbox',
@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './continents-checkbox.component.scss',
   standalone: true,
   imports: [
-    CheckboxListComponent,
+    CheckboxComponent,
     ReactiveFormsModule
   ],
 })
@@ -34,8 +34,8 @@ export class ContinentsCheckboxComponent implements OnInit {
     this.continentCheckbox.setCheckedContinents(this.continentsChecked);
   }
 
-  updateContinentChecboxes(checkboxes: Checkbox[]) {
-    this.continentCheckbox.checkOrUncheckContinents(checkboxes);
+  updateContinentChecbox(checkbox: Checkbox) {
+    this.continentCheckbox.checkOrUncheckContinent(checkbox);
     this.continentsChecked = this.continentCheckbox.getCheckedContinents().map(c => c.value);
     this.updateCheckoboxesEvent.emit(this.continentsChecked)
   }

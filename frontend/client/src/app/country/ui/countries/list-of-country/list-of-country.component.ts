@@ -2,10 +2,10 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Country } from '../../../models/Country';
 import { CountryService } from '../../../services/country.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
 import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 
 @Component({
   standalone: true,

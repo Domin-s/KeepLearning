@@ -59,17 +59,17 @@ export class ContinentCheckbox {
 
   checkOrUncheckContinents(continents: Checkbox[]) {
     for (let continent of continents) {
-      this.checkOrUncheckContinent(continent, continent.isChecked);
+      this.checkOrUncheckContinent(continent);
     }
   }
 
-  checkOrUncheckContinent(continent: Checkbox, isChecked: boolean) {
+  checkOrUncheckContinent(continent: Checkbox) {
     let continentIndex = this.continentCheckoboxes.findIndex( c => c.value === continent.value);
     if (continentIndex === -1) {
       console.log("Not found continent");
     }
     
-    this.continentCheckoboxes[continentIndex].isChecked = isChecked;
+    this.continentCheckoboxes[continentIndex].isChecked = continent.isChecked;
   }
 
   getCheckedContinents(): Checkbox[] {
