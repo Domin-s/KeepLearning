@@ -12,5 +12,9 @@
         </div>
     </div>
 } @else {
-    <app-checkbox-list [checkboxes]="continentCheckbox.continentCheckoboxes" [inOneLine]="inOneLine" (changeCheckForCheckboxesEvent)="updateContinentChecboxes($event)"/>
+    <app-checkbox-list
+        [checkboxes]="continentCheckbox.continentCheckoboxes"
+        [inOneLine]="inOneLine"
+        (changeCheckForCheckboxesEvent)="updateContinentChecboxes($event)"
+    />
 }
