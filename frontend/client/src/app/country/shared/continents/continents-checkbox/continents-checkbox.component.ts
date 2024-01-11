@@ -2,13 +2,18 @@ import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular
 import { CheckboxListComponent } from '../../../../common/checkbox/components/checkbox-list.component';
 import { Checkbox } from '../../../../common/checkbox/model/checkbox';
 import { ContinentCheckbox } from '../ContinentCheckbox';
+import { GenerateExamForm } from '../../../forms/generateExam.form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-continents-checkbox',
-  standalone: true,
-  imports: [CheckboxListComponent],
   templateUrl: './continents-checkbox.component.html',
-  styleUrl: './continents-checkbox.component.scss'
+  styleUrl: './continents-checkbox.component.scss',
+  standalone: true,
+  imports: [
+    CheckboxListComponent,
+    ReactiveFormsModule
+  ],
 })
 export class ContinentsCheckboxComponent implements OnInit { 
   @Input({ required: true }) inOneLine!: boolean;
@@ -16,11 +21,12 @@ export class ContinentsCheckboxComponent implements OnInit {
   @Input() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   @Output() updateCheckoboxesEvent = new EventEmitter<string[]>();
+  
+  readonly generateExamForm = inject(GenerateExamForm).form;
 
   public continentCheckbox: ContinentCheckbox;
 
-  constructor(
-  ){
+  constructor(){
     this.continentCheckbox = new ContinentCheckbox();
   }
 
