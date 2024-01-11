@@ -6,8 +6,8 @@ export class GenerateExamForm {
     readonly form = inject(FormBuilder).group({
         Name: [''],
         NumberOfQuestion: [10],
-        Category: [''],
-        Continents: ['']
+        Category: ['Country'],
+        Continents: ['Europe']
     });
 
     constructor(){}
