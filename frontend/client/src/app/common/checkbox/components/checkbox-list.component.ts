@@ -6,7 +6,7 @@ import { CheckboxComponent } from '../component/checkbox.component';
   standalone: true,
   selector: 'app-checkbox-list',
   templateUrl: './checkbox-list.component.html',
-  styleUrl: './checkbox-list.component.css',
+  styleUrl: './checkbox-list.component.scss',
   imports: [CheckboxComponent]
 })
 export class CheckboxListComponent {

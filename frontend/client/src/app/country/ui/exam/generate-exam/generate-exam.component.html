@@ -20,9 +20,11 @@
                             (updateCheckoboxesEvent)="getCheckedContinents($event)"
                         />
 
-                        <app-category-select />
+                        <app-category-select/>
 
-                        <app-number-of-questions-select [continents]="continentsChecked"/>
+                        <app-number-of-questions-select 
+                            [continents]="continentsChecked"
+                        />
                     </div>
 
                     <div class="row m-4 col-10 col-md-12 col-sm-12">

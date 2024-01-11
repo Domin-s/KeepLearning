@@ -1,8 +1,20 @@
-<div class="row m-2">
-    <div class="col-4 col-sm-5 col-md-4"> {{ select.description }} </div>
-    <select name=" {{ select.name }}" class="col-5 col-sm-6 col-md-5" id=" {{ select.id }}">
-        @for (option of select.options; track $index) {
-            <option value="{{option}}">{{option}}</option>
-        }
-    </select>
-</div>
+@if(control){
+    <div class="row m-2">
+        <label
+            [for]="select.id"
+            class="col-4 col-sm-5 col-md-4"
+        >
+            {{ select.description }}
+        </label>
+        <select
+            [formControl]="control"
+            [id]="select.id"
+            [name]="select.name"
+            class="col-5 col-sm-6 col-md-5"
+        >
+            @for (option of select.options; track $index) {
+                <option value="{{option}}">{{option}}</option>
+            }
+        </select>
+    </div>
+}

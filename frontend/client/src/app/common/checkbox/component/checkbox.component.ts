@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrl: './checkbox.component.css',
+  styleUrl: './checkbox.component.scss',
   imports: [ReactiveFormsModule]
 })
 export class CheckboxComponent implements OnInit {

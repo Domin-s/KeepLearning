@@ -41,6 +41,7 @@ export class GenerateExamComponent implements OnInit {
   onSubmit(event: Event) {
     console.log("GenerateExamComponent => onSubmit()")
     console.log(this.generateExamForm);
+    console.log(this.generateExamForm.value);
 
     // this.examService.generateExam(this.form.value).subscribe({
     //   next: (result) => {

@@ -1,3 +1,6 @@
 @if(cetegoriesSelect !== undefined) {
-    <app-select [select]="cetegoriesSelect" formControlName="Categories"/>
+    <app-select 
+        [select]="cetegoriesSelect" 
+        [formControl]="generateExamForm.controls.Category"
+    />
 }
