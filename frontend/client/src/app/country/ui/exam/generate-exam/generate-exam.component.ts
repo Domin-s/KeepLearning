@@ -26,17 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class GenerateExamComponent implements OnInit {
   readonly generateExamForm = inject(GenerateExamForm).form;
 
-  // TODO: remove
-  private examName: string = '';
-  private examContinents: string[] = [];
-  private examCategory: string = '';
-  private examNumberOfQuestion: string = '';
-
   public continentsChecked: string[] = [];
   
   public url = 'http://localhost:4200/country/resolveExam';
-
-  defaultQuestion = "pet";
 
   constructor (
     private route: ActivatedRoute,
@@ -45,14 +37,9 @@ export class GenerateExamComponent implements OnInit {
   ) {}
 
   onSubmit(event: Event) {
-    console.log("GenerateExamComponent => onSubmit()")
-    console.log(this.generateExamForm);
-    console.log(this.generateExamForm.value);
-
     this.examService.generateExam(this.generateExamForm).subscribe({
       next: (result) => {
         console.log(result);
-        // this.router.navigateByUrl('/country/resolveExam')
       },
       error: (err) => {
 

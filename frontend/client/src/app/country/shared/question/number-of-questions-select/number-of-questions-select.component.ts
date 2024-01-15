@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { ContinentService } from '../../../services/continent.service';
-import { Option, Select } from '../../../../common/select/model/select';
+import { Select } from '../../../../common/select/model/select';
 import { SelectComponent } from '../../../../common/select/component/select.component';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -49,13 +49,13 @@ export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
     })
   }
 
-  getNumbersOfQuestion(maxNumber: number, numbersToChoose: number[]): Option[] {
-    let numbers: Option[] = [];
+  getNumbersOfQuestion(maxNumber: number, numbersToChoose: number[]): number[] {
+    let numbers: number[] = [];
 
     for (let i = 0; i < numbersToChoose.length; i++) {
       const element = numbersToChoose[i];
       if(element < maxNumber) {
-        numbers.push({name: element.toString(), value: element});
+        numbers.push(element);
       } else {
         break;
       }
