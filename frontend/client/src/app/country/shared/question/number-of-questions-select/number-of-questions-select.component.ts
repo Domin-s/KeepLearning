@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { ContinentService } from '../../../services/continent.service';
-import { Select } from '../../../../common/select/model/select';
+import { Option, Select } from '../../../../common/select/model/select';
 import { SelectComponent } from '../../../../common/select/component/select.component';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -36,12 +36,12 @@ export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
   getMaxNumbersOfQuestion(continents: string[]) {
     this.continentService.getNumberOfCountries(continents).subscribe({
       next: (result) => {
-        this.numberOfQuestionSelect = new Select(
-          "Select-NumberOfQuestion",
-          "NumberOfQuestion",
-          "Choose number of questions",
-          this.getNumbersOfQuestion(result, this.numberOfQuestionToChoose)
-        );
+        this.numberOfQuestionSelect = {
+          id: "Select-NumberOfQuestion",
+          name: "NumberOfQuestion",
+          description: "Choose number of questions",
+          options: this.getNumbersOfQuestion(result, this.numberOfQuestionToChoose)
+        };
       },
       error: (error) => {
         console.log(error);
@@ -49,13 +49,13 @@ export class NumberOfQuestionsSelectComponent implements OnInit, OnChanges {
     })
   }
 
-  getNumbersOfQuestion(maxNumber: number, numbersToChoose: number[]): number[] {
-    let numbers: number[] = [];
+  getNumbersOfQuestion(maxNumber: number, numbersToChoose: number[]): Option[] {
+    let numbers: Option[] = [];
 
     for (let i = 0; i < numbersToChoose.length; i++) {
       const element = numbersToChoose[i];
       if(element < maxNumber) {
-        numbers.push(element);
+        numbers.push({name: element.toString(), value: element});
       } else {
         break;
       }

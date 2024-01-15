@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { GenerateExamForm } from "../forms/generateExam.form";
 import { Exam } from "../models/Exam";
 import { FormGroup } from "@angular/forms";
+import { Category } from "../models/Category";
 
 @Injectable({
   providedIn: "root",
@@ -10,16 +10,25 @@ import { FormGroup } from "@angular/forms";
 export class ExamService {
   private URL = "https://localhost:5001/api/country/exam";
 
-  private http: HttpClient = inject(HttpClient);
+  constructor(private http: HttpClient) {}
 
   getCategories() {
-    return this.http.get<string[]>(this.URL + '/category');
+    return this.http.get<Category[]>(this.URL + '/category');
   }
 
   generateExam(generateExamForm: FormGroup) {
-    console.log("ExamService");
-    console.log(generateExamForm.value);
+    let formObj = generateExamForm.value;
+    let serializedForm = JSON.stringify(formObj);
 
-    return this.http.post<Exam>(this.URL + '/generate', generateExamForm.value);
+    return this.http.post<Exam>(
+      this.URL + '/generate',
+      serializedForm,
+      {
+        headers: new HttpHeaders({
+          "Content-Type": 'application/json; charset=utf-8',
+          "Accept": "*/*"
+      })
+      },        
+    );
   }
 }

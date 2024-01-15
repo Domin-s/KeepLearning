@@ -51,7 +51,8 @@ export class GenerateExamComponent implements OnInit {
 
     this.examService.generateExam(this.generateExamForm).subscribe({
       next: (result) => {
-        this.router.navigateByUrl('/country/resolveExam')
+        console.log(result);
+        // this.router.navigateByUrl('/country/resolveExam')
       },
       error: (err) => {
 

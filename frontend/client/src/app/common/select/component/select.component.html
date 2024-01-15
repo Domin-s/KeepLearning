@@ -13,7 +13,7 @@
             class="col-5 col-sm-6 col-md-5"
         >
             @for (option of select.options; track $index) {
-                <option value="{{option}}">{{option}}</option>
+                <option value="{{option.value}}">{{ option.name }}</option>
             }
         </select>
     </div>

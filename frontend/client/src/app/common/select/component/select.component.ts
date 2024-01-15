@@ -2,6 +2,7 @@ import { Component, Input, forwardRef } from '@angular/core';
 import { Select } from '../model/select';
 import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { ControlValueAccessorDirective } from '../../control-value-accessor.directive';
+import { Category } from '../../../country/models/Category';
 
 @Component({
   selector: 'app-select',
