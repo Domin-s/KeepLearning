@@ -9,10 +9,11 @@ public static class QuestionDtoBuilder
     public static List<QuestionDto> CreateQuestions(List<CountryDto> countries, GenerateExamCountryQuery command)
     {
         var questions = new List<QuestionDto>() { };
+        var category = GuessType.ToCategory(command.Category);
 
         for (var i = 0; i < countries.Count(); i++)
         {
-            var newQuestion = CreateQuestionByCategory(countries[i], command.Category, i + 1);
+            var newQuestion = CreateQuestionByCategory(countries[i], category, i + 1);
             questions.Add(newQuestion);
         }
 

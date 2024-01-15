@@ -2,4 +2,4 @@
 
 namespace Application.Exam.Queries.GetCategoryCountryExam;
 
-public class GetCategoryCountryExamQuery : IRequest<IEnumerable<Category>> { }
+public class GetCategoryCountryExamQuery : IRequest<IEnumerable<string>> { }
