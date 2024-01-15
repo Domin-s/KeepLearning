@@ -1,13 +1,11 @@
-export class Select {
-    id!: string;
-    name!: string;
-    description!: string;
-    options!: any[];
+export interface Option {
+    name: string,
+    value: number
+}
 
-    constructor(id: string, name: string, description: string, options: any[]) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.options = options;
-    }
-} 
+export interface Select {
+    id: string;
+    name: string;
+    description: string;
+    options: Option[];
+}
