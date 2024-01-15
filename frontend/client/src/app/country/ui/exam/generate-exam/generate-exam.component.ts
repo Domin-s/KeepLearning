@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class GenerateExamComponent implements OnInit {
   readonly generateExamForm = inject(GenerateExamForm).form;
 
+  // TODO: remove
   private examName: string = '';
   private examContinents: string[] = [];
   private examCategory: string = '';

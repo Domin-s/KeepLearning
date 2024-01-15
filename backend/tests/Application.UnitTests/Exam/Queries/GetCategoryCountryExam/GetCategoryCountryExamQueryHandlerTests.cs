@@ -1,4 +1,5 @@
 using Application.Exam.Queries.GetCategoryCountryExam;
+using static Domain.Models.Enums.GuessType;
 
 namespace Application.Country.Queries.GetCategoryCountryExam.UnitTest;
 
@@ -8,7 +9,7 @@ public class GetCategoryCountryExamQueryHandlerTests
     public async void Handle_GetAllCategoryCountryExam_ReturnCapitalCityAndCountry()
     {
         // arrange
-        var expectedResult = new List<string>() { "Capital city", "Country" };
+        var expectedResult = new List<Category>() { Category.CapitalCity, Category.Country };
         var handler = new GetCategoryCountryExamQueryHandler();
 
         // act

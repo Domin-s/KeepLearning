@@ -1,3 +1,5 @@
-﻿namespace Application.Exam.Queries.GetCategoryCountryExam;
+﻿using static Domain.Models.Enums.GuessType;
 
-public class GetCategoryCountryExamQuery : IRequest<IEnumerable<string>> { }
+namespace Application.Exam.Queries.GetCategoryCountryExam;
+
+public class GetCategoryCountryExamQuery : IRequest<IEnumerable<Category>> { }
