@@ -1,26 +1,13 @@
 import { Component, Input, OnInit, Output, EventEmitter, inject, forwardRef } from '@angular/core';
 import { Checkbox } from '../model/checkbox';
-import { GenerateExamForm } from '../../../country/forms/generateExam.form';
-import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { ControlValueAccessorDirective } from '../../control-value-accessor.directive';
 
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
-      multi: true,
-    },
-  ],
+  standalone: true
 })
-export class CheckboxComponent<T> extends ControlValueAccessorDirective<T> {
+export class CheckboxComponent implements OnInit {
   @Input({ required: true }) checkbox!: Checkbox;
   @Input({ required: true }) inOneLine!: boolean;
 
@@ -28,8 +15,7 @@ export class CheckboxComponent<T> extends ControlValueAccessorDirective<T> {
 
   public classes = '';
 
-  override ngOnInit(): void {
-    super.ngOnInit();
+  ngOnInit(): void {
     this.classes = this.setClassToComponent(this.inOneLine);
   }
 
