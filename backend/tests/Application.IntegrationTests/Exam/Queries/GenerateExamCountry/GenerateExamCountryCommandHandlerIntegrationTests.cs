@@ -4,6 +4,7 @@ using Application.Helper.Seeders.IntegrationTests;
 using Application.UnitTests.Helper;
 using Ardalis.GuardClauses;
 using AutoMapper;
+using Domain.Models.Enums;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using static Domain.Models.Enums.GuessType;
@@ -50,25 +51,25 @@ public class GenerateExamCountryCommandHandlerIntegrationTests
             new GenerateExamCountryQuery(){
                 Name = "Exam 1",
                 NumberOfQuestion = 5,
-                Category = Category.Country,
+                Category = "Country",
                 Continents = new List<string>() { "Europe", "Asia" }
             },
             new GenerateExamCountryQuery(){
                 Name = "Exam 2",
                 NumberOfQuestion = 10,
-                Category = Category.Country,
+                Category = "Country",
                 Continents = new List<string>() { "Europe", "Asia" }
             },
             new GenerateExamCountryQuery(){
                 Name = "Exam 3",
                 NumberOfQuestion = 25,
-                Category = Category.Country,
+                Category = "Country",
                 Continents = new List<string>() { "Europe", "Asia" }
             },
             new GenerateExamCountryQuery(){
                 Name = "",
                 NumberOfQuestion = 50,
-                Category = Category.Country,
+                Category = "Country",
                 Continents = new List<string>() { "Europe", "Asia" }
             },
         };
@@ -83,12 +84,13 @@ public class GenerateExamCountryCommandHandlerIntegrationTests
         // arrange
         var createExamCountryCommandHandler = new GenerateExamCountryQueryHandler(_dbContext, _mapper, _countryServiceTest);
         var continents = createExamCountryCommand.Continents.Select(c => c);
+        var expectedCategory = GuessType.ToCategory(createExamCountryCommand.Category);
 
         // act
         var result = await createExamCountryCommandHandler.Handle(createExamCountryCommand, CancellationToken.None);
 
         // assert
-        result.Category.Should().Be(createExamCountryCommand.Category);
+        result.Category.Should().Be(expectedCategory);
         result.Name.Should().Be(createExamCountryCommand.Name);
         result.Continents.Select(c => c.Name).All(createExamCountryCommand.Continents.Contains);
         result.Questions.Count().Should().Be(createExamCountryCommand.NumberOfQuestion);
@@ -101,7 +103,7 @@ public class GenerateExamCountryCommandHandlerIntegrationTests
             new GenerateExamCountryQuery(){
                 Name = "Exam 1",
                 NumberOfQuestion = 105,
-                Category = Category.Country,
+                Category = "Country",
                 Continents = new List<string>() { "Europe"}
             }
         };
