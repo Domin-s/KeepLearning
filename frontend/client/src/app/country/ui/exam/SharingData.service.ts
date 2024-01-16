@@ -16,4 +16,12 @@ export class SharingDataService {
       return JSON.parse(data);
     }
   }
+
+  clearUserSettings(storageName: string) {
+    localStorage.removeItem(storageName);
+  }
+
+  cleanAll() {
+    localStorage.clear()
+  }
 }
