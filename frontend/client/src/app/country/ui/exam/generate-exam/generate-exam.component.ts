@@ -8,7 +8,7 @@ import { FormArray, FormControl, FormsModule, NgForm } from '@angular/forms';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Exam } from '../../../models/Exam';
-import { ExamDataService } from '../examData.service';
+import { SharingDataService } from '../SharingData.service';
 
 @Component({
   standalone: true,
@@ -26,6 +26,7 @@ import { ExamDataService } from '../examData.service';
   providers: [GenerateExamForm],
 })
 export class GenerateExamComponent implements OnInit {
+  private storageName = "ExamCountry";
   generateExamForm = inject(GenerateExamForm).form;
   public continentsChecked: string[] = [];
   
@@ -33,7 +34,7 @@ export class GenerateExamComponent implements OnInit {
 
   constructor (
     private examService: ExamService,
-    private examDataService: ExamDataService,
+    private sharingDataService: SharingDataService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
@@ -53,7 +54,7 @@ export class GenerateExamComponent implements OnInit {
   }
 
   setDataToExamDataService(exam: Exam) {
-    this.examDataService.setData(exam);
+    this.sharingDataService.setData(exam, this.storageName);
   }
 
   setContinents() {
