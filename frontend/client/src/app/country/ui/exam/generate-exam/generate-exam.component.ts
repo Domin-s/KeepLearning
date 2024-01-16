@@ -1,5 +1,5 @@
 import { Component,  OnInit, inject } from '@angular/core';
-import { ActivatedRoute,  RouterLink } from '@angular/router';
+import { ActivatedRoute,  Router,  RouterLink } from '@angular/router';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CategorySelectComponent } from '../../../shared/category/category-select/category-select.component';
 import { NumberOfQuestionsSelectComponent } from '../../../shared/question/number-of-questions-select/number-of-questions-select.component';
@@ -7,6 +7,8 @@ import { ExamService } from '../../../services/exam.service';
 import { FormArray, FormControl, FormsModule, NgForm } from '@angular/forms';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Exam } from '../../../models/Exam';
+import { ExamDataService } from '../examData.service';
 
 @Component({
   standalone: true,
@@ -25,14 +27,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class GenerateExamComponent implements OnInit {
   generateExamForm = inject(GenerateExamForm).form;
-
   public continentsChecked: string[] = [];
   
   public url = 'http://localhost:4200/country/resolveExam';
 
   constructor (
+    private examService: ExamService,
+    private examDataService: ExamDataService,
     private route: ActivatedRoute,
-    private examService: ExamService
+    private router: Router,
   ) {}
 
   onSubmit() {
@@ -40,12 +43,17 @@ export class GenerateExamComponent implements OnInit {
     
     this.examService.generateExam(this.generateExamForm).subscribe({
       next: (result) => {
-        console.log(result);
+        this.setDataToExamDataService(result);
+        this.router.navigate(['/country/resolveExam']);
       },
       error: (err) => {
 
       }
     });
+  }
+
+  setDataToExamDataService(exam: Exam) {
+    this.examDataService.setData(exam);
   }
 
   setContinents() {
