@@ -6,14 +6,20 @@
         >
             {{ select.description }}
         </label>
-        <select
+        <select #selectItem
             [formControl]="control"
             [id]="select.id"
             [name]="select.name"
             class="col-5 col-sm-6 col-md-5"
+            (ngModelChange)="ngChangeValue()"
         >
             @for (option of select.options; track $index) {
-                <option value="{{option}}">{{ option }}</option>
+                <option 
+                    [value]="option"
+                    [selected]="option === actualOption"
+                >
+                    {{ option }}
+                </option>
             }
         </select>
     </div>
