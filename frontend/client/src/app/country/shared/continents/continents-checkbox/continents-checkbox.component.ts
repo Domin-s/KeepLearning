@@ -22,8 +22,6 @@ export class ContinentsCheckboxComponent implements OnInit {
 
   @Output() updateCheckoboxesEvent = new EventEmitter<string[]>();
   
-  readonly generateExamForm = inject(GenerateExamForm).form;
-
   public continentCheckbox: ContinentCheckbox;
 
   constructor(){

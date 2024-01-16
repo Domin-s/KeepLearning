@@ -9,7 +9,7 @@ public class GetCategoryCountryExamQueryHandlerTests
     public async void Handle_GetAllCategoryCountryExam_ReturnCapitalCityAndCountry()
     {
         // arrange
-        var expectedResult = new List<Category>() { Category.CapitalCity, Category.Country };
+        var expectedResult = new List<string>() { "Capital City", "Country" };
         var handler = new GetCategoryCountryExamQueryHandler();
 
         // act

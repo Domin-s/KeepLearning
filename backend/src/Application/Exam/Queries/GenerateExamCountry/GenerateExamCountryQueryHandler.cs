@@ -5,6 +5,7 @@ using Application.Common.Models.Question;
 using Application.Common.Models.Exam.Country;
 using Application.Common.Interfaces;
 using Infrastructure.Services;
+using Domain.Models.Enums;
 
 namespace Application.Exam.Queries.GenerateExamCountry;
 
@@ -40,8 +41,10 @@ public class GenerateExamCountryQueryHandler : IRequestHandler<GenerateExamCount
         var countriesDto = randomCountries.Select(c => _mapper.Map<CountryDto>(c)).ToList();
         var continentsDto = request.Continents.Select(c => _mapper.Map<ContinentDto>(c)).ToList();
 
+        var category = GuessType.ToCategory(request.Category);
+
         var questionsDto = QuestionDtoBuilder.CreateQuestions(countriesDto, request);
-        var examDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, request.Category, continentsDto);
+        var examDto = ExamDtoBuilder.CreateExamCountry(request.Name, questionsDto, category, continentsDto);
 
         return examDto;
     }
