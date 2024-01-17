@@ -4,7 +4,6 @@ using Application.UnitTests.Helper;
 using Ardalis.GuardClauses;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
-using static Domain.Models.Enums.GuessType;
 
 namespace Application.Exam.Queries.CheckExam.IntegrationTests;
 
@@ -38,7 +37,7 @@ public class CheckExamQueryHandlerIntegrationTests
             new CheckExamQueryWithResult(
                 new CheckExamQuery()
                 {
-                    Category = Category.CapitalCity,
+                    Category = "Capital City",
                     Answers = new List<AnswerDto>()
                     {
                         new AnswerDto(1, "Germany", "Berlin"),
@@ -54,7 +53,7 @@ public class CheckExamQueryHandlerIntegrationTests
             new CheckExamQueryWithResult(
                 new CheckExamQuery()
                 {
-                    Category = Category.CapitalCity,
+                    Category = "Capital City",
                     Answers = new List<AnswerDto>()
                     {
                         new AnswerDto(1, "Germany", ""),
@@ -70,7 +69,7 @@ public class CheckExamQueryHandlerIntegrationTests
             new CheckExamQueryWithResult(
                 new CheckExamQuery()
                 {
-                    Category = Category.Country,
+                    Category = "Country",
                     Answers = new List<AnswerDto>()
                     {
                         new AnswerDto(1, "Berlin", "Germany"),
@@ -118,7 +117,7 @@ public class CheckExamQueryHandlerIntegrationTests
             (
                 new CheckExamQuery()
                 {
-                    Category = Category.CapitalCity,
+                    Category = "Capital City",
                     Answers = new List<AnswerDto>()
                     {
                         new AnswerDto(1, "Gerrmany", "Berlin"),
@@ -135,7 +134,7 @@ public class CheckExamQueryHandlerIntegrationTests
             (
                 new CheckExamQuery()
                 {
-                    Category = Category.CapitalCity,
+                    Category = "Capital City",
                     Answers = new List<AnswerDto>()
                 },
                 0,

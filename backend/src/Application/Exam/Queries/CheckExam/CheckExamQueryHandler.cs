@@ -1,5 +1,6 @@
 ﻿using Application.Common.Models.Answer;
 using Application.Common.Models.Exam;
+using Domain.Models.Enums;
 using Infrastructure.Services;
 
 namespace Application.Exam.Queries.CheckExam;
@@ -19,10 +20,11 @@ public class CheckExamQueryHandler : IRequestHandler<CheckExamQuery, ExamResultD
         var answers = new List<AnswerResultDto>();
         var numberOfCorrectAnswers = 0;
         var numberOfIncorrectAnswers = 0;
+        var category = GuessType.ToCategory(request.Category);
 
         foreach (var answer in request.Answers)
         {
-            var correctAnswer = await _countryService.GetCorrectAnswer(answer.QuestionText, request.Category);
+            var correctAnswer = await _countryService.GetCorrectAnswer(answer.QuestionText, category);
 
             if (answer.AnswerText is not null && answer.AnswerText?.ToLower() == correctAnswer.ToLower())
             {
