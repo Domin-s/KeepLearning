@@ -1,21 +1,36 @@
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">{{ questionCategory }}</th>
-            <th scope="col">{{ answerCategory }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (question of questions; ; track question.questionNumber; let i= $index) 
-        {
+<div>
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ question.questionNumber }}</td>
-                <td>{{ question.questionText }}</td>
-                <td>
-                    <input type="text" class="form-control Answer" name="Answer[{{question.questionNumber}}]"placeholder="Type answer">
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">{{ questionCategory }}</th>
+                <th scope="col">{{ answerCategory }}</th>
             </tr>
+        </thead>
+        <tbody>
+            @for (question of questions; track question.questionNumber; let i= $index) 
+            {
+                <tr>
+                    <td>{{ question.questionNumber }}</td>
+                    <td>{{ question.questionText }}</td>
+                    <td>
+                        <input type="text" class="form-control Answer" name="Answer[{{question.questionNumber}}]"placeholder="Type answer">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row m-4">
+        @if(isChecked) {
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                <div>Corect answers: <span class="CorrectAnswers"></span></div>
+                <div>Incorrect answers: <span class="IncorrectAnswers"></span></div>
+            </div>
+        } @else {
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                <button class="btn btn-success col-sm-10">Check answers</button>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
