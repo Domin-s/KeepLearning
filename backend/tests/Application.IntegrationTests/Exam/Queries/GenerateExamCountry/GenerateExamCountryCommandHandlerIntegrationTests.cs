@@ -7,8 +7,6 @@ using AutoMapper;
 using Domain.Models.Enums;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
-using static Domain.Models.Enums.GuessType;
-
 namespace Application.Commands.CreateExamCountry.IntegrationTests;
 
 public class GenerateExamCountryCommandHandlerIntegrationTests
