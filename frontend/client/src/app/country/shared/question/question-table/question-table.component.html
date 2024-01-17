@@ -2,33 +2,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">
-                    #
-                </th>
-                <th scope="col">
-                    {{ questionCategory }}
-                </th>
-                <th scope="col">
-                    {{ answerCategory }}
-                </th>
+                <th scope="col">#</th>
+                <th scope="col">{{ questionCategory }}</th>
+                <th scope="col">{{ answerCategory }}</th>
             </tr>
         </thead>
-        <tbody>
-            @for (question of questions; track question.questionNumber; let i= $index) 
+        <tbody formArrayName="Answers">
+            @for (question of answerControls; let i= $index; track i) 
             {
-                <tr>
+                <tr formGroupName="{{i}}">
                     <td>
-                        {{ question.questionNumber }}
+                        {{ question.get('NumberOfQuestion')?.value }}
                     </td>
                     <td>
-                        {{ question.questionText }}
+                        {{ question.get('QuestionText')?.value }}
                     </td>
                     <td>
                         <input 
                             type="text"
                             class="form-control"
-                            name="Answers[{{question.questionNumber}}]"
                             placeholder="Type answer"
+                            formControlName="AnswerText"
                         >
                     </td>
                 </tr>
