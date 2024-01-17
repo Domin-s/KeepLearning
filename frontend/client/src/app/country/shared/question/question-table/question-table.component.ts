@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Question } from '../../../models/Question';
 import { AbstractControl, FormArray, FormControl, FormGroup, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { ExamService } from '../../../services/exam.service';
 @Component({
   selector: 'app-question-table',
   standalone: true,
@@ -18,6 +19,10 @@ export class QuestionTableComponent implements OnInit {
   isChecked = false;
 
   checkExamForm!: FormGroup;
+
+  constructor(
+    private examService: ExamService
+  ){}
 
   ngOnInit(): void {
     this.checkExamForm = new FormGroup({
@@ -48,6 +53,14 @@ export class QuestionTableComponent implements OnInit {
 
   onSubmit(){
     console.log(this.checkExamForm.value);
-    // this.isChecked = true;
+    this.examService.checkExam(this.checkExamForm).subscribe({
+      next: (result) => {
+        console.log(result);
+        this.isChecked = true;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 }

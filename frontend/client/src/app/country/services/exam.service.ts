@@ -31,4 +31,20 @@ export class ExamService {
       },        
     );
   }
+
+  checkExam(checkExamForm: FormGroup) {
+    let formObj = checkExamForm.value;
+    let serializedForm = JSON.stringify(formObj);
+
+    return this.http.post<Exam>(
+      this.URL + '/check',
+      serializedForm,
+      {
+        headers: new HttpHeaders({
+          "Content-Type": 'application/json; charset=utf-8',
+          "Accept": "*/*"
+      })
+      },        
+    );
+  }
 }
