@@ -1,20 +1,35 @@
-<div>
+<form [formGroup]="checkExamForm" (ngSubmit)="onSubmit()">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">{{ questionCategory }}</th>
-                <th scope="col">{{ answerCategory }}</th>
+                <th scope="col">
+                    #
+                </th>
+                <th scope="col">
+                    {{ questionCategory }}
+                </th>
+                <th scope="col">
+                    {{ answerCategory }}
+                </th>
             </tr>
         </thead>
         <tbody>
             @for (question of questions; track question.questionNumber; let i= $index) 
             {
                 <tr>
-                    <td>{{ question.questionNumber }}</td>
-                    <td>{{ question.questionText }}</td>
                     <td>
-                        <input type="text" class="form-control Answer" name="Answer[{{question.questionNumber}}]"placeholder="Type answer">
+                        {{ question.questionNumber }}
+                    </td>
+                    <td>
+                        {{ question.questionText }}
+                    </td>
+                    <td>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="Answers[{{question.questionNumber}}]"
+                            placeholder="Type answer"
+                        >
                     </td>
                 </tr>
             }
@@ -33,4 +48,4 @@
             </div>
         }
     </div>
-</div>
+</form>
