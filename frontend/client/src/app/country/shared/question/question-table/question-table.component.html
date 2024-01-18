@@ -4,27 +4,19 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">{{ questionCategory }}</th>
-                <th scope="col">{{ answerCategory }}</th>
+                <th scope="col">{{ answerCategory }} (user answer)</th>
             </tr>
         </thead>
         <tbody formArrayName="Answers">
-            @for (question of answerControls; let i= $index; track i) 
+            @for (question of questions; let i= $index; track i) 
             {
-                <tr formGroupName="{{i}}">
-                    <td>
-                        {{ question.get('NumberOfQuestion')?.value }}
-                    </td>
-                    <td>
-                        {{ question.get('QuestionText')?.value }}
-                    </td>
-                    <td>
-                        <input 
-                            type="text"
-                            class="form-control"
-                            placeholder="Type answer"
-                            formControlName="AnswerText"
-                        >
-                    </td>
+                <tr app-question-row
+                    [question]="question"
+                    formGroupName="{{i}}"
+                    [formGroup]="checkExamForm"
+                    [isBeforeChecked]="isBeforeChecked"
+                    [corectAnswer]="getCorrectAnswer(question.questionNumber)"
+                >
                 </tr>
             }
         </tbody>
@@ -33,8 +25,12 @@
     <div class="row m-4">
         @if(isChecked) {
             <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                <div>Corect answers: <span class="CorrectAnswers"></span></div>
-                <div>Incorrect answers: <span class="IncorrectAnswers"></span></div>
+                <div>
+                    Corect answers: <span class="fw-bold">{{ result?.numberOfGoodAnswers }}</span>
+                </div>
+                <div>
+                    Incorrect answers: <span class="fw-bold">{{ result?.numberOfBadAnswers }}</span>
+                </div>
             </div>
         } @else {
             <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">

@@ -3,6 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { Exam } from "../models/Exam";
 import { FormGroup } from "@angular/forms";
 import { Category } from "../models/Category";
+import { Result } from "../models/Result";
 
 @Injectable({
   providedIn: "root",
@@ -36,7 +37,7 @@ export class ExamService {
     let formObj = checkExamForm.value;
     let serializedForm = JSON.stringify(formObj);
 
-    return this.http.post<Exam>(
+    return this.http.post<Result>(
       this.URL + '/check',
       serializedForm,
       {

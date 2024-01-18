@@ -1,0 +1,32 @@
+<ng-container [formGroup]="formAnswer">
+    <td>
+        {{ question.questionNumber }}
+    </td>
+    <td>
+        {{ question.questionText }}
+    </td>
+    <td>
+        @if (isBeforeChecked) {
+            <input 
+                #answerInput
+                type="text"
+                class="form-control"
+                placeholder="Type answer"
+                formControlName="AnswerText"
+            >
+        } @else {
+            <div class="input-group">
+                <input 
+                    #answerInput
+                    type="text"
+                    class="form-control"
+                    placeholder="Type answer"
+                    formControlName="AnswerText"
+                > 
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Show correct</button>
+                </div>
+                </div>
+        }
+    </td>
+</ng-container>
