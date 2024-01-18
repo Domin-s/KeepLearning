@@ -1,0 +1,33 @@
+.correct-answer {
+  border: 2px solid #1cd444;
+  background-color: #48e66a;
+  font-weight: bold;
+}
+
+.incorrect-answer {
+  border: 2px solid #c75141;
+  background-color: #f06250;
+  font-weight: bold;
+}
+
+.input-answer-border-radius {
+  border-top-right-radius: 6px !important;
+  border-top-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+}
+
+.custom-answer-botton {
+  position: absolute;
+  right: 3px; 
+  top: 3px;
+  bottom: 3px;
+  border: 3px solid #1cd444;
+  background-color: #48e66a;
+  font-weight: bold;
+  color: rgb(51, 47, 47);
+  outline: none;
+  margin: 2px;
+  padding: 0 10px;
+  z-index: 2;
+}

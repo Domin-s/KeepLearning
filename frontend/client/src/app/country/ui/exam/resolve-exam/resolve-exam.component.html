@@ -15,34 +15,28 @@
                     <div class="col-10">Guess type: <span class="fw-bold"> {{ exam.category }}</span></div>
 
                     <div class="col-10"> Choosen continents:
-                        <ul>
-                            @for (continent of exam.continents; track $index) {
-                                <li class="fw-bold"> {{ continent }}</li>
-                            }
-                        </ul>
+                        @for (continent of exam.continents; track continent.name; let i = $index;) {
+                            <span class="fw-bold">{{ continent.name }}</span> @if(i !== exam.continents.length - 1) {, }
+                        }
+                    </div>
+                </div>
+            </div>
+                    
+            <div>
+                <div class="row m-4">
+                    <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                        <button [routerLink]="['/generateExam']" class="btn btn-outline-primary col-sm-10">Back to creator</button>
+                    </div>
+                    
+                    <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                        <button [routerLink]="['/generateExam']" class="btn btn-outline-primary col-sm-10">New exam</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <app-question-table [questions]="exam.questions" [questionCategory]="questionCategory" [answerCategory]="answerCategory"/>
-
-    <div class="Result" style="display: none">
-        <div>Corect answers: <span class="CorrectAnswers"></span></div>
-        <div>Incorrect answers: <span class="IncorrectAnswers"></span></div>
-    </div>
-
+    
     <hr />
 
-    <div>
-        <div class="row m-4">
-            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                <button [routerLink]="['/generateExam']" class="btn btn-primary col-sm-10">Back to creator</button>
-            </div>
-            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                <button class="btn btn-success col-sm-10">Check answers</button>
-            </div>
-        </div>
-    </div>
+    <app-question-table [questions]="exam.questions" [questionCategory]="questionCategory" [answerCategory]="answerCategory"/>
 </div>
