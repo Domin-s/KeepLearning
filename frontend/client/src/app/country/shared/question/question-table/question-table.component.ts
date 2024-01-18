@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Question } from '../../../models/Question';
 import { AbstractControl, FormArray, FormControl, FormGroup, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ExamService } from '../../../services/exam.service';
@@ -15,7 +15,7 @@ import { QuestionRowComponent } from '../question-table copy/question-row.compon
   templateUrl: './question-table.component.html',
   styleUrl: './question-table.component.scss'
 })
-export class QuestionTableComponent implements OnInit {
+export class QuestionTableComponent implements OnChanges {
   @Input({ required: true }) questions!: Question[];
   @Input({ required: true }) questionCategory!: string;
   @Input({ required: true }) answerCategory!: string;
@@ -36,7 +36,7 @@ export class QuestionTableComponent implements OnInit {
     private examService: ExamService
   ){}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.checkExamForm = new FormGroup({
       'Category': new FormControl(this.questionCategory),
       'Answers': this.getDefaultParametersForAnswers()

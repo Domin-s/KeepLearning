@@ -24,7 +24,7 @@
                         disabled
                         [value]="corectAnswer?.userAnswer"
                     > 
-                    <div class="input-group-append" [hidden]="isCorrect()">
+                    <div class="input-group-append">
                             <button 
                             class="btn btn-outline-secondary custom-answer-botton"
                             [hidden]="isCorrect()" 
@@ -44,14 +44,14 @@
                         disabled
                         [value]="corectAnswer?.correctAnswer"
                     > 
-                    <div class="input-group-append" [hidden]="isCorrect()">
+                    <div class="input-group-append">
                             <button 
                                 class="btn btn-outline-secondary custom-answer-botton"
                                 [hidden]="isCorrect()" 
                                 type="button"
                                 (click)="changeShowingAnswer()"
                             >
-                                Your
+                                Your answer
                             </button>
                     </div>
                 </div>
