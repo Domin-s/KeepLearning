@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Exam } from '../../../models/Exam';
 import { QuestionTableComponent } from '../../../shared/question/question-table/question-table.component';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { SharingDataService } from '../SharingData.service';
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Category } from '../../../models/Category';

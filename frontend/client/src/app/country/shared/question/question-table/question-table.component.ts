@@ -3,7 +3,7 @@ import { Question } from '../../../models/Question';
 import { AbstractControl, FormArray, FormControl, FormGroup, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ExamService } from '../../../services/exam.service';
 import { Result } from '../../../models/Result';
-import { QuestionRowComponent } from '../question-table copy/question-row.component';
+import { QuestionRowComponent } from '../question-row/question-row.component';
 
 @Component({
   selector: 'app-question-table',
