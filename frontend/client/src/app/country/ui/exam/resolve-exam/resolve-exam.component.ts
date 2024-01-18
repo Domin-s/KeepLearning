@@ -24,11 +24,11 @@ export class ResolveExamComponent implements OnInit {
   public questionCategory!: string;
   public answerCategory!: string;
   public continentsChecked: string[] = [];
+  public isBeforeChecked! :  boolean;
 
   constructor(
     private sharingDataService: SharingDataService,
-    private examService: ExamService,
-    private router: Router,
+    private examService: ExamService
   ){}
 
   ngOnInit(): void {
@@ -39,6 +39,8 @@ export class ResolveExamComponent implements OnInit {
       this.questionCategory = Category[(exam.category + 1) % 2];
       this.answerCategory = Category[exam.category];
     }
+
+    this.isBeforeChecked = true;
     
     this.addContinentToQueryParam();
   }
@@ -49,12 +51,12 @@ export class ResolveExamComponent implements OnInit {
     }
   }
 
-  createNewExamWithSameParameters(){    
+  createNewExamWithSameParameters(){
     this.examService.generateExam(this.generateFormGroup()).subscribe({
       next: (result) => {
         this.sharingDataService.setData(result, this.storageName);
         this.exam = result;
-        this.router.navigate(['/country/resolveExam']);
+        this.isBeforeChecked = true;
       },
       error: (err) => {
 
@@ -81,5 +83,9 @@ export class ResolveExamComponent implements OnInit {
     }
 
     return arrayForm;
+  }
+
+  changeCheckedExam(value: boolean) {
+    this.isBeforeChecked = value;
   }
 }

@@ -48,6 +48,12 @@
     </div>
     
     <hr />
-
-    <app-question-table [questions]="exam.questions" [questionCategory]="questionCategory" [answerCategory]="answerCategory"/>
+    
+    <app-question-table
+        [questions]="exam.questions"
+        [questionCategory]="questionCategory"
+        [answerCategory]="answerCategory"
+        [isBeforeChecked]="isBeforeChecked"
+        (newItemEvent)="changeCheckedExam($event)"
+    />
 </div>

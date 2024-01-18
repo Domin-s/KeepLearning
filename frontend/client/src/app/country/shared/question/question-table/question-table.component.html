@@ -23,7 +23,11 @@
     </table>
 
     <div class="row m-4">
-        @if(isChecked) {
+        @if(isBeforeChecked) {
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                <button class="btn btn-outline-success col-sm-10">Check answers</button>
+            </div>
+        } @else {
             <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
                 <div>
                     Corect answers: <span class="fw-bold">{{ result?.numberOfGoodAnswers }}</span>
@@ -31,10 +35,6 @@
                 <div>
                     Incorrect answers: <span class="fw-bold">{{ result?.numberOfBadAnswers }}</span>
                 </div>
-            </div>
-        } @else {
-            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                <button class="btn btn-outline-success col-sm-10">Check answers</button>
             </div>
         }
     </div>

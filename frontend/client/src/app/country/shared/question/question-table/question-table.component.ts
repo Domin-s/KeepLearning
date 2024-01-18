@@ -1,10 +1,10 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Question } from '../../../models/Question';
 import { AbstractControl, FormArray, FormControl, FormGroup, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ExamService } from '../../../services/exam.service';
 import { Result } from '../../../models/Result';
 import { QuestionRowComponent } from '../question-table copy/question-row.component';
-import { Answer } from '../../../models/Answer';
+
 @Component({
   selector: 'app-question-table',
   standalone: true,
@@ -19,11 +19,11 @@ export class QuestionTableComponent implements OnInit {
   @Input({ required: true }) questions!: Question[];
   @Input({ required: true }) questionCategory!: string;
   @Input({ required: true }) answerCategory!: string;
+  @Input({ required: true }) isBeforeChecked!: boolean;
+  @Output() newItemEvent = new EventEmitter<boolean>();
 
   @ViewChild('answerInput', {static: true}) answerInput: ElementRef | undefined;
 
-  public isChecked = false;
-  public isBeforeChecked = true;
   public checkExamForm!: FormGroup;
   
   public result?: Result = {
@@ -67,8 +67,8 @@ export class QuestionTableComponent implements OnInit {
     this.examService.checkExam(this.checkExamForm).subscribe({
       next: (result) => {
         this.result = result;
-        this.isChecked = true;
         this.isBeforeChecked = false;
+        this.newItemEvent.emit(this.isBeforeChecked);
       },
       error: (error) => {
         console.log(error);
