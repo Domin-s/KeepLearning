@@ -1,0 +1,31 @@
+.correct-answer {
+  background-color: #1cd444;
+  font-weight: bold;
+}
+
+.incorrect-answer {
+  background-color: #c75141;;
+  font-weight: bold;
+  color: white;
+}
+
+.input-answer-border-radius {
+  border-top-right-radius: 6px !important;
+  border-top-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+}
+
+.custom-answer-botton {
+  position: absolute;
+  right: 3px; 
+  top: 3px;
+  bottom: 3px;
+  border: 0;
+  background: #1cd444;
+  color: #fff;
+  outline: none;
+  margin: 2px;
+  padding: 0 10px;
+  z-index: 2;
+}

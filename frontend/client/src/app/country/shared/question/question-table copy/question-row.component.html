@@ -15,18 +15,47 @@
                 formControlName="AnswerText"
             >
         } @else {
-            <div class="input-group">
-                <input 
-                    #answerInput
-                    type="text"
-                    class="form-control"
-                    placeholder="Type answer"
-                    formControlName="AnswerText"
-                > 
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Show correct</button>
+            @if(showCorrectAnswer) {
+                <div class="input-group input-answer-border-radius">
+                    <input 
+                        #answerInput
+                        type="text"
+                        [class]="inputClasses"
+                        disabled
+                        [value]="corectAnswer?.userAnswer"
+                    > 
+                    <div class="input-group-append" [hidden]="isCorrect()">
+                            <button 
+                            class="btn btn-outline-secondary custom-answer-botton"
+                            [hidden]="isCorrect()" 
+                            type="button"
+                            (click)="changeShowingAnswer()"
+                        >
+                            Correct
+                        </button>
+                    </div>
                 </div>
+            } @else {
+                <div class="input-group input-answer-border-radius">
+                    <input 
+                        #answerInput
+                        type="text"
+                        [class]="inputClasses"
+                        disabled
+                        value="Correct: {{ corectAnswer?.correctAnswer }}"
+                    > 
+                    <div class="input-group-append" [hidden]="isCorrect()">
+                            <button 
+                                class="btn btn-outline-secondary custom-answer-botton"
+                                [hidden]="isCorrect()" 
+                                type="button"
+                                (click)="changeShowingAnswer()"
+                            >
+                                Your
+                            </button>
+                    </div>
                 </div>
+            }
         }
     </td>
 </ng-container>
