@@ -21,6 +21,7 @@ export class ResolveExamComponent implements OnInit {
   public exam!: Exam;
   public questionCategory!: string;
   public answerCategory!: string;
+  public continentsChecked: string[] = [];
 
   constructor(
     private sharingDataService: SharingDataService,
@@ -35,6 +36,12 @@ export class ResolveExamComponent implements OnInit {
       this.answerCategory = Category[exam.category];
     }
     
-    console.log(this.exam);
+    this.addContinentToQueryParam();
+  }
+
+  addContinentToQueryParam(){
+    for (let continent  of this.exam.continents) {
+      this.continentsChecked.push(continent.name);
+    }
   }
 }
