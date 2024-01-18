@@ -20,7 +20,7 @@ export class QuestionTableComponent implements OnInit {
   @Input({ required: true }) questionCategory!: string;
   @Input({ required: true }) answerCategory!: string;
   @Input({ required: true }) isBeforeChecked!: boolean;
-  @Output() newItemEvent = new EventEmitter<boolean>();
+  @Output() changeCheckedExam = new EventEmitter<boolean>();
 
   @ViewChild('answerInput', {static: true}) answerInput: ElementRef | undefined;
 
@@ -68,7 +68,7 @@ export class QuestionTableComponent implements OnInit {
       next: (result) => {
         this.result = result;
         this.isBeforeChecked = false;
-        this.newItemEvent.emit(this.isBeforeChecked);
+        this.changeCheckedExam.emit(this.isBeforeChecked);
       },
       error: (error) => {
         console.log(error);
