@@ -1,12 +1,13 @@
 .correct-answer {
-  background-color: #1cd444;
+  border: 2px solid #1cd444;
+  background-color: #48e66a;
   font-weight: bold;
 }
 
 .incorrect-answer {
-  background-color: #c75141;;
+  border: 2px solid #c75141;
+  background-color: #f06250;
   font-weight: bold;
-  color: white;
 }
 
 .input-answer-border-radius {
@@ -21,9 +22,10 @@
   right: 3px; 
   top: 3px;
   bottom: 3px;
-  border: 0;
-  background: #1cd444;
-  color: #fff;
+  border: 3px solid #1cd444;
+  background-color: #48e66a;
+  font-weight: bold;
+  color: rgb(51, 47, 47);
   outline: none;
   margin: 2px;
   padding: 0 10px;

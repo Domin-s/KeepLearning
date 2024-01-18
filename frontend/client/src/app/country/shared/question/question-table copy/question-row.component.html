@@ -42,7 +42,7 @@
                         type="text"
                         [class]="inputClasses"
                         disabled
-                        value="Correct: {{ corectAnswer?.correctAnswer }}"
+                        [value]="corectAnswer?.correctAnswer"
                     > 
                     <div class="input-group-append" [hidden]="isCorrect()">
                             <button 
