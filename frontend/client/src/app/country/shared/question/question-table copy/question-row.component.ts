@@ -23,13 +23,19 @@ export class QuestionRowComponent implements OnInit, OnChanges {
   formAnswer!: FormGroup;
   showCorrectAnswer: boolean = true;
 
-  constructor(private controlContainer: ControlContainer) {}
+  constructor(
+    private controlContainer: ControlContainer
+  ) {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     this.setClasses();
+
     if (!this.isCorrect()){
       this.setEmptyValue()
     }
+    
+    this.formAnswer = <FormGroup>this.controlContainer.control;
+    this.showCorrectAnswer = true;
   }
 
   ngOnInit(): void {
@@ -38,9 +44,9 @@ export class QuestionRowComponent implements OnInit, OnChanges {
 
   setClasses() {
     if(this.isCorrect()) {
-      this.inputClasses.push("correct-answer");
+      this.inputClasses = ["form-control", "input-answer-border-radius", "correct-answer"];
     } else {
-      this.inputClasses.push("incorrect-answer");
+      this.inputClasses = ["form-control", "input-answer-border-radius", "incorrect-answer"];
     }
   }
 
@@ -51,7 +57,7 @@ export class QuestionRowComponent implements OnInit, OnChanges {
   }
 
   isCorrect(): boolean {
-    return this.corectAnswer?.userAnswer === this.corectAnswer?.correctAnswer ;
+    return  this.corectAnswer?.userAnswer === this.corectAnswer?.correctAnswer;
   }
 
   changeShowingAnswer(){

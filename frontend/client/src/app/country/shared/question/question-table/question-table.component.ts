@@ -1,10 +1,10 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Question } from '../../../models/Question';
 import { AbstractControl, FormArray, FormControl, FormGroup, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ExamService } from '../../../services/exam.service';
 import { Result } from '../../../models/Result';
 import { QuestionRowComponent } from '../question-table copy/question-row.component';
-import { Answer } from '../../../models/Answer';
+
 @Component({
   selector: 'app-question-table',
   standalone: true,
@@ -15,15 +15,15 @@ import { Answer } from '../../../models/Answer';
   templateUrl: './question-table.component.html',
   styleUrl: './question-table.component.scss'
 })
-export class QuestionTableComponent implements OnInit {
+export class QuestionTableComponent implements OnChanges {
   @Input({ required: true }) questions!: Question[];
   @Input({ required: true }) questionCategory!: string;
   @Input({ required: true }) answerCategory!: string;
+  @Input({ required: true }) isBeforeChecked!: boolean;
+  @Output() changeCheckedExam = new EventEmitter<boolean>();
 
   @ViewChild('answerInput', {static: true}) answerInput: ElementRef | undefined;
 
-  public isChecked = false;
-  public isBeforeChecked = true;
   public checkExamForm!: FormGroup;
   
   public result?: Result = {
@@ -36,7 +36,7 @@ export class QuestionTableComponent implements OnInit {
     private examService: ExamService
   ){}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.checkExamForm = new FormGroup({
       'Category': new FormControl(this.questionCategory),
       'Answers': this.getDefaultParametersForAnswers()
@@ -64,12 +64,11 @@ export class QuestionTableComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.checkExamForm.value);
     this.examService.checkExam(this.checkExamForm).subscribe({
       next: (result) => {
         this.result = result;
-        this.isChecked = true;
         this.isBeforeChecked = false;
+        this.changeCheckedExam.emit(this.isBeforeChecked);
       },
       error: (error) => {
         console.log(error);

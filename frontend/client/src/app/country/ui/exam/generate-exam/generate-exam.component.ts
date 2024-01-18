@@ -44,17 +44,13 @@ export class GenerateExamComponent implements OnInit {
     
     this.examService.generateExam(this.generateExamForm).subscribe({
       next: (result) => {
-        this.setDataToExamDataService(result);
+        this.sharingDataService.setData(result, this.storageName);
         this.router.navigate(['/country/resolveExam']);
       },
       error: (err) => {
 
       }
     });
-  }
-
-  setDataToExamDataService(exam: Exam) {
-    this.sharingDataService.setData(exam, this.storageName);
   }
 
   setContinents() {

@@ -25,11 +25,22 @@
             <div>
                 <div class="row m-4">
                     <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                        <button [routerLink]="['/generateExam']" class="btn btn-outline-primary col-sm-10">Back to creator</button>
+                        <button 
+                            [routerLink]="['/country/generateExam']"
+                            [queryParams]="{continentsChecked}"
+                            class="btn btn-outline-primary col-sm-10"
+                        >
+                            Back to creator
+                        </button>
                     </div>
                     
                     <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
-                        <button [routerLink]="['/generateExam']" class="btn btn-outline-primary col-sm-10">New exam</button>
+                        <button 
+                            class="btn btn-outline-primary col-sm-10"
+                            (click)="createNewExamWithSameParameters()"
+                        >
+                            New exam
+                        </button>
                     </div>
                 </div>
             </div>
@@ -37,6 +48,12 @@
     </div>
     
     <hr />
-
-    <app-question-table [questions]="exam.questions" [questionCategory]="questionCategory" [answerCategory]="answerCategory"/>
+    
+    <app-question-table
+        [questions]="exam.questions"
+        [questionCategory]="questionCategory"
+        [answerCategory]="answerCategory"
+        [isBeforeChecked]="isBeforeChecked"
+        (changeCheckedExam)="changeCheckedExam($event)"
+    />
 </div>
