@@ -23,10 +23,13 @@ export class QuestionRowComponent implements OnInit, OnChanges {
   formAnswer!: FormGroup;
   showCorrectAnswer: boolean = true;
 
-  constructor(private controlContainer: ControlContainer) {}
+  constructor(
+    private controlContainer: ControlContainer
+  ) {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     this.setClasses();
+    
     if (!this.isCorrect()){
       this.setEmptyValue()
     }

@@ -52,7 +52,6 @@ export class ResolveExamComponent implements OnInit {
   createNewExamWithSameParameters(){    
     this.examService.generateExam(this.generateFormGroup()).subscribe({
       next: (result) => {
-        console.log(result)
         this.sharingDataService.setData(result, this.storageName);
         this.exam = result;
         this.router.navigate(['/country/resolveExam']);
@@ -70,7 +69,7 @@ export class ResolveExamComponent implements OnInit {
       Category: new FormControl(Category[this.exam.category]),
       Continents: this.createContinentArrayForm()
     });
-    
+
     return form;
   }
 

@@ -64,7 +64,6 @@ export class QuestionTableComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.checkExamForm.value);
     this.examService.checkExam(this.checkExamForm).subscribe({
       next: (result) => {
         this.result = result;
