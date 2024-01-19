@@ -3,7 +3,7 @@ import { StartComponent } from './start/start.component';
 import { ListOfCountriesComponent } from './country/ui/countries/list-of-country/list-of-country.component';
 import { GenerateExamComponent } from './country/ui/exam/generate-exam/generate-exam.component';
 import { ResolveExamComponent } from './country/ui/exam/resolve-exam/resolve-exam.component';
-import { GenerateQuestionComponent } from './country/ui/question/generate-question/generate-question.component';
+import { GenerateQuestionComponent } from './country/ui/question/generate/generate-question.component';
 
 export const routes: Routes = [
     {
