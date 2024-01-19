@@ -39,6 +39,7 @@ export class GenerateQuestionComponent {
       next: (result) => {
         this.sharingDataService.setData(result, this.questionCountryStorageName);
         this.sharingDataService.setData(this.generateQuestionForm.value, this.questionCountryParametersStorageName);
+
         this.router.navigate(['/country/question/resolve']);
       },
       error: (err) => {

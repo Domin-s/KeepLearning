@@ -36,7 +36,7 @@ export class ResolveQuestionComponent implements OnInit {
   }
 
 
-  createNewQuestionWithSameParameters(){
+  createNewQuestionWithSameParameters(){    
     this.questionService.generate(this.generateFormGroup()).subscribe({
       next: (result) => {
         this.sharingDataService.setData(result, this.questionCountryStorageName);
@@ -53,8 +53,8 @@ export class ResolveQuestionComponent implements OnInit {
     this.parameters = this.sharingDataService.getData(this.questionCountryParametersStorageName);
 
     let form = new FormGroup({
-      Category: new FormControl([this.parameters.Category]),
-      Continents: new FormControl([this.parameters.Continent]),
+      Category: new FormControl(this.parameters.Category),
+      Continent: new FormControl(this.parameters.Continent),
     });
 
     return form;
