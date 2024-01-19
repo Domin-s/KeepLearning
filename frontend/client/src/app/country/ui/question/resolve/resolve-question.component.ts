@@ -1,10 +1,9 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { QuestionService } from "../../../services/exam.service copy";
+import { QuestionService } from "../../../services/question.service";
 import { SharingDataService } from "../../exam/SharingData.service";
 import { Question } from "../../../models/Question";
 import { FormControl, FormGroup } from "@angular/forms";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
-import { Category } from "../../../models/Category";
 import { RouterLink } from "@angular/router";
 
 @Component({

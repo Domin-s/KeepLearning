@@ -1,10 +1,10 @@
 import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategorySelectComponent } from "../../../shared/category/category-select/category-select.component";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
 import { ContinentSelectComponent } from "../../../shared/continents/continent-select/continent-select.component";
-import { QuestionService } from "../../../services/exam.service copy";
+import { QuestionService } from "../../../services/question.service";
 import { SharingDataService } from "../../exam/SharingData.service";
 
 @Component({
@@ -26,7 +26,7 @@ import { SharingDataService } from "../../exam/SharingData.service";
 export class GenerateQuestionComponent {
   private questionCountryStorageName = "QuestionCountry";
   private questionCountryParametersStorageName = "QuestionCountryParameters";
-  private generateQuestionForm = inject(GenerateQuestionForm).form;
+  public generateQuestionForm = inject(GenerateQuestionForm).form;
 
   constructor (
     private questionService: QuestionService,

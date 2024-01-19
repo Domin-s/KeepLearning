@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ContinentService } from '../../../services/continent.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../../../../common/select/component/select.component';
@@ -16,8 +16,7 @@ import { GenerateQuestionForm } from '../../../forms/generateQuestion.form';
   styleUrl: './continent-select.component.scss'
 })
 export class ContinentSelectComponent implements OnInit {
-
-  readonly generateQuestionForm = inject(GenerateQuestionForm).form;
+  @Input({ required: true }) continentFormControl!: FormControl;
   
   public continentsSelect: Select | undefined;
   
@@ -33,9 +32,9 @@ export class ContinentSelectComponent implements OnInit {
     this.continentService.getContinents().subscribe({
       next: (result) => {
         this.continentsSelect = {
-          id: "Select-Categories",
-          name: "Categories",
-          description: "Choose guess type",
+          id: "Select-Continent",
+          name: "Continents",
+          description: "Choose continent",
           options: result.map(c => c.name)
         }
       },

@@ -8,9 +8,13 @@
           <div class="row align-items-start">
               <form (ngSubmit)="onSubmit()">
                   <div class="col-10 col-md-12 col-sm-12">
-                      <app-continent-select/>
+                      <app-continent-select
+                        [continentFormControl]="generateQuestionForm.controls.Continent"
+                      />
 
-                      <app-category-select/>
+                      <app-category-select
+                        [categoryFormControl]="generateQuestionForm.controls.Category"
+                      />
                   </div>
 
                   <div class="row m-4 col-10 col-md-12 col-sm-12">

@@ -1,9 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Exam } from "../models/Exam";
 import { FormGroup } from "@angular/forms";
-import { Category } from "../models/Category";
-import { Result } from "../models/Result";
 import { Question } from "../models/Question";
 import { Answer } from "../models/Answer";
 
@@ -18,6 +15,7 @@ export class QuestionService {
   generate(generateQuestionForm: FormGroup) {
     let formObj = generateQuestionForm.value;
     let serializedForm = JSON.stringify(formObj);
+    console.log(formObj);
 
     return this.http.post<Question>(
       this.URL + '/generate',

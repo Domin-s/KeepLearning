@@ -8,11 +8,13 @@
 
                 <div class="col-10">
                     @if(parameters.Category === "Country") {
-                        <div>Guess the capital city of country: 
+                        <div>Guess the country by its capital city:
                             <span class="fw-bolder">{{ question.questionText }}</span>
                         </div>
                     } @else {
-                        <div>Guess the country by its capital city:</div>
+                        <div>Guess the capital city of country: 
+                            <span class="fw-bolder">{{ question.questionText }}</span>
+                        </div>
                     }
                 </div>
             </div>

@@ -9,7 +9,7 @@ export class GenerateQuestionForm {
    
     constructor(private formBuilder: FormBuilder) {
         this.form = this.formBuilder.group({
-            Category: ['Country', Validators.required],
+            Category: ['Capital City', Validators.required],
             Continent: ['Europe', Validators.required],
         })
     }
