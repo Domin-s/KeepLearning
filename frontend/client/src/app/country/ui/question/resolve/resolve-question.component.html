@@ -54,6 +54,7 @@
             <div class="input-group-append">
                 <button 
                     class="btn btn-outline-secondary custom-answer-botton"
+                    (click)="checkQuestion()"
                 >
                     Check
                 </button>
@@ -61,10 +62,16 @@
         </div>
     </form>
 
-    <div class="mt-4">
-        <label>Answer history (question => your answer):</label>
-
-        <ul>
-        </ul>
-    </div>
+    @if(answerHistory.length > 0) {
+        <div class="mt-4">
+            <label>Answer history (question => your answer):</label>
+            <ul>
+                @for(answer of answerHistory; track ) {
+                    <li>
+                        {{ answer.QuestionText }} => {{ answer.UserAnswer }}
+                    </li>
+                }
+            </ul>
+        </div>
+    }
 </div>

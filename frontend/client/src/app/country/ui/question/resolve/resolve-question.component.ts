@@ -5,6 +5,7 @@ import { Question } from "../../../models/Question";
 import { FormControl, FormGroup } from "@angular/forms";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
 import { RouterLink } from "@angular/router";
+import { UserAnswer } from "../../../models/UserAnswer";
 
 @Component({
   standalone: true,
@@ -24,6 +25,8 @@ export class ResolveQuestionComponent implements OnInit {
   public question!: Question;
   public isBeforeChecked! :  boolean;
 
+  public answerHistory: UserAnswer[] = [];
+
   constructor (
     private questionService: QuestionService,
     private sharingDataService: SharingDataService,
@@ -35,7 +38,9 @@ export class ResolveQuestionComponent implements OnInit {
   }
 
 
-  createNewQuestionWithSameParameters(){    
+  createNewQuestionWithSameParameters(){
+    this.addAnswerToAnswerHistory(); 
+
     this.questionService.generate(this.generateFormGroup()).subscribe({
       next: (result) => {
         this.sharingDataService.setData(result, this.questionCountryStorageName);
@@ -57,6 +62,22 @@ export class ResolveQuestionComponent implements OnInit {
     });
 
     return form;
+  }
+
+  checkQuestion() {
+    this.addAnswerToAnswerHistory();
+  }
+
+  addAnswerToAnswerHistory(){
+    console.log("addAnswerToAnswerHistory");
+    let userAnswer: UserAnswer = {
+      QuestionText: this.question.questionText,
+      UserAnswer: this.question.answerText,
+      IsCorrect: true
+    }
+    
+    this.answerHistory.push(userAnswer);
+    console.log(this.answerHistory);
   }
 
 }
