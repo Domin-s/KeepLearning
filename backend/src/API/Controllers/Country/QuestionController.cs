@@ -1,4 +1,5 @@
-﻿using Application.Question.Queries.GetRandomQuestion;
+﻿using Application.Question.Queries.CheckAnswer;
+using Application.Question.Queries.GenerateQuestion;
 
 namespace API.Controllers;
 
@@ -17,10 +18,18 @@ public class QuestionController : ControllerBase
     }
 
     [HttpPost("generate")]
-    public async Task<IActionResult> GenerateRandomQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
+    public async Task<IActionResult> Generate(GenerateQuestionQuery generateQuestionQuery)
     {
-        var question = await _mediator.Send(getRandomQuestionQuery);
+        var question = await _mediator.Send(generateQuestionQuery);
 
         return Ok(question);
+    }
+
+    [HttpPost("check")]
+    public async Task<IActionResult> Check(CheckAnswerQuery checkAnswerQuery)
+    {
+        var result = await _mediator.Send(checkAnswerQuery);
+
+        return Ok(result);
     }
 }
