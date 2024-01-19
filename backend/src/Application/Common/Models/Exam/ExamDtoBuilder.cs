@@ -1,6 +1,7 @@
 using Application.Common.Models.Continent;
 using Application.Common.Models.Exam.Country;
 using Application.Common.Models.Question;
+using Domain.Models.Enums;
 using static Domain.Models.Enums.GuessType;
 
 namespace Application.Common.Models.Exam;
@@ -24,7 +25,7 @@ public static class ExamDtoBuilder
         {
             Name = name,
             Questions = questions,
-            Category = category,
+            Category = GuessType.ToString(category),
             Continents = continents
         };
 
