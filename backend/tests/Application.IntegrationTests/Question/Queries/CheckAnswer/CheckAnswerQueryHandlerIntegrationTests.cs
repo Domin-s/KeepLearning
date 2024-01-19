@@ -30,47 +30,47 @@ public class CheckAnswerQueryHandlerIntegrationTests
 
     public static IEnumerable<object[]> GetCheckAnswerQueryWithCorrectAnswer()
     {
-        var list = new List<CheckAnswerQuery>()
+        var list = new List<CheckQuestionQuery>()
         {
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "La Paz",
                 Answer = "Bolivia",
-                Category = Category.Country
+                Category = "Country"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "France",
                 Answer = "Paris",
-                Category = Category.CapitalCity
+                Category = "Capital City"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "Warsaw",
                 Answer = "PoLaND",
-                Category = Category.Country
+                Category = "Country"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "Nur-Sultan",
                 Answer = "KAzAkhstAn",
-                Category = Category.Country
+                Category = "Country"
             },
 
         };
 
-        return list.Select( el => new object[] { el });
+        return list.Select(el => new object[] { el });
     }
 
     [Theory()]
     [MemberData(nameof(GetCheckAnswerQueryWithCorrectAnswer))]
-    public async void Handle_WithCorrectAnswer_ReturnTrue(CheckAnswerQuery checkAnswerQuery)
+    public async void Handle_WithCorrectAnswer_ReturnTrue(CheckQuestionQuery checkQuestionQuery)
     {
         // arrange
-        var checkAnswerQueryHandler = new CheckAnswerQueryHandler(_countryService);
+        var checkQuestionQueryHandler = new CheckQuestionQueryHandler(_countryService);
 
         // act
-        var result = await checkAnswerQueryHandler.Handle(checkAnswerQuery, CancellationToken.None);
+        var result = await checkQuestionQueryHandler.Handle(checkQuestionQuery, CancellationToken.None);
 
         // assert
         result.Should().BeTrue();
@@ -78,31 +78,31 @@ public class CheckAnswerQueryHandlerIntegrationTests
 
     public static IEnumerable<object[]> GetCheckAnswerQueryWithIncorrectAnswer()
     {
-        var list = new List<CheckAnswerQuery>()
+        var list = new List<CheckQuestionQuery>()
         {
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "La Paz",
                 Answer = "Boliviaaa",
-                Category = Category.Country
+                Category = "Country"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "France",
                 Answer = "",
-                Category = Category.CapitalCity
+                Category = "Capital City"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "Warsaw",
                 Answer = "Krakow",
-                Category = Category.Country
+                Category = "Country"
             },
-            new CheckAnswerQuery()
+            new CheckQuestionQuery()
             {
                 Question = "Nur-Sultan",
                 Answer = "KazahstAN!!!!!!",
-                Category = Category.Country
+                Category = "Country"
             },
 
         };
@@ -112,13 +112,13 @@ public class CheckAnswerQueryHandlerIntegrationTests
 
     [Theory()]
     [MemberData(nameof(GetCheckAnswerQueryWithIncorrectAnswer))]
-    public async void Handle_WithIncorrectAnswer_ReturnFalse(CheckAnswerQuery checkAnswerQuery)
+    public async void Handle_WithIncorrectAnswer_ReturnFalse(CheckQuestionQuery checkQuestionQuery)
     {
         // arrange
-        var checkAnswerQueryHandler = new CheckAnswerQueryHandler(_countryService);
+        var checkQuestionQueryHandler = new CheckQuestionQueryHandler(_countryService);
 
         // act
-        var result = await checkAnswerQueryHandler.Handle(checkAnswerQuery, CancellationToken.None);
+        var result = await checkQuestionQueryHandler.Handle(checkQuestionQuery, CancellationToken.None);
 
         // assert
         result.Should().BeFalse();
@@ -129,16 +129,16 @@ public class CheckAnswerQueryHandlerIntegrationTests
     public void Handle_WithIncorrectAnswerAndFoCountryWhichDoesNotExist_ReturnExceptionNotFound()
     {
         // arrange
-        var checkAnswerQuery = new CheckAnswerQuery()
+        var checkQuestionQuery = new CheckQuestionQuery()
         {
             Question = "NotExistCountry",
             Answer = "Warsaw",
-            Category = Category.Country
+            Category = "Country"
         };
-        var checkAnswerQueryHandler = new CheckAnswerQueryHandler(_countryService);
+        var checkQuestionQueryHandler = new CheckQuestionQueryHandler(_countryService);
 
         // act
-        var action = () => checkAnswerQueryHandler.Handle(checkAnswerQuery, CancellationToken.None);
+        var action = () => checkQuestionQueryHandler.Handle(checkQuestionQuery, CancellationToken.None);
 
         // assert
         action.Invoking(action => action.Invoke())

@@ -3,21 +3,20 @@ using Application.Common.Mappings;
 using Application.Helper.Seeders.IntegrationTests;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
-using static Domain.Models.Enums.GuessType;
 using Application.UnitTests.Helper;
 
-namespace Application.Question.Queries.GetRandomQuestion.IntegrationTests;
+namespace Application.Question.Queries.GenerateQuestion.IntegrationTests;
 
-public class GetRandomQuestionQueryHandlerIntegrationTests
+public class GenerateQuestionQueryHandlerIntegrationTests
 {
     private readonly KeepLearningDbContextTest _dbContext;
     private readonly CountryService _countryServiceTest;
     private readonly IMapper _mapper;
 
-    public GetRandomQuestionQueryHandlerIntegrationTests()
+    public GenerateQuestionQueryHandlerIntegrationTests()
     {
         var builder = new DbContextOptionsBuilder<KeepLearningDbContextTest>();
-        builder.UseInMemoryDatabase("TestKeepLearningDb-GetRandomQuestionQueryHandlerIntegrationTests");
+        builder.UseInMemoryDatabase("TestKeepLearningDb-GenerateQuestionQueryHandlerIntegrationTests");
 
         _dbContext = new KeepLearningDbContextTest(builder.Options);
 
@@ -42,26 +41,26 @@ public class GetRandomQuestionQueryHandlerIntegrationTests
 
     public static IEnumerable<object[]> GetRandomQuestionQuerySamples()
     {
-        var list = new List<GetRandomQuestionQuery>()
+        var list = new List<GenerateQuestionQuery>()
         {
-            new GetRandomQuestionQuery()
+            new GenerateQuestionQuery()
             {
-                Category = Category.Country,
+                Category = "Country",
                 Continent = "Asia",
             },
-            new GetRandomQuestionQuery()
+            new GenerateQuestionQuery()
             {
-                Category = Category.CapitalCity,
+                Category = "Capital City",
                 Continent = "Asia",
             },
-            new GetRandomQuestionQuery()
+            new GenerateQuestionQuery()
             {
-                Category = Category.CapitalCity,
+                Category = "Capital City",
                 Continent = "Europe",
             },
-            new GetRandomQuestionQuery()
+            new GenerateQuestionQuery()
             {
-                Category = Category.Country,
+                Category = "Country",
                 Continent = "North America",
             }
         };
@@ -71,13 +70,13 @@ public class GetRandomQuestionQueryHandlerIntegrationTests
 
     [Theory()]
     [MemberData(nameof(GetRandomQuestionQuerySamples))]
-    public async void Handle_WithCorrectData_ReturnQuestion(GetRandomQuestionQuery getRandomQuestionQuery)
+    public async void Handle_WithCorrectData_ReturnQuestion(GenerateQuestionQuery generateQuestionQuery)
     {
         // arrange
-        var getRandomQuestionQueryHandler = new GetRandomQuestionQueryHandler(_dbContext, _countryServiceTest, _mapper);
+        var generateQuestionQueryHandler = new GenerateQuestionQueryHandler(_dbContext, _countryServiceTest, _mapper);
 
         // act
-        var result = await getRandomQuestionQueryHandler.Handle(getRandomQuestionQuery, CancellationToken.None);
+        var result = await generateQuestionQueryHandler.Handle(generateQuestionQuery, CancellationToken.None);
 
         // assert
         result.Should().NotBeNull();
