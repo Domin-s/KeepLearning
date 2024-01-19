@@ -8,29 +8,28 @@
           <div class="row align-items-start">
               <form (ngSubmit)="onSubmit()">
                   <div class="col-10 col-md-12 col-sm-12">
-                      <app-continents-checkbox 
-                          [inOneLine]="false"
-                          [isForm]="true"
-                          [continentsChecked]="continentsChecked"
-                          (updateCheckoboxesEvent)="getCheckedContinents($event)"
-                      />
+                      <app-continent-select/>
 
                       <app-category-select/>
                   </div>
 
                   <div class="row m-4 col-10 col-md-12 col-sm-12">
-                      <div class="col-3 col-md-3 col-sm-4">
-                          <button [routerLink]="['/country']" [queryParams]="{continentsChecked}" class="btn btn-lg btn-outline-primary m-2">Back to list</button>
-                      </div>
-                      @if (continentsChecked.length > 0) {
-                          <div class="col-3 col-md-3 col-sm-4">
-                              <button type="submit" class="btn btn-lg btn-outline-primary m-2">Generate exam</button>
-                          </div>
-                      } @else {
-                          <div class="col-3 col-md-3 col-sm-4">
-                             To generate exam you have to choose at least one continent :)
-                          </div>
-                      }
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <button 
+                                [routerLink]="['/country']" 
+                                class="btn btn-lg btn-outline-primary m-2"
+                            >
+                                Back to list
+                            </button>
+                        </div>
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <button 
+                                type="submit"
+                                class="btn btn-lg btn-outline-primary m-2"
+                            >
+                                Generate question
+                            </button>
+                        </div>  
                   </div>
               </form>
           </div>
