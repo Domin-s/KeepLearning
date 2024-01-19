@@ -1,11 +1,9 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { SharingDataService } from "../../exam/SharingData.service";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategorySelectComponent } from "../../../shared/category/category-select/category-select.component";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
 import { ContinentSelectComponent } from "../../../shared/continents/continent-select/continent-select.component";
-import { QuestionService } from "../../../services/exam.service copy";
 
 @Component({
   standalone: true,
@@ -24,10 +22,9 @@ import { QuestionService } from "../../../services/exam.service copy";
 export class GenerateQuestionComponent implements OnInit {
   private generateQuestionForm = inject(GenerateQuestionForm).form;
 
-  public url = 'http://localhost:4200/country/question';
+  public url = 'http://localhost:4200/country/resolveExam';
 
   constructor (
-    private questionService: QuestionService,
     private router: Router,
   ) {}
 
@@ -37,15 +34,13 @@ export class GenerateQuestionComponent implements OnInit {
 
   onSubmit() {
     console.log(this.generateQuestionForm.value);
-    this.questionService.generate(this.generateQuestionForm).subscribe({
-      next: (result) => {
-        console.log("GenerateQuestionComponent => Question");
-        console.log(result);
-        this.router.navigate(['/generate']);
-      },
-      error: (err) => {
+    // this.examService.generateExam(this.generateExamForm).subscribe({
+    //   next: (result) => {
+    //     this.router.navigate(['/country/resolveExam']);
+    //   },
+    //   error: (err) => {
 
-      }
-    });
+    //   }
+    // });
   }
 }
