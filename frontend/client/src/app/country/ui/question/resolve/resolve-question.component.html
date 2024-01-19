@@ -1,49 +1,67 @@
-<div>
-    <div>
-        @if (true) {
-            <h1 class="m-2">
-              <div>Guess the capital city of country: <span class="fw-bolder">
-                {{ }}</span>
-              </div>
-            </h1>
-        } @else {
-          
-          <h1 class="m-2">
+<div>  
+    <div class="container">
+        <div class="row align-items-start">
             <div>
-              Guess the country by its capital city:
-              <span class="fw-bolder">{{ }}</span>
+                <h3>Question parameters:</h3>
+
+                <div class="col-10">Continent: <span class="fw-bold"> {{ parameters.Continent }}</span></div>
+
+                <div class="col-10">
+                    @if(parameters.Category === "Country") {
+                        <div>Guess the capital city of country: 
+                            <span class="fw-bolder">{{ question.questionText }}</span>
+                        </div>
+                    } @else {
+                        <div>Guess the country by its capital city:</div>
+                    }
+                </div>
             </div>
-          </h1>
-        }
-
-        <h4 class="m-2">Selected continent: <span class="fw-bolder"> {{}}</span></h4>
-    </div>
-
-    <div class="mt-4">
-        <div class="mb-3">
-            <input type="text" class="form-control" id="Answer" placeholder="Type answer">
+        </div>        
+                            
+        <div>
+            <div class="row m-4">
+                <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                    <button 
+                        class="btn btn-outline-primary col-sm-10"
+                        [routerLink]="['/country/question/generate']"
+                    >
+                        Back to creator
+                    </button>
+                </div>
+                
+                <div class="col-xs-10 col-sm-8 col-md-4 col-lg-3 m-2">
+                    <button 
+                        class="btn btn-outline-primary col-sm-10"
+                    >
+                        Another question
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <a asp-action="Create" class="btn btn-primary" role="button">Back to creator</a>
-            </div>
-            <div class="col">
-                <button id="answerChecker" class="btn btn-primary" role="button">Check answer</button>
-            </div>
-            <div class="col">
-                <button id="getAnotherRandomQuestion" class="btn btn-primary" role="button">Another random
-                    question</button>
+    <hr>
+
+    <form>
+        <div class="input-group input-answer-border-radius">
+            <input 
+                type="text"
+                class="form-control input-answer-border-radius"
+            > 
+            <div class="input-group-append">
+                <button 
+                    class="btn btn-outline-secondary custom-answer-botton"
+                >
+                    Check
+                </button>
             </div>
         </div>
-    </div>
+    </form>
 
     <div class="mt-4">
         <label>Answer history (question => your answer):</label>
 
-        <ul id="answerHistory">
+        <ul>
         </ul>
     </div>
 </div>
