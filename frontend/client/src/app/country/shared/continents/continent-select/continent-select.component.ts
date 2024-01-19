@@ -32,8 +32,6 @@ export class ContinentSelectComponent implements OnInit {
   getContinents() {
     this.continentService.getContinents().subscribe({
       next: (result) => {
-        console.log("ContinentSelectComponent");
-        console.log(result);
         this.continentsSelect = {
           id: "Select-Categories",
           name: "Categories",
