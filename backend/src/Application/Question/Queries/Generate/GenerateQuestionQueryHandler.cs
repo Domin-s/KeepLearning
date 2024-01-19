@@ -1,25 +1,26 @@
 ﻿using Application.Common.Interfaces;
 using Application.Common.Models.Country;
 using Application.Common.Models.Question;
+using Domain.Models.Enums;
 using Infrastructure.Services;
 
-namespace Application.Question.Queries.GetRandomQuestion;
+namespace Application.Question.Queries.GenerateQuestion;
 
-public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQuery, QuestionDto>
+public class GenerateQuestionQueryHandler : IRequestHandler<GenerateQuestionQuery, QuestionDto>
 {
     private readonly IKeepLearningDbContext _dbContext;
     private readonly CountryService _countryService;
     private readonly IMapper _mapper;
-    
-    public GetRandomQuestionQueryHandler(IKeepLearningDbContext dbContext, CountryService countryService, IMapper mapper)
+
+    public GenerateQuestionQueryHandler(IKeepLearningDbContext dbContext, CountryService countryService, IMapper mapper)
     {
         _dbContext = dbContext;
         _countryService = countryService;
         _mapper = mapper;
     }
 
-    // TODO: Add validation to GetRandomQuestionQuery
-    public async Task<QuestionDto> Handle(GetRandomQuestionQuery request, CancellationToken cancellationToken)
+    // TODO: Add validation to GenerateQuestionQuery
+    public async Task<QuestionDto> Handle(GenerateQuestionQuery request, CancellationToken cancellationToken)
     {
         var continent = await _dbContext.Continents.Where(c => c.Name == request.Continent).FirstAsync();
         if (continent is null)
@@ -34,7 +35,8 @@ public class GetRandomQuestionQueryHandler : IRequestHandler<GetRandomQuestionQu
         }
 
         var countryDto = _mapper.Map<CountryDto>(randomCountry);
+        var category = GuessType.ToCategory(request.Category);
 
-        return QuestionDtoBuilder.CreateQuestionByCategory(countryDto, request.Category);
+        return QuestionDtoBuilder.CreateQuestionByCategory(countryDto, category);
     }
 }
