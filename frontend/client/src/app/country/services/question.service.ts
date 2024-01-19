@@ -15,7 +15,6 @@ export class QuestionService {
   generate(generateQuestionForm: FormGroup) {
     let formObj = generateQuestionForm.value;
     let serializedForm = JSON.stringify(formObj);
-    console.log(formObj);
 
     return this.http.post<Question>(
       this.URL + '/generate',
