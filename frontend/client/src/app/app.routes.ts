@@ -4,6 +4,7 @@ import { ListOfCountriesComponent } from './country/ui/countries/list-of-country
 import { GenerateExamComponent } from './country/ui/exam/generate-exam/generate-exam.component';
 import { ResolveExamComponent } from './country/ui/exam/resolve-exam/resolve-exam.component';
 import { GenerateQuestionComponent } from './country/ui/question/generate/generate-question.component';
+import { ResolveQuestionComponent } from './country/ui/question/resolve/resolve-question.component';
 
 export const routes: Routes = [
     {
@@ -28,8 +29,13 @@ export const routes: Routes = [
     },
     {
       title: "Generate question",
-      path: "country/generateQuestion",
+      path: "country/question/generate",
       component: GenerateQuestionComponent
+    },
+    {
+      title: "Generate question",
+      path: "country/question/resolve",
+      component: ResolveQuestionComponent
     },
     {
       path: "**",

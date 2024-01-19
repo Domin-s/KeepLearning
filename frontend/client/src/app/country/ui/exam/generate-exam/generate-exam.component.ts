@@ -29,6 +29,7 @@ export class GenerateExamComponent implements OnInit {
   generateExamForm = inject(GenerateExamForm).form;
   public continentsChecked: string[] = [];
   
+  // TODO: remove it!
   public url = 'http://localhost:4200/country/resolveExam';
 
   constructor (

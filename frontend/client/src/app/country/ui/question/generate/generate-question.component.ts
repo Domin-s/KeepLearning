@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { SharingDataService } from "../../exam/SharingData.service";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategorySelectComponent } from "../../../shared/category/category-select/category-select.component";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
@@ -24,8 +23,6 @@ import { QuestionService } from "../../../services/exam.service copy";
 export class GenerateQuestionComponent implements OnInit {
   private generateQuestionForm = inject(GenerateQuestionForm).form;
 
-  public url = 'http://localhost:4200/country/question';
-
   constructor (
     private questionService: QuestionService,
     private router: Router,
@@ -41,7 +38,7 @@ export class GenerateQuestionComponent implements OnInit {
       next: (result) => {
         console.log("GenerateQuestionComponent => Question");
         console.log(result);
-        this.router.navigate(['/generate']);
+        this.router.navigate(['/country/question/resolve']);
       },
       error: (err) => {
 
