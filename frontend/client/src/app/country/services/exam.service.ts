@@ -20,6 +20,8 @@ export class ExamService {
   generateExam(generateExamForm: FormGroup) {
     let formObj = generateExamForm.value;
     let serializedForm = JSON.stringify(formObj);
+    console.log("ExamService => ");
+    console.log(formObj);
 
     return this.http.post<Exam>(
       this.URL + '/generate',

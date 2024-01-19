@@ -11,7 +11,7 @@ export class GenerateExamForm {
         this.form = this.formBuilder.group({
             Name: [''],
             NumberOfQuestion: [10, Validators.required],
-            Category: ['Country', Validators.required],
+            Category: ['Capital City', Validators.required],
             Continents: this.formBuilder.array([this.formBuilder.control('Europe')], Validators.required)
         })
     }
