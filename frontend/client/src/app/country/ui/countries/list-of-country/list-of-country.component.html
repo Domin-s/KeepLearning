@@ -4,8 +4,19 @@
     <h1>Countries</h1>
     
     <nav>
-        <button [routerLink]="['/country/generateExam']" [queryParams]="{continentsChecked}" class="btn btn-lg btn-outline-primary m-2">Generate exam</button>
-        <button class="btn btn-lg btn-outline-primary m-2" (click)="goToCreatorToGenerateRandomQuestion()">Generate random question</button>
+        <button 
+            [routerLink]="['/country/generateExam']" 
+            [queryParams]="{continentsChecked}" 
+            class="btn btn-lg btn-outline-primary m-2"
+        >
+            Generate exam
+        </button>
+        <button
+            [routerLink]="['/country/question/generate']"
+            class="btn btn-lg btn-outline-primary m-2"
+        >
+            Generate random question
+        </button>
     </nav>
     
     <hr />

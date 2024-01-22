@@ -1,0 +1,18 @@
+@if(answerHistory.length > 0) {
+  <div class="mt-4">
+      <label>Answer history (question => your answer):</label>
+      <ul>
+          @for(answer of answerHistory; let i= $index; track i) {
+              @if (answer.IsCorrect) {
+                  <li class="correct-answer">
+                      {{ answer.QuestionText }} => {{ answer.UserAnswer }}
+                  </li>
+              } @else {
+                  <li class="incorrect-answer">
+                      {{ answer.QuestionText }} => {{ answer.UserAnswer }}
+                  </li>
+              }
+          }
+      </ul>
+  </div>
+}

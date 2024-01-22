@@ -20,7 +20,9 @@
                             (updateCheckoboxesEvent)="getCheckedContinents($event)"
                         />
 
-                        <app-category-select/>
+                        <app-category-select
+                            [categoryFormControl]="generateExamForm.controls.Category"
+                        />
 
                         <app-number-of-questions-select 
                             [continents]="continentsChecked"

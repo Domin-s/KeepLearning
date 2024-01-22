@@ -1,0 +1,42 @@
+<div class="col-12 col-md-12 col-sm-12">
+  <h1>Random question creater</h1>
+
+  <hr />
+
+  <div class="form-group">
+      <div class="container">
+          <div class="row align-items-start">
+              <form (ngSubmit)="onSubmit()">
+                  <div class="col-10 col-md-12 col-sm-12">
+                      <app-continent-select
+                        [continentFormControl]="generateQuestionForm.controls.Continent"
+                      />
+
+                      <app-category-select
+                        [categoryFormControl]="generateQuestionForm.controls.Category"
+                      />
+                  </div>
+
+                  <div class="row m-4 col-10 col-md-12 col-sm-12">
+                        <div class="col-3 col-md-3 col-sm-4">
+                            <button 
+                                [routerLink]="['/country']" 
+                                class="btn btn-outline-primary m-2"
+                            >
+                                Back to list
+                            </button>
+                        </div>
+                        <div class="col-4 col-md-4 col-sm-5">
+                            <button 
+                                type="submit"
+                                class="btn btn-outline-primary m-2"
+                            >
+                                Generate question
+                            </button>
+                        </div>  
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

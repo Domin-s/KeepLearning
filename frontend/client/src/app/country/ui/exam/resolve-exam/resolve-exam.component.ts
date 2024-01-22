@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Exam } from '../../../models/Exam';
 import { QuestionTableComponent } from '../../../shared/question/question-table/question-table.component';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { SharingDataService } from '../SharingData.service';
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
 import { Category } from '../../../models/Category';
@@ -36,13 +36,17 @@ export class ResolveExamComponent implements OnInit {
 
     if (exam !== null){
       this.exam = exam;
-      this.questionCategory = Category[(exam.category + 1) % 2];
-      this.answerCategory = Category[exam.category];
+      this.questionCategory = exam.category;
+      this.answerCategory = this.setAnswerCategory(exam.category);
     }
 
     this.isBeforeChecked = true;
     
     this.addContinentToQueryParam();
+  }
+
+  setAnswerCategory(category: string) {
+    return (category === "Country") ? "Capital City" : "Country";
   }
 
   addContinentToQueryParam(){
@@ -68,7 +72,7 @@ export class ResolveExamComponent implements OnInit {
     let form = new FormGroup({
       Name: new FormControl(this.exam.name),
       NumberOfQuestion: new FormControl(this.exam.questions.length),
-      Category: new FormControl(Category[this.exam.category]),
+      Category: new FormControl(this.exam.category),
       Continents: this.createContinentArrayForm()
     });
 

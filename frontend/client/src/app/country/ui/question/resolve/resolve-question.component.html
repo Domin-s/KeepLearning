@@ -1,0 +1,19 @@
+<div>  
+    <app-new-question-form
+        [parameters]="parameters"
+        [question]="question"
+        (getNewQuestion)="createNewQuestionWithSameParameters($event)"
+    />
+    
+    <hr>
+
+    <app-resolve-question-form
+        [question]="question"
+        (isAnsweredCorrect)="generateNextQuestion($event)"
+    />
+    
+    <app-answer-history
+        [answerHistory]="answerHistory"
+    />
+
+</div>

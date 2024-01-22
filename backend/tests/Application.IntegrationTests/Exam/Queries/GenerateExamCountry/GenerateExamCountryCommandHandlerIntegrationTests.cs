@@ -82,7 +82,7 @@ public class GenerateExamCountryCommandHandlerIntegrationTests
         // arrange
         var createExamCountryCommandHandler = new GenerateExamCountryQueryHandler(_dbContext, _mapper, _countryServiceTest);
         var continents = createExamCountryCommand.Continents.Select(c => c);
-        var expectedCategory = GuessType.ToCategory(createExamCountryCommand.Category);
+        var expectedCategory = createExamCountryCommand.Category;
 
         // act
         var result = await createExamCountryCommandHandler.Handle(createExamCountryCommand, CancellationToken.None);

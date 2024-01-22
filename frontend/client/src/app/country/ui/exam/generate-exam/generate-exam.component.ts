@@ -7,7 +7,6 @@ import { ExamService } from '../../../services/exam.service';
 import { FormArray, FormControl, FormsModule, NgForm } from '@angular/forms';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Exam } from '../../../models/Exam';
 import { SharingDataService } from '../SharingData.service';
 
 @Component({
@@ -30,6 +29,7 @@ export class GenerateExamComponent implements OnInit {
   generateExamForm = inject(GenerateExamForm).form;
   public continentsChecked: string[] = [];
   
+  // TODO: remove it!
   public url = 'http://localhost:4200/country/resolveExam';
 
   constructor (
