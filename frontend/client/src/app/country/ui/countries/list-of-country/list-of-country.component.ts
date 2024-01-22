@@ -21,11 +21,10 @@ import { ContinentsCheckboxComponent } from '../../../shared/continents/continen
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() countries: Country[] = [];
+  @Output() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   previousUrl: string = '';
   currentUrl: string = '';
-
-  public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
 
   constructor(
     private countryService: CountryService,
