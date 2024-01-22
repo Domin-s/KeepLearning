@@ -8,6 +8,8 @@ import { RouterLink } from "@angular/router";
 import { ResolveQuestionFormComponent } from "./resolve-question-form/resolve-question-form.component";
 import { UserAnswer } from "../../../models/UserAnswer";
 import { AnswerHistoryComponent } from "./answer-history/answer-history.component";
+import { NewQuestionFormComponent } from "./new-question-form/new-question-form.component";
+import { QuestionParameters } from "./models/questionParameters";
 
 @Component({
   standalone: true,
@@ -15,9 +17,10 @@ import { AnswerHistoryComponent } from "./answer-history/answer-history.componen
   templateUrl: './resolve-question.component.html',
   styleUrl: './resolve-question.component.scss',
   imports: [
-    RouterLink,
+    AnswerHistoryComponent,
+    NewQuestionFormComponent,
     ResolveQuestionFormComponent,
-    AnswerHistoryComponent
+    RouterLink
   ]
 })
 export class ResolveQuestionComponent implements OnInit {
@@ -25,7 +28,7 @@ export class ResolveQuestionComponent implements OnInit {
   private questionCountryStorageName = "QuestionCountry";
   private questionCountryParametersStorageName = "QuestionCountryParameters";
   
-  public parameters!: { Category: string, Continent: string };
+  public parameters!: QuestionParameters;
   public question!: Question;
   
   public answerHistory: UserAnswer[] = [];
@@ -41,7 +44,7 @@ export class ResolveQuestionComponent implements OnInit {
   }
 
 
-  createNewQuestionWithSameParameters(){
+  createNewQuestionWithSameParameters(parameters: QuestionParameters){
     this.getNewQuestion();
     this.answerHistory.push(this.createEmptyAnswer(this.question));
   }
@@ -52,7 +55,6 @@ export class ResolveQuestionComponent implements OnInit {
     } else if (userAnswer.IsCorrect) {
       this.answerHistory.push(userAnswer);
       this.getNewQuestion();
-    
     } else {
       this.answerHistory.push(userAnswer);
     }
@@ -65,10 +67,11 @@ export class ResolveQuestionComponent implements OnInit {
         this.question = result;
       },
       error: (err) => {
-
+        console.log(err);
       }
     });
   }
+
   createEmptyAnswer(question: Question){
     let emptyAnswer = {
       QuestionText: question.questionText,
