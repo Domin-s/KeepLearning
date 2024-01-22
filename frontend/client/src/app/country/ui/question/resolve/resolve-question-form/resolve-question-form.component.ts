@@ -1,10 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
-import { QuestionService } from '../../../../services/question.service';
 import { UserAnswer } from '../../../../models/UserAnswer';
 import { Question } from '../../../../models/Question';
-import { ResolveQuestionForm } from '../forms/resolve-question.form';
-import { Answer } from '../../../../models/Answer';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resolve-question-form',
@@ -18,22 +15,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 export class ResolveQuestionFormComponent {
   @Input({required: true}) public question!: Question;
 
-  @Output() isAnsweredCorrect = new EventEmitter<boolean>();
+  @Output() isAnsweredCorrect = new EventEmitter<UserAnswer>();
   
   @ViewChild('userAnswerInput', {static: true}) userAnswerInput!: ElementRef;
-  
-  public answerHistory: UserAnswer[] = [];
 
   constructor(
   ) { }
 
   check() {
-    console.log(this.answerHistory);
     let userAnswer = this.createUserAnswer(this.userAnswerInput.nativeElement.value, this.question);
-    this.answerHistory.push(userAnswer);
-    this.isAnsweredCorrect.emit(userAnswer.IsCorrect);
+    this.isAnsweredCorrect.emit(userAnswer);
     this.userAnswerInput.nativeElement.value = '';
-    console.log(this.answerHistory);
   }
 
   createUserAnswer(userAnswerText: string, question: Question): UserAnswer {

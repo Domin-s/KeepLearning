@@ -6,6 +6,8 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { GenerateQuestionForm } from "../../../forms/generateQuestion.form";
 import { RouterLink } from "@angular/router";
 import { ResolveQuestionFormComponent } from "./resolve-question-form/resolve-question-form.component";
+import { UserAnswer } from "../../../models/UserAnswer";
+import { AnswerHistoryComponent } from "./answer-history/answer-history.component";
 
 @Component({
   standalone: true,
@@ -14,7 +16,8 @@ import { ResolveQuestionFormComponent } from "./resolve-question-form/resolve-qu
   styleUrl: './resolve-question.component.scss',
   imports: [
     RouterLink,
-    ResolveQuestionFormComponent
+    ResolveQuestionFormComponent,
+    AnswerHistoryComponent
   ]
 })
 export class ResolveQuestionComponent implements OnInit {
@@ -24,6 +27,8 @@ export class ResolveQuestionComponent implements OnInit {
   
   public parameters!: { Category: string, Continent: string };
   public question!: Question;
+  
+  public answerHistory: UserAnswer[] = [];
 
   constructor (
     private questionService: QuestionService,
@@ -37,6 +42,23 @@ export class ResolveQuestionComponent implements OnInit {
 
 
   createNewQuestionWithSameParameters(){
+    this.getNewQuestion();
+    this.answerHistory.push(this.createEmptyAnswer(this.question));
+  }
+
+  generateNextQuestion(userAnswer: UserAnswer){
+    if (userAnswer.UserAnswer === '') {
+      this.answerHistory.push(this.createEmptyAnswer(this.question));
+    } else if (userAnswer.IsCorrect) {
+      this.answerHistory.push(userAnswer);
+      this.getNewQuestion();
+    
+    } else {
+      this.answerHistory.push(userAnswer);
+    }
+  }
+
+  getNewQuestion(){
     this.questionService.generate(this.generateFormGroup()).subscribe({
       next: (result) => {
         this.sharingDataService.setData(result, this.questionCountryStorageName);
@@ -47,12 +69,15 @@ export class ResolveQuestionComponent implements OnInit {
       }
     });
   }
-
-  generateNextQuestion(isCorrectAnswer: boolean){
-    console.log("ResolveQuestionComponent => generateNextQuestion : " + isCorrectAnswer);
-    if (isCorrectAnswer) {
-      this.createNewQuestionWithSameParameters();
+  createEmptyAnswer(question: Question){
+    let emptyAnswer = {
+      QuestionText: question.questionText,
+      UserAnswer: '',
+      CorrectAnswer: question.answerText,
+      IsCorrect: false
     }
+
+    return emptyAnswer;
   }
 
   generateFormGroup(): FormGroup {

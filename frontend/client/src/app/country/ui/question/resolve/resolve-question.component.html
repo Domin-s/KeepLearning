@@ -48,7 +48,10 @@
     <app-resolve-question-form
         [question]="question"
         (isAnsweredCorrect)="generateNextQuestion($event)"
-    >
+    />
+    
+    <app-answer-history
+        [answerHistory]="answerHistory"
+    />
 
-    </app-resolve-question-form>
 </div>
