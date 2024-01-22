@@ -28,8 +28,8 @@ export class QuestionService {
     );
   }
 
-  check(checkExamForm: FormGroup) {
-    let formObj = checkExamForm.value;
+  check(checkQuestionForm: FormGroup) {
+    let formObj = checkQuestionForm.value;
     let serializedForm = JSON.stringify(formObj);
 
     return this.http.post<Answer>(

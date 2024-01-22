@@ -43,6 +43,8 @@ export class QuestionTableComponent implements OnChanges {
     });
   }
 
+  // TODO: Move check exam form to separate things. 
+  // Maybe form or form with service or something else.
   getDefaultParametersForAnswers(): FormArray {
     let form = new FormArray<any>([]);
 
