@@ -24,7 +24,6 @@ export class ResolveQuestionComponent implements OnInit {
   
   public parameters!: { Category: string, Continent: string };
   public question!: Question;
-  public isBeforeChecked! :  boolean;
 
   constructor (
     private questionService: QuestionService,
@@ -42,12 +41,18 @@ export class ResolveQuestionComponent implements OnInit {
       next: (result) => {
         this.sharingDataService.setData(result, this.questionCountryStorageName);
         this.question = result;
-        this.isBeforeChecked = true;
       },
       error: (err) => {
 
       }
     });
+  }
+
+  generateNextQuestion(isCorrectAnswer: boolean){
+    console.log("ResolveQuestionComponent => generateNextQuestion : " + isCorrectAnswer);
+    if (isCorrectAnswer) {
+      this.createNewQuestionWithSameParameters();
+    }
   }
 
   generateFormGroup(): FormGroup {

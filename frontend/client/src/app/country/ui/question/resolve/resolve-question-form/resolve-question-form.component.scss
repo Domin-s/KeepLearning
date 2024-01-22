@@ -19,3 +19,13 @@
   padding: 0 10px;
   z-index: 2;
 }
+
+.correct-answer {
+  font-weight: bold;
+  color: #48e66a;
+}
+
+.incorrect-answer {
+  font-weight: bold;
+  color: #c54a34;
+}

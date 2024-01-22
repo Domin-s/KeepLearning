@@ -1,10 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { QuestionService } from '../../../../services/question.service';
 import { UserAnswer } from '../../../../models/UserAnswer';
 import { Question } from '../../../../models/Question';
 import { ResolveQuestionForm } from '../forms/resolve-question.form';
 import { Answer } from '../../../../models/Answer';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resolve-question-form',
@@ -17,42 +17,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ResolveQuestionFormComponent {
   @Input({required: true}) public question!: Question;
-  
-  public resolveQuestionForm = inject(ResolveQuestionForm).form;
 
+  @Output() isAnsweredCorrect = new EventEmitter<boolean>();
+  
+  @ViewChild('userAnswerInput', {static: true}) userAnswerInput!: ElementRef;
+  
   public answerHistory: UserAnswer[] = [];
-  private answer!: Answer;
-  private userAnswer!: UserAnswer;
 
   constructor(
-    private questionService: QuestionService
-  ){}
+  ) { }
 
-  onSubmit() {
-    this.questionService.check(this.resolveQuestionForm).subscribe({
-      next: result => {
-        this.answer = result;
-        this.userAnswer = this.createUserAnswer(this.answer, this.question.questionText);
-        this.addAnswerToAnswerHistory(this.userAnswer);
-      },
-      error: error => {
-        console.log(error);
-      }
-    })
-  }
-
-  addAnswerToAnswerHistory(userAnswer: UserAnswer){
-    console.log("addAnswerToAnswerHistory");   
+  check() {
     console.log(this.answerHistory);
+    let userAnswer = this.createUserAnswer(this.userAnswerInput.nativeElement.value, this.question);
     this.answerHistory.push(userAnswer);
+    this.isAnsweredCorrect.emit(userAnswer.IsCorrect);
+    this.userAnswerInput.nativeElement.value = '';
     console.log(this.answerHistory);
   }
 
-  createUserAnswer(answer: Answer, questionText: string): UserAnswer {
+  createUserAnswer(userAnswerText: string, question: Question): UserAnswer {
     let userAnswer = {
-      QuestionText: questionText,
-      UserAnswer: answer.userAnswer,
-      IsCorrect: answer.correctAnswer === answer.userAnswer
+      QuestionText: question.questionText,
+      UserAnswer: userAnswerText,
+      CorrectAnswer: question.answerText,
+      IsCorrect: question.answerText.toLocaleLowerCase() === userAnswerText.toLocaleLowerCase()
     }
 
     return userAnswer; 

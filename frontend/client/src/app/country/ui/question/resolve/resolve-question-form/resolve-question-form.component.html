@@ -1,31 +1,36 @@
 <div>
-  <form [formGroup]="resolveQuestionForm" (ngSubmit)="onSubmit()">
     <div class="input-group input-answer-border-radius">
         <input 
+            #userAnswerInput
             type="text"
             class="form-control input-answer-border-radius"
-            
         > 
         <div class="input-group-append">
             <button 
                 class="btn btn-outline-secondary custom-answer-botton"
+                (click)="check()"
             >
                 Check
             </button>
         </div>
     </div>
-  </form>
-
-  @if(answerHistory.length > 0) {
-      <div class="mt-4">
-          <label>Answer history (question => your answer):</label>
-          <ul>
-              @for(answer of answerHistory; track ) {
-                  <li>
-                      {{ answer.QuestionText }} => {{ answer.UserAnswer }}
-                  </li>
-              }
-          </ul>
-      </div>
-  }
+    
+    @if(answerHistory.length > 0) {
+        <div class="mt-4">
+            <label>Answer history (question => your answer):</label>
+            <ul>
+                @for(answer of answerHistory; let i= $index; track i) {
+                    @if (answer.IsCorrect) {
+                        <li class="correct-answer">
+                            {{ answer.QuestionText }} => {{ answer.UserAnswer }}
+                        </li>
+                    } @else {
+                        <li class="incorrect-answer">
+                            {{ answer.QuestionText }} => {{ answer.UserAnswer }}
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    } 
 </div>

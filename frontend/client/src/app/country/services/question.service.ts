@@ -16,6 +16,8 @@ export class QuestionService {
     let formObj = generateQuestionForm.value;
     let serializedForm = JSON.stringify(formObj);
 
+    console.log(serializedForm);
+
     return this.http.post<Question>(
       this.URL + '/generate',
       serializedForm,
@@ -28,11 +30,13 @@ export class QuestionService {
     );
   }
 
+  // TODO: remove
   check(checkQuestionForm: FormGroup) {
     let formObj = checkQuestionForm.value;
     let serializedForm = JSON.stringify(formObj);
 
-    return this.http.post<Answer>(
+    console.log(serializedForm)
+    return this.http.post<boolean>(
       this.URL + '/check',
       serializedForm,
       {
