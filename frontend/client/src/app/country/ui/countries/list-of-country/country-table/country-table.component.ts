@@ -25,7 +25,9 @@ export class CountryTableComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     if (!changes['continentsChecked'].isFirstChange()) {
+      console.log(changes);
       this.getCountries();
     }
   }
@@ -33,11 +35,12 @@ export class CountryTableComponent implements OnInit, OnChanges {
   fiterCountriesByCheckedContientns(): Country[] {
     return this.countries.filter(c => this.continentsChecked.includes(c.continentDto.name));;
   }
-  
 
   getCountries() {
+    console.log(this.continentsChecked, this.pageNumber, this.pageSize);
     this.countryService.getCountries(this.continentsChecked, this.pageNumber, this.pageSize).subscribe({
       next: (result) => {
+        console.log(result);
         this.countries = result;
       },
       error: (error) => {

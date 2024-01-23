@@ -20,6 +20,8 @@ import { CountryTableComponent } from './country-table/country-table.component';
 })
 export class ListOfCountriesComponent implements OnInit {
   @Output() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  @Output() pageNumber: number = 1;
+  @Output() pageSize: number = 10;
 
   previousUrl: string = '';
   currentUrl: string = '';
