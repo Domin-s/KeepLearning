@@ -1,4 +1,4 @@
-namespace API.Extensions;
+namespace Application.Helpers;
 
 public class UserParams
 {
