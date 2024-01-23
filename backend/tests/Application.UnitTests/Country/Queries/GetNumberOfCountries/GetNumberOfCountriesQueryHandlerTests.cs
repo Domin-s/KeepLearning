@@ -1,4 +1,3 @@
-using Application.Common.Models.Continent;
 using Application.UnitTests.Helper;
 using Infrastructure.Helper.Seeders.UnitTests;
 using Microsoft.EntityFrameworkCore;
