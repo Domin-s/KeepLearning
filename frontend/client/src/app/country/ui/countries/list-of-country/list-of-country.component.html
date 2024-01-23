@@ -1,12 +1,10 @@
-@if (countries.length < 1) {
-    <h1>Not find any country</h1>
-} @else {
+<div>
     <h1>Countries</h1>
-    
+
     <nav>
         <button 
             [routerLink]="['/country/generateExam']" 
-            [queryParams]="{continentsChecked}" 
+            [queryParams]="{continentsChecked}"
             class="btn btn-lg btn-outline-primary m-2"
         >
             Generate exam
@@ -18,7 +16,7 @@
             Generate random question
         </button>
     </nav>
-    
+
     <hr />
 
     <app-continents-checkbox 
@@ -29,9 +27,10 @@
     />
 
     <hr />
-    
-    <app-country-table-component 
-        [countries]="countries"
-        [continentsChecked]="continentsChecked"    
+
+    <app-country-table-component
+        [continentsChecked]="continentsChecked"
+        [pageNumber]="1"
+        [pageSize]="100"  
     />
-}
+</div>

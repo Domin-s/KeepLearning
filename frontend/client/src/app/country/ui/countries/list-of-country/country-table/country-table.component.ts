@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Country } from '../../../models/Country';
+import { CountryService } from '../../../../services/country.service';
+import { Country } from '../../../../models/Country';
 
 @Component({
   standalone: true,
@@ -8,22 +9,40 @@ import { Country } from '../../../models/Country';
   styleUrl: './country-table.component.scss',
 })
 export class CountryTableComponent implements OnInit, OnChanges {
-  @Input({required: true}) countries: Country[] = [];
   @Input({required: true}) continentsChecked: string[] = [];
+  @Input({required: true}) pageNumber!: number;
+  @Input({required: true}) pageSize!: number;
 
-  public filteredCountries: Country[] = [];
+  public countries: Country[] = [];
+
+
+  constructor(
+    private countryService: CountryService,
+  ){}
 
   ngOnInit(): void {
-    this.filteredCountries = this.countries;
+    this.getCountries();
   }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['continentsChecked'].isFirstChange()) {
-      this.filteredCountries = this.fiterCountriesByCheckedContientns();
+      this.getCountries();
     }
   }
-
+  
   fiterCountriesByCheckedContientns(): Country[] {
     return this.countries.filter(c => this.continentsChecked.includes(c.continentDto.name));;
+  }
+  
+
+  getCountries() {
+    this.countryService.getCountries(this.continentsChecked, this.pageNumber, this.pageSize).subscribe({
+      next: (result) => {
+        this.countries = result;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 }
