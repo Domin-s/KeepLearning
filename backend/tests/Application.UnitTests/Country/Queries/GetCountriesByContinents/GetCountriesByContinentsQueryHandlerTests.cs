@@ -1,5 +1,4 @@
 using Application.Common.Mappings;
-using Application.Common.Models.Continent;
 using Application.Country.Queries.GetAllCountriesByContinents;
 using Application.UnitTests.Helper;
 using AutoMapper;
@@ -45,21 +44,51 @@ public class GetCountriesByContinentsQueryHandlerTests
         {
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                    Continents = new List<String>() { "Asia" }
+                    Continents = new List<String>() { "Asia" },
+                    PageSize = 100,
+                    PageNumber = 1
                 },
                 48
             ),
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                    Continents = new List<String>() { "Asia", "Europe" }
+                    Continents = new List<String>() { "Asia", "Europe" },
+                    PageSize = 100,
+                    PageNumber = 1
                 },
                 92
             ),
             new QueryWithExpectedResult(
                 new GetCountriesByContinentsQuery(){
-                    Continents = new List<String>() { "Europe" }
+                    Continents = new List<String>() { "Europe" },
+                    PageSize = 100,
+                    PageNumber = 1
                 },
                 44
+            ),
+            new QueryWithExpectedResult(
+                new GetCountriesByContinentsQuery(){
+                    Continents = new List<String>() { "Europe" },
+                    PageSize = 20,
+                    PageNumber = 1
+                },
+                20
+            ),
+            new QueryWithExpectedResult(
+                new GetCountriesByContinentsQuery(){
+                    Continents = new List<String>() { "Europe" },
+                    PageSize = 40,
+                    PageNumber = 1
+                },
+                40
+            ),
+            new QueryWithExpectedResult(
+                new GetCountriesByContinentsQuery(){
+                    Continents = new List<String>() { "Europe" },
+                    PageSize = 40,
+                    PageNumber = 2
+                },
+                4
             ),
         };
 
@@ -84,7 +113,10 @@ public class GetCountriesByContinentsQueryHandlerTests
     public async void Handle_WithEmptyListOfContinents_ReturnAllCountries()
     {
         // arrange
-        var getAllCountriesByContinentsQuery = new GetCountriesByContinentsQuery();
+        var getAllCountriesByContinentsQuery = new GetCountriesByContinentsQuery() {
+            PageNumber = 1,
+            PageSize = 200
+        };
         var handler = new GetCountriesByContinentsQueryHandler(_dbContext, _mapper);
         var numerOfAllCountries = 195;
 

@@ -3,7 +3,7 @@ using Application.Common.Models.Country;
 
 namespace Application.Country.Queries.GetAllCountriesByContinents;
 
-public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountriesByContinentsQuery, IEnumerable<CountryDto>>
+public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountriesByContinentsQuery, PagedList<CountryDto>>
 {
     private readonly IKeepLearningDbContext _dbContext;
     private readonly IMapper _mapper;
@@ -15,31 +15,37 @@ public class GetCountriesByContinentsQueryHandler : IRequestHandler<GetCountries
     }
 
     // TODO: Add more specific validation to GetCountriesByContinentsQuery
-    public async Task<IEnumerable<CountryDto>> Handle(GetCountriesByContinentsQuery request, CancellationToken cancellationToken)
+    public async Task<PagedList<CountryDto>> Handle(GetCountriesByContinentsQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Domain.Enteties.Country> countries = new List<Domain.Enteties.Country>();
 
         var continents = await _dbContext.Continents
             .Where(continent => request.Continents.Contains(continent.Name))
             .ToListAsync();
 
+        IQueryable<CountryDto> queryCountryDto = GetQueryableCountries(continents);
+
+        var result = PagedList<CountryDto>.CreateAsync(queryCountryDto, request.PageNumber, request.PageSize);
+
+        return await result;
+    }
+
+    private IQueryable<CountryDto> GetQueryableCountries(List<Domain.Enteties.Continent> continents)
+    {
+
         if (continents.Count() == 0)
         {
-            countries = await _dbContext.Countries
+            return _dbContext.Countries
                 .Include(continent => continent.Continent)
-                .ToListAsync();
-        } else
+                .Select(c => _mapper.Map<CountryDto>(c));
+        }
+        else
         {
             var continentIds = continents.Select(c => c.Id);
 
-            countries = await _dbContext.Countries
+            return _dbContext.Countries
                 .Include(continent => continent.Continent)
                 .Where(country => continentIds.Contains(country.ContinentId))
-                .ToListAsync();
+                .Select(c => _mapper.Map<CountryDto>(c));
         }
-
-        var contriesDto = countries.Select( c => _mapper.Map<CountryDto>(c));
-
-        return contriesDto;
     }
 }
