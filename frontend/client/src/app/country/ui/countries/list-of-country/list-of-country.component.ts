@@ -22,8 +22,8 @@ import { PageData } from '../../../models/PageData';
 })
 export class ListOfCountriesComponent implements OnInit {
   public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
-  public currentPage!: number;
-  public totalPages!: number;
+  public currentPage: number = 1;
+  public totalPages: number = 1;
 
   DEFAULT_PAGE = 1;
 

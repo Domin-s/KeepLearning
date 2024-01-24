@@ -14,12 +14,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() setCurrentPageEmit = new EventEmitter<number>();
 
   public numberOfPages: number[] = [];
-  public pagesToShow: number[] = [1, 2, 3];
-  public nextDisabled = true;
+  public isStartPage: boolean = true;
+  public nextDisabled = false;
   public previousDisabled = true;
 
   ngOnInit(): void {
-    this.configurePaginationData();
+    this.numberOfPages = this.getNumberOfPages(this.totalPages);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -27,13 +27,6 @@ export class PaginationComponent implements OnInit, OnChanges {
       this.numberOfPages = this.getNumberOfPages(this.totalPages);
     }
   }  
-
-  configurePaginationData(){
-    this.numberOfPages = this.getNumberOfPages(this.totalPages);
-    this.currentPage = this.currentPage;
-    this.previousDisabled = this.currentPage === 1;
-    this.nextDisabled = this.currentPage === this.totalPages;
-  }
 
   getNumberOfPages(totalPages: number) {
     let number: number[] = [];
@@ -57,6 +50,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   onSubmitNext(){
+    console.log(this.currentPage);
     this.currentPage = this.currentPage + 1;
     this.setCurrentPageEmit.emit(this.currentPage);
     this.setDisabledButton();
@@ -65,6 +59,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   setDisabledButton(){
     this.setDisabledPrevoiusButton();
     this.setDisabledNextButton();
+    this.isStartPage = false;
   }
 
   setDisabledPrevoiusButton(){
