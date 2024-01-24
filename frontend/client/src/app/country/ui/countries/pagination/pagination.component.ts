@@ -50,7 +50,6 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   onSubmitNext(){
-    console.log(this.currentPage);
     this.currentPage = this.currentPage + 1;
     this.setCurrentPageEmit.emit(this.currentPage);
     this.setDisabledButton();
