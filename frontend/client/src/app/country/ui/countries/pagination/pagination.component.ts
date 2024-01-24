@@ -14,7 +14,6 @@ export class PaginationComponent implements OnInit {
   @Output() setPageDataEmit = new EventEmitter<PageData>();
 
   public numberOfPages: number[] = [];
-  // public currentPage: number = 1;
   public nextDisabled = true;
   public previousDisabled = true;
 
@@ -59,7 +58,6 @@ export class PaginationComponent implements OnInit {
   setDisabledButton(){
     this.setDisabledPrevoiusButton();
     this.setDisabledNextButton();
-    console.log(this.pageData.currentPage);
   }
 
   setDisabledPrevoiusButton(){
@@ -77,5 +75,4 @@ export class PaginationComponent implements OnInit {
       this.nextDisabled = false;
     }
   }
-
 }
