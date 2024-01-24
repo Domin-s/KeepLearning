@@ -8,7 +8,7 @@
         <button #previous class="page-link" (click)="onSubmitPage(1)" >1</button>
       </li>
     }
-    @if(currentPage > 2){
+    @if(currentPage > 3){
       <li class="page-item">
         <button #previous class="page-link" [disabled]="true">...</button>
       </li>
@@ -20,7 +20,7 @@
         </li>
       }
     }
-    @if(currentPage < numberOfPages.length - 1){
+    @if(currentPage < numberOfPages.length - 2){
       <li class="page-item">
         <button #previous class="page-link" (click)="onSubmitPage(totalPages)">...</button>
       </li>
