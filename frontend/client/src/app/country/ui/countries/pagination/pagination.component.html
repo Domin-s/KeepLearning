@@ -1,15 +1,37 @@
 <nav>
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <button #previous class="page-link" (click)="onSubmitPrevious()" [disabled]="previousDisabled">Previous</button>
+      <button #previous class="page-link" (click)="onSubmitPrevious()" [disabled]="previousDisabled">&laquo;</button>
     </li>
-    @for(numberOfPage of numberOfPages; track numberOfPage;) {
+    @if(currentPage > 2){
       <li class="page-item">
-        <button class="page-link" (click)="onSubmitPage(numberOfPage)">{{ numberOfPage }}</button>
+        <button #previous class="page-link" (click)="onSubmitPage(1)" >1</button>
+      </li>
+    }
+    @if(currentPage > 2){
+      <li class="page-item">
+        <button #previous class="page-link" [disabled]="true">...</button>
+      </li>
+    }
+    @for(numberOfPage of numberOfPages; track numberOfPage;) {
+      @if (showButton(numberOfPage)){
+        <li class="page-item">
+          <button class="page-link" (click)="onSubmitPage(numberOfPage)">{{ numberOfPage }}</button>
+        </li>
+      }
+    }
+    @if(currentPage < numberOfPages.length - 1){
+      <li class="page-item">
+        <button #previous class="page-link" (click)="onSubmitPage(totalPages)">...</button>
+      </li>
+    }
+    @if(currentPage < numberOfPages.length - 1){
+      <li class="page-item">
+        <button #previous class="page-link" (click)="onSubmitPage(numberOfPages.length)">{{ numberOfPages.length }}</button>
       </li>
     }
     <li class="page-item">
-      <button #next class="page-link" (click)="onSubmitNext()" [disabled]="nextDisabled">Next</button>
+      <button #next class="page-link" (click)="onSubmitNext()" [disabled]="nextDisabled">&raquo;</button>
     </li>
   </ul>
 </nav>

@@ -14,6 +14,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output() setCurrentPageEmit = new EventEmitter<number>();
 
   public numberOfPages: number[] = [];
+  public pagesToShow: number[] = [1, 2, 3];
   public nextDisabled = true;
   public previousDisabled = true;
 
@@ -80,5 +81,13 @@ export class PaginationComponent implements OnInit, OnChanges {
     } else {
       this.nextDisabled = false;
     }
+  }
+
+  showButton(numberOfPage: number): boolean {
+    if(numberOfPage < this.currentPage - 1 || numberOfPage > this.currentPage + 1 ){
+      return false;
+    }
+
+    return true;
   }
 }
