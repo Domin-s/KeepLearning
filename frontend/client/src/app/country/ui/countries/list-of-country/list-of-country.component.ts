@@ -1,11 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Country } from '../../../models/Country';
-import { CountryService } from '../../../services/country.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CountryTableComponent } from '../../../shared/country/country-table/country-table.component';
 import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
+import { CountryTableComponent } from '../country-table/country-table.component';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { NumberOfCountrySelectComponent } from '../number-of-country-select/number-of-country-select.component';
 
 @Component({
   standalone: true,
@@ -15,19 +15,25 @@ import { ContinentsCheckboxComponent } from '../../../shared/continents/continen
   imports: [
     CountryTableComponent,
     ContinentsCheckboxComponent,
+    NumberOfCountrySelectComponent,
+    PaginationComponent,
     RouterLink
   ],
   providers: [GenerateExamForm],
 })
 export class ListOfCountriesComponent implements OnInit {
-  @Output() countries: Country[] = [];
-  @Output() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  private DEFAULT_NUMBER = 1;
+  private previousUrl: string = '';
+  // TODO: remove it
+  private currentUrl: string = '';
 
-  previousUrl: string = '';
-  currentUrl: string = '';
+  public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  public currentPage: number = this.DEFAULT_NUMBER;
+  public totalPages: number = this.DEFAULT_NUMBER;
+  public totalItems: number = 10;
+  public itemsPerPage: number = 10;
 
   constructor(
-    private countryService: CountryService,
     private route: ActivatedRoute,
     private previousRouteService: PreviousRouteService
   ) {
@@ -35,24 +41,7 @@ export class ListOfCountriesComponent implements OnInit {
   
   ngOnInit(): void {
     this.previousUrl = this.previousRouteService.getPreviousUrl();
-    this.continentsChecked = this.setCheckedContinentByDefault()
-    this.getCountries();
-  }
-
-  goToCreatorToGenerateRandomQuestion(){
-    console.log("ListOfCountriesComponent => goToCreatorToGenerateRandomQuestion");
-  }
-
-  getCountries() {
-    this.countryService.getCountries().subscribe({
-      next: (result) => {
-        this.countries = result;
-      },
-      error: (error) => {
-        this.countries = [];
-        console.log(error);
-      }
-    })
+    this.continentsChecked = this.setCheckedContinentByDefault();
   }
 
   getCheckedContinents(continents: string[]){
@@ -60,7 +49,7 @@ export class ListOfCountriesComponent implements OnInit {
   }
 
   getContinentsFromPath(){
-    let continentsFromPath: string[] = []; 
+    let continentsFromPath: string[] = [];
     
     this.route.queryParamMap.subscribe( params => {
       continentsFromPath = params.getAll('continentsChecked');
@@ -75,5 +64,21 @@ export class ListOfCountriesComponent implements OnInit {
     }
 
     return this.continentsChecked;
+  }
+
+  setCurrentPage(currentPage: number) {
+    this.currentPage = currentPage;
+  }
+
+  setTotalPages(totalPages: number) {
+    this.totalPages = totalPages;
+  }
+
+  setTotalItems(totalItems: number) {
+    this.totalItems = totalItems;
+  }
+
+  setItemsPerPage(itemsPerPage: number) {
+    this.itemsPerPage = itemsPerPage;
   }
 }

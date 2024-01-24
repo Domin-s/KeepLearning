@@ -1,0 +1,5 @@
+<select class="form-select" (change)="onSelect($event)">
+  @for(item of itemsOnPage; track item ) {
+    <option [value]="item">{{ item }}</option>
+  }
+</select>

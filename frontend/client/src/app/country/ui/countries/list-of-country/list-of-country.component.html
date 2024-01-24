@@ -1,12 +1,10 @@
-@if (countries.length < 1) {
-    <h1>Not find any country</h1>
-} @else {
+<div>
     <h1>Countries</h1>
-    
+
     <nav>
         <button 
             [routerLink]="['/country/generateExam']" 
-            [queryParams]="{continentsChecked}" 
+            [queryParams]="{continentsChecked}"
             class="btn btn-lg btn-outline-primary m-2"
         >
             Generate exam
@@ -18,7 +16,7 @@
             Generate random question
         </button>
     </nav>
-    
+
     <hr />
 
     <app-continents-checkbox 
@@ -28,10 +26,26 @@
         (updateCheckoboxesEvent)="getCheckedContinents($event)"
     />
 
-    <hr />
-    
-    <app-country-table-component 
-        [countries]="countries"
-        [continentsChecked]="continentsChecked"    
+    <app-number-of-country-select
+        [totalItems]="totalItems"
+        (setItemsPerPageEmit)="setItemsPerPage($event)"
+
     />
-}
+
+    <hr />
+
+    <app-country-table-component
+        [continentsChecked]="continentsChecked"
+        [currentPage]="currentPage"
+        [itemsPerPage]="itemsPerPage"
+        (setTotalPagesEmit)="setTotalPages($event)"
+        (setTotalItemsEmit)="setTotalItems($event)"
+    />
+
+    <app-pagination
+        [totalPages]="totalPages"
+        [currentPage]="currentPage"
+        [totalItems]="totalItems"
+        (setCurrentPageEmit)="setCurrentPage($event)"
+    />
+</div>
