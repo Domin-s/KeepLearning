@@ -12,7 +12,7 @@ export class CountryService {
 
   getCountries(continents: string[], pageNumber?: number, pageSize?: number) {
     let params = this.createGetCountryParams(continents, pageNumber, pageSize);
-    return this.http.get<Country[]>(this.URL, {params});
+    return this.http.get(this.URL, {params, observe: 'response'});
   }
 
   createGetCountryParams(continents: string[], pageNumber?: number, pageSize?: number): HttpParams {

@@ -1,10 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { CountryService } from '../../../services/country.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from './country-table/country-table.component';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { PageData } from '../../../models/PageData';
 
 @Component({
   standalone: true,
@@ -14,6 +15,7 @@ import { CountryTableComponent } from './country-table/country-table.component';
   imports: [
     CountryTableComponent,
     ContinentsCheckboxComponent,
+    PaginationComponent,
     RouterLink
   ],
   providers: [GenerateExamForm],
@@ -22,6 +24,13 @@ export class ListOfCountriesComponent implements OnInit {
   @Output() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
   @Output() pageNumber: number = 1;
   @Output() pageSize: number = 10;
+
+  public pageData: PageData = {
+    currentPage: 1,
+    itemsPerPage: 10,
+    totalItems: 44,
+    totalPages: 5
+  };
 
   previousUrl: string = '';
   currentUrl: string = '';
@@ -57,5 +66,11 @@ export class ListOfCountriesComponent implements OnInit {
     }
 
     return this.continentsChecked;
+  }
+
+  setPageData(pageData: PageData) {
+    this.pageData = pageData;
+    console.log("ListOfCountriesComponent => setPageData(pageData: PageData)");
+    console.log(this.pageData);
   }
 }

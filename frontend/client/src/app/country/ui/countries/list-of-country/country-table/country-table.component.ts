@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CountryService } from '../../../../services/country.service';
 import { Country } from '../../../../models/Country';
+import { PageData } from '../../../../models/PageData';
 
 @Component({
   standalone: true,
@@ -9,12 +10,10 @@ import { Country } from '../../../../models/Country';
   styleUrl: './country-table.component.scss',
 })
 export class CountryTableComponent implements OnInit, OnChanges {
-  @Input({required: true}) continentsChecked: string[] = [];
-  @Input({required: true}) pageNumber!: number;
-  @Input({required: true}) pageSize!: number;
+  @Input({ required: true }) continentsChecked: string[] = [];
+  @Input({ required: true }) pageData!: PageData;
 
   public countries: Country[] = [];
-
 
   constructor(
     private countryService: CountryService,
@@ -37,15 +36,29 @@ export class CountryTableComponent implements OnInit, OnChanges {
   }
 
   getCountries() {
-    console.log(this.continentsChecked, this.pageNumber, this.pageSize);
-    this.countryService.getCountries(this.continentsChecked, this.pageNumber, this.pageSize).subscribe({
+    console.log(this.continentsChecked, this.pageData.currentPage, this.pageData.itemsPerPage);
+    this.countryService.getCountries(this.continentsChecked, this.pageData.currentPage, this.pageData.itemsPerPage).subscribe({
       next: (result) => {
-        console.log(result);
-        this.countries = result;
+        this.setPageData(result.headers.get('Pagination'));
+        this.setCountries(result.body);
+        console.log(this.pageData);
+        console.log(result.body);
       },
       error: (error) => {
         console.log(error);
       }
     })
+  }
+
+  setPageData(paginationHeader: string | null) {
+    if (paginationHeader !== null) {
+      this.pageData = JSON.parse(paginationHeader);
+    }
+  }
+
+  setCountries(body: any | null) {
+    if (body !== null) {
+      this.countries = body;
+    }
   }
 }

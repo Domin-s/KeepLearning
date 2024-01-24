@@ -1,0 +1,15 @@
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <button #previous class="page-link" (click)="onSubmitPrevious()" [disabled]="previousDisabled">Previous</button>
+    </li>
+    @for(numberOfPage of numberOfPages; track numberOfPage;) {
+      <li class="page-item">
+        <button class="page-link" (click)="onSubmitPage(numberOfPage)">{{ numberOfPage }}</button>
+      </li>
+    }
+    <li class="page-item">
+      <button #next class="page-link" (click)="onSubmitNext()" [disabled]="nextDisabled">Next</button>
+    </li>
+  </ul>
+</nav>
