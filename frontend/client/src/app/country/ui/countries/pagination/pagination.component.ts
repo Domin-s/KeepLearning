@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 export class PaginationComponent implements OnInit, OnChanges {
   @Input({ required: true }) totalPages!: number;
   @Input({ required: true }) currentPage!: number;
+  @Input({ required: true }) totalItems!: number;
 
   @Output() setCurrentPageEmit = new EventEmitter<number>();
 

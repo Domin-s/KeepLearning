@@ -5,7 +5,6 @@ import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from './country-table/country-table.component';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { PageData } from '../../../models/PageData';
 
 @Component({
   standalone: true,
@@ -21,14 +20,14 @@ import { PageData } from '../../../models/PageData';
   providers: [GenerateExamForm],
 })
 export class ListOfCountriesComponent implements OnInit {
+  private DEFAULT_NUMBER = 1;
+  private previousUrl: string = '';
+  private currentUrl: string = '';
+
   public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
-  public currentPage: number = 1;
-  public totalPages: number = 1;
-
-  DEFAULT_PAGE = 1;
-
-  previousUrl: string = '';
-  currentUrl: string = '';
+  public currentPage: number = this.DEFAULT_NUMBER;
+  public totalPages: number = this.DEFAULT_NUMBER;
+  public totalItems: number = this.DEFAULT_NUMBER;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +42,6 @@ export class ListOfCountriesComponent implements OnInit {
 
   getCheckedContinents(continents: string[]){
     this.continentsChecked = continents;
-    this.currentPage = this.DEFAULT_PAGE;
   }
 
   getContinentsFromPath(){
