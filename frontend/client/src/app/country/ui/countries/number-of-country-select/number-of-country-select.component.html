@@ -1,0 +1,5 @@
+<select class="form-select">
+  @for(item of itemsOnPage; track item ) {
+    <option [value]="item">{{ item }}</option>
+  }
+</select>

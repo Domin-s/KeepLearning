@@ -26,12 +26,17 @@
         (updateCheckoboxesEvent)="getCheckedContinents($event)"
     />
 
+    <app-number-of-country-select
+        [totalItems]="totalItems"
+    />
+
     <hr />
 
     <app-country-table-component
         [continentsChecked]="continentsChecked"
         [currentPage]="currentPage"
         (setTotalPagesEmit)="setTotalPages($event)"
+        (setTotalitemsEmit)="setItemsPages($event)"
     />
 
     <app-pagination

@@ -14,6 +14,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
   @Input({ required: true }) currentPage!: number;
   
   @Output() setTotalPagesEmit = new EventEmitter<number>();
+  @Output() setTotalitemsEmit = new EventEmitter<number>();
   
   public countries: Country[] = [];
   public pageData: PageData = {
@@ -60,6 +61,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
     if (paginationHeader !== null) {
       this.pageData = JSON.parse(paginationHeader);
       this.setTotalPagesEmit.emit(this.pageData.totalPages);
+      this.setTotalitemsEmit.emit(this.pageData.totalItems);
     }
   }
 

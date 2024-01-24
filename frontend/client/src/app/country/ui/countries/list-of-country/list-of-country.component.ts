@@ -5,6 +5,7 @@ import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from '../country-table/country-table.component';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { NumberOfCountrySelectComponent } from '../number-of-country-select/number-of-country-select.component';
 
 @Component({
   standalone: true,
@@ -14,6 +15,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
   imports: [
     CountryTableComponent,
     ContinentsCheckboxComponent,
+    NumberOfCountrySelectComponent,
     PaginationComponent,
     RouterLink
   ],
@@ -22,12 +24,13 @@ import { PaginationComponent } from '../pagination/pagination.component';
 export class ListOfCountriesComponent implements OnInit {
   private DEFAULT_NUMBER = 1;
   private previousUrl: string = '';
+  // TODO: remove it
   private currentUrl: string = '';
 
   public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
   public currentPage: number = this.DEFAULT_NUMBER;
   public totalPages: number = this.DEFAULT_NUMBER;
-  public totalItems: number = this.DEFAULT_NUMBER;
+  public totalItems: number = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -68,5 +71,9 @@ export class ListOfCountriesComponent implements OnInit {
 
   setTotalPages(totalPages: number) {
     this.totalPages = totalPages;
+  }
+
+  setItemsPages(totalItems: number) {
+    this.totalItems = totalItems;
   }
 }
