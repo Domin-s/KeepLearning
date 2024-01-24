@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
-import { CountryTableComponent } from './country-table/country-table.component';
+import { CountryTableComponent } from '../country-table/country-table.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CountryService } from '../../../../services/country.service';
-import { Country } from '../../../../models/Country';
-import { PageData } from '../../../../models/PageData';
+import { CountryService } from '../../../services/country.service';
+import { Country } from '../../../models/Country';
+import { PageData } from '../../../models/PageData';
 
 @Component({
   standalone: true,
