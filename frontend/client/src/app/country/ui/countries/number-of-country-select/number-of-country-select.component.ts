@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 export class NumberOfCountrySelectComponent implements OnInit, OnChanges {
   @Input({ required: true }) totalItems!: number;
 
-  @Output() setItemsPageEmit = new EventEmitter<number>();
+  @Output() setItemsPerPageEmit = new EventEmitter<number>();
 
   private numbersOfItem = [10, 20, 50, 100];
 
@@ -40,5 +40,10 @@ export class NumberOfCountrySelectComponent implements OnInit, OnChanges {
     }
 
     return numbers;
+  }
+
+  onSelect(event: Event){
+    this.selectedItemOnPage = parseInt((event.target as HTMLSelectElement).value);
+    this.setItemsPerPageEmit.emit(this.selectedItemOnPage);
   }
 }

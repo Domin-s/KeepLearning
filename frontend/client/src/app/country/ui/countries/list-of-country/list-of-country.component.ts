@@ -31,6 +31,7 @@ export class ListOfCountriesComponent implements OnInit {
   public currentPage: number = this.DEFAULT_NUMBER;
   public totalPages: number = this.DEFAULT_NUMBER;
   public totalItems: number = 10;
+  public itemsPerPage: number = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -73,7 +74,11 @@ export class ListOfCountriesComponent implements OnInit {
     this.totalPages = totalPages;
   }
 
-  setItemsPages(totalItems: number) {
+  setTotalItems(totalItems: number) {
     this.totalItems = totalItems;
+  }
+
+  setItemsPerPage(itemsPerPage: number) {
+    this.itemsPerPage = itemsPerPage;
   }
 }

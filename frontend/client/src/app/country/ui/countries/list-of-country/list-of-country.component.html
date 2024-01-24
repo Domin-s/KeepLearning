@@ -28,6 +28,8 @@
 
     <app-number-of-country-select
         [totalItems]="totalItems"
+        (setItemsPerPageEmit)="setItemsPerPage($event)"
+
     />
 
     <hr />
@@ -35,8 +37,9 @@
     <app-country-table-component
         [continentsChecked]="continentsChecked"
         [currentPage]="currentPage"
+        [itemsPerPage]="itemsPerPage"
         (setTotalPagesEmit)="setTotalPages($event)"
-        (setTotalitemsEmit)="setItemsPages($event)"
+        (setTotalItemsEmit)="setTotalItems($event)"
     />
 
     <app-pagination

@@ -12,16 +12,17 @@ import { PageData } from '../../../models/PageData';
 export class CountryTableComponent implements OnInit, OnChanges {
   @Input({ required: true }) continentsChecked!: string[];
   @Input({ required: true }) currentPage!: number;
+  @Input({ required: true }) itemsPerPage!: number;
   
   @Output() setTotalPagesEmit = new EventEmitter<number>();
-  @Output() setTotalitemsEmit = new EventEmitter<number>();
+  @Output() setTotalItemsEmit = new EventEmitter<number>();
   
   public countries: Country[] = [];
   public pageData: PageData = {
     currentPage: this.currentPage,
-    itemsPerPage: 20,
-    totalItems: 44,
-    totalPages: 3,
+    itemsPerPage: this.itemsPerPage,
+    totalItems: 1,
+    totalPages: 1,
   };
 
   constructor(
@@ -39,6 +40,9 @@ export class CountryTableComponent implements OnInit, OnChanges {
     if (changes['currentPage'] !== undefined && !changes['currentPage'].isFirstChange()) {
       this.getCountries();
     }
+    if (changes['itemsPerPage'] !== undefined && !changes['itemsPerPage'].isFirstChange()) {
+      this.getCountries();
+    }
   }
   
   fiterCountriesByCheckedContientns(): Country[] {
@@ -46,7 +50,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
   }
 
   getCountries() {
-    this.countryService.getCountries(this.continentsChecked, this.currentPage, this.pageData.itemsPerPage).subscribe({
+    this.countryService.getCountries(this.continentsChecked, this.currentPage, this.itemsPerPage).subscribe({
       next: (result) => {
         this.setPageData(result.headers.get('Pagination'));
         this.setCountries(result.body);
@@ -61,7 +65,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
     if (paginationHeader !== null) {
       this.pageData = JSON.parse(paginationHeader);
       this.setTotalPagesEmit.emit(this.pageData.totalPages);
-      this.setTotalitemsEmit.emit(this.pageData.totalItems);
+      this.setTotalItemsEmit.emit(this.pageData.totalItems);
     }
   }
 
