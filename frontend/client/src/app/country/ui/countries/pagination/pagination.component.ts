@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PageData } from '../../../models/PageData';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -8,10 +7,11 @@ import { PageData } from '../../../models/PageData';
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss'
 })
-export class PaginationComponent implements OnInit {
-  @Input({ required: true }) pageData!: PageData;
+export class PaginationComponent implements OnInit, OnChanges {
+  @Input({ required: true }) totalPages!: number;
+  @Input({ required: true }) currentPage!: number;
 
-  @Output() setPageDataEmit = new EventEmitter<PageData>();
+  @Output() setCurrentPageEmit = new EventEmitter<number>();
 
   public numberOfPages: number[] = [];
   public nextDisabled = true;
@@ -21,11 +21,17 @@ export class PaginationComponent implements OnInit {
     this.configurePaginationData();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['totalPages'] !== undefined && !changes['totalPages'].isFirstChange()) {
+      this.numberOfPages = this.getNumberOfPages(this.totalPages);
+    }
+  }  
+
   configurePaginationData(){
-    this.numberOfPages = this.getNumberOfPages(this.pageData.totalPages);
-    this.pageData.currentPage = this.pageData.currentPage;
-    this.previousDisabled = this.pageData.currentPage === 1;
-    this.nextDisabled = this.pageData.currentPage === this.pageData.totalPages;
+    this.numberOfPages = this.getNumberOfPages(this.totalPages);
+    this.currentPage = this.currentPage;
+    this.previousDisabled = this.currentPage === 1;
+    this.nextDisabled = this.currentPage === this.totalPages;
   }
 
   getNumberOfPages(totalPages: number) {
@@ -38,20 +44,20 @@ export class PaginationComponent implements OnInit {
   }
 
   onSubmitPrevious(){
-    this.pageData.currentPage = this.pageData.currentPage - 1;
-    this.setPageDataEmit.emit(this.pageData);
+    this.currentPage = this.currentPage - 1;
+    this.setCurrentPageEmit.emit(this.currentPage);
     this.setDisabledButton();
   }
 
   onSubmitPage(pageNumber: number){
-    this.pageData.currentPage = pageNumber;
-    this.setPageDataEmit.emit(this.pageData);
+    this.currentPage = pageNumber;
+    this.setCurrentPageEmit.emit(this.currentPage);
     this.setDisabledButton();
   }
 
   onSubmitNext(){
-    this.pageData.currentPage = this.pageData.currentPage + 1;
-    this.setPageDataEmit.emit(this.pageData);
+    this.currentPage = this.currentPage + 1;
+    this.setCurrentPageEmit.emit(this.currentPage);
     this.setDisabledButton();
   }
 
@@ -61,7 +67,7 @@ export class PaginationComponent implements OnInit {
   }
 
   setDisabledPrevoiusButton(){
-    if (this.pageData.currentPage === 1) {
+    if (this.currentPage === 1) {
       this.previousDisabled = true;
     } else {
       this.previousDisabled = false;
@@ -69,7 +75,7 @@ export class PaginationComponent implements OnInit {
   }
 
   setDisabledNextButton(){
-    if (this.pageData.currentPage >= this.pageData.totalPages){
+    if (this.currentPage >= this.totalPages){
       this.nextDisabled = true;
     } else {
       this.nextDisabled = false;

@@ -21,16 +21,11 @@ import { PageData } from '../../../models/PageData';
   providers: [GenerateExamForm],
 })
 export class ListOfCountriesComponent implements OnInit {
-  @Output() continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
-  @Output() pageNumber: number = 1;
-  @Output() pageSize: number = 10;
+  public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
+  public currentPage!: number;
+  public totalPages!: number;
 
-  public pageData: PageData = {
-    currentPage: 1,
-    itemsPerPage: 10,
-    totalItems: 44,
-    totalPages: 5
-  };
+  DEFAULT_PAGE = 1;
 
   previousUrl: string = '';
   currentUrl: string = '';
@@ -48,6 +43,7 @@ export class ListOfCountriesComponent implements OnInit {
 
   getCheckedContinents(continents: string[]){
     this.continentsChecked = continents;
+    this.currentPage = this.DEFAULT_PAGE;
   }
 
   getContinentsFromPath(){
@@ -68,9 +64,11 @@ export class ListOfCountriesComponent implements OnInit {
     return this.continentsChecked;
   }
 
-  setPageData(pageData: PageData) {
-    this.pageData = pageData;
-    console.log("ListOfCountriesComponent => setPageData(pageData: PageData)");
-    console.log(this.pageData);
+  setCurrentPage(currentPage: number) {
+    this.currentPage = currentPage;
+  }
+
+  setTotalPages(totalPages: number) {
+    this.totalPages = totalPages;
   }
 }

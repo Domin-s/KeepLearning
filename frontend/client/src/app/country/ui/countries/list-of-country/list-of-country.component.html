@@ -30,11 +30,13 @@
 
     <app-country-table-component
         [continentsChecked]="continentsChecked"
-        [pageData]="pageData"
+        [currentPage]="currentPage"
+        (setTotalPagesEmit)="setTotalPages($event)"
     />
 
     <app-pagination
-        [pageData]="pageData"
-        (setPageDataEmit)="setPageData($event)"
+        [totalPages]="totalPages"
+        [currentPage]="currentPage"
+        (setCurrentPageEmit)="setCurrentPage($event)"
     />
 </div>

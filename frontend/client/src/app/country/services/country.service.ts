@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Country } from "../models/Country";
 
 @Injectable({
   providedIn: "root",
@@ -23,11 +22,11 @@ export class CountryService {
     }
 
     if(pageNumber !== undefined) {
-      params.append("PageNumber", pageNumber);
+      params = params.append("PageNumber", pageNumber);
     }
 
     if(pageSize !== undefined) {
-      params.append("PageSize", pageSize);
+      params = params.append("PageSize", pageSize);
     }
 
     return params;

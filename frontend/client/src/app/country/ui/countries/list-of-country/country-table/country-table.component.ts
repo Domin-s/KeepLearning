@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CountryService } from '../../../../services/country.service';
 import { Country } from '../../../../models/Country';
 import { PageData } from '../../../../models/PageData';
@@ -10,10 +10,18 @@ import { PageData } from '../../../../models/PageData';
   styleUrl: './country-table.component.scss',
 })
 export class CountryTableComponent implements OnInit, OnChanges {
-  @Input({ required: true }) continentsChecked: string[] = [];
-  @Input({ required: true }) pageData!: PageData;
-
+  @Input({ required: true }) continentsChecked!: string[];
+  @Input({ required: true }) currentPage!: number;
+  
+  @Output() setTotalPagesEmit = new EventEmitter<number>();
+  
   public countries: Country[] = [];
+  public pageData: PageData = {
+    currentPage: this.currentPage,
+    itemsPerPage: 20,
+    totalItems: 44,
+    totalPages: 3,
+  };
 
   constructor(
     private countryService: CountryService,
@@ -24,9 +32,10 @@ export class CountryTableComponent implements OnInit, OnChanges {
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    if (!changes['continentsChecked'].isFirstChange()) {
-      console.log(changes);
+    if (changes['continentsChecked'] !== undefined && !changes['continentsChecked'].isFirstChange()) {
+      this.getCountries();
+    }
+    if (changes['currentPage'] !== undefined && !changes['currentPage'].isFirstChange()) {
       this.getCountries();
     }
   }
@@ -36,13 +45,10 @@ export class CountryTableComponent implements OnInit, OnChanges {
   }
 
   getCountries() {
-    console.log(this.continentsChecked, this.pageData.currentPage, this.pageData.itemsPerPage);
-    this.countryService.getCountries(this.continentsChecked, this.pageData.currentPage, this.pageData.itemsPerPage).subscribe({
+    this.countryService.getCountries(this.continentsChecked, this.currentPage, this.pageData.itemsPerPage).subscribe({
       next: (result) => {
         this.setPageData(result.headers.get('Pagination'));
         this.setCountries(result.body);
-        console.log(this.pageData);
-        console.log(result.body);
       },
       error: (error) => {
         console.log(error);
@@ -53,6 +59,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
   setPageData(paginationHeader: string | null) {
     if (paginationHeader !== null) {
       this.pageData = JSON.parse(paginationHeader);
+      this.setTotalPagesEmit.emit(this.pageData.totalPages);
     }
   }
 
