@@ -5,7 +5,6 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   standalone: true,
   imports: [],
   templateUrl: './number-of-country-select.component.html',
-  styleUrl: './number-of-country-select.component.scss'
 })
 export class NumberOfCountrySelectComponent implements OnInit, OnChanges {
   @Input({ required: true }) totalItems!: number;

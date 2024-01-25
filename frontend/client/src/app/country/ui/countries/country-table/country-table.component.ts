@@ -6,8 +6,7 @@ import { PageData } from '../../../models/PageData';
 @Component({
   standalone: true,
   selector: 'app-country-table-component',
-  templateUrl: './country-table.component.html',
-  styleUrl: './country-table.component.scss',
+  templateUrl: './country-table.component.html'
 })
 export class CountryTableComponent implements OnInit, OnChanges {
   @Input({ required: true }) continentsChecked!: string[];
@@ -16,6 +15,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
   
   @Output() setTotalPagesEmit = new EventEmitter<number>();
   @Output() setTotalItemsEmit = new EventEmitter<number>();
+  @Output() setCurrentPageEmit = new EventEmitter<number>();
   
   public countries: Country[] = [];
   public pageData: PageData = {
@@ -66,6 +66,7 @@ export class CountryTableComponent implements OnInit, OnChanges {
       this.pageData = JSON.parse(paginationHeader);
       this.setTotalPagesEmit.emit(this.pageData.totalPages);
       this.setTotalItemsEmit.emit(this.pageData.totalItems);
+      this.setCurrentPageEmit.emit(this.pageData.currentPage);
     }
   }
 
