@@ -4,8 +4,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   selector: 'app-pagination',
   standalone: true,
   imports: [],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss'
+  templateUrl: './pagination.component.html'
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input({ required: true }) totalPages!: number;

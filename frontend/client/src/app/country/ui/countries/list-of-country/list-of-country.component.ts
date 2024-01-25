@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
@@ -11,7 +11,6 @@ import { NumberOfCountrySelectComponent } from '../number-of-country-select/numb
   standalone: true,
   selector: 'app-list-of-countries',
   templateUrl: './list-of-country.component.html',
-  styleUrl: './list-of-country.component.scss',
   imports: [
     CountryTableComponent,
     ContinentsCheckboxComponent,
@@ -24,8 +23,6 @@ import { NumberOfCountrySelectComponent } from '../number-of-country-select/numb
 export class ListOfCountriesComponent implements OnInit {
   private DEFAULT_NUMBER = 1;
   private previousUrl: string = '';
-  // TODO: remove it
-  private currentUrl: string = '';
 
   public continentsChecked: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
   public currentPage: number = this.DEFAULT_NUMBER;

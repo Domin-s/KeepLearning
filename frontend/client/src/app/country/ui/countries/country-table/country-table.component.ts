@@ -6,8 +6,7 @@ import { PageData } from '../../../models/PageData';
 @Component({
   standalone: true,
   selector: 'app-country-table-component',
-  templateUrl: './country-table.component.html',
-  styleUrl: './country-table.component.scss',
+  templateUrl: './country-table.component.html'
 })
 export class CountryTableComponent implements OnInit, OnChanges {
   @Input({ required: true }) continentsChecked!: string[];
