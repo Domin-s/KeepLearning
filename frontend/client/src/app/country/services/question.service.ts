@@ -8,7 +8,7 @@ import { Answer } from "../models/Answer";
   providedIn: "root",
 })
 export class QuestionService {
-  private URL = "https://localhost:5001/api/country/question";
+  private URL = process.env['SERVER_BACKEND_URL'] + '/country/question';
 
   constructor(private http: HttpClient) {}
 
