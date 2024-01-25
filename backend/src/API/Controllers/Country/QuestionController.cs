@@ -26,9 +26,9 @@ public class QuestionController : ControllerBase
     }
 
     [HttpPost("check")]
-    public async Task<IActionResult> Check(CheckQuestionQuery checkAnswerQuery)
+    public async Task<IActionResult> Check(CheckQuestionQuery checkQuestionQuery)
     {
-        var result = await _mediator.Send(checkAnswerQuery);
+        var result = await _mediator.Send(checkQuestionQuery);
 
         return Ok(result);
     }
