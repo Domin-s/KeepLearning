@@ -27,6 +27,9 @@ export class PaginationComponent implements OnInit, OnChanges {
     if (changes['totalPages'] !== undefined && !changes['totalPages'].isFirstChange()) {
       this.numberOfPages = this.getNumberOfPages(this.totalPages);
     }
+    if (changes['totalItems'] !== undefined && !changes['totalItems'].isFirstChange()) {
+      this.numberOfPages = this.getNumberOfPages(this.totalPages);
+    }
   }  
 
   getNumberOfPages(totalPages: number) {

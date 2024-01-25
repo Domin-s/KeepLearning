@@ -4,7 +4,7 @@ import { PreviousRouteService } from '../../../services/previousRoute.service';
 import { GenerateExamForm } from '../../../forms/generateExam.form';
 import { ContinentsCheckboxComponent } from '../../../shared/continents/continents-checkbox/continents-checkbox.component';
 import { CountryTableComponent } from '../country-table/country-table.component';
-import { PaginationComponent } from '../pagination/pagination.component';
+import { PaginationComponent } from '../../../../common/pagination/pagination.component';
 import { NumberOfCountrySelectComponent } from '../number-of-country-select/number-of-country-select.component';
 
 @Component({
