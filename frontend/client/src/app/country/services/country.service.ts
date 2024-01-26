@@ -5,7 +5,7 @@ import { Injectable, inject } from "@angular/core";
   providedIn: "root",
 })
 export class CountryService {
-  private URL = "https://localhost:5001/api/country";
+  private URL = process.env['SERVER_BACKEND_URL'] + '/country';
 
   private http: HttpClient = inject(HttpClient);
 

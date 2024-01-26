@@ -9,7 +9,7 @@ import { Result } from "../models/Result";
   providedIn: "root",
 })
 export class ExamService {
-  private URL = "https://localhost:5001/api/country/exam";
+  private URL = process.env['SERVER_BACKEND_URL'] + '/country/exam';
 
   constructor(private http: HttpClient) {}
 

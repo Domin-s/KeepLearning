@@ -11,10 +11,12 @@ COPY ["/backend/src/API/API.csproj", "/backend/src/API/"]
 RUN dotnet restore "/backend/src/API/API.csproj"
 
 COPY . ./
+
+WORKDIR /app/backend
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final-env
 
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "MVC.dll"]
+WORKDIR /app/backend
+COPY --from=build-env /app/backend/out .
+ENTRYPOINT ["dotnet", "API.dll"]
