@@ -20,7 +20,7 @@
             "customWebpackConfig": {
               "path": "src/custom-webpack.config.ts"
             },
-            "outputPath": "dist/client",
+            "outputPath": "../..backend/API/wwwroot",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
